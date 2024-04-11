@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Web on Sum Ting Wong's Blog</title><link>https://qiaonpc.github.io/tags/web/</link><description>Recent content in Web on Sum Ting Wong's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/web/index.xml" rel="self" type="application/rss+xml"/><item><title>Anti-Brute</title><link>https://qiaonpc.github.io/post/anti-brute/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/anti-brute/</guid><description>&lt;h1 id="anti-brute-ctf-challenge-writeup">
+&lt;a href="#anti-brute-ctf-challenge-writeup">#&lt;/a>
+Anti-Brute CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">
+&lt;a href="#challenge-information">#&lt;/a>
+Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Anti-Brute&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 340&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves bypassing anti-brute force measures to retrieve the flag without brute-forcing.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">
+&lt;a href="#solution">#&lt;/a>
+Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a detailed solution for the Anti-Brute CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Received a wordlist and instructions not to brute force the password.&lt;/li>
+&lt;li>But I brute-forced anyways&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Attempted Brute Force&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Tried using Burp Suite&amp;rsquo;s Intruder tool for brute forcing, but it was unsuccessful for unknown reasons.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Python Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Created a Python script to automate the process of retrieving the flag without brute-forcing.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;https://no-brute.ctf.rawsec.com/login.php&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">headers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;Content-Type&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;application/x-www-form-urlencoded&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;possible_password.txt&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">line&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">line&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">strip&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;username&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s1">&amp;#39;admin&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s1">&amp;#39;password&amp;#39;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">password&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">post&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">headers&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">headers&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="s1">&amp;#39;Invalid username or password&amp;#39;&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Password found: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">password&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Trying password: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">password&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Successfully extracted the flag using the Python script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/anti-brute/flag.png"
+width="1421"
+height="125"
+srcset="https://qiaonpc.github.io/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="1136"
+data-flex-basis="2728px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>BlackHole</title><link>https://qiaonpc.github.io/post/blackhole/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/blackhole/</guid><description>&lt;h1 id="blackhole-ctf-challenge-writeup">
+&lt;a href="#blackhole-ctf-challenge-writeup">#&lt;/a>
+BlackHole CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">
+&lt;a href="#challenge-information">#&lt;/a>
+Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: BlackHole&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 380&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the BlackHole challenge is to find the flag hidden within the URL or the web page&amp;rsquo;s content.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">
+&lt;a href="#solution">#&lt;/a>
+Solution
+&lt;/h2>&lt;p>To solve the BlackHole CTF challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Identified that the challenge seemed the same as the preliminary one.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Script Adaptation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Utilized a script from a writeup from that day.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Adapted the script to suit my needs for the challenge.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">bs4&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">BeautifulSoup&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">urllib.parse&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">urljoin&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">urlparse&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">unquote&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">visited_links&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">set&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">get_links&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">soup&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">BeautifulSoup&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;html.parser&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">links&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">soup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find_all&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">href&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">urljoin&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">link&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;href&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">link&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">links&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">except&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exceptions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RequestException&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Error retrieving links from &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">is_directory&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">soup&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="s2">&amp;#34;No directories found.&amp;#34;&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">soup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get_text&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">soup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find_all&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">class_&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;directory-link&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">visit_links_recursive&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">url&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">visited_links&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">parsed_url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">urlparse&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">base_domain&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;blackhole.ctf.rawsec.com&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">parsed_url&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">netloc&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">base_domain&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Visiting: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">unquote&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">try&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">soup&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">BeautifulSoup&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;html.parser&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">is_directory&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">soup&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Directory found: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">visited_links&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">links&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_links&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">link&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">links&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">visit_links_recursive&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">link&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">except&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">exceptions&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">RequestException&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Error visiting &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">e&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">starting_url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;https://blackhole.ctf.rawsec.com/&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">visit_links_recursive&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">starting_url&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag.txt Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used the adapted script to find a flag.txt file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>However, the flag was not directly found in the flag.txt file.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blackhole/found%20flag%20txt.png"
+width="1716"
+height="196"
+srcset="https://qiaonpc.github.io/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Flag"
+class="gallery-image"
+data-flex-grow="875"
+data-flex-basis="2101px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Rereading the URL&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Revisited the challenge&amp;rsquo;s instructions to reread the URL.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blackhole/not%20flag.png"
+width="1509"
+height="425"
+srcset="https://qiaonpc.github.io/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Not Flag"
+class="gallery-image"
+data-flex-grow="355"
+data-flex-basis="852px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>CyberChef Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Analyzed the URL using CyberChef.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered the flag hidden within the URL.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blackhole/flag.png"
+width="1382"
+height="606"
+srcset="https://qiaonpc.github.io/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="228"
+data-flex-basis="547px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>SimpleLazy</title><link>https://qiaonpc.github.io/post/simplelazy/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/simplelazy/</guid><description>&lt;h1 id="simplelazy-ctf-challenge-writeup">
+&lt;a href="#simplelazy-ctf-challenge-writeup">#&lt;/a>
+SimpleLazy CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">
+&lt;a href="#challenge-information">#&lt;/a>
+Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: SimpleLazy&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 330&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves exploiting a Local File Inclusion (LFI) vulnerability to retrieve a flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">
+&lt;a href="#solution">#&lt;/a>
+Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a detailed solution for the SimpleLazy CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Immediately recognized the challenge as having a Local File Inclusion (LFI) vulnerability, particularly with the &lt;code>page3.php&lt;/code> parameter.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered that input was always appended with &lt;code>.php&lt;/code>, limiting directory traversal options.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/simplelazy/initial%20page.png"
+width="1700"
+height="818"
+srcset="https://qiaonpc.github.io/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Initial Page"
+class="gallery-image"
+data-flex-grow="207"
+data-flex-basis="498px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Strategy for Exploitation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Focused on extracting PHP source code from &lt;code>index.php&lt;/code>, &lt;code>page1.php&lt;/code>, &lt;code>page2.php&lt;/code>, and &lt;code>page3.php&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Utilized &lt;code>php://filter&lt;/code> to retrieve PHP files in base64 format, allowing for remote file inclusion.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/simplelazy/part%201.png"
+width="1551"
+height="617"
+srcset="https://qiaonpc.github.io/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LFI"
+class="gallery-image"
+data-flex-grow="251"
+data-flex-basis="603px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploiting the LFI&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Retrieved the source code of &lt;code>page3.php&lt;/code> using &lt;code>php://filter&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered the inclusion of a suspicious file in the PHP source code.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/simplelazy/part%201%201.png"
+width="855"
+height="656"
+srcset="https://qiaonpc.github.io/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LFI"
+class="gallery-image"
+data-flex-grow="130"
+data-flex-basis="312px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieving the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Applied the same &lt;code>php://filter&lt;/code> technique to extract the suspicious file&amp;rsquo;s contents in base64 format.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoded the contents of the suspicious file to reveal the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/simplelazy/part%202.png"
+width="1276"
+height="650"
+srcset="https://qiaonpc.github.io/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LFI"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/simplelazy/part%202%202.png"
+width="871"
+height="629"
+srcset="https://qiaonpc.github.io/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="332px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusion">
+&lt;a href="#conclusion">#&lt;/a>
+Conclusion
+&lt;/h2>&lt;p>The SimpleLazy CTF challenge demonstrated the importance of understanding LFI vulnerabilities and using techniques like &lt;code>php://filter&lt;/code> to retrieve PHP source code and extract hidden files. By exploiting the vulnerability and decoding the suspicious file&amp;rsquo;s contents, the flag was successfully obtained, completing the challenge.&lt;/p></description></item></channel></rss>
