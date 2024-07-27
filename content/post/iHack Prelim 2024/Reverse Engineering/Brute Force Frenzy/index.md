@@ -3,7 +3,7 @@ title: Brute Force Frenzy
 description: The objective of the "Brute Force Frenzy" CTF challenge is reverse engineer a binary to find the correct key for verification.
 date: 2024-07-28 00:00:00+0000
 categories:
-   - ihack-prelim-2024
+   - iHack 2024 Preliminary
    - CTF Writeup
 tags:
    - Reverse Engineering

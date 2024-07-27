@@ -3,7 +3,7 @@ title: Just A Normal EXE
 description: The objective of the "Just A Normal EXE" CTF challenge is analyze a malware file to find the flag.
 date: 2024-07-28 00:00:00+0000
 categories:
-   - ihack-prelim-2024
+   - iHack 2024 Preliminary
    - CTF Writeup
 tags:
    - Misc
