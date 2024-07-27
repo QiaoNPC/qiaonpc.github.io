@@ -1,0 +1,1367 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>rENTAS rawSEC CTF 2024 on Sum Ting Wong&#39;s Blog</title>
+        <link>https://qiaonpc.github.io/categories/rentas-rawsec-ctf-2024/</link>
+        <description>Recent content in rENTAS rawSEC CTF 2024 on Sum Ting Wong&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/rentas-rawsec-ctf-2024/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Anti-Brute</title>
+        <link>https://qiaonpc.github.io/post/anti-brute/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/anti-brute/</guid>
+        <description>&lt;h1 id=&#34;anti-brute-ctf-challenge-writeup&#34;&gt;Anti-Brute CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Anti-Brute&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 340&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves bypassing anti-brute force measures to retrieve the flag without brute-forcing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a detailed solution for the Anti-Brute CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Received a wordlist and instructions not to brute force the password.&lt;/li&gt;
+&lt;li&gt;But I brute-forced anyways&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Attempted Brute Force&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Tried using Burp Suite&amp;rsquo;s Intruder tool for brute forcing, but it was unsuccessful for unknown reasons.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Python Script&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Created a Python script to automate the process of retrieving the flag without brute-forcing.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;requests&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://no-brute.ctf.rawsec.com/login.php&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;Content-Type&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;application/x-www-form-urlencoded&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;possible_password.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;r&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;line&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;line&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;s1&#34;&gt;&amp;#39;username&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;admin&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;s1&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;post&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Invalid username or password&amp;#39;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Password found: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Trying password: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Extraction&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Successfully extracted the flag using the Python script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/anti-brute/flag.png&#34;
+	width=&#34;1421&#34;
+	height=&#34;125&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1136&#34;
+		data-flex-basis=&#34;2728px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Assemble</title>
+        <link>https://qiaonpc.github.io/post/assemble/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/assemble/</guid>
+        <description>&lt;h1 id=&#34;assemble-ctf-challenge-writeup&#34;&gt;Assemble CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Assemble&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Hardware&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;Assemble&amp;rdquo; challenge is to correctly configure the hardware components and troubleshoot any technical issues to display the flag on the LCD.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Assemble&amp;rdquo; CTF challenge, the following configurations were made:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Wiring Matrix Module to Arduino&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;C4 -&amp;gt; 13&lt;/li&gt;
+&lt;li&gt;C3 -&amp;gt; 12&lt;/li&gt;
+&lt;li&gt;C2 -&amp;gt; ~11&lt;/li&gt;
+&lt;li&gt;C1 -&amp;gt; ~10&lt;/li&gt;
+&lt;li&gt;R1 -&amp;gt; ~9&lt;/li&gt;
+&lt;li&gt;R2 -&amp;gt; 8&lt;/li&gt;
+&lt;li&gt;R3 -&amp;gt; 7&lt;/li&gt;
+&lt;li&gt;R4 -&amp;gt; 6&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Attach Potentiometer and LCD to Breadboard&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Potentiometer wiring:
+&lt;ul&gt;
+&lt;li&gt;GND to Blue rail&lt;/li&gt;
+&lt;li&gt;5V to Red rail&lt;/li&gt;
+&lt;li&gt;I/O - LCD &amp;lsquo;VEE&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;LCD Wiring:
+&lt;ul&gt;
+&lt;li&gt;VSS to Blue rail&lt;/li&gt;
+&lt;li&gt;VDD to Red rail&lt;/li&gt;
+&lt;li&gt;RS to A0&lt;/li&gt;
+&lt;li&gt;RW to A1&lt;/li&gt;
+&lt;li&gt;E to A2&lt;/li&gt;
+&lt;li&gt;D7 to Blue rail&lt;/li&gt;
+&lt;li&gt;D6 to Red rail&lt;/li&gt;
+&lt;li&gt;D5 to A5&lt;/li&gt;
+&lt;li&gt;D4 to A4&lt;/li&gt;
+&lt;li&gt;D3 to A3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Technical Issues&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Encountered technical issues where the flag would not display on the LCD.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Despite the issues, the excons provided the flag as a gesture of completion.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can view it on the video in this directory&lt;/p&gt;
+&lt;p&gt;&lt;video controls src=&#34;technical issues.mp4&#34; title=&#34;Technical Issue&#34;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;RWSC{XXXXXXXXXX}&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>BlackHole</title>
+        <link>https://qiaonpc.github.io/post/blackhole/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/blackhole/</guid>
+        <description>&lt;h1 id=&#34;blackhole-ctf-challenge-writeup&#34;&gt;BlackHole CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: BlackHole&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 380&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the BlackHole challenge is to find the flag hidden within the URL or the web page&amp;rsquo;s content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the BlackHole CTF challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Identified that the challenge seemed the same as the preliminary one.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Script Adaptation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Utilized a script from a writeup from that day.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Adapted the script to suit my needs for the challenge.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;requests&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;bs4&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;urllib.parse&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;urljoin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;urlparse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unquote&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;visited_links&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;get_links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;html.parser&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;links&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find_all&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;urljoin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;link&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;href&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;link&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;except&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exceptions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RequestException&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Error retrieving links from &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;is_directory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;No directories found.&amp;#34;&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find_all&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;class_&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;directory-link&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;visit_links_recursive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;visited_links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;parsed_url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;urlparse&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;base_domain&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;blackhole.ctf.rawsec.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;parsed_url&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;netloc&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;!=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;base_domain&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Visiting: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;unquote&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;html.parser&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;is_directory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Directory found: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;visited_links&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;links&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;get_links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;link&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;links&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;visit_links_recursive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;link&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;except&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exceptions&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;RequestException&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Error visiting &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;starting_url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://blackhole.ctf.rawsec.com/&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;visit_links_recursive&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;starting_url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag.txt Extraction&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Used the adapted script to find a flag.txt file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;However, the flag was not directly found in the flag.txt file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/blackhole/found%20flag%20txt.png&#34;
+	width=&#34;1716&#34;
+	height=&#34;196&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;875&#34;
+		data-flex-basis=&#34;2101px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Rereading the URL&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Revisited the challenge&amp;rsquo;s instructions to reread the URL.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/blackhole/not%20flag.png&#34;
+	width=&#34;1509&#34;
+	height=&#34;425&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Not Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;355&#34;
+		data-flex-basis=&#34;852px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;CyberChef Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Analyzed the URL using CyberChef.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered the flag hidden within the URL.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/blackhole/flag.png&#34;
+	width=&#34;1382&#34;
+	height=&#34;606&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;228&#34;
+		data-flex-basis=&#34;547px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ButterCup</title>
+        <link>https://qiaonpc.github.io/post/buttercup/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/buttercup/</guid>
+        <description>&lt;h1 id=&#34;buttercup-ctf-challenge-writeup&#34;&gt;ButterCup CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: ButterCup&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 490&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Misc&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves extracting three parts of the flag from a video, with two parts embedded in the video itself and one part hidden in the audio spectrum.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a detailed solution for the ButterCup CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Without hints, we definitely cannot solve this challenge.&lt;/li&gt;
+&lt;li&gt;We were told that there were three parts to the flag, with two parts embedded in the video and one part hidden in the audio spectrum.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Video Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Went through the video multiple times, including adjusting playback speed and brightness to catch any hidden elements.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered the words &lt;code&gt;3XP3RT_&lt;/code&gt; at around 14 seconds and &lt;code&gt;1N_&lt;/code&gt; at around 2:52 in the video.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/part%201.png&#34;
+	width=&#34;912&#34;
+	height=&#34;684&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Part 1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/part%202.png&#34;
+	width=&#34;1287&#34;
+	height=&#34;776&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Part 2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;398px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Audio Spectrum Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Used audacity on the audio of the video to reveal hidden patterns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configured the spectrogram to enhance visibility of subtle details.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Found a hint for the last part of the flag in the spectrogram.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Not the clearest picture of the last part, but we were able to deducde its &lt;code&gt;4UD1O&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/configuration.jpg&#34;
+	width=&#34;528&#34;
+	height=&#34;388&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Configuration&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;136&#34;
+		data-flex-basis=&#34;326px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/last%20part.jpg&#34;
+	width=&#34;338&#34;
+	height=&#34;344&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Last Part&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;98&#34;
+		data-flex-basis=&#34;235px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Reconstruction&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Combined the three parts of the flag obtained from the video and audio spectrum to reconstruct the complete flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The ButterCup CTF challenge required a thorough analysis of both the video and audio spectrum to extract all parts of the flag. It demonstrated the importance of attention to detail and the use of specialized tools for multimedia analysis in CTF challenges.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Cali Cartel</title>
+        <link>https://qiaonpc.github.io/post/cali-cartel/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/cali-cartel/</guid>
+        <description>&lt;h1 id=&#34;cali-cartel-ctf-challenge-writeup&#34;&gt;Cali Cartel CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Cali Cartel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 50&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: OSINT (Open-Source Intelligence)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge requires finding a flag using OSINT techniques.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a brief overview of the solution for the Cali Cartel CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Approach&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Initially attempted to solve the challenge using traditional OSINT techniques.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Alternative Solution&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;But when we saw many players are solving it and we aren&amp;rsquo;t, we resorted to the most retarded way of solving CTF ever, Google Dorking.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Google Dorking&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applied Google dorking techniques to search for information related to the challenge.&lt;/li&gt;
+&lt;li&gt;Discovered relevant information that led to the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Acquisition&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Obtained the flag using the information found through Google dorking.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/cali-cartel/flag.png&#34;
+	width=&#34;1057&#34;
+	height=&#34;551&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;460px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The Cali Cartel challenge was solved using an alternative approach of Google dorking after traditional OSINT techniques did not yield the desired results. Google dorking helped discover information that ultimately led to finding the flag.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>I Hope You Have The Software</title>
+        <link>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</guid>
+        <description>&lt;h1 id=&#34;i-hope-you-have-the-software-ctf-challenge-writeup&#34;&gt;I Hope You Have The Software CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: I Hope You Have The Software&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 230&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Network&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of this challenge is to find the flag hidden in the HTML files served by the servers in the packet capture.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;I Hope You Have The Software&amp;rdquo; CTF challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Analyzed the packet capture and identified 12 servers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Noticed two servers stacked on top of each other, suggesting a hidden layer.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked.png&#34;
+	width=&#34;585&#34;
+	height=&#34;609&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Stacked&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;96&#34;
+		data-flex-basis=&#34;230px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTML File Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inspected the HTML files served by the servers.&lt;/li&gt;
+&lt;li&gt;Found the flag hidden within one of the HTML files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Extraction&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Extracted the flag from the HTML file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag.png&#34;
+	width=&#34;595&#34;
+	height=&#34;321&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;444px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>LastHope</title>
+        <link>https://qiaonpc.github.io/post/lasthope/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/lasthope/</guid>
+        <description>&lt;h1 id=&#34;lasthope-ctf-challenge-writeup&#34;&gt;LastHope CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: LastHope&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 50&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Network&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves cracking a WiFi password using captured WiFi packets.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a step-by-step solution for the LastHope CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Capturing WiFi Packets&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Loaded the provided file in Wireshark to analyze the network traffic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Observed a large number of 802.11 packets, indicating WiFi traffic.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/protocol%20hierachy.png&#34;
+	width=&#34;1395&#34;
+	height=&#34;255&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Protocol Hierachy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;547&#34;
+		data-flex-basis=&#34;1312px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying Access Point MAC Address&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Identified the MAC address of the access point, which can be used to crack the WiFi password.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Identified the SSID of the WiFi network as &amp;ldquo;Rawsec Command Centre.&amp;rdquo;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/mac%20address.png&#34;
+	width=&#34;1617&#34;
+	height=&#34;147&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Mac Address &amp; SSID&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1100&#34;
+		data-flex-basis=&#34;2640px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cracking WiFi Password&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Used a tool like Aircrack-ng with the rockyou.txt wordlist to crack the WiFi password associated with the captured packets.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/aircrack.png&#34;
+	width=&#34;1333&#34;
+	height=&#34;706&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Aircrack&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;453px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Obtaining the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The cracked WiFi password is the flag for this challenge.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/flag.png&#34;
+	width=&#34;1345&#34;
+	height=&#34;704&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The LastHope challenge required participants to crack a WiFi password using captured network packets. By analyzing the packets in Wireshark and using tools like Aircrack-ng with wordlists, participants could obtain the flag associated with the cracked WiFi password.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Medellín Cartel</title>
+        <link>https://qiaonpc.github.io/post/medell%C3%ADn-cartel/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/medell%C3%ADn-cartel/</guid>
+        <description>&lt;h1 id=&#34;medellín-cartel-ctf-challenge-writeup&#34;&gt;Medellín Cartel CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Medellín Cartel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 190&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: OSINT (Open-Source Intelligence)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves finding a flag related to a person named Blacky on a specific Instagram page.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a step-by-step solution for the Medellín Cartel CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hint Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We definitely used the hints in this challenge which directed us to find information about Blacky on a specific Instagram page.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Investigating Blacky&amp;rsquo;s Instagram Page&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Visited the Instagram page mentioned in the hint.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Found that Blacky&amp;rsquo;s page has only 1 follower and 1 post.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten.png&#34;
+	width=&#34;1277&#34;
+	height=&#34;659&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;UNITEN&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;193&#34;
+		data-flex-basis=&#34;465px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Inspecting the Post&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inspected the single post on Blacky&amp;rsquo;s page.&lt;/li&gt;
+&lt;li&gt;Discovered the flag hidden within the post&amp;rsquo;s content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Obtaining the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Extracted the flag from the post&amp;rsquo;s content.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag.png&#34;
+	width=&#34;380&#34;
+	height=&#34;160&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;237&#34;
+		data-flex-basis=&#34;570px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The Medellín Cartel challenge required participants to investigate a specific Instagram page to find information about a person named Blacky. By inspecting Blacky&amp;rsquo;s post on the page, participants could discover the flag hidden within the post&amp;rsquo;s content.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Mobile</title>
+        <link>https://qiaonpc.github.io/post/mobile/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/mobile/</guid>
+        <description>&lt;h1 id=&#34;mobile-ctf-challenge-writeup&#34;&gt;Mobile CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Mobile&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 290&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: DFIR (Digital Forensics and Incident Response)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves extracting information from a PDF document related to mobile forensics.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a brief overview of the solution for the Mobile CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Approach&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Started by examining the 3000-page PDF document provided for any visible clues or patterns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Noticed that certain pages were scribbled over, indicating potential hidden information.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/scribble.png&#34;
+	width=&#34;747&#34;
+	height=&#34;557&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Scribble&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;134&#34;
+		data-flex-basis=&#34;321px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extraction Attempt&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Used &lt;code&gt;pdfimages&lt;/code&gt; tool to extract images from the PDF, hoping to find hidden messages or flags.&lt;/li&gt;
+&lt;li&gt;However, this approach did not yield any relevant information.&lt;/li&gt;
+&lt;li&gt;If you are curious, they are confidential information such as IC, BankRakyat Account Information, etc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identification of Suspicious Content&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Continued to carefully review the PDF document.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Noticed a suspicious SHA-1 hash that was out of place and bolded, hinting at its significance.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/sus%20hash.png&#34;
+	width=&#34;404&#34;
+	height=&#34;211&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Sus Hash&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;459px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hint from Social Media&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Recalled a hint from Twitter related to Android hacking and cracking gesture passwords.&lt;/li&gt;
+&lt;li&gt;Realized that the SHA-1 hash resembled the format of the hash mentioned in the hint.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decryption Attempt&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Researched tools and methods for decrypting SHA-1 hashes associated with Android gesture passwords.&lt;/li&gt;
+&lt;li&gt;Found a Python script on GitHub that seemed promising for this purpose.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Successful Decryption&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Applied the Python script to decrypt the SHA-1 hash found in the PDF.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The decrypted value revealed the flag, solving the challenge.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/flag.png&#34;
+	width=&#34;1338&#34;
+	height=&#34;700&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The Mobile CTF challenge involved extracting a hidden flag from a large PDF document related to mobile forensics. Despite initial attempts to extract information from the PDF images, the solution was found in a suspicious SHA-1 hash within the document. By decrypting this hash using a Python script, the flag was successfully obtained, completing the challenge.&lt;/p&gt;
+&lt;h2 id=&#34;notes-for-this-challenge&#34;&gt;Notes for this challenge
+&lt;/h2&gt;&lt;p&gt;Despite the gruesome challenge, there were highlights that are worth mentioning. Attached below are my favourite parts of this challenge.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat%201.png&#34;
+	width=&#34;744&#34;
+	height=&#34;762&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Cat&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;97&#34;
+		data-flex-basis=&#34;234px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat%202.png&#34;
+	width=&#34;665&#34;
+	height=&#34;655&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Cat&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;101&#34;
+		data-flex-basis=&#34;243px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat%203.png&#34;
+	width=&#34;740&#34;
+	height=&#34;718&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Cat&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;103&#34;
+		data-flex-basis=&#34;247px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat.png&#34;
+	width=&#34;759&#34;
+	height=&#34;682&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Cat&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;111&#34;
+		data-flex-basis=&#34;267px&#34;
+	
+&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Resign Letter</title>
+        <link>https://qiaonpc.github.io/post/resign-letter/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/resign-letter/</guid>
+        <description>&lt;h1 id=&#34;resign-letter-ctf-challenge-writeup&#34;&gt;Resign Letter CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Resign Letter&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 50&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Reverse Engineering&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves analyzing a Word document to extract and analyze a suspicious executable file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a detailed solution for the Resign Letter CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Analyzed the provided Word document for any embedded macros using olevba.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Identified a suspicious link within the document.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/resign-letter/olevba.png&#34;
+	width=&#34;1362&#34;
+	height=&#34;722&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/resign-letter/olevba_huc8352854c34ce250dad912c7912122a2_175437_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/resign-letter/olevba_huc8352854c34ce250dad912c7912122a2_175437_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Olevba&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;188&#34;
+		data-flex-basis=&#34;452px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analysis of the Executable&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Downloaded and extracted the executable, named &lt;code&gt;lenovo.exe&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Ran the executable in a Windows virtual machine for analysis.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Dynamic Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Initially used Procmon for monitoring file system activity but found it challenging due to the hidden modifications.&lt;/li&gt;
+&lt;li&gt;Switched to API Monitor for more detailed monitoring.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Analyzed the API calls made by the executable using API Monitor.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered the flag being accessed or manipulated by the executable.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/resign-letter/apimon.png&#34;
+	width=&#34;1223&#34;
+	height=&#34;540&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/resign-letter/apimon_huf863cc1d3372a70d01521b70eb61f157_83834_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/resign-letter/apimon_huf863cc1d3372a70d01521b70eb61f157_83834_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;API Monitor&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;226&#34;
+		data-flex-basis=&#34;543px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/resign-letter/flag.png&#34;
+	width=&#34;607&#34;
+	height=&#34;447&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/resign-letter/flag_hu9c58b289f09ccda0fa3747ea98d5109d_10751_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/resign-letter/flag_hu9c58b289f09ccda0fa3747ea98d5109d_10751_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;135&#34;
+		data-flex-basis=&#34;325px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The Resign Letter CTF challenge required reverse engineering skills to analyze a Word document and a Windows executable. By using tools like olevba for macro analysis and API Monitor for dynamic analysis of the executable, the flag was successfully extracted. This challenge highlighted the importance of understanding malware analysis techniques for identifying malicious behavior.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Round and Round</title>
+        <link>https://qiaonpc.github.io/post/round-and-round/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/round-and-round/</guid>
+        <description>&lt;h1 id=&#34;round-and-round-ctf-challenge-writeup&#34;&gt;Round and Round CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Round and Round&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 50&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Cryptography&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves decrypting a given ciphertext to obtain the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a detailed solution for the Round and Round CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Examined the given ciphertext but was unsure of the encryption method used.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Observations and Strategy&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It took me long to notice that the ciphertext seemed to resemble ASCII values or character mappings.&lt;/li&gt;
+&lt;li&gt;Attempted to place the flag format, &lt;code&gt;RWSC{&lt;/code&gt;, under the ciphertext to see if any patterns emerged.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decryption Process&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;For example, 21 corresponds to &amp;lsquo;R&amp;rsquo;, 26 corresponds to &amp;lsquo;W&amp;rsquo;, and so on.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Used this pattern to decode each number in the ciphertext to its corresponding character.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;But there is a gimmick, I eventually found out that if numbers were less than 30 were being wrapped around.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This is a very stupid gimmick to be honest, since the flag cannot be constructed without knowing this.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/round-and-round/workings.png&#34;
+	width=&#34;1467&#34;
+	height=&#34;2164&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Workings&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;67&#34;
+		data-flex-basis=&#34;162px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Decryption&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Decrypted the entire ciphertext using the wrapping pattern to reveal the flag.&lt;/li&gt;
+&lt;li&gt;The flag is also in upper-case.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The Round and Round CTF challenge required understanding a specific wrapping pattern to decrypt the given ciphertext. By recognizing the pattern and applying it to the ciphertext, the flag was successfully decrypted. This challenge demonstrated the importance of pattern recognition and creative thinking in cryptography challenges.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SimpleLazy</title>
+        <link>https://qiaonpc.github.io/post/simplelazy/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/simplelazy/</guid>
+        <description>&lt;h1 id=&#34;simplelazy-ctf-challenge-writeup&#34;&gt;SimpleLazy CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: SimpleLazy&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 330&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves exploiting a Local File Inclusion (LFI) vulnerability to retrieve a flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a detailed solution for the SimpleLazy CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Immediately recognized the challenge as having a Local File Inclusion (LFI) vulnerability, particularly with the &lt;code&gt;page3.php&lt;/code&gt; parameter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered that input was always appended with &lt;code&gt;.php&lt;/code&gt;, limiting directory traversal options.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/initial%20page.png&#34;
+	width=&#34;1700&#34;
+	height=&#34;818&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Initial Page&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;207&#34;
+		data-flex-basis=&#34;498px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Strategy for Exploitation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Focused on extracting PHP source code from &lt;code&gt;index.php&lt;/code&gt;, &lt;code&gt;page1.php&lt;/code&gt;, &lt;code&gt;page2.php&lt;/code&gt;, and &lt;code&gt;page3.php&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Utilized &lt;code&gt;php://filter&lt;/code&gt; to retrieve PHP files in base64 format, allowing for remote file inclusion.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%201.png&#34;
+	width=&#34;1551&#34;
+	height=&#34;617&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;LFI&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;251&#34;
+		data-flex-basis=&#34;603px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploiting the LFI&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Retrieved the source code of &lt;code&gt;page3.php&lt;/code&gt; using &lt;code&gt;php://filter&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered the inclusion of a suspicious file in the PHP source code.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%201%201.png&#34;
+	width=&#34;855&#34;
+	height=&#34;656&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;LFI&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;312px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Retrieving the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Applied the same &lt;code&gt;php://filter&lt;/code&gt; technique to extract the suspicious file&amp;rsquo;s contents in base64 format.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Decoded the contents of the suspicious file to reveal the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%202.png&#34;
+	width=&#34;1276&#34;
+	height=&#34;650&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;LFI&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;471px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%202%202.png&#34;
+	width=&#34;871&#34;
+	height=&#34;629&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;138&#34;
+		data-flex-basis=&#34;332px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The SimpleLazy CTF challenge demonstrated the importance of understanding LFI vulnerabilities and using techniques like &lt;code&gt;php://filter&lt;/code&gt; to retrieve PHP source code and extract hidden files. By exploiting the vulnerability and decoding the suspicious file&amp;rsquo;s contents, the flag was successfully obtained, completing the challenge.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

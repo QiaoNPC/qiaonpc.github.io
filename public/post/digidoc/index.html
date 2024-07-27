@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="The objective of the \"DigiDoc\" CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.">
+<title>DigiDoc</title>
+
+<link rel='canonical' href='https://qiaonpc.github.io/post/digidoc/'>
+
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="DigiDoc">
+<meta property='og:description' content="The objective of the \"DigiDoc\" CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.">
+<meta property='og:url' content='https://qiaonpc.github.io/post/digidoc/'>
+<meta property='og:site_name' content='Sum Ting Wong&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Boot2Root' /><meta property='article:published_time' content='2023-12-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-12-02T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="DigiDoc">
+<meta name="twitter:description" content="The objective of the \"DigiDoc\" CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.">
+    <link rel="shortcut icon" href="/avatar.jpeg" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3941651df2f1975cfd87dfe8c4afb297_324250_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🐱</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Sum Ting Wong&#39;s Blog</a></h1>
+            <h2 class="site-description">GDSC Cybersecurity Co-Lead | FSEC-CC Challenge Creator</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#challenge-information">Challenge Information</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#flag">Flag</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/aboh-2023/" style="background-color: #0177b8; color: #fff;">
+                ABOH 2023
+            </a>
+        
+            <a href="/categories/ctf-writeup/" style="background-color: #2a9d8f; color: #fff;">
+                CTF Writeup
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/digidoc/">DigiDoc</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            The objective of the &#34;DigiDoc&#34; CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 02, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="digidoc---ctf-challenge-writeup">DigiDoc - CTF Challenge Writeup
+</h1><h2 id="challenge-information">Challenge Information
+</h2><ul>
+<li><strong>Name</strong>: DigiDoc</li>
+<li><strong>Objective</strong>: The objective of the &ldquo;DigiDoc&rdquo; CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.</li>
+</ul>
+<h2 id="solution">Solution
+</h2><p>To successfully tackle the &ldquo;DigiDoc&rdquo; challenge, I executed the following steps:</p>
+<ol>
+<li>
+<p><strong>Initial Enumeration using Nmap</strong>:</p>
+<ul>
+<li>
+<p>I started by performing an initial scan using Nmap on the provided IP address, which revealed open ports: FTP, SSH, and HTTP.</p>
+<p><img src="/post/digidoc/nmap.png"
+	width="1155"
+	height="762"
+	srcset="/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, /post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Nmap Scan"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="151"
+		data-flex-basis="363px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>FTP Analysis</strong>:</p>
+<ul>
+<li>
+<p>Investigating the FTP service, I logged in anonymously and found two files. Downloading these files revealed an ECB key that would be useful later.</p>
+<p><img src="/post/digidoc/anonymous%20login.png"
+	width="653"
+	height="280"
+	srcset="/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, /post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Anonymous Login"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="233"
+		data-flex-basis="559px"
+	
+></p>
+<p><img src="/post/digidoc/files.png"
+	width="884"
+	height="145"
+	srcset="/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, /post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Files"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="609"
+		data-flex-basis="1463px"
+	
+></p>
+<p><img src="/post/digidoc/reading%20files.png"
+	width="1699"
+	height="560"
+	srcset="/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, /post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Reading Files"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="303"
+		data-flex-basis="728px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Exploring the HTTP Service</strong>:</p>
+<ul>
+<li>
+<p>Moving to the HTTP service, I ran a directory brute force using Gobuster. Eventually, it identified a login page.</p>
+<p><img src="/post/digidoc/home%20page.png"
+	width="1185"
+	height="728"
+	srcset="/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, /post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Home Page"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="162"
+		data-flex-basis="390px"
+	
+></p>
+<p><img src="/post/digidoc/gobuster.png"
+	width="1230"
+	height="411"
+	srcset="/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, /post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Gobuster"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="299"
+		data-flex-basis="718px"
+	
+></p>
+</li>
+<li>
+<p>Logging in as a guest revealed an upload page, indicating a potential upload vulnerability. However, admin access was required.</p>
+<p><img src="/post/digidoc/login%20page.png"
+	width="943"
+	height="620"
+	srcset="/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, /post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Login Page"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="152"
+		data-flex-basis="365px"
+	
+></p>
+<p><img src="/post/digidoc/admin%20required.png"
+	width="1640"
+	height="467"
+	srcset="/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, /post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Admin Required"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="351"
+		data-flex-basis="842px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Identifying IDOR Vulnerability</strong>:</p>
+<ul>
+<li>
+<p>Analyzing the accounts tab, I identified an Insecure Direct Object Reference (IDOR) vulnerability, allowing access to user IDs, crucial for admin privileges.</p>
+</li>
+<li>
+<p>IDOR vulnerability involves manipulating user IDs or object references to gain unauthorized access.</p>
+<p><img src="/post/digidoc/IDOR.png"
+	width="1367"
+	height="610"
+	srcset="/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, /post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="IDOR"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="224"
+		data-flex-basis="537px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Exploiting Upload Vulnerability</strong>:</p>
+<ul>
+<li>
+<p>I attempted exploiting the upload vulnerability. Despite correctly written code and magic bytes, standard PHP file extensions didn&rsquo;t work.</p>
+</li>
+<li>
+<p>Following recommendations from hacktricks, I discovered that the <code>.phtml</code> extension allowed successful uploads, enabling me to upload a reverse shell.</p>
+<p><img src="/post/digidoc/phtml%20poc.png"
+	width="943"
+	height="247"
+	srcset="/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, /post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="PHTML POC"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="381"
+		data-flex-basis="916px"
+	
+></p>
+<p><img src="/post/digidoc/phtml.png"
+	width="517"
+	height="118"
+	srcset="/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, /post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="PHTML Code"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="438"
+		data-flex-basis="1051px"
+	
+></p>
+<p><img src="/post/digidoc/web-shell.png"
+	width="1532"
+	height="750"
+	srcset="/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, /post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Web Shell"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="204"
+		data-flex-basis="490px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Escalating Privileges</strong>:</p>
+<ul>
+<li>
+<p>Accessing the server, I realized I was the <code>www-data</code> user. To achieve root access, I explored the home directory, finding two users: Alvin and Dave.</p>
+<p><img src="/post/digidoc/dave.png"
+	width="573"
+	height="84"
+	srcset="/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, /post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Dave"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="682"
+		data-flex-basis="1637px"
+	
+></p>
+</li>
+<li>
+<p>Decoding a base64-encoded string in Alvin&rsquo;s directory, using the previously obtained ECB key, revealed a plaintext password.</p>
+<p><img src="/post/digidoc/base64%20password.png"
+	width="613"
+	height="92"
+	srcset="/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, /post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Base64 Password"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="666"
+		data-flex-basis="1599px"
+	
+></p>
+<p><img src="/post/digidoc/decode.png"
+	width="459"
+	height="576"
+	srcset="/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, /post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Decoded"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="79"
+		data-flex-basis="191px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Privilege Escalation</strong>:</p>
+<ul>
+<li>
+<p>SSHing into the server using Alvin&rsquo;s credentials, I discovered an ability for Alvin to execute a hidden Python script as root using sudo.</p>
+<p><img src="/post/digidoc/sudo%20l.png"
+	width="1236"
+	height="206"
+	srcset="/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, /post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Sudo -l"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="600"
+		data-flex-basis="1440px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Privilege Escalation</strong>:</p>
+<ul>
+<li>
+<p>The solution involved hijacking the libraries in a script file provided without modifying it.</p>
+</li>
+<li>
+<p>Creating a new <code>shutil.py</code> file, spawning a shell using <code>os</code>, escalated privileges to root.</p>
+<p><img src="/post/digidoc/hijacking.png"
+	width="475"
+	height="111"
+	srcset="/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, /post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Hijacking"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="427"
+		data-flex-basis="1027px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Flag Retrieval</strong>:</p>
+<ul>
+<li>
+<p>The obtained flag through the intended solution: <code>ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}</code>.</p>
+<p><img src="/post/digidoc/hijacked.png"
+	width="904"
+	height="233"
+	srcset="/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, /post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Hijacked"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="387"
+		data-flex-basis="931px"
+	
+></p>
+</li>
+</ul>
+</li>
+</ol>
+<p>The resolution of the &ldquo;DigiDoc&rdquo; challenge encompassed identifying multiple vulnerabilities, including FTP access, web application flaws, and privilege escalation, ultimately leading to obtaining the root flag.</p>
+<h2 id="flag">Flag
+</h2><p>The flag for this challenge is: <code>ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}</code>.</p>
+<p>This writeup demonstrates the process of identifying and exploiting various vulnerabilities to gain root access in the &ldquo;DigiDoc&rdquo; CTF challenge. For any further inquiries or clarifications, please feel free to ask.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/boot2root/">Boot2Root</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Dec 02, 2023 00:00 UTC
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/furelise/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">FurElise</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/may-the-force-be-with-you/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">May The Force Be With You</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/small-sage/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Small Sage</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/threat-hunting-challenge-1/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Threat Hunting Challenge 1</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/threat-hunting-challenge-2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Threat Hunting Challenge 2</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 Sum Ting Wong&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

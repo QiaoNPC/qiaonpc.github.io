@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="The objective of the \"Unearth the Long Lost Cipher\" challenge is to conduct memory forensics to find Dexter's password on a computer. Your task is to identify the password and reveal the hidden flag.">
+<title>Unearth the Long Lost Cipher</title>
+
+<link rel='canonical' href='https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/'>
+
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Unearth the Long Lost Cipher">
+<meta property='og:description' content="The objective of the \"Unearth the Long Lost Cipher\" challenge is to conduct memory forensics to find Dexter's password on a computer. Your task is to identify the password and reveal the hidden flag.">
+<meta property='og:url' content='https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/'>
+<meta property='og:site_name' content='Sum Ting Wong&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Forensics' /><meta property='article:published_time' content='2023-10-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-10-10T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Unearth the Long Lost Cipher">
+<meta name="twitter:description" content="The objective of the \"Unearth the Long Lost Cipher\" challenge is to conduct memory forensics to find Dexter's password on a computer. Your task is to identify the password and reveal the hidden flag.">
+    <link rel="shortcut icon" href="/avatar.jpeg" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3941651df2f1975cfd87dfe8c4afb297_324250_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🐱</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Sum Ting Wong&#39;s Blog</a></h1>
+            <h2 class="site-description">GDSC Cybersecurity Co-Lead | FSEC-CC Challenge Creator</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#objective">Objective</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#flag">Flag</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/petronas-interuniversity-ctf-2023/" style="background-color: #0177b8; color: #fff;">
+                Petronas Interuniversity CTF 2023
+            </a>
+        
+            <a href="/categories/ctf-writeup/" style="background-color: #2a9d8f; color: #fff;">
+                CTF Writeup
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/unearth-the-long-lost-cipher/">Unearth the Long Lost Cipher</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            The objective of the &#34;Unearth the Long Lost Cipher&#34; challenge is to conduct memory forensics to find Dexter&#39;s password on a computer. Your task is to identify the password and reveal the hidden flag.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 10, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="unearth-the-long-lost-cipher---ctf-challenge-writeup">Unearth the Long Lost Cipher - CTF Challenge Writeup
+</h1><p>Challenge: Unearth the Long Lost Cipher<br>
+Points: 150<br>
+Category: Memory Forensics</p>
+<h2 id="objective">Objective
+</h2><p>The objective of the &ldquo;Unearth the Long Lost Cipher&rdquo; challenge is to conduct memory forensics to find Dexter&rsquo;s password on a computer. Your task is to identify the password and reveal the hidden flag.</p>
+<h2 id="solution">Solution
+</h2><p>To successfully complete the &ldquo;Unearth the Long Lost Cipher&rdquo; challenge, follow these steps:</p>
+<ol>
+<li>
+<p><strong>Prerequisite - Complete m3m0irs</strong>:</p>
+<ul>
+<li>This challenge is the second in the memory forensics series and assumes you have completed the &ldquo;m3m0irs&rdquo; challenge. However, since the previous challenge has ended, it&rsquo;s not necessary to have completed it to proceed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Password Search</strong>:</p>
+<ul>
+<li>You are tasked with finding Dexter&rsquo;s password on the computer. Passwords can be located in various ways during memory forensics, such as examining hash dumps or LSA dumps.</li>
+</ul>
+</li>
+<li>
+<p><strong>Hash Cracking Attempt</strong>:</p>
+<ul>
+<li>An initial approach might involve attempting to crack the password hashes, but it didn&rsquo;t yield results in this case.</li>
+</ul>
+</li>
+<li>
+<p><strong>File Scan and Grep</strong>:</p>
+<ul>
+<li>Another approach is to scan the memory for files and grep for references to &ldquo;Dexter.&rdquo; You can perform file scans using the command: <code>volatility -f &lt;memory file&gt; --profile=&lt;architecture&gt; filescan &gt; filescan.txt</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Locate SECRET.txt File</strong>:</p>
+<ul>
+<li>During the file scan, you may discover a file named &ldquo;SECRET.txt.&rdquo; Extract this file from the memory dump using the command: <code>volatility -f &lt;memory file&gt; --profile=&lt;architecture&gt; dumpfiles -Q &lt;memory-location&gt; -D &lt;directory-where-you-wish-to-place-the-file&gt;</code>.
+<img src="/post/unearth-the-long-lost-cipher/filescan.png"
+	width="1709"
+	height="327"
+	srcset="/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_480x0_resize_box_3.png 480w, /post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="SECRETS.txt"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="522"
+		data-flex-basis="1254px"
+	
+></li>
+</ul>
+</li>
+<li>
+<p><strong>Examine Dexter&rsquo;s Files</strong>:</p>
+<ul>
+<li>Investigate the contents of Dexter&rsquo;s files to gather information. You may find hints that lead to the password.</li>
+</ul>
+</li>
+<li>
+<p><strong>Password Clues</strong>:</p>
+<ul>
+<li>Dexter constructed his password using his favorite animal and a mysterious &ldquo;MMYY.&rdquo; Your task is to determine the animal and decode the password using the provided clues.
+<img src="/post/unearth-the-long-lost-cipher/secret.png"
+	width="1246"
+	height="213"
+	srcset="/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_480x0_resize_box_3.png 480w, /post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Password Construction"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="584"
+		data-flex-basis="1403px"
+	
+></li>
+</ul>
+</li>
+<li>
+<p><strong>Flag Format</strong>:</p>
+<ul>
+<li>The flag will be in the format specified, with the animal represented by 7 letters, followed by &ldquo;MM&rdquo; and &ldquo;YY.&rdquo;</li>
+</ul>
+</li>
+<li>
+<p><strong>Multiple Panther Instances</strong>:</p>
+<ul>
+<li>After examining Dexter&rsquo;s files, you may discover two instances of the word &ldquo;panther.&rdquo; Assume this is his favorite animal and forms the first part of the flag (7 letters).
+<img src="/post/unearth-the-long-lost-cipher/panther%20hint.png"
+	width="1704"
+	height="551"
+	srcset="/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_480x0_resize_box_3.png 480w, /post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="2 Instances of Panther"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="309"
+		data-flex-basis="742px"
+	
+></li>
+</ul>
+</li>
+<li>
+<p><strong>Password Changing Hint</strong>:</p>
+<ul>
+<li>SECRET.txt may contain information about password changes. This hints that passwords are updated regularly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Password Discovery</strong>:</p>
+<ul>
+<li>To narrow down the possibilities, investigate when the &ldquo;notepad&rdquo; application was used. You may find only two dates in the memory dump, so try both as potential password combinations.
+<img src="/post/unearth-the-long-lost-cipher/usage%20of%20notepad.png"
+	width="1715"
+	height="128"
+	srcset="/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_480x0_resize_box_3.png 480w, /post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Usage of Notepad"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="1339"
+		data-flex-basis="3215px"
+	
+></li>
+</ul>
+</li>
+<li>
+<p>After following these steps and conducting memory forensics analysis, you will successfully locate Dexter&rsquo;s password and reveal the hidden flag.</p>
+</li>
+</ol>
+<h2 id="flag">Flag
+</h2><p>The flag for this challenge is in the format: <code>petgrad2023{XXXXXXXXXX}</code>.</p>
+<p>In the &ldquo;Unearth the Long Lost Cipher&rdquo; challenge, memory forensics skills are crucial as you explore the computer&rsquo;s memory to discover Dexter&rsquo;s password and unveil the flag. Best of luck!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/forensics/">Forensics</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Oct 10, 2023 00:00 UTC
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/intruding-the-hidden-society/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Intruding the Hidden Society</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/puzzles-of-an-altered-history/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Puzzles of An Altered History</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/temporal-traffic-traces/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Temporal Traffic Traces</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/the-early-quantum-supercomputer-i/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">The Early Quantum Supercomputer I</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/unearth-the-enigmatic-codebreakers-challenge/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Unearth the Enigmatic Codebreaker&#39;s Challenge</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 Sum Ting Wong&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,1175 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>ABOH 2023 on Sum Ting Wong&#39;s Blog</title>
+        <link>https://qiaonpc.github.io/categories/aboh-2023/</link>
+        <description>Recent content in ABOH 2023 on Sum Ting Wong&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/aboh-2023/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>DigiDoc</title>
+        <link>https://qiaonpc.github.io/post/digidoc/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/digidoc/</guid>
+        <description>&lt;h1 id=&#34;digidoc---ctf-challenge-writeup&#34;&gt;DigiDoc - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: DigiDoc&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;DigiDoc&amp;rdquo; CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully tackle the &amp;ldquo;DigiDoc&amp;rdquo; challenge, I executed the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Enumeration using Nmap&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I started by performing an initial scan using Nmap on the provided IP address, which revealed open ports: FTP, SSH, and HTTP.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/nmap.png&#34;
+	width=&#34;1155&#34;
+	height=&#34;762&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Nmap Scan&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;363px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;FTP Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Investigating the FTP service, I logged in anonymously and found two files. Downloading these files revealed an ECB key that would be useful later.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login.png&#34;
+	width=&#34;653&#34;
+	height=&#34;280&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Anonymous Login&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;559px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/files.png&#34;
+	width=&#34;884&#34;
+	height=&#34;145&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Files&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;609&#34;
+		data-flex-basis=&#34;1463px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files.png&#34;
+	width=&#34;1699&#34;
+	height=&#34;560&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Reading Files&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;303&#34;
+		data-flex-basis=&#34;728px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploring the HTTP Service&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Moving to the HTTP service, I ran a directory brute force using Gobuster. Eventually, it identified a login page.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/home%20page.png&#34;
+	width=&#34;1185&#34;
+	height=&#34;728&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Home Page&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;162&#34;
+		data-flex-basis=&#34;390px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/gobuster.png&#34;
+	width=&#34;1230&#34;
+	height=&#34;411&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Gobuster&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;299&#34;
+		data-flex-basis=&#34;718px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Logging in as a guest revealed an upload page, indicating a potential upload vulnerability. However, admin access was required.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/login%20page.png&#34;
+	width=&#34;943&#34;
+	height=&#34;620&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Login Page&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;365px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required.png&#34;
+	width=&#34;1640&#34;
+	height=&#34;467&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Admin Required&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;351&#34;
+		data-flex-basis=&#34;842px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying IDOR Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Analyzing the accounts tab, I identified an Insecure Direct Object Reference (IDOR) vulnerability, allowing access to user IDs, crucial for admin privileges.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IDOR vulnerability involves manipulating user IDs or object references to gain unauthorized access.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/IDOR.png&#34;
+	width=&#34;1367&#34;
+	height=&#34;610&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IDOR&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;224&#34;
+		data-flex-basis=&#34;537px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploiting Upload Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I attempted exploiting the upload vulnerability. Despite correctly written code and magic bytes, standard PHP file extensions didn&amp;rsquo;t work.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Following recommendations from hacktricks, I discovered that the &lt;code&gt;.phtml&lt;/code&gt; extension allowed successful uploads, enabling me to upload a reverse shell.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc.png&#34;
+	width=&#34;943&#34;
+	height=&#34;247&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PHTML POC&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;381&#34;
+		data-flex-basis=&#34;916px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml.png&#34;
+	width=&#34;517&#34;
+	height=&#34;118&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PHTML Code&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;438&#34;
+		data-flex-basis=&#34;1051px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/web-shell.png&#34;
+	width=&#34;1532&#34;
+	height=&#34;750&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Web Shell&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;204&#34;
+		data-flex-basis=&#34;490px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Escalating Privileges&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Accessing the server, I realized I was the &lt;code&gt;www-data&lt;/code&gt; user. To achieve root access, I explored the home directory, finding two users: Alvin and Dave.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/dave.png&#34;
+	width=&#34;573&#34;
+	height=&#34;84&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Dave&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;682&#34;
+		data-flex-basis=&#34;1637px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Decoding a base64-encoded string in Alvin&amp;rsquo;s directory, using the previously obtained ECB key, revealed a plaintext password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password.png&#34;
+	width=&#34;613&#34;
+	height=&#34;92&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Base64 Password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;666&#34;
+		data-flex-basis=&#34;1599px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/decode.png&#34;
+	width=&#34;459&#34;
+	height=&#34;576&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Decoded&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;79&#34;
+		data-flex-basis=&#34;191px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Privilege Escalation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SSHing into the server using Alvin&amp;rsquo;s credentials, I discovered an ability for Alvin to execute a hidden Python script as root using sudo.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l.png&#34;
+	width=&#34;1236&#34;
+	height=&#34;206&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Sudo -l&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;600&#34;
+		data-flex-basis=&#34;1440px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Privilege Escalation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The solution involved hijacking the libraries in a script file provided without modifying it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Creating a new &lt;code&gt;shutil.py&lt;/code&gt; file, spawning a shell using &lt;code&gt;os&lt;/code&gt;, escalated privileges to root.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacking.png&#34;
+	width=&#34;475&#34;
+	height=&#34;111&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hijacking&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;427&#34;
+		data-flex-basis=&#34;1027px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The obtained flag through the intended solution: &lt;code&gt;ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacked.png&#34;
+	width=&#34;904&#34;
+	height=&#34;233&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hijacked&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;387&#34;
+		data-flex-basis=&#34;931px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of the &amp;ldquo;DigiDoc&amp;rdquo; challenge encompassed identifying multiple vulnerabilities, including FTP access, web application flaws, and privilege escalation, ultimately leading to obtaining the root flag.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup demonstrates the process of identifying and exploiting various vulnerabilities to gain root access in the &amp;ldquo;DigiDoc&amp;rdquo; CTF challenge. For any further inquiries or clarifications, please feel free to ask.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>FurElise</title>
+        <link>https://qiaonpc.github.io/post/furelise/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/furelise/</guid>
+        <description>&lt;h1 id=&#34;furelise---ctf-challenge-writeup&#34;&gt;FurElise - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: FurElise&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;FurElise&amp;rdquo; CTF challenge is to decode a hidden flag concealed within a PowerShell script by following a series of deobfuscation and decoding steps.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;FurElise&amp;rdquo; challenge and retrieve the flag, I executed the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;File Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upon inspecting the provided file, it was evident that it is a PowerShell script containing obfuscated code.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/challenge.png&#34;
+	width=&#34;700&#34;
+	height=&#34;797&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Challenge&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;87&#34;
+		data-flex-basis=&#34;210px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Deobfuscation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Drawing inspiration from problem-solving approaches by John Hammond, I initiated the deobfuscation process.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The initial step involved removing the &lt;code&gt;&amp;amp;&lt;/code&gt; present throughout the script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/removed%20and.png&#34;
+	width=&#34;469&#34;
+	height=&#34;150&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Removed &amp;&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;312&#34;
+		data-flex-basis=&#34;750px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Removing Unnecessary Lines&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Further simplification of the script was performed by eliminating redundant lines, notably lines containing &lt;code&gt;&#39;&#39;&#39;&#39;&#39;&#39;FürElise&#39;&#39;&#39;&#39;&#39;&#39;FürElise&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This step helped in revealing clearer, relevant content within the script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/removed%20everything.png&#34;
+	width=&#34;866&#34;
+	height=&#34;720&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Removed Everything&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;120&#34;
+		data-flex-basis=&#34;288px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying Clues&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Within the revised script, two links were discovered, which contained crucial elements of the flag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The first link provided the initial part of the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%201.png&#34;
+	width=&#34;272&#34;
+	height=&#34;69&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag Part 1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;394&#34;
+		data-flex-basis=&#34;946px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analyzing the Second Link&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The second link presented another PowerShell script. However, caution was exercised against executing it directly on a host machine due to safety concerns.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/1%20powershell.png&#34;
+	width=&#34;1911&#34;
+	height=&#34;946&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Powershell Part 1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;484px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decoding Base64&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The second PowerShell script was decoded from Base64, revealing additional script content.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To understand its functionality, portions of the script were cautiously executed one by one, avoiding potential risks and aiming to decode it progressively.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/decode%20base64.png&#34;
+	width=&#34;1697&#34;
+	height=&#34;867&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Decode Base64&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;195&#34;
+		data-flex-basis=&#34;469px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/2%20powershell.png&#34;
+	width=&#34;1433&#34;
+	height=&#34;578&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Powershell Part 2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;247&#34;
+		data-flex-basis=&#34;595px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Locating Hidden Information&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;While decoding the PowerShell script, a link was discovered halfway through the process, leading to the final part of the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/decoding.png&#34;
+	width=&#34;1677&#34;
+	height=&#34;791&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Decoding&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;212&#34;
+		data-flex-basis=&#34;508px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Final Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Navigating to the obtained link revealed the last segment of the flag, completing the puzzle.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%202.png&#34;
+	width=&#34;825&#34;
+	height=&#34;127&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag Part 2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;649&#34;
+		data-flex-basis=&#34;1559px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of the &amp;ldquo;FurElise&amp;rdquo; challenge involved systematic deobfuscation, cautious decoding, and progressive script execution to unveil hidden elements and retrieve the flag.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH23{d!ff1cU17_s0Ng_FROm_hEaRtBrE4K}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup serves as a demonstration of decoding techniques used to extract the hidden flag within the &amp;ldquo;FurElise&amp;rdquo; CTF challenge. Should you require further explanation or have additional queries, please feel free to ask.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>May The Force Be With You</title>
+        <link>https://qiaonpc.github.io/post/may-the-force-be-with-you/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/may-the-force-be-with-you/</guid>
+        <description>&lt;h1 id=&#34;may-the-force-be-with-you---ctf-challenge-writeup&#34;&gt;May The Force Be With You - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: May The Force Be With You&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;May The Force Be With You&amp;rdquo; CTF challenge is to decipher a hidden flag encoded within a given script using reverse engineering techniques.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;May The Force Be With You&amp;rdquo; challenge and obtain the flag, I followed the below steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Understanding the Challenge Objective&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The challenge required decoding a hidden flag from a provided script using reverse engineering methods.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Approach&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Due to personal constraints and limited expertise in mathematics, I opted to use HackerGPT, a tool specialized in reversing scripts, to decode the hidden flag.&lt;/li&gt;
+&lt;li&gt;Though using automated tools can be considered disrespectful to the challenge creator, it was necessary due to my limitations and time constraints during the competition.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Script Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Utilizing the script below, I executed it to unveil the hidden flag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unfortunately, due to my lack of proficiency in deciphering the script manually, I had to rely on HackerGPT to assist me in understanding the logic and unveiling the flag.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Crypto.Cipher&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Crypto.Util.Padding&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unpad&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Crypto.Protocol.KDF&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PBKDF2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;textwrap&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;decrypt_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encrypted_file_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encrypted_file_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;ciphertext_iv&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;iv&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ciphertext_iv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;block_size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ciphertext_iv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;block_size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;passwd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;textwrap&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dedent&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[:&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;salt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;b&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;salt123&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;key&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PBKDF2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;passwd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;salt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dkLen&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;key&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MODE_CBC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;iv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unpad&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cipher&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decrypt&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ciphertext&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AES&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;block_size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;ni5h2h?Yrq8Do?n+|6a;pKbZkv%}O~tV&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;encrypted_file_path&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;./flag.txt.enc&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;decrypt_file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;encrypted_file_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plaintext&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Extraction&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upon executing the script, the decoded flag was revealed as &lt;code&gt;ABOH23{A3S_Rul35_tH3_F0rc3}&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of this challenge involved leveraging reverse engineering tools like HackerGPT to decode the hidden flag from the provided script. While I regret not being able to decode it manually due to personal limitations, I acknowledge the importance of understanding the underlying concepts for future challenges.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH23{A3S_Rul35_tH3_F0rc3}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup serves as a demonstration of utilizing reverse engineering tools to decode the hidden flag in the &amp;ldquo;May The Force Be With You&amp;rdquo; CTF challenge. If you have any further inquiries or need additional clarification, please feel free to ask.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Small Sage</title>
+        <link>https://qiaonpc.github.io/post/small-sage/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/small-sage/</guid>
+        <description>&lt;h1 id=&#34;small-sage---ctf-challenge-writeup&#34;&gt;Small Sage - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Small Sage&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;Small Sage&amp;rdquo; CTF challenge is to decipher a flag that has been encrypted using RSA encryption techniques, focusing on elements like &lt;code&gt;n&lt;/code&gt;, &lt;code&gt;p&lt;/code&gt;, &lt;code&gt;q&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;N&lt;/code&gt;, and &lt;code&gt;e&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully solve the &amp;ldquo;Small Sage&amp;rdquo; challenge and retrieve the flag, I followed these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upon inspecting the provided &amp;ldquo;Small Sage&amp;rdquo; script, it was evident that it resembled RSA encryption, as it contained elements like &lt;code&gt;n&lt;/code&gt;, &lt;code&gt;p&lt;/code&gt;, and &lt;code&gt;q&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Additionally, the &lt;code&gt;out.txt&lt;/code&gt; file contained variables &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;N&lt;/code&gt;, and &lt;code&gt;e&lt;/code&gt;, further indicating an RSA encryption problem.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/nce.png&#34;
+	width=&#34;1311&#34;
+	height=&#34;328&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;NCE&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;399&#34;
+		data-flex-basis=&#34;959px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/npq.png&#34;
+	width=&#34;863&#34;
+	height=&#34;438&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;NPQ&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;197&#34;
+		data-flex-basis=&#34;472px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying RSA Encryption&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Recognizing the RSA encryption components (&lt;code&gt;n&lt;/code&gt;, &lt;code&gt;p&lt;/code&gt;, &lt;code&gt;q&lt;/code&gt;, &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;N&lt;/code&gt;, &lt;code&gt;e&lt;/code&gt;), it was clear that this challenge was centered around RSA encryption and decryption.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Approach&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Noticing the hint with the term &amp;ldquo;small&amp;rdquo; in the challenge name, I hypothesized that it might involve a small &lt;code&gt;e&lt;/code&gt; problem in RSA encryption.&lt;/li&gt;
+&lt;li&gt;I proceeded to use my typucal script tailored for solving RSA problems with small &lt;code&gt;e&lt;/code&gt; values.&lt;/li&gt;
+&lt;li&gt;You can find the script in solve.py&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Executing the script designed to handle RSA problems with small &lt;code&gt;e&lt;/code&gt; values successfully decrypted the encrypted data.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The deciphered message revealed the flag: &lt;code&gt;ABOH23{rocky0ubrr!}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/flag.png&#34;
+	width=&#34;760&#34;
+	height=&#34;136&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;558&#34;
+		data-flex-basis=&#34;1341px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;gmpy2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;N&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;28161864534081810305839467239167774824180698442991360538137338315924601027539535041400325106523598882827263670671140966855944057889837783992080270143420119844958855679728614805589197733901663249220100214524859116110365815705699485099116276988534253521580223115836247118089590595980346272692504104976860138248959015932618979651746563030552421216691329694961700647328850519321776696007920491542096366696034760558758393690945535590284240994579352805664119144134863786797266463118165575746650538843159490903440899114347091988968775074879305009340592457617508211781199057573663246634610497629416920053419998682083393087987&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;C&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;762355112596222421309825166446067448121886093544068458795156044255325081286699861240486430215279901835675723822721970949307265398924333599178805487220325668055743991293697494477706560130827449405781098938392283482757063955895656607033694619449376928780098570577226994800731087835230561205556094959240210387000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;is_true_root&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;gmpy2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;iroot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;is_true_root&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Found, Iteration = &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Flag: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bytearray&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fromhex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;x&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;decode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;break&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of the &amp;ldquo;Small Sage&amp;rdquo; challenge involved recognizing RSA encryption elements and leveraging a specialized script to handle the small &lt;code&gt;e&lt;/code&gt; problem, resulting in the decryption of the encrypted data to obtain the flag.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH23{rocky0ubrr!}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup demonstrates the process of identifying and decrypting an RSA-encrypted flag in the &amp;ldquo;Small Sage&amp;rdquo; CTF challenge. Should you require further clarification or have additional questions, please feel free to ask.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Threat Hunting Challenge 1</title>
+        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</guid>
+        <description>&lt;h1 id=&#34;threat-hunting-challenge-1---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 1 - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Threat Hunting: Challenge 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; CTF challenge is to investigate a ransomware-like attack scenario within a provided VM and identify the executable responsible for the encryption.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully complete the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; challenge, I followed these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Context&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This challenge is part of a series in the threat hunting category and involves a provided VM named BOH_TH_2023. The VM needs to be extracted and loaded onto a virtualization platform like VMware or Oracle VirtualBox.&lt;/li&gt;
+&lt;li&gt;It is recommended to solve this challenge before looking into Challenge 2 and Challenge 3&lt;/li&gt;
+&lt;li&gt;However, you can solve Challenge 2 and Challenge 3 in any order&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial VM Inspection&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upon loading the VM, it became apparent that the files were encrypted, resembling a ransomware attack scenario. The challenge also directed us to identify the executable responsible for the encryption.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Therefore, it is safe to assumed that the ransomware executable has already been executed.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack.png&#34;
+	width=&#34;960&#34;
+	height=&#34;603&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Ransomware&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;159&#34;
+		data-flex-basis=&#34;382px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Utilizing Amcache and Shimcache&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Amcache and Shimcache are artifacts used in Windows systems to record executed executables.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Amcache is a registry hive that records metadata and information about applications and programs executed on a Windows system. It provides a wealth of information about executed executables.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Amcache is typically located in &lt;code&gt;C:\Windows\appcompat\Programs\Amcache.hve&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shimcache, another Windows artifact, also records information about executed programs but in a different format. However, in this challenge, the Shimcache files are intentionally corrupted.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache.png&#34;
+	width=&#34;1046&#34;
+	height=&#34;190&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Amcache&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;550&#34;
+		data-flex-basis=&#34;1321px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Amcache Parsing&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To extract and process Amcache data, I utilized the AmcacheParser tool available at &lt;a class=&#34;link&#34; href=&#34;https://ericzimmerman.github.io/#!index.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Eric Zimmerman&amp;rsquo;s website&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;The Amcache data is typically stored in &lt;code&gt;C:\Windows\appcompat\Programs\Amcache.hve&lt;/code&gt;. I searched for this file and utilized AmcacheParser to process it.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Processing Amcache Data&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Running AmcacheParser generated multiple CSV files, which I exported for easier analysis. These files can be explored using applications like Timeline Explorer or by downloading them from &lt;a class=&#34;link&#34; href=&#34;https://ericzimmerman.github.io/#!index.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Eric Zimmerman&amp;rsquo;s website&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser.png&#34;
+	width=&#34;1500&#34;
+	height=&#34;806&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;AmcacheParser&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;186&#34;
+		data-flex-basis=&#34;446px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding Suspicious Activity&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;By examining the generated CSV files, I eventually identified something suspicious among the data, indicating the executable responsible for the encryption.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus.png&#34;
+	width=&#34;810&#34;
+	height=&#34;152&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Suspicious&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;532&#34;
+		data-flex-basis=&#34;1278px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The identified executable responsible for the encryption is: &lt;code&gt;ABOH{Mcqqic24UJyU40JKdja0A.exe}&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; involved extracting Amcache data from the provided VM, utilizing AmcacheParser to process the data, and investigating the executables to identify the suspicious file responsible for the encryption.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH{Mcqqic24UJyU40JKdja0A.exe}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup demonstrates the process of investigating a ransomware-like attack scenario using Amcache parsing techniques in the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; CTF challenge. For further queries or clarifications, feel free to inquire.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Threat Hunting Challenge 2</title>
+        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</guid>
+        <description>&lt;h1 id=&#34;threat-hunting-challenge-2---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 2 - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Threat Hunting: Challenge 2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; CTF challenge is to identify the SHA256 hash value of the executable responsible for exfiltrating data within a given context.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully tackle the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; challenge, I followed these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Context&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This challenge is part of a series in the threat hunting category and requires identifying the SHA256 hash value of the executable responsible for data exfiltration.&lt;/li&gt;
+&lt;li&gt;It is recommended to solve Challenge 1 before looking into Challenge 2 and Challenge 3&lt;/li&gt;
+&lt;li&gt;However, you can solve Challenge 2 and Challenge 3 in any order&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying Suspicious Executables&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;On further inspection from the first challenge, I discovered a total three suspicious files including the one from the first challenge.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I dumped the two executables onto VirusTotal and HybridAnalysis, whilst analysed the powershell script myself.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The powershell script showed symptoms of reading files and encrypting it and I am suspecting that this is the file they are looking for, but not 100% certain.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable.png&#34;
+	width=&#34;774&#34;
+	height=&#34;214&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Executables&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;361&#34;
+		data-flex-basis=&#34;868px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script.png&#34;
+	width=&#34;1674&#34;
+	height=&#34;768&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Powershell Script&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;217&#34;
+		data-flex-basis=&#34;523px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Approach to Finding SHA256 Hash&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A common misconception might lead one to use &lt;code&gt;Get-FileHash&lt;/code&gt; to find the hash value. However, in challenges like these, this method may not yield the expected results.&lt;/li&gt;
+&lt;li&gt;This difference in hash values can be due to various factors and is further explained in this &lt;a class=&#34;link&#34; href=&#34;https://stackoverflow.com/questions/29946221/hash-value-md5-and-sha256-of-file-is-coming-different-when-file-is-from-system32&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Stack Overflow thread&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Using Hasher Tool&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To accurately acquire the SHA256 hash value of the suspicious files, I utilized the Hasher tool available at &lt;a class=&#34;link&#34; href=&#34;https://ericzimmerman.github.io/#!index.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Eric Zimmerman&amp;rsquo;s website&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Determining Executable&amp;rsquo;s SHA256 Hash&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Since there were only three suspicious files discovered, and I am not so sure about my discovery, I will be calculating the SHA256 hash value for each of them using the Hasher tool and submitting as a flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Final Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Among the calculated SHA256 hash values, one matched the expected format of the flag: &lt;code&gt;ABOH{hash_value}&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;At the time of writing this writeup, I have forgotten which one was the flag. Im sorry.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value.png&#34;
+	width=&#34;1165&#34;
+	height=&#34;235&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hash Value&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;495&#34;
+		data-flex-basis=&#34;1189px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; involved identifying potentially malicious executables and determining their SHA256 hash values using the Hasher tool to extract the flag.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH{hash_value}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup illustrates the process of identifying the SHA256 hash value of a potentially malicious executable in the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; CTF challenge. For further inquiries or clarifications, feel free to ask.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Threat Hunting Challenge 3</title>
+        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</guid>
+        <description>&lt;h1 id=&#34;threat-hunting-challenge-3---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 3 - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Threat Hunting: Challenge 3&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; CTF challenge is to identify the significant indicator related to a potentially malicious executable based on its behavior observed through external connections.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully solve the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; challenge, I proceeded with the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Context from Previous Challenge&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Continuing from the previous challenge, I conducted further analysis on the executables by uploading them to security analysis platforms like VirusTotal and HybridAnalysis for comprehensive analysis.&lt;/li&gt;
+&lt;li&gt;It is recommended to solve Challenge 1 before looking into Challenge 3 and Challenge 3&lt;/li&gt;
+&lt;li&gt;However, you can solve Challenge 3 and Challenge 3 in any order&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analysis Results&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upon reviewing the analysis results from the previous challenge (VirusTotal and HybridAnalysis), I observed that both executables made external connections to IP addresses. However, one particular connection stood out among the rest.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus.png&#34;
+	width=&#34;790&#34;
+	height=&#34;238&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Not Sus&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;331&#34;
+		data-flex-basis=&#34;796px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus.png&#34;
+	width=&#34;683&#34;
+	height=&#34;273&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Sus&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;250&#34;
+		data-flex-basis=&#34;600px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Identification&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;After careful observation and analysis, I identified the standout indicator related to a potentially malicious executable, which is the URL or IP address:
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;ABOH{http://146.190.89.115:8080/YPAPJDoGD3aIQlFix11ZA.php}&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; involved analyzing the behavior of potentially malicious executables and identifying the significant external connection, aiding in the discovery of the flag.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH{http://146.190.89.115:8080/YPAPJDoGD3aIQlFix11ZA.php}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup demonstrates the process of analyzing executable behavior to identify significant indicators of potential malicious activity in the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; CTF challenge. For any further queries or clarifications, please feel free to inquire.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

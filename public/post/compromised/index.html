@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="The objective of the \"Compromised\" CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.">
+<title>Compromised</title>
+
+<link rel='canonical' href='https://qiaonpc.github.io/post/compromised/'>
+
+<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Compromised">
+<meta property='og:description' content="The objective of the \"Compromised\" CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.">
+<meta property='og:url' content='https://qiaonpc.github.io/post/compromised/'>
+<meta property='og:site_name' content='Sum Ting Wong&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Forensics' /><meta property='article:published_time' content='2023-12-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2023-12-17T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Compromised">
+<meta name="twitter:description" content="The objective of the \"Compromised\" CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.">
+    <link rel="shortcut icon" href="/avatar.jpeg" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3941651df2f1975cfd87dfe8c4afb297_324250_300x0_resize_q75_box.jpeg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🐱</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Sum Ting Wong&#39;s Blog</a></h1>
+            <h2 class="site-description">GDSC Cybersecurity Co-Lead | FSEC-CC Challenge Creator</h2>
+        </div>
+    </header><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#challenge-information">Challenge Information</a></li>
+    <li><a href="#solution">Solution</a></li>
+    <li><a href="#flag">Flag</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/student-wargames-2023/" style="background-color: #0177b8; color: #fff;">
+                Student Wargames 2023
+            </a>
+        
+            <a href="/categories/ctf-writeup/" style="background-color: #2a9d8f; color: #fff;">
+                CTF Writeup
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/compromised/">Compromised</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            The objective of the &#34;Compromised&#34; CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 17, 2023</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="compromised---ctf-challenge-writeup">Compromised - CTF Challenge Writeup
+</h1><h2 id="challenge-information">Challenge Information
+</h2><ul>
+<li><strong>Name</strong>: Compromised</li>
+<li><strong>Category</strong>: Forensics</li>
+<li><strong>Objective</strong>: The objective of the &ldquo;Compromised&rdquo; CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.</li>
+</ul>
+<h2 id="solution">Solution
+</h2><p>To successfully solve the &ldquo;Compromised&rdquo; challenge, I executed the following steps:</p>
+<ol>
+<li>
+<p><strong>Initial Examination</strong>:</p>
+<ul>
+<li>Unzipped the provided challenge file, revealing a directory structure reminiscent of a Windows directory.</li>
+</ul>
+</li>
+<li>
+<p><strong>Flag Identification</strong>:</p>
+<ul>
+<li>
+<p>Using the <code>tree</code> command, I quickly located the flag within the directory structure. However, it was a zip file itself, requiring further steps for extraction.</p>
+<p><img src="/post/compromised/tree%20to%20find%20flag.png"
+	width="471"
+	height="262"
+	srcset="/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_480x0_resize_box_3.png 480w, /post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Tree to find flag"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="179"
+		data-flex-basis="431px"
+	
+></p>
+<p><img src="/post/compromised/flag%20zip.png"
+	width="1091"
+	height="119"
+	srcset="/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_480x0_resize_box_3.png 480w, /post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Flag is a zip"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="916"
+		data-flex-basis="2200px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Brute Forcing the Zip File</strong>:</p>
+<ul>
+<li>
+<p>Attempted to brute force the password for the zip file. Initially faced permission issues, resolved by changing permissions using <code>chmod</code>.</p>
+</li>
+<li>
+<p>Used <code>John The Ripper</code> to crack the zip file password, which proved unsuccessful, prompting a search for the password.</p>
+<p><img src="/post/compromised/john%20failed.png"
+	width="1295"
+	height="353"
+	srcset="/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_480x0_resize_box_3.png 480w, /post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="John Failed"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="366"
+		data-flex-basis="880px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Locating Password</strong>:</p>
+<ul>
+<li>
+<p>After some exploration, identified the crucial file named <code>Cache0000.bin</code>, which holds significant data for the challenge.</p>
+</li>
+<li>
+<p><code>Cache0000.bin</code> contains data related to Remote Desktop Protocol (RDP) cache.</p>
+<p><img src="/post/compromised/found%20cache.png"
+	width="490"
+	height="225"
+	srcset="/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_480x0_resize_box_3.png 480w, /post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Cache File Found"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="217"
+		data-flex-basis="522px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Extracting Images from Cache File</strong>:</p>
+<ul>
+<li>
+<p>Employed the tool <code>bmc-tools</code> (<a class="link" href="https://github.com/ANSSI-FR/bmc-tools"  target="_blank" rel="noopener"
+    >https://github.com/ANSSI-FR/bmc-tools</a>) to extract pictures from <code>Cache0000.bin</code>.</p>
+<p><img src="/post/compromised/bmc%20tools.png"
+	width="1265"
+	height="713"
+	srcset="/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_480x0_resize_box_3.png 480w, /post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="BMC Tool Output"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="177"
+		data-flex-basis="425px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Revealing Flag within Images</strong>:</p>
+<ul>
+<li>
+<p>Extracted over 2000 images, one of which combines all the segments of the flag.</p>
+</li>
+<li>
+<p>Noticed segments of the flag within the combined image, visible upon zooming in.</p>
+<p><img src="/post/compromised/bmc%20tools%20zoomed.png"
+	width="965"
+	height="231"
+	srcset="/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_480x0_resize_box_3.png 480w, /post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="BMC Tool Flag Segment"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="417"
+		data-flex-basis="1002px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Combining Segments into Flag</strong>:</p>
+<ul>
+<li>
+<p>Utilized  <code>RDPCacheStitcher</code> (<a class="link" href="https://github.com/BSI-Bund/RdpCacheStitcher/releases/"  target="_blank" rel="noopener"
+    >https://github.com/BSI-Bund/RdpCacheStitcher/releases/</a>) to assemble the segments as if solving a puzzle.</p>
+<p><img src="/post/compromised/stitcher.png"
+	width="1459"
+	height="715"
+	srcset="/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_480x0_resize_box_3.png 480w, /post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Stitcher"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="204"
+		data-flex-basis="489px"
+	
+></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Obtaining Password</strong>:</p>
+<ul>
+<li>Discovered the password <code>WGMY_P4ssw0rd_N0t_V3ry_H4rd!!!</code> while assembling the image segments.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Flag Extraction</strong>:</p>
+<ul>
+<li>
+<p>Successfully unzipped the flag from the zip file using the obtained password.</p>
+<p><img src="/post/compromised/flag.png"
+	width="951"
+	height="271"
+	srcset="/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_480x0_resize_box_3.png 480w, /post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_1024x0_resize_box_3.png 1024w"
+	loading="lazy"
+	
+		alt="Flag"
+	
+	
+		class="gallery-image" 
+		data-flex-grow="350"
+		data-flex-basis="842px"
+	
+></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="flag">Flag
+</h2><p>The flag for this challenge is: <code>wgmy{XXXXXXXXXX}</code>.</p>
+<p>This writeup delineates the process of navigating through a directory, extracting images from a cache file, assembling image segments, and obtaining the hidden flag in the &ldquo;Compromised&rdquo; CTF challenge. For any further queries or clarifications, please feel free to ask.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/forensics/">Forensics</a>
+        
+    </section>
+
+
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Dec 17, 2023 00:00 UTC
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/linux-memory-usage/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linux Memory Usage</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/lokami-temple/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Lokami Temple</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/lasthope/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">LastHope</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/mobile/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Mobile</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/furelise/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">FurElise</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2023 - 
+        
+        2024 Sum Ting Wong&#39;s Blog
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

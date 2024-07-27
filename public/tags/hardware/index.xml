@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Hardware on Sum Ting Wong&#39;s Blog</title>
+        <link>https://qiaonpc.github.io/tags/hardware/</link>
+        <description>Recent content in Hardware on Sum Ting Wong&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/hardware/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Assemble</title>
+        <link>https://qiaonpc.github.io/post/assemble/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/assemble/</guid>
+        <description>&lt;h1 id=&#34;assemble-ctf-challenge-writeup&#34;&gt;Assemble CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Assemble&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Hardware&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;Assemble&amp;rdquo; challenge is to correctly configure the hardware components and troubleshoot any technical issues to display the flag on the LCD.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Assemble&amp;rdquo; CTF challenge, the following configurations were made:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Wiring Matrix Module to Arduino&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;C4 -&amp;gt; 13&lt;/li&gt;
+&lt;li&gt;C3 -&amp;gt; 12&lt;/li&gt;
+&lt;li&gt;C2 -&amp;gt; ~11&lt;/li&gt;
+&lt;li&gt;C1 -&amp;gt; ~10&lt;/li&gt;
+&lt;li&gt;R1 -&amp;gt; ~9&lt;/li&gt;
+&lt;li&gt;R2 -&amp;gt; 8&lt;/li&gt;
+&lt;li&gt;R3 -&amp;gt; 7&lt;/li&gt;
+&lt;li&gt;R4 -&amp;gt; 6&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Attach Potentiometer and LCD to Breadboard&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Potentiometer wiring:
+&lt;ul&gt;
+&lt;li&gt;GND to Blue rail&lt;/li&gt;
+&lt;li&gt;5V to Red rail&lt;/li&gt;
+&lt;li&gt;I/O - LCD &amp;lsquo;VEE&amp;rsquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;LCD Wiring:
+&lt;ul&gt;
+&lt;li&gt;VSS to Blue rail&lt;/li&gt;
+&lt;li&gt;VDD to Red rail&lt;/li&gt;
+&lt;li&gt;RS to A0&lt;/li&gt;
+&lt;li&gt;RW to A1&lt;/li&gt;
+&lt;li&gt;E to A2&lt;/li&gt;
+&lt;li&gt;D7 to Blue rail&lt;/li&gt;
+&lt;li&gt;D6 to Red rail&lt;/li&gt;
+&lt;li&gt;D5 to A5&lt;/li&gt;
+&lt;li&gt;D4 to A4&lt;/li&gt;
+&lt;li&gt;D3 to A3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Technical Issues&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Encountered technical issues where the flag would not display on the LCD.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Despite the issues, the excons provided the flag as a gesture of completion.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can view it on the video in this directory&lt;/p&gt;
+&lt;p&gt;&lt;video controls src=&#34;technical issues.mp4&#34; title=&#34;Technical Issue&#34;&gt;&lt;/video&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;RWSC{XXXXXXXXXX}&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

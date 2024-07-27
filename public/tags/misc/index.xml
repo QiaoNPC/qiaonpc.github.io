@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Misc on Sum Ting Wong&#39;s Blog</title>
+        <link>https://qiaonpc.github.io/tags/misc/</link>
+        <description>Recent content in Misc on Sum Ting Wong&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ButterCup</title>
+        <link>https://qiaonpc.github.io/post/buttercup/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/buttercup/</guid>
+        <description>&lt;h1 id=&#34;buttercup-ctf-challenge-writeup&#34;&gt;ButterCup CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: ButterCup&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 490&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Misc&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves extracting three parts of the flag from a video, with two parts embedded in the video itself and one part hidden in the audio spectrum.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a detailed solution for the ButterCup CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Without hints, we definitely cannot solve this challenge.&lt;/li&gt;
+&lt;li&gt;We were told that there were three parts to the flag, with two parts embedded in the video and one part hidden in the audio spectrum.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Video Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Went through the video multiple times, including adjusting playback speed and brightness to catch any hidden elements.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered the words &lt;code&gt;3XP3RT_&lt;/code&gt; at around 14 seconds and &lt;code&gt;1N_&lt;/code&gt; at around 2:52 in the video.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/part%201.png&#34;
+	width=&#34;912&#34;
+	height=&#34;684&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Part 1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;133&#34;
+		data-flex-basis=&#34;320px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/part%202.png&#34;
+	width=&#34;1287&#34;
+	height=&#34;776&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Part 2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;398px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Audio Spectrum Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Used audacity on the audio of the video to reveal hidden patterns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configured the spectrogram to enhance visibility of subtle details.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Found a hint for the last part of the flag in the spectrogram.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Not the clearest picture of the last part, but we were able to deducde its &lt;code&gt;4UD1O&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/configuration.jpg&#34;
+	width=&#34;528&#34;
+	height=&#34;388&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Configuration&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;136&#34;
+		data-flex-basis=&#34;326px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/last%20part.jpg&#34;
+	width=&#34;338&#34;
+	height=&#34;344&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_1024x0_resize_q75_box.jpg 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Last Part&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;98&#34;
+		data-flex-basis=&#34;235px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Reconstruction&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Combined the three parts of the flag obtained from the video and audio spectrum to reconstruct the complete flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The ButterCup CTF challenge required a thorough analysis of both the video and audio spectrum to extract all parts of the flag. It demonstrated the importance of attention to detail and the use of specialized tools for multimedia analysis in CTF challenges.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>I Hope You Have The Software</title>
+        <link>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</guid>
+        <description>&lt;h1 id=&#34;i-hope-you-have-the-software-ctf-challenge-writeup&#34;&gt;I Hope You Have The Software CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: I Hope You Have The Software&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 230&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Network&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of this challenge is to find the flag hidden in the HTML files served by the servers in the packet capture.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;I Hope You Have The Software&amp;rdquo; CTF challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Assessment&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Analyzed the packet capture and identified 12 servers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Noticed two servers stacked on top of each other, suggesting a hidden layer.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked.png&#34;
+	width=&#34;585&#34;
+	height=&#34;609&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Stacked&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;96&#34;
+		data-flex-basis=&#34;230px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;HTML File Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inspected the HTML files served by the servers.&lt;/li&gt;
+&lt;li&gt;Found the flag hidden within one of the HTML files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Extraction&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Extracted the flag from the HTML file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag.png&#34;
+	width=&#34;595&#34;
+	height=&#34;321&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;185&#34;
+		data-flex-basis=&#34;444px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>STOP SPAMMING</title>
+        <link>https://qiaonpc.github.io/post/stop-spamming/</link>
+        <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/stop-spamming/</guid>
+        <description>&lt;h1 id=&#34;stop-spamming---ctf-challenge-writeup&#34;&gt;STOP SPAMMING - CTF Challenge Writeup
+&lt;/h1&gt;&lt;p&gt;Challenge: STOP SPAMMING&lt;br&gt;
+Points: 100&lt;br&gt;
+Category: Miscellaneous&lt;/p&gt;
+&lt;h2 id=&#34;objective&#34;&gt;Objective
+&lt;/h2&gt;&lt;p&gt;The objective of the STOP SPAMMING challenge is to decode a provided spam message using a spam decoder tool. Your task is to utilize the tool to uncover the hidden flag.&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully complete the STOP SPAMMING challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Spam Message Decoding&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Begin by examining the provided spam message. The challenge hints at using a spam decoder tool.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Spam Decoder Tool&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This challenge simplifies the task by directing you to a specific spam decoder tool. You can use the following online tool to decode the spam message:
+&lt;a class=&#34;link&#34; href=&#34;https://spammimic.com/decode.cgi&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Spam Decoder Tool&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;By utilizing the provided tool, you will decode the spam message and reveal the hidden flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The STOP SPAMMING challenge, in this case, involves the straightforward use of a spam decoder tool to uncover the flag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is in the format: &lt;code&gt;petgrad2023{XXXXXXXXXX}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In the STOP SPAMMING challenge, you utilize a spam decoder tool to decode the spam message and reveal the flag. It&amp;rsquo;s a quick and straightforward solution to the challenge. Best of luck!&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

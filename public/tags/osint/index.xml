@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>OSINT on Sum Ting Wong&#39;s Blog</title>
+        <link>https://qiaonpc.github.io/tags/osint/</link>
+        <description>Recent content in OSINT on Sum Ting Wong&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/osint/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Cali Cartel</title>
+        <link>https://qiaonpc.github.io/post/cali-cartel/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/cali-cartel/</guid>
+        <description>&lt;h1 id=&#34;cali-cartel-ctf-challenge-writeup&#34;&gt;Cali Cartel CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Cali Cartel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 50&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: OSINT (Open-Source Intelligence)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge requires finding a flag using OSINT techniques.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a brief overview of the solution for the Cali Cartel CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Approach&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Initially attempted to solve the challenge using traditional OSINT techniques.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Alternative Solution&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;But when we saw many players are solving it and we aren&amp;rsquo;t, we resorted to the most retarded way of solving CTF ever, Google Dorking.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Google Dorking&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applied Google dorking techniques to search for information related to the challenge.&lt;/li&gt;
+&lt;li&gt;Discovered relevant information that led to the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Acquisition&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Obtained the flag using the information found through Google dorking.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/cali-cartel/flag.png&#34;
+	width=&#34;1057&#34;
+	height=&#34;551&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;460px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The Cali Cartel challenge was solved using an alternative approach of Google dorking after traditional OSINT techniques did not yield the desired results. Google dorking helped discover information that ultimately led to finding the flag.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Medellín Cartel</title>
+        <link>https://qiaonpc.github.io/post/medell%C3%ADn-cartel/</link>
+        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/medell%C3%ADn-cartel/</guid>
+        <description>&lt;h1 id=&#34;medellín-cartel-ctf-challenge-writeup&#34;&gt;Medellín Cartel CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Medellín Cartel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 190&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: OSINT (Open-Source Intelligence)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The challenge involves finding a flag related to a person named Blacky on a specific Instagram page.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;Here&amp;rsquo;s a step-by-step solution for the Medellín Cartel CTF challenge:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hint Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We definitely used the hints in this challenge which directed us to find information about Blacky on a specific Instagram page.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Investigating Blacky&amp;rsquo;s Instagram Page&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Visited the Instagram page mentioned in the hint.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Found that Blacky&amp;rsquo;s page has only 1 follower and 1 post.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten.png&#34;
+	width=&#34;1277&#34;
+	height=&#34;659&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;UNITEN&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;193&#34;
+		data-flex-basis=&#34;465px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Inspecting the Post&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inspected the single post on Blacky&amp;rsquo;s page.&lt;/li&gt;
+&lt;li&gt;Discovered the flag hidden within the post&amp;rsquo;s content.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Obtaining the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Extracted the flag from the post&amp;rsquo;s content.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag.png&#34;
+	width=&#34;380&#34;
+	height=&#34;160&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;237&#34;
+		data-flex-basis=&#34;570px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;conclusion&#34;&gt;Conclusion
+&lt;/h2&gt;&lt;p&gt;The Medellín Cartel challenge required participants to investigate a specific Instagram page to find information about a person named Blacky. By inspecting Blacky&amp;rsquo;s post on the page, participants could discover the flag hidden within the post&amp;rsquo;s content.&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Checkout my socials 1</title>
+        <link>https://qiaonpc.github.io/post/checkout-my-socials-1/</link>
+        <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/checkout-my-socials-1/</guid>
+        <description>&lt;h1 id=&#34;checkout-my-socials-1---ctf-challenge-writeup&#34;&gt;Checkout my socials 1 - CTF Challenge Writeup
+&lt;/h1&gt;&lt;p&gt;Challenge: Checkout my socials 1&lt;br&gt;
+Points: 50&lt;br&gt;
+Category: OSINT (Open-Source Intelligence)&lt;/p&gt;
+&lt;h2 id=&#34;objective&#34;&gt;Objective
+&lt;/h2&gt;&lt;p&gt;The objective of the &amp;ldquo;Checkout my socials 1&amp;rdquo; challenge is to gather information from publicly available sources (OSINT) to identify the username. You will be provided with a link, and your task is to find the username associated with it.&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully complete the &amp;ldquo;Checkout my socials 1&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Access the Provided Link&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Click on the link provided in the challenge: &lt;a class=&#34;link&#34; href=&#34;https://imgur.com/xa4jBRt&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://imgur.com/xa4jBRt&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Examine the Content&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upon visiting the link, you will be directed to a web page or image on Imgur.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identify the Username&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Look for any visible information, such as a username, on the web page or image.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Identification&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The username you find on the web page or image is the flag for this challenge.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;As you identify the username, you will uncover the hidden flag. The flag follows the format: &lt;code&gt;petgrad2023{XXXXXXXXXX}&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By following these steps and accessing the provided link, you will successfully retrieve the flag through OSINT techniques.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is in the format: &lt;code&gt;petgrad2023{XXXXXXXXXX}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In &amp;ldquo;Checkout my socials 1&amp;rdquo; challenge, your task is to gather information from the provided link and identify the associated username. Best of luck!&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Checkout my socials 3</title>
+        <link>https://qiaonpc.github.io/post/checkout-my-socials-3/</link>
+        <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/checkout-my-socials-3/</guid>
+        <description>&lt;h1 id=&#34;checkout-my-socials-3---ctf-challenge-writeup&#34;&gt;Checkout my socials 3 - CTF Challenge Writeup
+&lt;/h1&gt;&lt;p&gt;Challenge: Checkout my socials 3&lt;br&gt;
+Points: 50&lt;br&gt;
+Category: OSINT (Open-Source Intelligence)&lt;/p&gt;
+&lt;h2 id=&#34;objective&#34;&gt;Objective
+&lt;/h2&gt;&lt;p&gt;The objective of the &amp;ldquo;Checkout my socials 3&amp;rdquo; challenge is to gather information from publicly available sources (OSINT) to uncover the hidden flag. The challenge provides hints related to birds, and your task is to identify the Twitter or other social media account associated with the user.&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully complete the &amp;ldquo;Checkout my socials 3&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analyze the Challenge Hint&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The challenge hints at birds, which implies you should look for a social media account related to birds or something bird-related.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Search for Social Media Accounts&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start by searching for Twitter or other social media accounts associated with birds based on the hint.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Use Quipquip for the Cipher&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The challenge likely involves deciphering a cipher. To solve it, use a tool like Quipquip.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Identification&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Once you find the social media account and decipher the cipher, you will identify the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;As you follow the hints and decode the message, you will uncover the hidden flag. The flag follows the format: &lt;code&gt;petgrad2023{XXXXXXXXXX}&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By following these steps and using OSINT techniques along with Quipquip, you will successfully retrieve the flag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is in the format: &lt;code&gt;petgrad2023{XXXXXXXXXX}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;In &amp;ldquo;Checkout my socials 3&amp;rdquo; challenge, your task is to leverage the provided hint and OSINT techniques to find the relevant social media account and decode the flag. Best of luck!&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

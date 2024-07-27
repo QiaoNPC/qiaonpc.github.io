@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Boot2Root on Sum Ting Wong&#39;s Blog</title>
+        <link>https://qiaonpc.github.io/tags/boot2root/</link>
+        <description>Recent content in Boot2Root on Sum Ting Wong&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/boot2root/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>DigiDoc</title>
+        <link>https://qiaonpc.github.io/post/digidoc/</link>
+        <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://qiaonpc.github.io/post/digidoc/</guid>
+        <description>&lt;h1 id=&#34;digidoc---ctf-challenge-writeup&#34;&gt;DigiDoc - CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: DigiDoc&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: The objective of the &amp;ldquo;DigiDoc&amp;rdquo; CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To successfully tackle the &amp;ldquo;DigiDoc&amp;rdquo; challenge, I executed the following steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Enumeration using Nmap&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I started by performing an initial scan using Nmap on the provided IP address, which revealed open ports: FTP, SSH, and HTTP.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/nmap.png&#34;
+	width=&#34;1155&#34;
+	height=&#34;762&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Nmap Scan&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;151&#34;
+		data-flex-basis=&#34;363px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;FTP Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Investigating the FTP service, I logged in anonymously and found two files. Downloading these files revealed an ECB key that would be useful later.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login.png&#34;
+	width=&#34;653&#34;
+	height=&#34;280&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Anonymous Login&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;233&#34;
+		data-flex-basis=&#34;559px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/files.png&#34;
+	width=&#34;884&#34;
+	height=&#34;145&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Files&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;609&#34;
+		data-flex-basis=&#34;1463px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files.png&#34;
+	width=&#34;1699&#34;
+	height=&#34;560&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Reading Files&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;303&#34;
+		data-flex-basis=&#34;728px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploring the HTTP Service&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Moving to the HTTP service, I ran a directory brute force using Gobuster. Eventually, it identified a login page.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/home%20page.png&#34;
+	width=&#34;1185&#34;
+	height=&#34;728&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Home Page&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;162&#34;
+		data-flex-basis=&#34;390px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/gobuster.png&#34;
+	width=&#34;1230&#34;
+	height=&#34;411&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Gobuster&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;299&#34;
+		data-flex-basis=&#34;718px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Logging in as a guest revealed an upload page, indicating a potential upload vulnerability. However, admin access was required.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/login%20page.png&#34;
+	width=&#34;943&#34;
+	height=&#34;620&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Login Page&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;365px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required.png&#34;
+	width=&#34;1640&#34;
+	height=&#34;467&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Admin Required&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;351&#34;
+		data-flex-basis=&#34;842px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying IDOR Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Analyzing the accounts tab, I identified an Insecure Direct Object Reference (IDOR) vulnerability, allowing access to user IDs, crucial for admin privileges.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IDOR vulnerability involves manipulating user IDs or object references to gain unauthorized access.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/IDOR.png&#34;
+	width=&#34;1367&#34;
+	height=&#34;610&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;IDOR&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;224&#34;
+		data-flex-basis=&#34;537px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploiting Upload Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I attempted exploiting the upload vulnerability. Despite correctly written code and magic bytes, standard PHP file extensions didn&amp;rsquo;t work.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Following recommendations from hacktricks, I discovered that the &lt;code&gt;.phtml&lt;/code&gt; extension allowed successful uploads, enabling me to upload a reverse shell.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc.png&#34;
+	width=&#34;943&#34;
+	height=&#34;247&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PHTML POC&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;381&#34;
+		data-flex-basis=&#34;916px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml.png&#34;
+	width=&#34;517&#34;
+	height=&#34;118&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PHTML Code&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;438&#34;
+		data-flex-basis=&#34;1051px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/web-shell.png&#34;
+	width=&#34;1532&#34;
+	height=&#34;750&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Web Shell&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;204&#34;
+		data-flex-basis=&#34;490px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Escalating Privileges&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Accessing the server, I realized I was the &lt;code&gt;www-data&lt;/code&gt; user. To achieve root access, I explored the home directory, finding two users: Alvin and Dave.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/dave.png&#34;
+	width=&#34;573&#34;
+	height=&#34;84&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Dave&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;682&#34;
+		data-flex-basis=&#34;1637px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Decoding a base64-encoded string in Alvin&amp;rsquo;s directory, using the previously obtained ECB key, revealed a plaintext password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password.png&#34;
+	width=&#34;613&#34;
+	height=&#34;92&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Base64 Password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;666&#34;
+		data-flex-basis=&#34;1599px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/decode.png&#34;
+	width=&#34;459&#34;
+	height=&#34;576&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Decoded&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;79&#34;
+		data-flex-basis=&#34;191px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Privilege Escalation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SSHing into the server using Alvin&amp;rsquo;s credentials, I discovered an ability for Alvin to execute a hidden Python script as root using sudo.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l.png&#34;
+	width=&#34;1236&#34;
+	height=&#34;206&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Sudo -l&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;600&#34;
+		data-flex-basis=&#34;1440px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Privilege Escalation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The solution involved hijacking the libraries in a script file provided without modifying it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Creating a new &lt;code&gt;shutil.py&lt;/code&gt; file, spawning a shell using &lt;code&gt;os&lt;/code&gt;, escalated privileges to root.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacking.png&#34;
+	width=&#34;475&#34;
+	height=&#34;111&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hijacking&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;427&#34;
+		data-flex-basis=&#34;1027px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The obtained flag through the intended solution: &lt;code&gt;ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacked.png&#34;
+	width=&#34;904&#34;
+	height=&#34;233&#34;
+	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Hijacked&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;387&#34;
+		data-flex-basis=&#34;931px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The resolution of the &amp;ldquo;DigiDoc&amp;rdquo; challenge encompassed identifying multiple vulnerabilities, including FTP access, web application flaws, and privilege escalation, ultimately leading to obtaining the root flag.&lt;/p&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;The flag for this challenge is: &lt;code&gt;ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;This writeup demonstrates the process of identifying and exploiting various vulnerabilities to gain root access in the &amp;ldquo;DigiDoc&amp;rdquo; CTF challenge. For any further inquiries or clarifications, please feel free to ask.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>
