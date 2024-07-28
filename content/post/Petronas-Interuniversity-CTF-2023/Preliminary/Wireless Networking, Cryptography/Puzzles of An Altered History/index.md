@@ -44,7 +44,7 @@ To solve the "Puzzles of An Altered History" challenge, follow these steps:
      ```
 
 5. **Password Recovery**:
-   - "aircrack-ng" will attempt to recover the password by testing combinations from the wordlist.
+   - "aircrack-ng" will attempt to recover the password by iHack Prelim 2024 combinations from the wordlist.
    - When aircrack-ng successfully finds the correct password, it will display the password in the terminal.
 
 6. **Flag Retrieval**:

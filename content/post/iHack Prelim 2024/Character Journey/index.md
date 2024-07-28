@@ -3,7 +3,7 @@ title: Character Journey
 description: The objective of the "Character Journey" CTF challenge is to find and retrieve the flag from a web application by exploiting IDOR.
 date: 2024-07-28 00:00:00+0000
 categories:
-   - testing
+   - iHack Prelim 2024
    - CTF Writeup
 tags:
    - Web
@@ -44,7 +44,7 @@ To solve the "Character Journey" challenge, follow these steps:
         ![Base64 Chunks](<base64 chunks.png>)
 
 4. **Brute Force Exploration**:
-   - Develop a script to automate the process of testing user IDs from 1 to 100.
+   - Develop a script to automate the process of iHack Prelim 2024 user IDs from 1 to 100.
    - Run the script to extract all base64 encoded text chunks.
 
 
