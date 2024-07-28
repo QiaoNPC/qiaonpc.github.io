@@ -1,0 +1,1973 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Forensics on Sum Ting Wong's Blog</title><link>https://qiaonpc.github.io/tags/forensics/</link><description>Recent content in Forensics on Sum Ting Wong's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/forensics/index.xml" rel="self" type="application/rss+xml"/><item><title>Lock?</title><link>https://qiaonpc.github.io/post/lock/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lock/</guid><description>&lt;h1 id="lock-ctf-challenge-writeup">Lock? CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lock?&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: DFIR (Digital Forensics and Incident Response)&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Recover the flag from a BitLocker-encrypted disk image by analyzing logs and decrypting the image.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/challenge.png"
+width="653"
+height="948"
+srcset="https://qiaonpc.github.io/post/lock/challenge_hu120854b6ac4413d85b0f0cf2e5c86454_116125_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/challenge_hu120854b6ac4413d85b0f0cf2e5c86454_116125_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="68"
+data-flex-basis="165px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Lock?&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>We are provided with multiple files, including various event logs.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing Event Logs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use Hayabusa to analyze the &lt;code>.evtx&lt;/code> files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Although Hayabusa didn’t provide extensive results, it revealed a password useful for decrypting the BitLocker image.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/hayabusa%20output.png"
+width="1233"
+height="488"
+srcset="https://qiaonpc.github.io/post/lock/hayabusa%20output_huc2abd5c305811c56c5999d3a553bb96e_29756_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/hayabusa%20output_huc2abd5c305811c56c5999d3a553bb96e_29756_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Bitlocker Output"
+class="gallery-image"
+data-flex-grow="252"
+data-flex-basis="606px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Handling the Disk Image&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The &lt;code>.img&lt;/code> file is identified as a DOS file based on the &lt;code>file&lt;/code> command output.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Attempt to mount the image using Autopsy, but encounter an error indicating that it is a BitLocker-encrypted volume.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/file%20output.png"
+width="1317"
+height="187"
+srcset="https://qiaonpc.github.io/post/lock/file%20output_huf0d32ca2c86369b329adf1ad9fe9d748_49628_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/file%20output_huf0d32ca2c86369b329adf1ad9fe9d748_49628_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="File Output"
+class="gallery-image"
+data-flex-grow="704"
+data-flex-basis="1690px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/autopsy.png"
+width="1365"
+height="708"
+srcset="https://qiaonpc.github.io/post/lock/autopsy_hucded28c6ec367bdf12ac5bff531db922_83457_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/autopsy_hucded28c6ec367bdf12ac5bff531db922_83457_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Autopsy"
+class="gallery-image"
+data-flex-grow="192"
+data-flex-basis="462px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Mounting the Disk Image&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Research shows that double-clicking the &lt;code>.img&lt;/code> file on Linux can automatically mount the disk.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Enter the password obtained from the logs to unlock and mount the encrypted disk image.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/mount.png"
+width="1367"
+height="748"
+srcset="https://qiaonpc.github.io/post/lock/mount_hufdebe59e3807e09518bb92b68edbb941_513724_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/mount_hufdebe59e3807e09518bb92b68edbb941_513724_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Mount"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Once the disk is mounted, navigate through the filesystem to locate the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Retrieve the flag from the accessible filesystem.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/flag.png"
+width="1023"
+height="417"
+srcset="https://qiaonpc.github.io/post/lock/flag_hu908995cec0deb171addd5820ef1c0817_44029_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/flag_hu908995cec0deb171addd5820ef1c0817_44029_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="245"
+data-flex-basis="588px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &amp;ldquo;ihack24{6f6450f1695e405557486a2be402dc27}&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Memory</title><link>https://qiaonpc.github.io/post/memory/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/memory/</guid><description>&lt;h1 id="memory-ctf-challenge-writeup">Memory CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Memory&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: DFIR (Digital Forensics and Incident Response)&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify the user that was created based on a memory dump from a Windows system.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/challenge.png"
+width="680"
+height="899"
+srcset="https://qiaonpc.github.io/post/memory/challenge_hu8d943007e1db52133e46709e65b3b886_140588_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/challenge_hu8d943007e1db52133e46709e65b3b886_140588_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="75"
+data-flex-basis="181px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Memory&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Setup&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>We are tasked with finding the user created on a Windows system based on a memory dump.&lt;/li>
+&lt;li>Given the filename suggests a Windows environment, use &lt;code>memprocfs&lt;/code> to streamline the analysis of the memory dump, avoiding manual extraction with tools like Volatility.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing Powershell Commands&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Navigate to &lt;code>/sys/proc/proc-v.txt&lt;/code> within &lt;code>memprocfs&lt;/code> to locate and review PowerShell commands executed during the memory capture.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search for commands that involve executing base64 encoded strings.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/powershell.png"
+width="1654"
+height="857"
+srcset="https://qiaonpc.github.io/post/memory/powershell_hue65ed31818b4dd708707f0361788db9c_127081_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/powershell_hue65ed31818b4dd708707f0361788db9c_127081_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell"
+class="gallery-image"
+data-flex-grow="192"
+data-flex-basis="463px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding Base64 Commands&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Identify and extract the base64 encoded strings from the PowerShell commands.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decode the base64 strings to reveal the underlying PowerShell commands.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/decoded%20base64.png"
+width="961"
+height="655"
+srcset="https://qiaonpc.github.io/post/memory/decoded%20base64_hu1bdccd6f67bbc62de5df5f17f71ece72_78051_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/decoded%20base64_hu1bdccd6f67bbc62de5df5f17f71ece72_78051_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decoded Base64"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="352px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Executing and Reversing PowerShell Commands&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Run the decoded PowerShell commands to reveal their functionality.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Analyze the output to determine which user was created.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/powrshell%20executed.png"
+width="1905"
+height="786"
+srcset="https://qiaonpc.github.io/post/memory/powrshell%20executed_hue222b5147006b13eb2d294ecc62a763b_89320_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/powrshell%20executed_hue222b5147006b13eb2d294ecc62a763b_89320_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell Executed"
+class="gallery-image"
+data-flex-grow="242"
+data-flex-basis="581px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>With the user information identified from the PowerShell commands, make the flag&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/flalg.png"
+width="446"
+height="620"
+srcset="https://qiaonpc.github.io/post/memory/flalg_huc76f719ed256e5c2a64a1faeb5f83f53_11865_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/flalg_huc76f719ed256e5c2a64a1faeb5f83f53_11865_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="71"
+data-flex-basis="172px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{sysadmin_SYSAdmin}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Mystery File</title><link>https://qiaonpc.github.io/post/mystery-file/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/mystery-file/</guid><description>&lt;h1 id="mystery-file-ctf-challenge-writeup">Mystery File CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Mystery File&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: DFIR (Digital Forensics and Incident Response)&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Deobfuscate a script within a ZIP file to uncover a domain and retrieve the flag from the associated webpage.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/challenge.png"
+width="658"
+height="949"
+srcset="https://qiaonpc.github.io/post/mystery-file/challenge_hu0d2feb64800025e2a7752003c4e43b04_107338_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/challenge_hu0d2feb64800025e2a7752003c4e43b04_107338_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="69"
+data-flex-basis="166px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Mystery File&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>We are given a file named &lt;code>program.bin&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use the &lt;code>file&lt;/code> command to identify the nature of the file, which reveals it is a ZIP archive.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/found%20zip%20file.png"
+width="1124"
+height="119"
+srcset="https://qiaonpc.github.io/post/mystery-file/found%20zip%20file_hu0c975e5c8d5da052906b6db9206065cf_26423_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/found%20zip%20file_hu0c975e5c8d5da052906b6db9206065cf_26423_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Zip File"
+class="gallery-image"
+data-flex-grow="944"
+data-flex-basis="2266px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting the ZIP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Unzip &lt;code>program.bin&lt;/code> to obtain its contents, which include a large, obfuscated Bash script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/obfsucataed%201.png"
+width="1532"
+height="755"
+srcset="https://qiaonpc.github.io/post/mystery-file/obfsucataed%201_huc85426c768a5dd35125b4f561d3ca1d8_299139_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/obfsucataed%201_huc85426c768a5dd35125b4f561d3ca1d8_299139_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Obfuscated"
+class="gallery-image"
+data-flex-grow="202"
+data-flex-basis="486px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Running the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>To handle the obfuscation, use an online Bash interpreter such as &lt;a class="link" href="https://tio.run/#bash" target="_blank" rel="noopener"
+>TIO.run&lt;/a> to execute the script.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The initial execution of the script shows no useful output.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/nothing%20to%20see%20here.png"
+width="800"
+height="200"
+srcset="https://qiaonpc.github.io/post/mystery-file/nothing%20to%20see%20here_hue8d2dd89dd546cb49f8d59182eb2339e_11969_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/nothing%20to%20see%20here_hue8d2dd89dd546cb49f8d59182eb2339e_11969_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Nothing to see"
+class="gallery-image"
+data-flex-grow="400"
+data-flex-basis="960px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Deobfuscating the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Modify the script to replace &lt;code>eval&lt;/code> with &lt;code>echo&lt;/code>. This allows you to see the script&amp;rsquo;s output, revealing a new, similarly obfuscated Bash script.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Repeat the process of replacing &lt;code>eval&lt;/code> with &lt;code>echo&lt;/code> to progressively reveal less obfuscated versions of the script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/less%20obfuscated.png"
+width="1565"
+height="556"
+srcset="https://qiaonpc.github.io/post/mystery-file/less%20obfuscated_hud96892a3ef132c5bc0f45259f4868424_97552_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/less%20obfuscated_hud96892a3ef132c5bc0f45259f4868424_97552_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Less Obfuscated"
+class="gallery-image"
+data-flex-grow="281"
+data-flex-basis="675px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Uncovering the Domain and Flag Location&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After several iterations, the script becomes sufficiently deobfuscated to understand its content.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The script contains two base64 encoded strings. Decode the first string to reveal a domain name.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decode the second string to find the URL where the flag can be obtained.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/beef.png"
+width="1900"
+height="751"
+srcset="https://qiaonpc.github.io/post/mystery-file/beef_hu9dc06f89b3f9b884981a5a9876a7b6fa_131978_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/beef_hu9dc06f89b3f9b884981a5a9876a7b6fa_131978_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Beef"
+class="gallery-image"
+data-flex-grow="252"
+data-flex-basis="607px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/flag%20link.png"
+width="980"
+height="792"
+srcset="https://qiaonpc.github.io/post/mystery-file/flag%20link_hu5413b8efa87feb0ad89dd91e45ddf6cc_59774_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/flag%20link_hu5413b8efa87feb0ad89dd91e45ddf6cc_59774_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Link"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="296px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieving the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Visit the webpage indicated by the decoded domain to locate and extract the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/flag.png"
+width="1436"
+height="412"
+srcset="https://qiaonpc.github.io/post/mystery-file/flag_hu0eaebece33cc29eb0fe6df467c3b5562_22785_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/flag_hu0eaebece33cc29eb0fe6df467c3b5562_22785_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="348"
+data-flex-basis="836px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{0bfusc4t3d_thr34t3}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>SSH Compromised</title><link>https://qiaonpc.github.io/post/ssh-compromised/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/ssh-compromised/</guid><description>&lt;h1 id="ssh-compromised-ctf-challenge-writeup">SSH Compromised CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: SSH Compromised&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Incident Handling&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a large log file to identify a compromised SSH login.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;SSH Compromised&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Start by examining the large log file provided for clues regarding SSH logins.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Filtering the Log File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Reduce the amount of noise in the log file by removing lines containing common failure and error messages:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;fail&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;error&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;invalid&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;unknown&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;closed&amp;rdquo; and &amp;ldquo;disconnect&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;ignoring&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;reset&amp;rdquo; and &amp;ldquo;unable&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/removing%20fail.png"
+width="1655"
+height="492"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/removing%20fail_hu086a0563318a2698c8c85c5872b0efec_443907_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/removing%20fail_hu086a0563318a2698c8c85c5872b0efec_443907_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Fail Removed"
+class="gallery-image"
+data-flex-grow="336"
+data-flex-basis="807px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/removing%20error.png"
+width="1653"
+height="465"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/removing%20error_hu107b2f7b35640c4cad1e86e5ea675a10_420869_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/removing%20error_hu107b2f7b35640c4cad1e86e5ea675a10_420869_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Error Removed"
+class="gallery-image"
+data-flex-grow="355"
+data-flex-basis="853px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/removed%20almost%20everything.png"
+width="1575"
+height="720"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/removed%20almost%20everything_hu277baf15dff4a3b28f3dedd5dd9ebafb_675357_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/removed%20almost%20everything_hu277baf15dff4a3b28f3dedd5dd9ebafb_675357_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Removed Almost Everything"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="525px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Successful Logins&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After filtering, focus on the remaining lines to identify successful logins.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search for entries related to the user &lt;code>sysadmin&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/foud%20stuff.png"
+width="1385"
+height="262"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/foud%20stuff_huda2b7c3376e573deae58f166edb2372f_231376_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/foud%20stuff_huda2b7c3376e573deae58f166edb2372f_231376_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Stuff"
+class="gallery-image"
+data-flex-grow="528"
+data-flex-basis="1268px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting Relevant Information&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>From the filtered results, find entries showing successful logins for the user &lt;code>sysadmin&lt;/code>.&lt;/li>
+&lt;li>Identify the IP address associated with these logins. In this case, the IP address is &lt;code>149.102.244.68&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use the extracted IP address and user information to locate the flag related to the SSH compromise.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/flag.png"
+width="1643"
+height="331"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/flag_hudb47794599e6a68ebc99d45af972e165_324345_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/flag_hudb47794599e6a68ebc99d45af972e165_324345_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="496"
+data-flex-basis="1191px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{149.102.244.68_sysadmin}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>LastHope</title><link>https://qiaonpc.github.io/post/lasthope/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lasthope/</guid><description>&lt;h1 id="lasthope-ctf-challenge-writeup">LastHope CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: LastHope&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 50&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Network&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves cracking a WiFi password using captured WiFi packets.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a step-by-step solution for the LastHope CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Capturing WiFi Packets&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Loaded the provided file in Wireshark to analyze the network traffic.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Observed a large number of 802.11 packets, indicating WiFi traffic.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lasthope/protocol%20hierachy.png"
+width="1395"
+height="255"
+srcset="https://qiaonpc.github.io/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Protocol Hierachy"
+class="gallery-image"
+data-flex-grow="547"
+data-flex-basis="1312px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Access Point MAC Address&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Identified the MAC address of the access point, which can be used to crack the WiFi password.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Identified the SSID of the WiFi network as &amp;ldquo;Rawsec Command Centre.&amp;rdquo;&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lasthope/mac%20address.png"
+width="1617"
+height="147"
+srcset="https://qiaonpc.github.io/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Mac Address &amp; SSID"
+class="gallery-image"
+data-flex-grow="1100"
+data-flex-basis="2640px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking WiFi Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used a tool like Aircrack-ng with the rockyou.txt wordlist to crack the WiFi password associated with the captured packets.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lasthope/aircrack.png"
+width="1333"
+height="706"
+srcset="https://qiaonpc.github.io/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Aircrack"
+class="gallery-image"
+data-flex-grow="188"
+data-flex-basis="453px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Obtaining the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The cracked WiFi password is the flag for this challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lasthope/flag.png"
+width="1345"
+height="704"
+srcset="https://qiaonpc.github.io/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>The LastHope challenge required participants to crack a WiFi password using captured network packets. By analyzing the packets in Wireshark and using tools like Aircrack-ng with wordlists, participants could obtain the flag associated with the cracked WiFi password.&lt;/p></description></item><item><title>Mobile</title><link>https://qiaonpc.github.io/post/mobile/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/mobile/</guid><description>&lt;h1 id="mobile-ctf-challenge-writeup">Mobile CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Mobile&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 290&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: DFIR (Digital Forensics and Incident Response)&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves extracting information from a PDF document related to mobile forensics.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a brief overview of the solution for the Mobile CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Approach&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Started by examining the 3000-page PDF document provided for any visible clues or patterns.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Noticed that certain pages were scribbled over, indicating potential hidden information.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mobile/scribble.png"
+width="747"
+height="557"
+srcset="https://qiaonpc.github.io/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Scribble"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="321px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extraction Attempt&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used &lt;code>pdfimages&lt;/code> tool to extract images from the PDF, hoping to find hidden messages or flags.&lt;/li>
+&lt;li>However, this approach did not yield any relevant information.&lt;/li>
+&lt;li>If you are curious, they are confidential information such as IC, BankRakyat Account Information, etc&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identification of Suspicious Content&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Continued to carefully review the PDF document.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Noticed a suspicious SHA-1 hash that was out of place and bolded, hinting at its significance.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mobile/sus%20hash.png"
+width="404"
+height="211"
+srcset="https://qiaonpc.github.io/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sus Hash"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="459px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Hint from Social Media&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Recalled a hint from Twitter related to Android hacking and cracking gesture passwords.&lt;/li>
+&lt;li>Realized that the SHA-1 hash resembled the format of the hash mentioned in the hint.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decryption Attempt&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Researched tools and methods for decrypting SHA-1 hashes associated with Android gesture passwords.&lt;/li>
+&lt;li>Found a Python script on GitHub that seemed promising for this purpose.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Successful Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Applied the Python script to decrypt the SHA-1 hash found in the PDF.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The decrypted value revealed the flag, solving the challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mobile/flag.png"
+width="1338"
+height="700"
+srcset="https://qiaonpc.github.io/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>The Mobile CTF challenge involved extracting a hidden flag from a large PDF document related to mobile forensics. Despite initial attempts to extract information from the PDF images, the solution was found in a suspicious SHA-1 hash within the document. By decrypting this hash using a Python script, the flag was successfully obtained, completing the challenge.&lt;/p>
+&lt;h2 id="notes-for-this-challenge">Notes for this challenge
+&lt;/h2>&lt;p>Despite the gruesome challenge, there were highlights that are worth mentioning. Attached below are my favourite parts of this challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mobile/cat%201.png"
+width="744"
+height="762"
+srcset="https://qiaonpc.github.io/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cat"
+class="gallery-image"
+data-flex-grow="97"
+data-flex-basis="234px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mobile/cat%202.png"
+width="665"
+height="655"
+srcset="https://qiaonpc.github.io/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cat"
+class="gallery-image"
+data-flex-grow="101"
+data-flex-basis="243px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mobile/cat%203.png"
+width="740"
+height="718"
+srcset="https://qiaonpc.github.io/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cat"
+class="gallery-image"
+data-flex-grow="103"
+data-flex-basis="247px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mobile/cat.png"
+width="759"
+height="682"
+srcset="https://qiaonpc.github.io/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cat"
+class="gallery-image"
+data-flex-grow="111"
+data-flex-basis="267px"
+>&lt;/p></description></item><item><title>Compromised</title><link>https://qiaonpc.github.io/post/compromised/</link><pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/compromised/</guid><description>&lt;h1 id="compromised---ctf-challenge-writeup">Compromised - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Compromised&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Compromised&amp;rdquo; CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully solve the &amp;ldquo;Compromised&amp;rdquo; challenge, I executed the following steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Unzipped the provided challenge file, revealing a directory structure reminiscent of a Windows directory.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Using the &lt;code>tree&lt;/code> command, I quickly located the flag within the directory structure. However, it was a zip file itself, requiring further steps for extraction.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag.png"
+width="471"
+height="262"
+srcset="https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Tree to find flag"
+class="gallery-image"
+data-flex-grow="179"
+data-flex-basis="431px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/flag%20zip.png"
+width="1091"
+height="119"
+srcset="https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag is a zip"
+class="gallery-image"
+data-flex-grow="916"
+data-flex-basis="2200px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Brute Forcing the Zip File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempted to brute force the password for the zip file. Initially faced permission issues, resolved by changing permissions using &lt;code>chmod&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used &lt;code>John The Ripper&lt;/code> to crack the zip file password, which proved unsuccessful, prompting a search for the password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/john%20failed.png"
+width="1295"
+height="353"
+srcset="https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="John Failed"
+class="gallery-image"
+data-flex-grow="366"
+data-flex-basis="880px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Locating Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After some exploration, identified the crucial file named &lt;code>Cache0000.bin&lt;/code>, which holds significant data for the challenge.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>Cache0000.bin&lt;/code> contains data related to Remote Desktop Protocol (RDP) cache.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/found%20cache.png"
+width="490"
+height="225"
+srcset="https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cache File Found"
+class="gallery-image"
+data-flex-grow="217"
+data-flex-basis="522px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting Images from Cache File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Employed the tool &lt;code>bmc-tools&lt;/code> (&lt;a class="link" href="https://github.com/ANSSI-FR/bmc-tools" target="_blank" rel="noopener"
+>https://github.com/ANSSI-FR/bmc-tools&lt;/a>) to extract pictures from &lt;code>Cache0000.bin&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/bmc%20tools.png"
+width="1265"
+height="713"
+srcset="https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="BMC Tool Output"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="425px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Revealing Flag within Images&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extracted over 2000 images, one of which combines all the segments of the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Noticed segments of the flag within the combined image, visible upon zooming in.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed.png"
+width="965"
+height="231"
+srcset="https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="BMC Tool Flag Segment"
+class="gallery-image"
+data-flex-grow="417"
+data-flex-basis="1002px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Combining Segments into Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Utilized &lt;code>RDPCacheStitcher&lt;/code> (&lt;a class="link" href="https://github.com/BSI-Bund/RdpCacheStitcher/releases/" target="_blank" rel="noopener"
+>https://github.com/BSI-Bund/RdpCacheStitcher/releases/&lt;/a>) to assemble the segments as if solving a puzzle.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/stitcher.png"
+width="1459"
+height="715"
+srcset="https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Stitcher"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="489px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Obtaining Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Discovered the password &lt;code>WGMY_P4ssw0rd_N0t_V3ry_H4rd!!!&lt;/code> while assembling the image segments.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Flag Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Successfully unzipped the flag from the zip file using the obtained password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/flag.png"
+width="951"
+height="271"
+srcset="https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="350"
+data-flex-basis="842px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>wgmy{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>This writeup delineates the process of navigating through a directory, extracting images from a cache file, assembling image segments, and obtaining the hidden flag in the &amp;ldquo;Compromised&amp;rdquo; CTF challenge. For any further queries or clarifications, please feel free to ask.&lt;/p></description></item><item><title>FurElise</title><link>https://qiaonpc.github.io/post/furelise/</link><pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/furelise/</guid><description>&lt;h1 id="furelise---ctf-challenge-writeup">FurElise - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: FurElise&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;FurElise&amp;rdquo; CTF challenge is to decode a hidden flag concealed within a PowerShell script by following a series of deobfuscation and decoding steps.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;FurElise&amp;rdquo; challenge and retrieve the flag, I executed the following steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Upon inspecting the provided file, it was evident that it is a PowerShell script containing obfuscated code.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/challenge.png"
+width="700"
+height="797"
+srcset="https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="87"
+data-flex-basis="210px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Deobfuscation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Drawing inspiration from problem-solving approaches by John Hammond, I initiated the deobfuscation process.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The initial step involved removing the &lt;code>&amp;amp;&lt;/code> present throughout the script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/removed%20and.png"
+width="469"
+height="150"
+srcset="https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Removed &amp;"
+class="gallery-image"
+data-flex-grow="312"
+data-flex-basis="750px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Removing Unnecessary Lines&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Further simplification of the script was performed by eliminating redundant lines, notably lines containing &lt;code>''''''FürElise''''''FürElise&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This step helped in revealing clearer, relevant content within the script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/removed%20everything.png"
+width="866"
+height="720"
+srcset="https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Removed Everything"
+class="gallery-image"
+data-flex-grow="120"
+data-flex-basis="288px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Clues&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Within the revised script, two links were discovered, which contained crucial elements of the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The first link provided the initial part of the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/flag%20part%201.png"
+width="272"
+height="69"
+srcset="https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag Part 1"
+class="gallery-image"
+data-flex-grow="394"
+data-flex-basis="946px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Second Link&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The second link presented another PowerShell script. However, caution was exercised against executing it directly on a host machine due to safety concerns.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/1%20powershell.png"
+width="1911"
+height="946"
+srcset="https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell Part 1"
+class="gallery-image"
+data-flex-grow="202"
+data-flex-basis="484px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding Base64&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The second PowerShell script was decoded from Base64, revealing additional script content.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To understand its functionality, portions of the script were cautiously executed one by one, avoiding potential risks and aiming to decode it progressively.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/decode%20base64.png"
+width="1697"
+height="867"
+srcset="https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decode Base64"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="469px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/2%20powershell.png"
+width="1433"
+height="578"
+srcset="https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell Part 2"
+class="gallery-image"
+data-flex-grow="247"
+data-flex-basis="595px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Locating Hidden Information&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>While decoding the PowerShell script, a link was discovered halfway through the process, leading to the final part of the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/decoding.png"
+width="1677"
+height="791"
+srcset="https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decoding"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="508px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Navigating to the obtained link revealed the last segment of the flag, completing the puzzle.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/furelise/flag%20part%202.png"
+width="825"
+height="127"
+srcset="https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag Part 2"
+class="gallery-image"
+data-flex-grow="649"
+data-flex-basis="1559px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>The resolution of the &amp;ldquo;FurElise&amp;rdquo; challenge involved systematic deobfuscation, cautious decoding, and progressive script execution to unveil hidden elements and retrieve the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>ABOH23{d!ff1cU17_s0Ng_FROm_hEaRtBrE4K}&lt;/code>.&lt;/p>
+&lt;p>This writeup serves as a demonstration of decoding techniques used to extract the hidden flag within the &amp;ldquo;FurElise&amp;rdquo; CTF challenge. Should you require further explanation or have additional queries, please feel free to ask.&lt;/p></description></item><item><title>Threat Hunting Challenge 1</title><link>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</link><pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</guid><description>&lt;h1 id="threat-hunting-challenge-1---ctf-challenge-writeup">Threat Hunting: Challenge 1 - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Threat Hunting: Challenge 1&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; CTF challenge is to investigate a ransomware-like attack scenario within a provided VM and identify the executable responsible for the encryption.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is part of a series in the threat hunting category and involves a provided VM named BOH_TH_2023. The VM needs to be extracted and loaded onto a virtualization platform like VMware or Oracle VirtualBox.&lt;/li>
+&lt;li>It is recommended to solve this challenge before looking into Challenge 2 and Challenge 3&lt;/li>
+&lt;li>However, you can solve Challenge 2 and Challenge 3 in any order&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Initial VM Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Upon loading the VM, it became apparent that the files were encrypted, resembling a ransomware attack scenario. The challenge also directed us to identify the executable responsible for the encryption.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Therefore, it is safe to assumed that the ransomware executable has already been executed.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack.png"
+width="960"
+height="603"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Ransomware"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="382px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Utilizing Amcache and Shimcache&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Amcache and Shimcache are artifacts used in Windows systems to record executed executables.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Amcache is a registry hive that records metadata and information about applications and programs executed on a Windows system. It provides a wealth of information about executed executables.&lt;/p>
+&lt;ul>
+&lt;li>Amcache is typically located in &lt;code>C:\Windows\appcompat\Programs\Amcache.hve&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Shimcache, another Windows artifact, also records information about executed programs but in a different format. However, in this challenge, the Shimcache files are intentionally corrupted.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache.png"
+width="1046"
+height="190"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Amcache"
+class="gallery-image"
+data-flex-grow="550"
+data-flex-basis="1321px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Amcache Parsing&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To extract and process Amcache data, I utilized the AmcacheParser tool available at &lt;a class="link" href="https://ericzimmerman.github.io/#!index.md" target="_blank" rel="noopener"
+>Eric Zimmerman&amp;rsquo;s website&lt;/a>.&lt;/li>
+&lt;li>The Amcache data is typically stored in &lt;code>C:\Windows\appcompat\Programs\Amcache.hve&lt;/code>. I searched for this file and utilized AmcacheParser to process it.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Processing Amcache Data&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Running AmcacheParser generated multiple CSV files, which I exported for easier analysis. These files can be explored using applications like Timeline Explorer or by downloading them from &lt;a class="link" href="https://ericzimmerman.github.io/#!index.md" target="_blank" rel="noopener"
+>Eric Zimmerman&amp;rsquo;s website&lt;/a>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser.png"
+width="1500"
+height="806"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="AmcacheParser"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="446px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Suspicious Activity&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>By examining the generated CSV files, I eventually identified something suspicious among the data, indicating the executable responsible for the encryption.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus.png"
+width="810"
+height="152"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Suspicious"
+class="gallery-image"
+data-flex-grow="532"
+data-flex-basis="1278px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The identified executable responsible for the encryption is: &lt;code>ABOH{Mcqqic24UJyU40JKdja0A.exe}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>The resolution of the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; involved extracting Amcache data from the provided VM, utilizing AmcacheParser to process the data, and investigating the executables to identify the suspicious file responsible for the encryption.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>ABOH{Mcqqic24UJyU40JKdja0A.exe}&lt;/code>.&lt;/p>
+&lt;p>This writeup demonstrates the process of investigating a ransomware-like attack scenario using Amcache parsing techniques in the &amp;ldquo;Threat Hunting: Challenge 1&amp;rdquo; CTF challenge. For further queries or clarifications, feel free to inquire.&lt;/p></description></item><item><title>Threat Hunting Challenge 2</title><link>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</link><pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</guid><description>&lt;h1 id="threat-hunting-challenge-2---ctf-challenge-writeup">Threat Hunting: Challenge 2 - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Threat Hunting: Challenge 2&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; CTF challenge is to identify the SHA256 hash value of the executable responsible for exfiltrating data within a given context.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully tackle the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is part of a series in the threat hunting category and requires identifying the SHA256 hash value of the executable responsible for data exfiltration.&lt;/li>
+&lt;li>It is recommended to solve Challenge 1 before looking into Challenge 2 and Challenge 3&lt;/li>
+&lt;li>However, you can solve Challenge 2 and Challenge 3 in any order&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Suspicious Executables&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>On further inspection from the first challenge, I discovered a total three suspicious files including the one from the first challenge.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I dumped the two executables onto VirusTotal and HybridAnalysis, whilst analysed the powershell script myself.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The powershell script showed symptoms of reading files and encrypting it and I am suspecting that this is the file they are looking for, but not 100% certain.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable.png"
+width="774"
+height="214"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Executables"
+class="gallery-image"
+data-flex-grow="361"
+data-flex-basis="868px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script.png"
+width="1674"
+height="768"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell Script"
+class="gallery-image"
+data-flex-grow="217"
+data-flex-basis="523px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Approach to Finding SHA256 Hash&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>A common misconception might lead one to use &lt;code>Get-FileHash&lt;/code> to find the hash value. However, in challenges like these, this method may not yield the expected results.&lt;/li>
+&lt;li>This difference in hash values can be due to various factors and is further explained in this &lt;a class="link" href="https://stackoverflow.com/questions/29946221/hash-value-md5-and-sha256-of-file-is-coming-different-when-file-is-from-system32" target="_blank" rel="noopener"
+>Stack Overflow thread&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Using Hasher Tool&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To accurately acquire the SHA256 hash value of the suspicious files, I utilized the Hasher tool available at &lt;a class="link" href="https://ericzimmerman.github.io/#!index.md" target="_blank" rel="noopener"
+>Eric Zimmerman&amp;rsquo;s website&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Determining Executable&amp;rsquo;s SHA256 Hash&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Since there were only three suspicious files discovered, and I am not so sure about my discovery, I will be calculating the SHA256 hash value for each of them using the Hasher tool and submitting as a flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Among the calculated SHA256 hash values, one matched the expected format of the flag: &lt;code>ABOH{hash_value}&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At the time of writing this writeup, I have forgotten which one was the flag. Im sorry.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value.png"
+width="1165"
+height="235"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Hash Value"
+class="gallery-image"
+data-flex-grow="495"
+data-flex-basis="1189px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>The resolution of the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; involved identifying potentially malicious executables and determining their SHA256 hash values using the Hasher tool to extract the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>ABOH{hash_value}&lt;/code>.&lt;/p>
+&lt;p>This writeup illustrates the process of identifying the SHA256 hash value of a potentially malicious executable in the &amp;ldquo;Threat Hunting: Challenge 2&amp;rdquo; CTF challenge. For further inquiries or clarifications, feel free to ask.&lt;/p></description></item><item><title>Threat Hunting Challenge 3</title><link>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</link><pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</guid><description>&lt;h1 id="threat-hunting-challenge-3---ctf-challenge-writeup">Threat Hunting: Challenge 3 - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Threat Hunting: Challenge 3&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; CTF challenge is to identify the significant indicator related to a potentially malicious executable based on its behavior observed through external connections.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully solve the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; challenge, I proceeded with the following steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Context from Previous Challenge&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Continuing from the previous challenge, I conducted further analysis on the executables by uploading them to security analysis platforms like VirusTotal and HybridAnalysis for comprehensive analysis.&lt;/li>
+&lt;li>It is recommended to solve Challenge 1 before looking into Challenge 3 and Challenge 3&lt;/li>
+&lt;li>However, you can solve Challenge 3 and Challenge 3 in any order&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analysis Results&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon reviewing the analysis results from the previous challenge (VirusTotal and HybridAnalysis), I observed that both executables made external connections to IP addresses. However, one particular connection stood out among the rest.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus.png"
+width="790"
+height="238"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Not Sus"
+class="gallery-image"
+data-flex-grow="331"
+data-flex-basis="796px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus.png"
+width="683"
+height="273"
+srcset="https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sus"
+class="gallery-image"
+data-flex-grow="250"
+data-flex-basis="600px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After careful observation and analysis, I identified the standout indicator related to a potentially malicious executable, which is the URL or IP address:
+&lt;ul>
+&lt;li>&lt;code>ABOH{http://146.190.89.115:8080/YPAPJDoGD3aIQlFix11ZA.php}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>The resolution of the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; involved analyzing the behavior of potentially malicious executables and identifying the significant external connection, aiding in the discovery of the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>ABOH{http://146.190.89.115:8080/YPAPJDoGD3aIQlFix11ZA.php}&lt;/code>.&lt;/p>
+&lt;p>This writeup demonstrates the process of analyzing executable behavior to identify significant indicators of potential malicious activity in the &amp;ldquo;Threat Hunting: Challenge 3&amp;rdquo; CTF challenge. For any further queries or clarifications, please feel free to inquire.&lt;/p></description></item><item><title>Intruding the Hidden Society</title><link>https://qiaonpc.github.io/post/intruding-the-hidden-society/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/intruding-the-hidden-society/</guid><description>&lt;h1 id="intruding-the-hidden-society---ctf-challenge-writeup">Intruding the Hidden Society - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Intruding the Hidden Society&lt;br>
+Points: 200&lt;br>
+Category: Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge is to extract hidden information from the provided pcap file and uncover the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Identified Patterns in DNS Packets&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon analyzing the pcap file, I noticed that a significant portion of the packets were DNS (Domain Name System) packets.&lt;/li>
+&lt;li>I started by filtering and analyzing these DNS packets.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pattern Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Pay attention to the DNS packets with base64-like encodings.&lt;/li>
+&lt;li>These packets had accompanying numbers, indicating an order for reconstruction.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Packet Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The goal was to extract and reconstruct the base64-like encoded data. However, with more than 10,000 packets, manual extraction would be impractical.&lt;/li>
+&lt;li>I used the &amp;ldquo;tshark&amp;rdquo; command-line tool to extract relevant packets. The following query is an example of how I extracted packets related to the challenge:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">tshark -nr hiddensociety.pcap -Y &amp;#39;(ip.dst == 8.8.8.8) &amp;amp;&amp;amp; (dns.qry.name contains &amp;#34;challange.petronasgraduate.ctfd.io&amp;#34;)&amp;#39; &amp;gt; output.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>The output of the query was saved in the &amp;ldquo;output.txt&amp;rdquo; file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Data Extraction and Reconstruction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I created a Python script to process the &amp;ldquo;output.txt&amp;rdquo; file and extract the base64-like encoded data.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The extracted data was reconstructed and written into a separate file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">base64&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">base64_reconstructed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;output.txt&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;r&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">content&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">readlines&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">line&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">extract_number_and_base64&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">line&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34; &amp;#34;&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;.challange.petronasgraduate.ctfd.io&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">extract_base64&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">extract_number_and_base64&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;.&amp;#34;&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">base64_reconstructed&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">extract_base64&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;output&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;wb&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base64&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">b64decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base64_reconstructed&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identified the Data Type&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Using the &lt;code>file&lt;/code> command to determine the type of data contained in the reconstructed file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The reconstructed base64 is an image file.&lt;/li>
+&lt;li>Open and view the image&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By following these steps, I was able to successfully uncover the hidden flag within the pcap file and complete the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge, my goal was to decode and reconstruct base64-like encoded data found in DNS packets within a pcap file and reveal the flag concealed within the data.&lt;/p></description></item><item><title>m3m0irs</title><link>https://qiaonpc.github.io/post/m3m0irs/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/m3m0irs/</guid><description>&lt;h1 id="m3m0irs---ctf-challenge-writeup">m3m0irs - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: m3m0irs&lt;br>
+Points: 50&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the m3m0irs challenge is to perform memory forensics on a memory dump file to uncover suspicious activity. Your task is to analyze the memory dump to identify the software that should not be running and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the m3m0irs challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Memory Dump Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In any memory forensics challenge, the first step is to determine the architecture of the system. You can achieve this using the &lt;code>volatility&lt;/code> tool with the command: &lt;code>volatility -f &amp;lt;memory dump&amp;gt; imageinfo&lt;/code>.&lt;/li>
+&lt;li>The &lt;code>imageinfo&lt;/code> command will provide suggested architectures based on the memory dump&amp;rsquo;s analysis.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Architecture Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Try each of the suggested architectures until you find one that works for your analysis. You can use the following command to specify the architecture: &lt;code>volatility -f &amp;lt;memory dump&amp;gt; --profile=&amp;lt;architecture&amp;gt;&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Suspicious Software&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The main objective is to identify software that shouldn&amp;rsquo;t be running. You can often find this information in the process lists of the memory dump.&lt;/li>
+&lt;li>There are various ways to find processes in a memory dump, such as &lt;code>pstree&lt;/code>, &lt;code>pslist&lt;/code>, &lt;code>psscan&lt;/code> etc. &lt;code>pstree&lt;/code>&amp;quot; is a favorite among many analysts because it presents processes in a hierarchical manner, allowing you to easily trace parent and child processes.&lt;/li>
+&lt;li>You can identify suspicious software based on the processes and their relationships in the tree.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing with &amp;ldquo;pstree&amp;rdquo;&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use the following command to generate a &lt;code>pstree&lt;/code> analysis and save it to a file for reference: &lt;code>volatility -f &amp;lt;memory dump&amp;gt; --profile=&amp;lt;architecture&amp;gt; pstree &amp;gt; pstree.txt&lt;/code>.&lt;/li>
+&lt;li>Saving the output to a file ensures that you can revisit the analysis without repeating the same steps.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During your analysis, you may find &lt;code>Azureus&lt;/code> to be suspicious as it spawned &lt;code>AzureusTor&lt;/code>. This is the software that shouldn&amp;rsquo;t be running.
+&lt;img src="https://qiaonpc.github.io/post/m3m0irs/Sus.png"
+width="1428"
+height="231"
+srcset="https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Azureus &amp; AzureusTor"
+class="gallery-image"
+data-flex-grow="618"
+data-flex-basis="1483px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and conducting memory forensics analysis, you will uncover the suspicious software and reveal the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the m3m0irs challenge, memory forensics skills are put to the test as you analyze a memory dump to identify the suspicious software that shouldn&amp;rsquo;t be running. Best of luck!&lt;/p></description></item><item><title>Puzzles of An Altered History</title><link>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</guid><description>&lt;h1 id="puzzles-of-an-altered-history---ctf-challenge-writeup">Puzzles of An Altered History - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Puzzles of An Altered History&lt;br>
+Points: 150&lt;br>
+Category: Wireless Networking&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Puzzles of An Altered History&amp;rdquo; challenge is to crack the password for a given wireless network, which is stored in a provided pcap (packet capture) file. You will need to use a tool called &amp;ldquo;aircrack-ng&amp;rdquo; to successfully recover the network&amp;rsquo;s password.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Puzzles of An Altered History&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Download and Open the pcap File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by downloading the provided pcap file, which contains the network traffic data.&lt;/li>
+&lt;li>Open the pcap file using a network analysis tool like Wireshark.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking the Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use the &amp;ldquo;aircrack-ng&amp;rdquo; tool to attempt to crack the wireless network&amp;rsquo;s password.&lt;/li>
+&lt;li>The basic command structure for &amp;ldquo;aircrack-ng&amp;rdquo; is as follows:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">aircrack-ng &amp;lt;pcap file&amp;gt; -w &amp;lt;wordlist&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>&amp;lt;pcap file&amp;gt;&lt;/code>: Replace this with the name of the pcap file you are analyzing.&lt;/li>
+&lt;li>&lt;code>&amp;lt;wordlist&amp;gt;&lt;/code>: Specify the path to a wordlist file that &amp;ldquo;aircrack-ng&amp;rdquo; will use to attempt password combinations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Wordlist Selection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>For the wordlist, you can use a common password dictionary like &amp;ldquo;rockyou.txt,&amp;rdquo; which is available in various locations. You should specify the full path to the wordlist file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Run aircrack-ng&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Execute the &amp;ldquo;aircrack-ng&amp;rdquo; command in your terminal, providing the pcap file and wordlist as arguments. For example:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">aircrack-ng ctfwifi.cap -w /usr/share/wordlists/rockyou.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Recovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;aircrack-ng&amp;rdquo; will attempt to recover the password by iHack Prelim 2024 combinations from the wordlist.&lt;/li>
+&lt;li>When aircrack-ng successfully finds the correct password, it will display the password in the terminal.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The cracked password will resemble the format specified in the challenge. Retrieve and present it as the flag to complete the challenge.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By following these steps and using &amp;ldquo;aircrack-ng,&amp;rdquo; you can successfully crack the password for the wireless network captured in the pcap file and obtain the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Puzzles of An Altered History&amp;rdquo; challenge, your goal is to utilize network analysis tools to crack the wireless network&amp;rsquo;s password, revealing the flag upon successful recovery.&lt;/p></description></item><item><title>Temporal Traffic Traces</title><link>https://qiaonpc.github.io/post/temporal-traffic-traces/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/temporal-traffic-traces/</guid><description>&lt;h1 id="temporal-traffic-traces---ctf-challenge-writeup">Temporal Traffic Traces - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Temporal Traffic Traces&lt;br>
+Points: 100&lt;br>
+Category: Network Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Temporal Traffic Traces&amp;rdquo; challenge is to analyze a provided pcap file and extract the hidden flag. Your task is to investigate the protocol hierarchy, identify relevant data, and decode the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Temporal Traffic Traces&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the PCAP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are given a pcap file, and the first thing to do is to analyze its contents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Check Protocol Hierarchy&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Examine the protocol hierarchy within the pcap file. Look for any anomalies or unusual combinations of protocols.
+&lt;img src="https://qiaonpc.github.io/post/temporal-traffic-traces/protocol.png"
+width="1380"
+height="759"
+srcset="https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Protocol Hierarchy"
+class="gallery-image"
+data-flex-grow="181"
+data-flex-basis="436px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Focus on HTTP Traffic&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In this challenge, it&amp;rsquo;s essential to focus on HTTP traffic. You can identify and extract HTTP packets, which may contain relevant data.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Export HTTP Packets as Files&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Using a tool like Wireshark&amp;rsquo;s export functionality, extract HTTP packets as files for closer inspection.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify Base64 Encoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During your analysis, you may come across a base64 encoded message within the extracted files.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decode the Message&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Decode the base64-encoded message to unveil the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you decode the message, you will discover the flag hidden within the &amp;ldquo;Temporal Traffic Traces.&amp;rdquo; The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and investigating the pcap file&amp;rsquo;s network traffic, you will successfully reveal the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Temporal Traffic Traces&amp;rdquo; challenge, your task is to analyze network traffic within a pcap file, extract the relevant data, and decode the hidden flag. Best of luck!&lt;/p></description></item><item><title>The Early Quantum Supercomputer I</title><link>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</guid><description>&lt;h1 id="the-early-quantum-supercomputer-i---ctf-challenge-writeup">The Early Quantum Supercomputer I - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: The Early Quantum Supercomputer I&lt;br>
+Points: 100&lt;br>
+Category: Network Forensics, Operational Technology&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of &amp;ldquo;The Early Quantum Supercomputer I&amp;rdquo; challenge is to analyze a provided pcap file and identify an uncommon protocol to uncover the hidden flag. Your task is to investigate the network traffic and pinpoint the unique protocol.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete &amp;ldquo;The Early Quantum Supercomputer I&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the PCAP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by opening the provided pcap file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine Network Traffic&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Scrutinize the network traffic captured within the pcap file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify Uncommon Protocols&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Pay close attention to the protocols being used. Look for any uncommon or unusual protocols that may stand out.
+&lt;img src="https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol.png"
+width="1396"
+height="795"
+srcset="https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Protocols"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The flag is hidden within the uncommon protocol you identify during your analysis.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you identify the unique protocol, you will uncover the hidden flag. The flag is the uncommon protocol.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and investigating the network traffic within the pcap file, you will successfully reveal the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In &amp;ldquo;The Early Quantum Supercomputer I&amp;rdquo; challenge, your task is to analyze network traffic within a pcap file and identify the uncommon protocol that hides the flag. Best of luck!&lt;/p></description></item><item><title>Unearth the Enigmatic Codebreaker's Challenge</title><link>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</guid><description>&lt;h1 id="unearth-the-enigmatic-codebreakers-challenge---ctf-challenge-writeup">Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge&lt;br>
+Points: 150&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge&amp;rdquo; is to leverage memory forensics skills to crack Jerry&amp;rsquo;s hashed NTLM password. Your task is to find the hashdump, extract Jerry&amp;rsquo;s hashed password, and use a tool like hashcat to crack it and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge,&amp;rdquo; follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Prerequisite - Complete m3m0irs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is the third installment in the memory forensics series. While it is recommended to complete the previous challenges as a prerequisite, it&amp;rsquo;s not necessary to have completed it to proceed, especially since the CTF has ended.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Jerry&amp;rsquo;s Password Hash&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Jerry&amp;rsquo;s password is hashed, and you need to crack it. Hashcat, which didn&amp;rsquo;t work for Dexter&amp;rsquo;s password in the previous challenge, is effective for Jerry&amp;rsquo;s.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Locating the Hashdump&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To find the hashes to be cracked, you first need to locate the hashdump within the memory dump. You can achieve this using the following command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; hashdump&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking Jerry&amp;rsquo;s Hashed Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After extracting Jerry&amp;rsquo;s hashed NTLM password from the hashdump, use a tool like &amp;ldquo;hashcat&amp;rdquo; to crack it. The objective is to reveal the plaintext of Jerry&amp;rsquo;s password.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Once you have successfully cracked Jerry&amp;rsquo;s hashed password, you will discover the flag. It will adhere to the specified format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and employing memory forensics techniques, you will uncover Jerry&amp;rsquo;s password and unveil the hidden flag in the &amp;ldquo;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge.&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In this memory forensics challenge, you must use your skills to crack Jerry&amp;rsquo;s hashed NTLM password and reveal the hidden flag. Best of luck!&lt;/p></description></item><item><title>Unearth the Long Lost Cipher</title><link>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</guid><description>&lt;h1 id="unearth-the-long-lost-cipher---ctf-challenge-writeup">Unearth the Long Lost Cipher - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Unearth the Long Lost Cipher&lt;br>
+Points: 150&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Unearth the Long Lost Cipher&amp;rdquo; challenge is to conduct memory forensics to find Dexter&amp;rsquo;s password on a computer. Your task is to identify the password and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Unearth the Long Lost Cipher&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Prerequisite - Complete m3m0irs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is the second in the memory forensics series and assumes you have completed the &amp;ldquo;m3m0irs&amp;rdquo; challenge. However, since the previous challenge has ended, it&amp;rsquo;s not necessary to have completed it to proceed.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Search&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are tasked with finding Dexter&amp;rsquo;s password on the computer. Passwords can be located in various ways during memory forensics, such as examining hash dumps or LSA dumps.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Hash Cracking Attempt&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>An initial approach might involve attempting to crack the password hashes, but it didn&amp;rsquo;t yield results in this case.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>File Scan and Grep&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Another approach is to scan the memory for files and grep for references to &amp;ldquo;Dexter.&amp;rdquo; You can perform file scans using the command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; filescan &amp;gt; filescan.txt&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Locate SECRET.txt File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During the file scan, you may discover a file named &amp;ldquo;SECRET.txt.&amp;rdquo; Extract this file from the memory dump using the command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; dumpfiles -Q &amp;lt;memory-location&amp;gt; -D &amp;lt;directory-where-you-wish-to-place-the-file&amp;gt;&lt;/code>.
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan.png"
+width="1709"
+height="327"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="SECRETS.txt"
+class="gallery-image"
+data-flex-grow="522"
+data-flex-basis="1254px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine Dexter&amp;rsquo;s Files&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Investigate the contents of Dexter&amp;rsquo;s files to gather information. You may find hints that lead to the password.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Clues&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Dexter constructed his password using his favorite animal and a mysterious &amp;ldquo;MMYY.&amp;rdquo; Your task is to determine the animal and decode the password using the provided clues.
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret.png"
+width="1246"
+height="213"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Password Construction"
+class="gallery-image"
+data-flex-grow="584"
+data-flex-basis="1403px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Format&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The flag will be in the format specified, with the animal represented by 7 letters, followed by &amp;ldquo;MM&amp;rdquo; and &amp;ldquo;YY.&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Multiple Panther Instances&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After examining Dexter&amp;rsquo;s files, you may discover two instances of the word &amp;ldquo;panther.&amp;rdquo; Assume this is his favorite animal and forms the first part of the flag (7 letters).
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint.png"
+width="1704"
+height="551"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="2 Instances of Panther"
+class="gallery-image"
+data-flex-grow="309"
+data-flex-basis="742px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Changing Hint&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>SECRET.txt may contain information about password changes. This hints that passwords are updated regularly.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To narrow down the possibilities, investigate when the &amp;ldquo;notepad&amp;rdquo; application was used. You may find only two dates in the memory dump, so try both as potential password combinations.
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad.png"
+width="1715"
+height="128"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Usage of Notepad"
+class="gallery-image"
+data-flex-grow="1339"
+data-flex-basis="3215px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>After following these steps and conducting memory forensics analysis, you will successfully locate Dexter&amp;rsquo;s password and reveal the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Unearth the Long Lost Cipher&amp;rdquo; challenge, memory forensics skills are crucial as you explore the computer&amp;rsquo;s memory to discover Dexter&amp;rsquo;s password and unveil the flag. Best of luck!&lt;/p></description></item><item><title>Unlock the Time Traveller's Dilemma</title><link>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</guid><description>&lt;h1 id="unlock-the-time-travellers-dilemma---ctf-challenge-writeup">Unlock the Time Traveller&amp;rsquo;s Dilemma - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Unlock the Time Traveller&amp;rsquo;s Dilemma&lt;br>
+Points: 200&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Unlock the Time Traveller&amp;rsquo;s Dilemma&amp;rdquo; challenge was to perform advanced memory forensics to find the hidden flag. This challenge was the fourth in the memory forensics series, and while it was recommended to solve the previous three challenges, it wasn&amp;rsquo;t necessary as the CTF had ended.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Unlock the Time Traveller&amp;rsquo;s Dilemma&amp;rdquo; challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I explored various aspects of the computer&amp;rsquo;s memory, including examining the MFT (Master File Table) using &lt;code>mftparser&lt;/code> and reviewing the state of the computer using &lt;code>screenshot&lt;/code>. Unfortunately, none of these methods provided the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Clipboard Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>With my previous methods proving unsuccessful, I turned my attention to &lt;code>clipboard&lt;/code> content. I used the command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; clipboard&lt;/code> to examine the clipboard contents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Although the clipboard content didn&amp;rsquo;t immediately resemble the flag, but I tried it anyways and solved the challenge.
+&lt;img src="https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard.png"
+width="1409"
+height="330"
+srcset="https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Clipboard"
+class="gallery-image"
+data-flex-grow="426"
+data-flex-basis="1024px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>After conducting a comprehensive memory forensics analysis, I successfully found the flag and completed the challenge.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Unlock the Time Traveller&amp;rsquo;s Dilemma&amp;rdquo; challenge, my advanced memory forensics skills were put to the test as I explored various aspects of the computer&amp;rsquo;s memory to unveil the hidden flag. It was a rewarding challenge that required careful analysis. Good luck!&lt;/p></description></item><item><title>Witness the Quantum Entanglement</title><link>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</guid><description>&lt;h1 id="witness-the-quantum-entanglement---ctf-challenge-writeup">Witness the Quantum Entanglement - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Witness the Quantum Entanglement&lt;br>
+Points: 100&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Witness the Quantum Entanglement&amp;rdquo; challenge is to utilize your memory forensics skills to determine an essential piece of information. Building upon the previous challenges in the series, you are given a hint regarding Dexter&amp;rsquo;s wife, allowing you to focus on finding her birthdate. With this knowledge, you can proceed to solve the challenge.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Witness the Quantum Entanglement&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Previous Challenge Hint&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In the previous challenge, a hint was provided about Dexter&amp;rsquo;s wife. This hint, along with the knowledge that she is celebrating her 42nd birthday, forms the foundation for this challenge.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Dexter&amp;rsquo;s Wife&amp;rsquo;s Birthdate&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Dexter&amp;rsquo;s wife&amp;rsquo;s age is established as 42. Now, the objective is to determine when she was born.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Key Years&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The previous challenges also provided two years: 2023 and 2018. With these years in mind, attempt to calculate Dexter&amp;rsquo;s wife&amp;rsquo;s birthdate using both possibilities.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Test both years to find the correct combination of information that results in her birthdate. One of these combinations will lead you to the correct birthdate, allowing you to obtain the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By carefully analyzing the provided hints and experimenting with the available information, you will successfully determine Dexter&amp;rsquo;s wife&amp;rsquo;s birthdate and retrieve the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Witness the Quantum Entanglement&amp;rdquo; challenge, your memory forensics skills and problem-solving abilities are put to the test as you work to unravel the mystery of Dexter&amp;rsquo;s wife&amp;rsquo;s birthdate. Good luck!&lt;/p></description></item></channel></rss>
