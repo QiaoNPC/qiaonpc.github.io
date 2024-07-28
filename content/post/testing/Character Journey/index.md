@@ -3,7 +3,7 @@ title: Character Journey
 description: The objective of the "Character Journey" CTF challenge is to find and retrieve the flag from a web application by exploiting IDOR.
 date: 2024-07-28 00:00:00+0000
 categories:
-   - iHack Prelim 2024
+   - testing
    - CTF Writeup
 tags:
    - Web
