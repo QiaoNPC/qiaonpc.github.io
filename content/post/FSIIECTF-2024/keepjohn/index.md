@@ -28,12 +28,12 @@ weight: 1
 4. I generated a list of passwords using Munge, and this helped me find the correct password.
 
 
-![Password](<found password.png>)
+      ![Password](<found password.png>)
 
 5. After opening the **kdbx** file with the found password, I retrieved the flag.
 
 
-![Flag](flag.png)
+      ![Flag](flag.png)
 
 ## Flag
 FSIIECTF{XXXXXXXXXX}
