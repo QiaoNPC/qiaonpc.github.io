@@ -1,6 +1,6 @@
 ---
 title: KeepJohn
-description: Use Munger to guess passwords
+description: A writeup of the cryptography challenge "KeepJohn" from FSIIECTF 2024. The challenge required using Munger to guess passwords.
 date: 2024-09-08 00:00:00+0000
 categories:
    - FSIIECTF 2024
@@ -31,7 +31,6 @@ weight: 1
    ![Password](<found password.png>)
 
 5. After opening the **kdbx** file with the found password, I retrieved the flag.
-
 
 
    ![Flag](flag.png)
