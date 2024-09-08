@@ -38,4 +38,3 @@ weight: 1
 
 ## Flag
 FSIIECTF{XXXXXXXXXX}
-
