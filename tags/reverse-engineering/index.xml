@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Reverse Engineering on Sum Ting Wong's Blog</title><link>https://qiaonpc.github.io/tags/reverse-engineering/</link><description>Recent content in Reverse Engineering on Sum Ting Wong's Blog</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 05 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/reverse-engineering/index.xml" rel="self" type="application/rss+xml"/><item><title>Packman</title><link>https://qiaonpc.github.io/post/packman/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/packman/</guid><description>&lt;h1 id="packman-ctf-challenge-writeup">Packman CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Packman&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 300&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Reverse Engineering&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Reverse engineer a Python-compiled Windows executable to retrieve a flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>File Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon receiving the reverse engineering file, the first step was to enumerate the details.&lt;/li>
+&lt;li>The filename indicated it was a Windows executable due to the &lt;code>.exe&lt;/code> extension.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Binary Type&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>By running the &lt;code>strings&lt;/code> command on the file, I identified it as a Python-compiled executable rather than one compiled with C, C++, or Rust.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The presence of Python libraries and mentions of &lt;code>pyc&lt;/code> and &lt;code>pyz&lt;/code> in the output confirmed this.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/packman/presence%20of%20python.png"
+width="894"
+height="492"
+srcset="https://qiaonpc.github.io/post/packman/presence%20of%20python_hu10323182033309809499.png 480w, https://qiaonpc.github.io/post/packman/presence%20of%20python_hu15878791289582094202.png 1024w"
+loading="lazy"
+alt="Presence of Python"
+class="gallery-image"
+data-flex-grow="181"
+data-flex-basis="436px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decompilation Process&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>For Python-compiled binaries, the typical approach is to reverse it to obtain the original Python code.&lt;/li>
+&lt;li>I utilized &lt;code>pyinstxtractor&lt;/code> to extract the &lt;code>.pyc&lt;/code> file from the executable.&lt;/li>
+&lt;li>After obtaining the &lt;code>.pyc&lt;/code> file, I used &lt;code>pycdc&lt;/code> to convert the &lt;code>.pyc&lt;/code> back into readable Python code.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>With the decompiled Python code, I searched through the functions and identified one that would generate or return the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I executed the relevant function to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/packman/flag.png"
+width="1178"
+height="555"
+srcset="https://qiaonpc.github.io/post/packman/flag_hu17998641174285685860.png 480w, https://qiaonpc.github.io/post/packman/flag_hu14755478509094747492.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="509px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Brute Force Frenzy</title><link>https://qiaonpc.github.io/post/brute-force-frenzy/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/brute-force-frenzy/</guid><description>&lt;h1 id="brute-force-frenzy-ctf-challenge-writeup">Brute Force Frenzy CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Brute Force Frenzy&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Reverse Engineering&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Reverse engineer a binary to find the correct key for verification.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/challenge.png"
+width="655"
+height="920"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/challenge_hu13976817592340802089.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/challenge_hu678533284307289472.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="71"
+data-flex-basis="170px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Brute Force Frenzy&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the Binary&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use Ghidra to analyze the provided file. Identify the key verification process and how the key is checked against a predefined array.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/ghidra%20encryption.png"
+width="889"
+height="603"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/ghidra%20encryption_hu15865627824386009177.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/ghidra%20encryption_hu13183705210436996355.png 1024w"
+loading="lazy"
+alt="Encryption"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="353px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/predefined%20bytes.png"
+width="818"
+height="610"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/predefined%20bytes_hu1216830457358041011.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/predefined%20bytes_hu4613096236915023019.png 1024w"
+loading="lazy"
+alt="Predefined Bytes"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="321px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Understand the Obfuscation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Discover that the byte array used for verification is obfuscated. Only every 4th byte in the array is relevant for the key.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extract and Recreate&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extract the useful bytes from the obfuscated array.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Recreate the key verification logic in Python using these extracted bytes.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">find_license_key&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">predefined_values&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target_sum&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">license_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">found&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">False&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">32&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">127&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="c1"># Printable ASCII characters&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">iVar1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">13&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">97&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">iVar1&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">predefined_values&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">license_key&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">chr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">found&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">True&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">found&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">None&lt;/span> &lt;span class="c1"># If no valid character is found&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">computed_sum&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">sum&lt;/span>&lt;span class="p">(((&lt;/span>&lt;span class="nb">ord&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">13&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">97&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Example usage:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">predefined_values&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">91&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">62&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">66&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">19&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">59&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">51&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">72&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">41&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">target_sum&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="c1"># Replace with the actual target sum value&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">license_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">find_license_key&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">predefined_values&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target_sum&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;The license key is: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Run the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Execute the Python script to test the key verification process. Obtain the flag from the script output.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/flag.png"
+width="743"
+height="120"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/flag_hu15088040626105665204.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/flag_hu9560513365730400571.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="619"
+data-flex-basis="1486px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{NI220G24}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Resign Letter</title><link>https://qiaonpc.github.io/post/resign-letter/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/resign-letter/</guid><description>&lt;h1 id="resign-letter-ctf-challenge-writeup">Resign Letter CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Resign Letter&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 50&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Reverse Engineering&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves analyzing a Word document to extract and analyze a suspicious executable file.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a detailed solution for the Resign Letter CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Analyzed the provided Word document for any embedded macros using olevba.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Identified a suspicious link within the document.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/resign-letter/olevba.png"
+width="1362"
+height="722"
+srcset="https://qiaonpc.github.io/post/resign-letter/olevba_hu17827962690354560392.png 480w, https://qiaonpc.github.io/post/resign-letter/olevba_hu14422172331767993415.png 1024w"
+loading="lazy"
+alt="Olevba"
+class="gallery-image"
+data-flex-grow="188"
+data-flex-basis="452px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analysis of the Executable&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Downloaded and extracted the executable, named &lt;code>lenovo.exe&lt;/code>.&lt;/li>
+&lt;li>Ran the executable in a Windows virtual machine for analysis.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Dynamic Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Initially used Procmon for monitoring file system activity but found it challenging due to the hidden modifications.&lt;/li>
+&lt;li>Switched to API Monitor for more detailed monitoring.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Analyzed the API calls made by the executable using API Monitor.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered the flag being accessed or manipulated by the executable.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/resign-letter/apimon.png"
+width="1223"
+height="540"
+srcset="https://qiaonpc.github.io/post/resign-letter/apimon_hu9712320003060566334.png 480w, https://qiaonpc.github.io/post/resign-letter/apimon_hu11490190280092290518.png 1024w"
+loading="lazy"
+alt="API Monitor"
+class="gallery-image"
+data-flex-grow="226"
+data-flex-basis="543px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/resign-letter/flag.png"
+width="607"
+height="447"
+srcset="https://qiaonpc.github.io/post/resign-letter/flag_hu2381340610511315666.png 480w, https://qiaonpc.github.io/post/resign-letter/flag_hu6629687554547942273.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="325px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>The Resign Letter CTF challenge required reverse engineering skills to analyze a Word document and a Windows executable. By using tools like olevba for macro analysis and API Monitor for dynamic analysis of the executable, the flag was successfully extracted. This challenge highlighted the importance of understanding malware analysis techniques for identifying malicious behavior.&lt;/p></description></item><item><title>Getmecorrect</title><link>https://qiaonpc.github.io/post/getmecorrect/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/getmecorrect/</guid><description>&lt;h1 id="getmecorrect---ctf-challenge-writeup">Getmecorrect - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Getmecorrect&lt;br>
+Points: 150&lt;br>
+Category: Reverse Engineering&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Getmecorrect&amp;rdquo; challenge is to reverse engineer an APK file to uncover a hidden flag. The flag is divided into four parts, and you need to understand how these parts are constructed. However, a key part of the flag is implemented using native code, which is not available in the APK&amp;rsquo;s source code. Your task is to find a way to retrieve the missing part of the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Getmecorrect&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the APK File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Start by opening and examining the APK file using tools like jadx-gui. Look for clues that reveal how the flag is constructed.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Part 3 and Native Code&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>While analyzing the APK, you will identify that the third part of the flag relies on the &lt;code>getNativeFlag()&lt;/code> function. However, this function&amp;rsquo;s implementation is missing from the APK&amp;rsquo;s source code, and it is marked as &amp;ldquo;native.&amp;rdquo;
+&lt;img src="https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag.png"
+width="1377"
+height="523"
+srcset="https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag_hu15624305738256547951.png 480w, https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag_hu2866490444325746503.png 1024w"
+loading="lazy"
+alt="Construct Flag"
+class="gallery-image"
+data-flex-grow="263"
+data-flex-basis="631px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Understanding Native Code&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The keyword &amp;ldquo;native&amp;rdquo; in the function declaration indicates that the function is implemented using native code, often written in a different programming language like C or C++. This means the actual implementation of &lt;code>getNativeFlagPart&lt;/code> is not available in the provided APK source code.
+&lt;img src="https://qiaonpc.github.io/post/getmecorrect/Native%20Flag.png"
+width="470"
+height="69"
+srcset="https://qiaonpc.github.io/post/getmecorrect/Native%20Flag_hu11417778989510105369.png 480w, https://qiaonpc.github.io/post/getmecorrect/Native%20Flag_hu3310496007017161182.png 1024w"
+loading="lazy"
+alt="getNativeFlag() definition"
+class="gallery-image"
+data-flex-grow="681"
+data-flex-basis="1634px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reverse Engineering Native Code&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To retrieve the missing part of the flag, you need to reverse engineer the native code. Begin by converting the &lt;code>dynamic.apk&lt;/code> to &lt;code>dynamic.zip&lt;/code>, and then unzip the file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine the Lib Folder&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Navigate to the &lt;code>lib&lt;/code> folder, where you will find different architectures. Choose the one you are most comfortable with. In this case, the &lt;code>x86&lt;/code> architecture is used for analysis.
+&lt;img src="https://qiaonpc.github.io/post/getmecorrect/lib.png"
+width="1157"
+height="334"
+srcset="https://qiaonpc.github.io/post/getmecorrect/lib_hu3880375080033012071.png 480w, https://qiaonpc.github.io/post/getmecorrect/lib_hu2804070121128881271.png 1024w"
+loading="lazy"
+alt="lib Folder"
+class="gallery-image"
+data-flex-grow="346"
+data-flex-basis="831px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Ghidra Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Within Ghidra, look for a function with a name that resembles the naming convention used throughout &lt;code>dynamic.apk&lt;/code>. This function will likely contain the missing part of the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieve the Missing Flag Part&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>By examining the code in Ghidra, you can identify the third part of the flag. This part is not encrypted or hidden and is directly accessible in the function.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you combine the parts of the flag revealed during your analysis, you will uncover the complete hidden flag. The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps, you will successfully reverse engineer the APK and retrieve the missing part of the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Getmecorrect&amp;rdquo; challenge, you need to reverse engineer the APK to construct the flag correctly. Understanding native code and reverse engineering are crucial for solving this challenge. Best of luck!&lt;/p></description></item><item><title>Reverseme</title><link>https://qiaonpc.github.io/post/reverseme/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/reverseme/</guid><description>&lt;h1 id="reverseme---ctf-challenge-writeup">Reverseme - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Reverseme&lt;br>
+Points: 150&lt;br>
+Category: Reverse Engineering&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Reverseme&amp;rdquo; challenge is to reverse engineer an Android APK file and retrieve the hidden flag. You need to understand how APK files are structured, how strings are stored, and how resources are referenced in Android app development.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Reverseme&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the APK File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Start by examining the APK file using jadx-gui or a similar tool. You will need to navigate through the app&amp;rsquo;s code to find the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During your analysis, you will come across a reference to the flag as &lt;code>R.string.flag&lt;/code>. This indicates that the flag is retrieved from the app&amp;rsquo;s string resources.
+&lt;img src="https://qiaonpc.github.io/post/reverseme/r%20string.png"
+width="1018"
+height="431"
+srcset="https://qiaonpc.github.io/post/reverseme/r%20string_hu632779918979871744.png 480w, https://qiaonpc.github.io/post/reverseme/r%20string_hu17481069245487358608.png 1024w"
+loading="lazy"
+alt="R.String.Flag"
+class="gallery-image"
+data-flex-grow="236"
+data-flex-basis="566px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Accessing Resources&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In Android app development, the &lt;code>R.string&lt;/code> is a reference to a string resource defined in the app&amp;rsquo;s resources. An APK file contains all the resources and code needed to run an Android application.&lt;/li>
+&lt;li>When you see &lt;code>R.string.some_string&lt;/code>, it refers to a string resource defined in the app&amp;rsquo;s &lt;code>res/values/strings.xml&lt;/code> file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Strings.xml Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You need to locate the &lt;code>strings.xml&lt;/code> file within the APK&amp;rsquo;s resources. Navigate to the Resources folder, then to &lt;code>resources.arsc&lt;/code>, and finally, to &lt;code>res/values&lt;/code>.&lt;/li>
+&lt;li>Use the search function (&lt;code>CTRL+F&lt;/code>) to look for the &amp;ldquo;flag&amp;rdquo; string. This will allow you to find the flag in plain text.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>By examining the content of the &lt;code>strings.xml&lt;/code> file, you can retrieve the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you extract and decipher the flag, you will reveal the complete hidden flag. The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps, you will successfully reverse engineer the APK and uncover the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Reverseme&amp;rdquo; challenge, understanding how Android APK files store resources and references to string resources is crucial. By navigating the app&amp;rsquo;s code and examining the &lt;code>strings.xml&lt;/code> file, you can retrieve the flag and complete the challenge.&lt;/p></description></item></channel></rss>
