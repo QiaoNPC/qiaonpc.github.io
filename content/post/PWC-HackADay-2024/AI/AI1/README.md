@@ -37,4 +37,4 @@ weight: 1
      - If it refuses or fails the first task, it will attempt to complete the second with whatever information it has.  
    - This tactic exploited the LLM's behavior to output the flag indirectly.  
 
-      ![Flag](image.png)
+   ![Flag](image.png)

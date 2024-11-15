@@ -25,9 +25,9 @@ weight: 1
    - Used these keys to log in to the AWS account.
 
 
-      ![Old Access Keys](image.png)
+   ![Old Access Keys](image.png)
 
-      ![Whoami](image-1.png)
+   ![Whoami](image-1.png)
 
 2. **Enumerating Permissions**:
    - **Manual Enumeration**:
@@ -46,7 +46,7 @@ weight: 1
    - Created a new username in the account's Cognito (or relevant IAM platform) profile to match the regex.
 
 
-      ![Regex Role](image-2.png)
+   ![Regex Role](image-2.png)
 
    - You can definitely create a user that matches the regex using GUI, but I prefer to use CLI 
    - The commands I used are:
@@ -78,4 +78,4 @@ weight: 1
    - With elevated permissions, accessed the resources tied to the `secret_reader` role and retrieved the flag.
 
 
-      ![Flag](image-3.png)
+   ![Flag](image-3.png)

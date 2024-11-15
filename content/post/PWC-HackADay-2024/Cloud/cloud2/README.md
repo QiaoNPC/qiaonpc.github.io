@@ -25,7 +25,7 @@ weight: 1
 2. Observe two versions of `flag.txt`:
    - One is **70 KB**, and the other is **71 KB**.
 
-      ![Flag](image.png)
+   ![Flag](image.png)
 
 3. As far as I know, GUI does not support direct access to older versions of the file
 4. Hence, CLI is required to proceed
@@ -48,4 +48,4 @@ weight: 1
                      oldflag --profile ccx
     ```
 
-    ![Flag](image-1.png)
+   ![Flag](image-1.png)

@@ -37,4 +37,4 @@ weight: 1
      - This strategy prompted the LLM to reveal the flag indirectly while executing API logic.  
 
 
-      ![Flag](image.png)
+   ![Flag](image.png)

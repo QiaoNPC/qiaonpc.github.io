@@ -23,7 +23,7 @@ weight: 1
    - Started by viewing the source code of the entry page (CTRL+U) in search of any AWS-related links or references.
    - No relevant links were found.
 
-      ![No Links Found](image.png)
+   ![No Links Found](image.png)
 
 2. **Brute Forcing Directories**:
    - Attempted directory enumeration using `feroxbuster` to discover hidden paths but abandoned this method midway, recalling this was primarily an AWS-focused challenge.
@@ -32,7 +32,7 @@ weight: 1
    - Realized the presence of a `login.html` page, which led to further exploration.
 
 
-      ![Found Login Page](image-1.png)
+   ![Found Login Page](image-1.png)
 
 4. **Discovering AWS Endpoint**:
    - Within the `login.html` page, noticed a 404 error image that contained the AWS endpoint in its metadata.
@@ -41,10 +41,10 @@ weight: 1
    - After obtaining the AWS endpoint, used the AWS CLI or a GUI tool to interact with the endpoint and extract the flag.
 
 
-      ![Found Flag](image-2.png)
+   ![Found Flag](image-2.png)
 
 
-      ![Flag](image-3.png)
+   ![Flag](image-3.png)
 
 ## Commands (if using CLI):
 ```bash
