@@ -20,7 +20,7 @@ weight: 1
 ## Solution  
 
 1. **Initial Connection**:  
-   - Connected the local challenge machine to NAT and used **netdiscover** to identify its IP address.  
+   - Me and Han Kai connected the local challenge machine to NAT and used **netdiscover** to identify its IP address.  
 
       ![Netdiscover](netdiscover.png)
 
@@ -48,7 +48,7 @@ weight: 1
       ![phpinfo](phpinfo_php.png)
 
 3. **Kerberos Enumeration**:  
-   - Re-scanned using **nmap** for potential users.  
+   - Han Kai then re-scanned using **nmap** for potential users.  
    - Found usernames but failed to crack them via password spraying or brute-forcing the login page.
 
 
