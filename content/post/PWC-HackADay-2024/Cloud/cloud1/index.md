@@ -1,6 +1,6 @@
 ---
 title: Cloud 1 - Finding AWS Endpoint
-description: The objective of the "Cloud 1 - Finding AWS Endpoint" challenge is to discover the AWS endpoint associated with the challenge and retrieve the flag.
+description: The objective of the Cloud 1 - Finding AWS Endpoint challenge is to discover the AWS endpoint associated with the challenge and retrieve the flag.
 date: 2024-11-11 00:00:00+0000
 categories:
    - PWC HackADay 2024

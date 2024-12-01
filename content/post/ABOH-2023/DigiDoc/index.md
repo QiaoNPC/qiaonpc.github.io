@@ -1,6 +1,6 @@
 ---
 title: DigiDoc
-description: The objective of the "DigiDoc" CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.
+description: The objective of the DigiDoc CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.
 date: 2023-12-02 00:00:00+0000
 categories:
    - ABOH 2023

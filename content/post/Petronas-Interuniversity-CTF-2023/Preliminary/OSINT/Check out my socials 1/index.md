@@ -1,6 +1,6 @@
 ---
 title: Checkout my socials 1
-description: The objective of the "Checkout my socials 1" challenge is to gather information from publicly available sources (OSINT) to identify the username. You will be provided with a link, and your task is to find the username associated with it.
+description: The objective of the Checkout my socials 1 challenge is to gather information from publicly available sources (OSINT) to identify the username. You will be provided with a link, and your task is to find the username associated with it.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

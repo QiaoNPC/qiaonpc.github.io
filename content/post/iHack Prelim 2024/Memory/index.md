@@ -1,6 +1,6 @@
 ---
 title: Memory
-description: The objective of the "Memory" CTF challenge is identify the user that was created based on a memory dump from a Windows system
+description: The objective of the Memory CTF challenge is identify the user that was created based on a memory dump from a Windows system
 date: 2024-07-28 00:00:00+0000
 categories:
    - iHack Prelim 2024

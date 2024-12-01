@@ -1,6 +1,6 @@
 ---
 title: Linux Memory Usage
-description: The objective of the "Linux Memory Usage" CTF challenge is to efficiently manage and process memory usage data for different processes based on given inputs.
+description: The objective of the Linux Memory Usage CTF challenge is to efficiently manage and process memory usage data for different processes based on given inputs.
 date: 2023-12-17 00:00:00+0000
 categories:
    - Student Wargames 2023

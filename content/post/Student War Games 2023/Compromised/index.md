@@ -1,6 +1,6 @@
 ---
 title: Compromised
-description: The objective of the "Compromised" CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.
+description: The objective of the Compromised CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.
 date: 2023-12-17 00:00:00+0000
 categories:
    - Student Wargames 2023

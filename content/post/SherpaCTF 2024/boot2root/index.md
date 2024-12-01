@@ -1,6 +1,6 @@
 ---
 title: Oren
-description: The objective of the "Oren" challenge is to exploit the target machine and retrieve the flag.
+description: The objective of the Oren challenge is to exploit the target machine and retrieve the flag.
 date: 2024-11-24 00:00:00+0000
 categories:
    - SherpaCTF 2024

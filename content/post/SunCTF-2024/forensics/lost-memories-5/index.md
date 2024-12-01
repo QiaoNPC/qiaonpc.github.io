@@ -1,6 +1,6 @@
 ---
 title: Lost Memories 5
-description: The objective of the "Lost Memories 5" CTF challenge is to retrieve notes hidden in the computer of a user named "warlocksmurf."
+description: The objective of the Lost Memories 5 CTF challenge is to retrieve notes hidden in the computer of a user named "warlocksmurf."
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

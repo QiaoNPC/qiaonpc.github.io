@@ -1,6 +1,6 @@
 ---
 title: Cloud 3 - Role Hijacking
-description: The objective of the "Cloud 3 - Role Hijacking" challenge is to ese role hijacking techniques to escalate privileges and retrieve the flag.
+description: The objective of the Cloud 3 - Role Hijacking challenge is to ese role hijacking techniques to escalate privileges and retrieve the flag.
 date: 2024-11-11 00:00:00+0000
 categories:
    - PWC HackADay 2024

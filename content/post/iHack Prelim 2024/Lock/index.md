@@ -1,6 +1,6 @@
 ---
 title: Lock?
-description: The objective of the "Lock?" CTF challenge is to recover the flag from a BitLocker-encrypted disk image by analyzing logs and decrypting the image.
+description: The objective of the Lock? CTF challenge is to recover the flag from a BitLocker-encrypted disk image by analyzing logs and decrypting the image.
 date: 2024-07-28 00:00:00+0000
 categories:
    - iHack Prelim 2024

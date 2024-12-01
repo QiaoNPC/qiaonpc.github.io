@@ -1,6 +1,6 @@
 ---
 title: SSH Compromised
-description: The objective of the "SSH Compromised" CTF challenge is analyze a large log file to identify a compromised SSH login.
+description: The objective of the SSH Compromised CTF challenge is analyze a large log file to identify a compromised SSH login.
 date: 2024-07-28 00:00:00+0000
 categories:
    - iHack Prelim 2024

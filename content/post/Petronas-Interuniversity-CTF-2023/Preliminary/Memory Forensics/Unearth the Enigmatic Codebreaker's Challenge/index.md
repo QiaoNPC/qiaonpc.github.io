@@ -1,6 +1,6 @@
 ---
 title: Unearth the Enigmatic Codebreaker's Challenge
-description: The objective of the "Unearth the Enigmatic Codebreaker's Challenge" is to leverage memory forensics skills to crack Jerry's hashed NTLM password. Your task is to find the hashdump, extract Jerry's hashed password, and use a tool like hashcat to crack it and reveal the hidden flag.
+description: The objective of the Unearth the Enigmatic Codebreaker's Challenge is to leverage memory forensics skills to crack Jerry's hashed NTLM password. Your task is to find the hashdump, extract Jerry's hashed password, and use a tool like hashcat to crack it and reveal the hidden flag.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

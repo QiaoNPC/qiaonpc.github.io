@@ -1,6 +1,6 @@
 ---
 title: iamspeed
-description: The objective of the "iamspeed" challenge is to analyze the Python-compiled executable to retrieve and decode the flag.
+description: The objective of the iamspeed challenge is to analyze the Python-compiled executable to retrieve and decode the flag.
 date: 2024-11-24 00:00:00+0000
 categories:
    - SherpaCTF 2024

@@ -1,6 +1,6 @@
 ---
 title: Temporal Traffic Traces
-description: The objective of the "Temporal Traffic Traces" challenge is to analyze a provided pcap file and extract the hidden flag. Your task is to investigate the protocol hierarchy, identify relevant data, and decode the flag.
+description: The objective of the Temporal Traffic Traces challenge is to analyze a provided pcap file and extract the hidden flag. Your task is to investigate the protocol hierarchy, identify relevant data, and decode the flag.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

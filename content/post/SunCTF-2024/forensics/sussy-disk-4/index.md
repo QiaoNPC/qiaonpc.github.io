@@ -1,6 +1,6 @@
 ---
 title: Sussy Disk 4
-description: The objective of the "Sussy Disk 4" CTF challenge is to unzip a password-protected zip file and retrieve the flag.
+description: The objective of the Sussy Disk 4 CTF challenge is to unzip a password-protected zip file and retrieve the flag.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

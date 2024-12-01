@@ -1,6 +1,6 @@
 ---
 title: Unearth the Long Lost Cipher
-description: The objective of the "Unearth the Long Lost Cipher" challenge is to conduct memory forensics to find Dexter's password on a computer. Your task is to identify the password and reveal the hidden flag.
+description: The objective of the Unearth the Long Lost Cipher challenge is to conduct memory forensics to find Dexter's password on a computer. Your task is to identify the password and reveal the hidden flag.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

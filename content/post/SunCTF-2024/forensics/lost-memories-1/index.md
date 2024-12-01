@@ -1,6 +1,6 @@
 ---
 title: Lost Memories 1
-description: The objective of the "Lost Memories 1" CTF challenge is to determine the exact time when the memory dump was taken from a given memory dump file.
+description: The objective of the Lost Memories 1 CTF challenge is to determine the exact time when the memory dump was taken from a given memory dump file.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

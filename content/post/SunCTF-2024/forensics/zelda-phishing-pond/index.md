@@ -1,6 +1,6 @@
 ---
 title: Zelda Phishing Pond
-description: The objective of the "Zelda Phishing Pond" CTF challenge is to analyze a phishing email and extract the flag from encoded contents.
+description: The objective of the Zelda Phishing Pond CTF challenge is to analyze a phishing email and extract the flag from encoded contents.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

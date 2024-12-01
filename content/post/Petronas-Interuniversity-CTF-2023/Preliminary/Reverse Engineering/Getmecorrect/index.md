@@ -1,6 +1,6 @@
 ---
 title: Getmecorrect
-description: The objective of the "Getmecorrect" challenge is to reverse engineer an APK file to uncover a hidden flag. The flag is divided into four parts, and you need to understand how these parts are constructed. However, a key part of the flag is implemented using native code, which is not available in the APK's source code. Your task is to find a way to retrieve the missing part of the flag.
+description: The objective of the Getmecorrect challenge is to reverse engineer an APK file to uncover a hidden flag. The flag is divided into four parts, and you need to understand how these parts are constructed. However, a key part of the flag is implemented using native code, which is not available in the APK's source code. Your task is to find a way to retrieve the missing part of the flag.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

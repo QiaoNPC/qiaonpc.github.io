@@ -1,6 +1,6 @@
 ---
 title: Lokami Temple
-description: The objective of the "Lokami Temple" CTF challenge is to navigate a graph problem by determining the shortest path for all doors to exit.
+description: The objective of the Lokami Temple CTF challenge is to navigate a graph problem by determining the shortest path for all doors to exit.
 date: 2023-12-17 00:00:00+0000
 categories:
    - Student Wargames 2023

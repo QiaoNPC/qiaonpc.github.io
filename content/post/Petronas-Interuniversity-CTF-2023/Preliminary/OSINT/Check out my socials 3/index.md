@@ -1,6 +1,6 @@
 ---
 title: Checkout my socials 3
-description: The objective of the "Checkout my socials 3" challenge is to gather information from publicly available sources (OSINT) to uncover the hidden flag. The challenge provides hints related to birds, and your task is to identify the Twitter or other social media account associated with the user.
+description: The objective of the Checkout my socials 3 challenge is to gather information from publicly available sources (OSINT) to uncover the hidden flag. The challenge provides hints related to birds, and your task is to identify the Twitter or other social media account associated with the user.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

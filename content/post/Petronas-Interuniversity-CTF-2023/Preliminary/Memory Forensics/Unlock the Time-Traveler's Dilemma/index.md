@@ -1,6 +1,6 @@
 ---
 title: Unlock the Time Traveller's Dilemma
-description: The objective of the "Unlock the Time Traveller's Dilemma" challenge was to perform advanced memory forensics to find the hidden flag. This challenge was the fourth in the memory forensics series, and while it was recommended to solve the previous three challenges, it wasn't necessary as the CTF had ended.
+description: The objective of the Unlock the Time Traveller's Dilemma challenge was to perform advanced memory forensics to find the hidden flag. This challenge was the fourth in the memory forensics series, and while it was recommended to solve the previous three challenges, it wasn't necessary as the CTF had ended.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

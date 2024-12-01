@@ -1,6 +1,6 @@
 ---
 title: Small Sage
-description: The objective of the "Small Sage" CTF challenge is to decipher a flag that has been encrypted using RSA encryption techniques, focusing on elements like `n`, `p`, `q`, `C`, `N`, and `e`.
+description: The objective of the Small Sage CTF challenge is to decipher a flag that has been encrypted using RSA encryption techniques, focusing on elements like `n`, `p`, `q`, `C`, `N`, and `e`.
 date: 2023-12-02 00:00:00+0000
 categories:
    - ABOH 2023

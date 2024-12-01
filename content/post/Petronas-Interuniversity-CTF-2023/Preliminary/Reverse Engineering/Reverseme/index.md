@@ -1,6 +1,6 @@
 ---
 title: Reverseme
-description: The objective of the "Reverseme" challenge is to reverse engineer an Android APK file and retrieve the hidden flag. You need to understand how APK files are structured, how strings are stored, and how resources are referenced in Android app development.
+description: The objective of the Reverseme challenge is to reverse engineer an Android APK file and retrieve the hidden flag. You need to understand how APK files are structured, how strings are stored, and how resources are referenced in Android app development.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

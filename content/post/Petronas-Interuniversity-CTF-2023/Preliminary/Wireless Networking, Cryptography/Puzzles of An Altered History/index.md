@@ -1,6 +1,6 @@
 ---
 title: Puzzles of An Altered History
-description: The objective of the "Puzzles of An Altered History" challenge is to crack the password for a given wireless network, which is stored in a provided pcap (packet capture) file. You will need to use a tool called "aircrack-ng" to successfully recover the network's password.
+description: The objective of the Puzzles of An Altered History challenge is to crack the password for a given wireless network, which is stored in a provided pcap (packet capture) file. You will need to use a tool called "aircrack-ng" to successfully recover the network's password.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

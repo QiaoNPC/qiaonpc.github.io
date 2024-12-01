@@ -1,6 +1,6 @@
 ---
 title: Into The Matrix
-description: The objective of the "Into The Matrix" challenge is to decode the contents of an NPY file to retrieve the flag.
+description: The objective of the Into The Matrix challenge is to decode the contents of an NPY file to retrieve the flag.
 date: 2024-11-24 00:00:00+0000
 categories:
    - SherpaCTF 2024

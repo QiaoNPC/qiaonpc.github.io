@@ -1,6 +1,6 @@
 ---
 title: Intruding the Hidden Society
-description: The objective of the "Intruding the Hidden Society" challenge is to extract hidden information from the provided pcap file and uncover the flag.
+description: The objective of the Intruding the Hidden Society challenge is to extract hidden information from the provided pcap file and uncover the flag.
 date: 2023-10-10 00:00:00+0000
 categories:
    - Petronas Interuniversity CTF 2023

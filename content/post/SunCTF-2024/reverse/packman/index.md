@@ -1,6 +1,6 @@
 ---
 title: Packman
-description: The objective of the "Packman" CTF challenge is to reverse engineer a Python-compiled Windows executable to retrieve a flag.
+description: The objective of the Packman CTF challenge is to reverse engineer a Python-compiled Windows executable to retrieve a flag.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

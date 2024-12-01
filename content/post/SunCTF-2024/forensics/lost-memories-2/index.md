@@ -1,6 +1,6 @@
 ---
 title: Lost Memories 2
-description: The objective of the "Lost Memories 2" CTF challenge is to find the password of the system user.
+description: The objective of the Lost Memories 2 CTF challenge is to find the password of the system user.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

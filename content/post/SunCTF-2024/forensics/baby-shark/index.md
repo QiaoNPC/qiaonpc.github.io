@@ -1,6 +1,6 @@
 ---
 title: Baby Shark
-description: The objective of the "Baby Shark" CTF challenge is to nalyze a pcap file to find and decode a hidden flag.
+description: The objective of the Baby Shark CTF challenge is to nalyze a pcap file to find and decode a hidden flag.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

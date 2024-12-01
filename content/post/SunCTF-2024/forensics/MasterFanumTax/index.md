@@ -1,6 +1,6 @@
 ---
 title: MasterFanumTax
-description: The objective of the "MasterFanumTax" CTF challenge is to recover and decode the flag from a Master File Table (MFT) file.
+description: The objective of the MasterFanumTax CTF challenge is to recover and decode the flag from a Master File Table (MFT) file.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

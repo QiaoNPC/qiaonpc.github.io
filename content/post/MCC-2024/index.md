@@ -1,6 +1,6 @@
 ---
 title: MCC 2024 Box
-description: The objective of the "MCC 2024 Box" challenge is to gain root access to the machine by exploiting vulnerabilities and misconfigurations.
+description: The objective of the MCC 2024 Box challenge is to gain root access to the machine by exploiting vulnerabilities and misconfigurations.
 date: 2024-12-01 00:00:00+0000
 categories:
    - MCC 2024

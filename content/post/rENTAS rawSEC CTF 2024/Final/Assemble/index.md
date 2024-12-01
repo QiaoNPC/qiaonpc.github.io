@@ -1,6 +1,6 @@
 ---
 title: Assemble
-description: The objective of the "Assemble" challenge is to correctly configure the hardware components and troubleshoot any technical issues to display the flag on the LCD.
+description: The objective of the Assemble challenge is to correctly configure the hardware components and troubleshoot any technical issues to display the flag on the LCD.
 date: 2024-03-09 00:00:00+0000
 categories:
    - rENTAS rawSEC CTF 2024

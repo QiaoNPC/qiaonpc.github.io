@@ -1,6 +1,6 @@
 ---
 title: Graduation Letter
-description: The objective of the "Graduation Letter" CTF challenge is to extract hidden information from an image, leading to a password-protected PDF, and ultimately retrieve the flag.
+description: The objective of the Graduation Letter CTF challenge is to extract hidden information from an image, leading to a password-protected PDF, and ultimately retrieve the flag.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

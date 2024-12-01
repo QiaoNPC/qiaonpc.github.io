@@ -1,6 +1,6 @@
 ---
 title: Sussy Disk 1 
-description: The objective of the "Sussy Disk 1" CTF challenge is to analyze the disk image to recover the flag hidden in the web browsing history.
+description: The objective of the Sussy Disk 1 CTF challenge is to analyze the disk image to recover the flag hidden in the web browsing history.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

@@ -1,6 +1,6 @@
 ---
 title: The Early Quantum Supercomputer I
-description: The objective of "The Early Quantum Supercomputer I" challenge is to analyze a provided pcap file and identify an uncommon protocol to uncover the hidden flag. Your task is to investigate the network traffic and pinpoint the unique protocol.
+description: The objective of The Early Quantum Supercomputer I challenge is to analyze a provided pcap file and identify an uncommon protocol to uncover the hidden flag. Your task is to investigate the network traffic and pinpoint the unique protocol.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

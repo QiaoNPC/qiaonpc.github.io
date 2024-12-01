@@ -1,6 +1,6 @@
 ---
 title: Call for Protocols
-description: The objective of the "Call for Protocols" CTF challenge is to analyze encrypted TLS traffic to extract the flag
+description: The objective of the Call for Protocols CTF challenge is to analyze encrypted TLS traffic to extract the flag
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

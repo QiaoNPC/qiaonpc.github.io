@@ -1,6 +1,6 @@
 ---
 title: Lost Memories 3 
-description: The objective of the "Lost Memories 3" CTF challenge is to identify the malicious process, its process ID, and its parent process ID.
+description: The objective of the Lost Memories 3 CTF challenge is to identify the malicious process, its process ID, and its parent process ID.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

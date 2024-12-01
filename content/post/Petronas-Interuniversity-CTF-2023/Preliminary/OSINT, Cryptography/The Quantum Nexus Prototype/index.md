@@ -1,6 +1,6 @@
 ---
 title: The Quantum Nexus Prototype
-description: The objective of "The Quantum Nexus Prototype" challenge is to use your OSINT (Open-Source Intelligence) and cryptography skills to uncover hidden information within a provided YouTube link. At first glance, this challenge may seem confusing, but with careful examination of the link and some cryptography, you can successfully extract the flag.
+description: The objective of The Quantum Nexus Prototype challenge is to use your OSINT (Open-Source Intelligence) and cryptography skills to uncover hidden information within a provided YouTube link. At first glance, this challenge may seem confusing, but with careful examination of the link and some cryptography, you can successfully extract the flag.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

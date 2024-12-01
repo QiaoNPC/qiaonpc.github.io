@@ -1,6 +1,6 @@
 ---
 title: Graded Reels
-description: The objective of the "Graded Reels" CTF challenge is to analyze an image with a partially hidden flag by manipulating its properties.
+description: The objective of the Graded Reels CTF challenge is to analyze an image with a partially hidden flag by manipulating its properties.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

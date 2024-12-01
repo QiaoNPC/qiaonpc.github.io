@@ -1,6 +1,6 @@
 ---
 title: Cloud 2 - Time Travel
-description: The objective of the "Cloud 2 - Time Travel" challenge is to retrieve an older version of the flag stored in an AWS S3 bucket.
+description: The objective of the Cloud 2 - Time Travel challenge is to retrieve an older version of the flag stored in an AWS S3 bucket.
 date: 2024-11-11 00:00:00+0000
 categories:
    - PWC HackADay 2024

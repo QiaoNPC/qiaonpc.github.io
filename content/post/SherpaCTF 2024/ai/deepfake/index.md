@@ -1,6 +1,6 @@
 ---
 title: DeepFake
-description: The objective of the "DeepFake" challenge is analyze the provided .h5 file to retrieve the flag.
+description: The objective of the DeepFake challenge is analyze the provided .h5 file to retrieve the flag.
 date: 2024-11-24 00:00:00+0000
 categories:
    - SherpaCTF 2024

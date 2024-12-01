@@ -1,6 +1,6 @@
 ---
 title: FurElise
-description: The objective of the "FurElise" CTF challenge is to decode a hidden flag concealed within a PowerShell script by following a series of deobfuscation and decoding steps.
+description: The objective of the FurElise CTF challenge is to decode a hidden flag concealed within a PowerShell script by following a series of deobfuscation and decoding steps.
 date: 2023-12-02 00:00:00+0000
 categories:
    - ABOH 2023

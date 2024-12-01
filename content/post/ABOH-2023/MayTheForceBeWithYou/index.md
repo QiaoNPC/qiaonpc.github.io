@@ -1,6 +1,6 @@
 ---
 title: May The Force Be With You
-description: The objective of the "May The Force Be With You" CTF challenge is to decipher a hidden flag encoded within a given script using reverse engineering techniques.
+description: The objective of the May The Force Be With You CTF challenge is to decipher a hidden flag encoded within a given script using reverse engineering techniques.
 date: 2023-12-02 00:00:00+0000
 categories:
    - ABOH 2023

@@ -1,6 +1,6 @@
 ---
 title: Marx's Melodic Memoir
-description: The objective of the "Marx's Melodic Memoir" challenge is to decode a given music sheet to reveal the hidden flag. Your task is to find a music sheet decoder, manually input every element from the picture, and decipher the flag.
+description: The objective of the Marx's Melodic Memoir challenge is to decode a given music sheet to reveal the hidden flag. Your task is to find a music sheet decoder, manually input every element from the picture, and decipher the flag.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

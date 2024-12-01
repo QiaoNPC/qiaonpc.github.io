@@ -1,6 +1,6 @@
 ---
 title: Sussy Disk 2
-description: The objective of the "Sussy Disk 2" CTF challenge is to recover a deleted file from the disk image.
+description: The objective of the Sussy Disk 2 CTF challenge is to recover a deleted file from the disk image.
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024

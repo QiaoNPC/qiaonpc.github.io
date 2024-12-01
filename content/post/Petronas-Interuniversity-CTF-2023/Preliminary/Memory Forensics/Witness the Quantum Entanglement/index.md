@@ -1,6 +1,6 @@
 ---
 title: Witness the Quantum Entanglement
-description: The objective of the "Witness the Quantum Entanglement" challenge is to utilize your memory forensics skills to determine an essential piece of information. Building upon the previous challenges in the series, you are given a hint regarding Dexter's wife, allowing you to focus on finding her birthdate. With this knowledge, you can proceed to solve the challenge.
+description: The objective of the Witness the Quantum Entanglement challenge is to utilize your memory forensics skills to determine an essential piece of information. Building upon the previous challenges in the series, you are given a hint regarding Dexter's wife, allowing you to focus on finding her birthdate. With this knowledge, you can proceed to solve the challenge.
 date: 2023-10-10 00:00:00+0000
 categories:
     - Petronas Interuniversity CTF 2023

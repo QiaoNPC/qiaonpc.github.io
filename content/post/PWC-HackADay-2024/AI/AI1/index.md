@@ -1,6 +1,6 @@
 ---
 title: AI 1
-description: The objective of the "AI 1" challenge is to exploit an LLM's behavior to retrieve the flag.
+description: The objective of the AI 1 challenge is to exploit an LLM's behavior to retrieve the flag.
 date: 2024-11-11 00:00:00+0000
 categories:
    - PWC HackADay 2024

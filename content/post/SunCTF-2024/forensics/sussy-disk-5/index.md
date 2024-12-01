@@ -1,6 +1,6 @@
 ---
 title: Sussy Disk 5
-description: The objective of the "Sussy Disk 5" CTF challenge is to find the flag through various hidden artifacts across the disk
+description: The objective of the Sussy Disk 5 CTF challenge is to find the flag through various hidden artifacts across the disk
 date: 2024-10-05 00:00:00+0000
 categories:
    - SunCTF 2024
