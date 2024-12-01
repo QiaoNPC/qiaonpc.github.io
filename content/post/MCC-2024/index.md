@@ -22,8 +22,8 @@ To solve the "MCC 2024 Box" challenge, follow these steps:
 
 1. **Information Gathering**:
    - First, obtained the IP address of the target machine and ran an `nmap` scan to identify open ports.
-   - The scan revealed ports 21 (FTP), 22 (SSH), and 80 (HTTP) were open.
-   - Port 21 (FTP) allowed anonymous login, which could be useful for data retrieval.
+   - The scan revealed ports `21 (FTP)`, `22 (SSH)`, and `80 (HTTP)` were open.
+   - Port 21 (FTP) allowed `anonymous login`, which could be useful for data retrieval.
 
 
       ![nmap](nmap.png)
@@ -51,14 +51,14 @@ To solve the "MCC 2024 Box" challenge, follow these steps:
      - `changelog.md`, `secret/login.html`, `xmlrpc.php`, and `wp-admin.php`.
    - Tried logging into WordPress admin and the secret login page using the credentials from the PCAP file, but it didn’t work.
    - Attempted SQL injection on the login pages, but it was unsuccessful.
-   - Tried exploiting `xmlrpc.php`, but that also failed.
+   - Tried exploiting xmlrpc.php, but that also failed.
 
 
       ![Feroxbuster](feroxbuster.png)
 
 5. **Reviewing Changelog for CUPS Vulnerabilities**:
    - A hint pointed us back to the `changelog.md` file.
-   - Inside, we found that CUPS (Common Unix Printing System) had 4 CVEs related to it, which might be exploitable.
+   - Inside, we found that `CUPS` (Common Unix Printing System) had 4 CVEs related to it, which might be exploitable.
 
 
 
@@ -68,20 +68,20 @@ To solve the "MCC 2024 Box" challenge, follow these steps:
       ![CUPS CVE](<cups cve.png>)
 
 6. **Attempting CVE Exploits**:
-   - We tried several POCs (Proof of Concepts) related to the CUPS vulnerabilities, but none of them worked.
+   - We tried several `POCs` (Proof of Concepts) related to the CUPS vulnerabilities, but none of them worked.
    - Despite trying every known POC available, we couldn't gain further access.
 
 7. **Revisiting the PCAP File**:
    - A hint suggested revisiting the `.pcap` file for additional clues.
    - After further inspection, we discovered a port knocking sequence.
-     - The sequence was 77, 67, 2024, 631, which was similar to techniques seen in previous CTF challenges like the one in Petronas CTF 2023.
+     - The sequence was `77, 67, 2024, 631`, which was similar to techniques seen in previous CTF challenges like the one in Petronas CTF 2023.
      - The PCAP file showed a failed connection attempt to port 631, followed by a successful connection after the knocking sequence.
 
 
       ![Port knocking](<port knocking.png>)
 
 8. **Performing Port Knocking**:
-   - We attempted the port knocking sequence by connecting to ports 77, 67, 2024, and then port 631.
+   - We attempted the port knocking sequence by connecting to ports `77, 67, 2024`, and then port `631`.
    - After knocking on the correct ports, we were able to successfully connect to port 631, which provided access to the CUPS service.
 
 
@@ -101,7 +101,7 @@ To solve the "MCC 2024 Box" challenge, follow these steps:
       ![LP user flag](<lp user flag.png>)
 
 10. **Privilege Escalation**:
-    - As the `LP` user, we found some SUID binaries that could be useful for privilege escalation and escalated to the `alexander` user.
+    - As the `LP` user, we found some `SUID binaries` that could be useful for privilege escalation and escalated to the `alexander` user.
 
 
       ![SUID Binary](<SUID Binary.png>)
@@ -126,7 +126,7 @@ To solve the "MCC 2024 Box" challenge, follow these steps:
         ![Trying Password](<trying password.png>)
 
 
-    - Finally, we used John the Ripper to crack the passphrase, and successfully retrieved the SSH key’s passphrase.
+    - Finally, we used `John the Ripper` to crack the passphrase, and successfully retrieved the SSH key’s passphrase.
 
 
         ![John the ripper](<john the ripper.png>)
@@ -152,6 +152,6 @@ To solve the "MCC 2024 Box" challenge, follow these steps:
 
 
 ## Flag
-MCC24{h3ll0_fr0m_pr1nt1ng_s3rv1c3s}
-MCC24{4bus1ng_su1d}
-MCC24{g00d_j0b_3v3ry0n3}
+MCC24{h3ll0_fr0m_pr1nt1ng_s3rv1c3s}  
+MCC24{4bus1ng_su1d}  
+MCC24{g00d_j0b_3v3ry0n3}  
