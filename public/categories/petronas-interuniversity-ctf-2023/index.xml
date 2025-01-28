@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Petronas Interuniversity CTF 2023 on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/categories/petronas-interuniversity-ctf-2023/</link>
-        <description>Recent content in Petronas Interuniversity CTF 2023 on Sum Ting Wong&#39;s Blog</description>
+        <title>Petronas Interuniversity CTF 2023 on </title>
+        <link>http://localhost:1313/categories/petronas-interuniversity-ctf-2023/</link>
+        <description>Recent content in Petronas Interuniversity CTF 2023 on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 10 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/petronas-interuniversity-ctf-2023/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 10 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/petronas-interuniversity-ctf-2023/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Checkout my socials 1</title>
-        <link>https://qiaonpc.github.io/post/checkout-my-socials-1/</link>
+        <link>http://localhost:1313/post/checkout-my-socials-1/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/checkout-my-socials-1/</guid>
+        <guid>http://localhost:1313/post/checkout-my-socials-1/</guid>
         <description>&lt;h1 id=&#34;checkout-my-socials-1---ctf-challenge-writeup&#34;&gt;Checkout my socials 1 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Checkout my socials 1&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -63,10 +63,10 @@ Category: OSINT (Open-Source Intelligence)&lt;/p&gt;
         </item>
         <item>
         <title>Checkout my socials 3</title>
-        <link>https://qiaonpc.github.io/post/checkout-my-socials-3/</link>
+        <link>http://localhost:1313/post/checkout-my-socials-3/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/checkout-my-socials-3/</guid>
+        <guid>http://localhost:1313/post/checkout-my-socials-3/</guid>
         <description>&lt;h1 id=&#34;checkout-my-socials-3---ctf-challenge-writeup&#34;&gt;Checkout my socials 3 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Checkout my socials 3&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -117,10 +117,10 @@ Category: OSINT (Open-Source Intelligence)&lt;/p&gt;
         </item>
         <item>
         <title>Cryptic Raven</title>
-        <link>https://qiaonpc.github.io/post/cryptic-raven/</link>
+        <link>http://localhost:1313/post/cryptic-raven/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/cryptic-raven/</guid>
+        <guid>http://localhost:1313/post/cryptic-raven/</guid>
         <description>&lt;h1 id=&#34;cryptic-raven---ctf-challenge-writeup&#34;&gt;Cryptic Raven - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Cryptic Raven&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -134,7 +134,7 @@ Category: Cryptography&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Message Deciphering&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Begin by examining the provided message. The challenge does not disclose the specific encryption technique used.
-&lt;img src=&#34;https://qiaonpc.github.io/Challenge.png&#34;
+&lt;img src=&#34;http://localhost:1313/Challenge.png&#34;
 	
 	
 	
@@ -177,10 +177,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>Getmecorrect</title>
-        <link>https://qiaonpc.github.io/post/getmecorrect/</link>
+        <link>http://localhost:1313/post/getmecorrect/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/getmecorrect/</guid>
+        <guid>http://localhost:1313/post/getmecorrect/</guid>
         <description>&lt;h1 id=&#34;getmecorrect---ctf-challenge-writeup&#34;&gt;Getmecorrect - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Getmecorrect&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -200,10 +200,10 @@ Category: Reverse Engineering&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flag Part 3 and Native Code&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;While analyzing the APK, you will identify that the third part of the flag relies on the &lt;code&gt;getNativeFlag()&lt;/code&gt; function. However, this function&amp;rsquo;s implementation is missing from the APK&amp;rsquo;s source code, and it is marked as &amp;ldquo;native.&amp;rdquo;
-&lt;img src=&#34;https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/getmecorrect/Construct%20Flag.png&#34;
 	width=&#34;1377&#34;
 	height=&#34;523&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag_hu575f026a9d1ba17783e0ad9f68de7d71_104924_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag_hu575f026a9d1ba17783e0ad9f68de7d71_104924_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/getmecorrect/Construct%20Flag_hu575f026a9d1ba17783e0ad9f68de7d71_104924_480x0_resize_box_3.png 480w, http://localhost:1313/post/getmecorrect/Construct%20Flag_hu575f026a9d1ba17783e0ad9f68de7d71_104924_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Construct Flag&#34;
@@ -220,10 +220,10 @@ Category: Reverse Engineering&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Understanding Native Code&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;The keyword &amp;ldquo;native&amp;rdquo; in the function declaration indicates that the function is implemented using native code, often written in a different programming language like C or C++. This means the actual implementation of &lt;code&gt;getNativeFlagPart&lt;/code&gt; is not available in the provided APK source code.
-&lt;img src=&#34;https://qiaonpc.github.io/post/getmecorrect/Native%20Flag.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/getmecorrect/Native%20Flag.png&#34;
 	width=&#34;470&#34;
 	height=&#34;69&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/getmecorrect/Native%20Flag_hubd60ff486ce749f754de6321deaa2bf0_6312_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/getmecorrect/Native%20Flag_hubd60ff486ce749f754de6321deaa2bf0_6312_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/getmecorrect/Native%20Flag_hubd60ff486ce749f754de6321deaa2bf0_6312_480x0_resize_box_3.png 480w, http://localhost:1313/post/getmecorrect/Native%20Flag_hubd60ff486ce749f754de6321deaa2bf0_6312_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;getNativeFlag() definition&#34;
@@ -246,10 +246,10 @@ Category: Reverse Engineering&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Examine the Lib Folder&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Navigate to the &lt;code&gt;lib&lt;/code&gt; folder, where you will find different architectures. Choose the one you are most comfortable with. In this case, the &lt;code&gt;x86&lt;/code&gt; architecture is used for analysis.
-&lt;img src=&#34;https://qiaonpc.github.io/post/getmecorrect/lib.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/getmecorrect/lib.png&#34;
 	width=&#34;1157&#34;
 	height=&#34;334&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/getmecorrect/lib_hu1cb0493450aaae343ce82264b9d2b68e_96707_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/getmecorrect/lib_hu1cb0493450aaae343ce82264b9d2b68e_96707_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/getmecorrect/lib_hu1cb0493450aaae343ce82264b9d2b68e_96707_480x0_resize_box_3.png 480w, http://localhost:1313/post/getmecorrect/lib_hu1cb0493450aaae343ce82264b9d2b68e_96707_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;lib Folder&#34;
@@ -291,10 +291,10 @@ Category: Reverse Engineering&lt;/p&gt;
         </item>
         <item>
         <title>Harmonic Secrets</title>
-        <link>https://qiaonpc.github.io/post/harmonic-secrets/</link>
+        <link>http://localhost:1313/post/harmonic-secrets/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/harmonic-secrets/</guid>
+        <guid>http://localhost:1313/post/harmonic-secrets/</guid>
         <description>&lt;h1 id=&#34;harmonic-secrets---ctf-challenge-writeup&#34;&gt;Harmonic Secrets - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Harmonic Secrets&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -331,10 +331,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>Intruding the Hidden Society</title>
-        <link>https://qiaonpc.github.io/post/intruding-the-hidden-society/</link>
+        <link>http://localhost:1313/post/intruding-the-hidden-society/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/intruding-the-hidden-society/</guid>
+        <guid>http://localhost:1313/post/intruding-the-hidden-society/</guid>
         <description>&lt;h1 id=&#34;intruding-the-hidden-society---ctf-challenge-writeup&#34;&gt;Intruding the Hidden Society - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Intruding the Hidden Society&lt;br&gt;
 Points: 200&lt;br&gt;
@@ -446,10 +446,10 @@ Category: Forensics&lt;/p&gt;
         </item>
         <item>
         <title>m3m0irs</title>
-        <link>https://qiaonpc.github.io/post/m3m0irs/</link>
+        <link>http://localhost:1313/post/m3m0irs/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/m3m0irs/</guid>
+        <guid>http://localhost:1313/post/m3m0irs/</guid>
         <description>&lt;h1 id=&#34;m3m0irs---ctf-challenge-writeup&#34;&gt;m3m0irs - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: m3m0irs&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -491,10 +491,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;During your analysis, you may find &lt;code&gt;Azureus&lt;/code&gt; to be suspicious as it spawned &lt;code&gt;AzureusTor&lt;/code&gt;. This is the software that shouldn&amp;rsquo;t be running.
-&lt;img src=&#34;https://qiaonpc.github.io/post/m3m0irs/Sus.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/m3m0irs/Sus.png&#34;
 	width=&#34;1428&#34;
 	height=&#34;231&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_480x0_resize_box_3.png 480w, http://localhost:1313/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Azureus &amp; AzureusTor&#34;
@@ -518,10 +518,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Marx&#39;s Melodic Memoir</title>
-        <link>https://qiaonpc.github.io/post/marxs-melodic-memoir/</link>
+        <link>http://localhost:1313/post/marxs-melodic-memoir/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/marxs-melodic-memoir/</guid>
+        <guid>http://localhost:1313/post/marxs-melodic-memoir/</guid>
         <description>&lt;h1 id=&#34;marxs-melodic-memoir---ctf-challenge-writeup&#34;&gt;Marx&amp;rsquo;s Melodic Memoir - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Marx&amp;rsquo;s Melodic Memoir&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -566,10 +566,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>Puzzles of An Altered History</title>
-        <link>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</link>
+        <link>http://localhost:1313/post/puzzles-of-an-altered-history/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</guid>
+        <guid>http://localhost:1313/post/puzzles-of-an-altered-history/</guid>
         <description>&lt;h1 id=&#34;puzzles-of-an-altered-history---ctf-challenge-writeup&#34;&gt;Puzzles of An Altered History - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Puzzles of An Altered History&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -630,7 +630,7 @@ Category: Wireless Networking&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Password Recovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;ldquo;aircrack-ng&amp;rdquo; will attempt to recover the password by testing combinations from the wordlist.&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;aircrack-ng&amp;rdquo; will attempt to recover the password by iHack Prelim 2024 combinations from the wordlist.&lt;/li&gt;
 &lt;li&gt;When aircrack-ng successfully finds the correct password, it will display the password in the terminal.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -649,10 +649,10 @@ Category: Wireless Networking&lt;/p&gt;
         </item>
         <item>
         <title>Reverseme</title>
-        <link>https://qiaonpc.github.io/post/reverseme/</link>
+        <link>http://localhost:1313/post/reverseme/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/reverseme/</guid>
+        <guid>http://localhost:1313/post/reverseme/</guid>
         <description>&lt;h1 id=&#34;reverseme---ctf-challenge-writeup&#34;&gt;Reverseme - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Reverseme&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -672,10 +672,10 @@ Category: Reverse Engineering&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flag Identification&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;During your analysis, you will come across a reference to the flag as &lt;code&gt;R.string.flag&lt;/code&gt;. This indicates that the flag is retrieved from the app&amp;rsquo;s string resources.
-&lt;img src=&#34;https://qiaonpc.github.io/post/reverseme/r%20string.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/reverseme/r%20string.png&#34;
 	width=&#34;1018&#34;
 	height=&#34;431&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/reverseme/r%20string_hu4b8b27e34b33bfa87f019438e5d1fa74_74104_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/reverseme/r%20string_hu4b8b27e34b33bfa87f019438e5d1fa74_74104_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/reverseme/r%20string_hu4b8b27e34b33bfa87f019438e5d1fa74_74104_480x0_resize_box_3.png 480w, http://localhost:1313/post/reverseme/r%20string_hu4b8b27e34b33bfa87f019438e5d1fa74_74104_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;R.String.Flag&#34;
@@ -725,10 +725,10 @@ Category: Reverse Engineering&lt;/p&gt;
         </item>
         <item>
         <title>STOP SPAMMING</title>
-        <link>https://qiaonpc.github.io/post/stop-spamming/</link>
+        <link>http://localhost:1313/post/stop-spamming/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/stop-spamming/</guid>
+        <guid>http://localhost:1313/post/stop-spamming/</guid>
         <description>&lt;h1 id=&#34;stop-spamming---ctf-challenge-writeup&#34;&gt;STOP SPAMMING - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: STOP SPAMMING&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -769,10 +769,10 @@ Category: Miscellaneous&lt;/p&gt;
         </item>
         <item>
         <title>Temporal Traffic Traces</title>
-        <link>https://qiaonpc.github.io/post/temporal-traffic-traces/</link>
+        <link>http://localhost:1313/post/temporal-traffic-traces/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/temporal-traffic-traces/</guid>
+        <guid>http://localhost:1313/post/temporal-traffic-traces/</guid>
         <description>&lt;h1 id=&#34;temporal-traffic-traces---ctf-challenge-writeup&#34;&gt;Temporal Traffic Traces - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Temporal Traffic Traces&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -792,10 +792,10 @@ Category: Network Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Check Protocol Hierarchy&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Examine the protocol hierarchy within the pcap file. Look for any anomalies or unusual combinations of protocols.
-&lt;img src=&#34;https://qiaonpc.github.io/post/temporal-traffic-traces/protocol.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/temporal-traffic-traces/protocol.png&#34;
 	width=&#34;1380&#34;
 	height=&#34;759&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_480x0_resize_box_3.png 480w, http://localhost:1313/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Protocol Hierarchy&#34;
@@ -849,10 +849,10 @@ Category: Network Forensics&lt;/p&gt;
         </item>
         <item>
         <title>The Early Quantum Supercomputer I</title>
-        <link>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</link>
+        <link>http://localhost:1313/post/the-early-quantum-supercomputer-i/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</guid>
+        <guid>http://localhost:1313/post/the-early-quantum-supercomputer-i/</guid>
         <description>&lt;h1 id=&#34;the-early-quantum-supercomputer-i---ctf-challenge-writeup&#34;&gt;The Early Quantum Supercomputer I - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: The Early Quantum Supercomputer I&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -878,10 +878,10 @@ Category: Network Forensics, Operational Technology&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Identify Uncommon Protocols&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Pay close attention to the protocols being used. Look for any uncommon or unusual protocols that may stand out.
-&lt;img src=&#34;https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/the-early-quantum-supercomputer-i/protocol.png&#34;
 	width=&#34;1396&#34;
 	height=&#34;795&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_480x0_resize_box_3.png 480w, http://localhost:1313/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Protocols&#34;
@@ -917,10 +917,10 @@ Category: Network Forensics, Operational Technology&lt;/p&gt;
         </item>
         <item>
         <title>The Enigmatic Manuscript</title>
-        <link>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</link>
+        <link>http://localhost:1313/post/the-enigmatic-manuscript/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</guid>
+        <guid>http://localhost:1313/post/the-enigmatic-manuscript/</guid>
         <description>&lt;h1 id=&#34;the-enigmatic-manuscript---ctf-challenge-writeup&#34;&gt;The Enigmatic Manuscript - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: The Enigmatic Manuscript&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -965,10 +965,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>The Quantum Nexus Prototype</title>
-        <link>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</link>
+        <link>http://localhost:1313/post/the-quantum-nexus-prototype/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</guid>
+        <guid>http://localhost:1313/post/the-quantum-nexus-prototype/</guid>
         <description>&lt;h1 id=&#34;the-quantum-nexus-prototype---ctf-challenge-writeup&#34;&gt;The Quantum Nexus Prototype - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: The Quantum Nexus Prototype&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -1013,10 +1013,10 @@ Category: OSINT, Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>Unearth the Enigmatic Codebreaker&#39;s Challenge</title>
-        <link>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</link>
+        <link>http://localhost:1313/post/unearth-the-enigmatic-codebreakers-challenge/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</guid>
+        <guid>http://localhost:1313/post/unearth-the-enigmatic-codebreakers-challenge/</guid>
         <description>&lt;h1 id=&#34;unearth-the-enigmatic-codebreakers-challenge---ctf-challenge-writeup&#34;&gt;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -1067,10 +1067,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Unearth the Long Lost Cipher</title>
-        <link>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</link>
+        <link>http://localhost:1313/post/unearth-the-long-lost-cipher/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</guid>
+        <guid>http://localhost:1313/post/unearth-the-long-lost-cipher/</guid>
         <description>&lt;h1 id=&#34;unearth-the-long-lost-cipher---ctf-challenge-writeup&#34;&gt;Unearth the Long Lost Cipher - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Unearth the Long Lost Cipher&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -1108,10 +1108,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Locate SECRET.txt File&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;During the file scan, you may discover a file named &amp;ldquo;SECRET.txt.&amp;rdquo; Extract this file from the memory dump using the command: &lt;code&gt;volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; dumpfiles -Q &amp;lt;memory-location&amp;gt; -D &amp;lt;directory-where-you-wish-to-place-the-file&amp;gt;&lt;/code&gt;.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/filescan.png&#34;
 	width=&#34;1709&#34;
 	height=&#34;327&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;SECRETS.txt&#34;
@@ -1134,10 +1134,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Password Clues&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Dexter constructed his password using his favorite animal and a mysterious &amp;ldquo;MMYY.&amp;rdquo; Your task is to determine the animal and decode the password using the provided clues.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/secret.png&#34;
 	width=&#34;1246&#34;
 	height=&#34;213&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Password Construction&#34;
@@ -1160,10 +1160,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Multiple Panther Instances&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;After examining Dexter&amp;rsquo;s files, you may discover two instances of the word &amp;ldquo;panther.&amp;rdquo; Assume this is his favorite animal and forms the first part of the flag (7 letters).
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/panther%20hint.png&#34;
 	width=&#34;1704&#34;
 	height=&#34;551&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2 Instances of Panther&#34;
@@ -1186,10 +1186,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Password Discovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;To narrow down the possibilities, investigate when the &amp;ldquo;notepad&amp;rdquo; application was used. You may find only two dates in the memory dump, so try both as potential password combinations.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/usage%20of%20notepad.png&#34;
 	width=&#34;1715&#34;
 	height=&#34;128&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Usage of Notepad&#34;
@@ -1213,10 +1213,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Unlock the Time Traveller&#39;s Dilemma</title>
-        <link>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</link>
+        <link>http://localhost:1313/post/unlock-the-time-travellers-dilemma/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</guid>
+        <guid>http://localhost:1313/post/unlock-the-time-travellers-dilemma/</guid>
         <description>&lt;h1 id=&#34;unlock-the-time-travellers-dilemma---ctf-challenge-writeup&#34;&gt;Unlock the Time Traveller&amp;rsquo;s Dilemma - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Unlock the Time Traveller&amp;rsquo;s Dilemma&lt;br&gt;
 Points: 200&lt;br&gt;
@@ -1242,10 +1242,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Although the clipboard content didn&amp;rsquo;t immediately resemble the flag, but I tried it anyways and solved the challenge.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unlock-the-time-travellers-dilemma/clipboard.png&#34;
 	width=&#34;1409&#34;
 	height=&#34;330&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_480x0_resize_box_3.png 480w, http://localhost:1313/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Clipboard&#34;
@@ -1269,10 +1269,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Witness the Quantum Entanglement</title>
-        <link>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</link>
+        <link>http://localhost:1313/post/witness-the-quantum-entanglement/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</guid>
+        <guid>http://localhost:1313/post/witness-the-quantum-entanglement/</guid>
         <description>&lt;h1 id=&#34;witness-the-quantum-entanglement---ctf-challenge-writeup&#34;&gt;Witness the Quantum Entanglement - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Witness the Quantum Entanglement&lt;br&gt;
 Points: 100&lt;br&gt;

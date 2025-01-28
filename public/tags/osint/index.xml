@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>OSINT on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/tags/osint/</link>
-        <description>Recent content in OSINT on Sum Ting Wong&#39;s Blog</description>
+        <title>OSINT on </title>
+        <link>http://localhost:1313/tags/osint/</link>
+        <description>Recent content in OSINT on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/osint/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/osint/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Cali Cartel</title>
-        <link>https://qiaonpc.github.io/post/cali-cartel/</link>
+        <link>http://localhost:1313/post/cali-cartel/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/cali-cartel/</guid>
+        <guid>http://localhost:1313/post/cali-cartel/</guid>
         <description>&lt;h1 id=&#34;cali-cartel-ctf-challenge-writeup&#34;&gt;Cali Cartel CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -47,10 +47,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Obtained the flag using the information found through Google dorking.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/cali-cartel/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/cali-cartel/flag.png&#34;
 	width=&#34;1057&#34;
 	height=&#34;551&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_480x0_resize_box_3.png 480w, http://localhost:1313/post/cali-cartel/flag_hud5eef15462f665d9ca3ffc9aea9cebe1_100272_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -71,10 +71,10 @@
         </item>
         <item>
         <title>Medellín Cartel</title>
-        <link>https://qiaonpc.github.io/post/medell%C3%ADn-cartel/</link>
+        <link>http://localhost:1313/post/medell%C3%ADn-cartel/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/medell%C3%ADn-cartel/</guid>
+        <guid>http://localhost:1313/post/medell%C3%ADn-cartel/</guid>
         <description>&lt;h1 id=&#34;medellín-cartel-ctf-challenge-writeup&#34;&gt;Medellín Cartel CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -100,10 +100,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Found that Blacky&amp;rsquo;s page has only 1 follower and 1 post.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/medell%C3%ADn-cartel/uniten.png&#34;
 	width=&#34;1277&#34;
 	height=&#34;659&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_480x0_resize_box_3.png 480w, http://localhost:1313/post/medell%C3%ADn-cartel/uniten_hue4dc42a48013d540b17510cbbd418b45_118030_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;UNITEN&#34;
@@ -129,10 +129,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Extracted the flag from the post&amp;rsquo;s content.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/medell%C3%ADn-cartel/flag.png&#34;
 	width=&#34;380&#34;
 	height=&#34;160&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_480x0_resize_box_3.png 480w, http://localhost:1313/post/medell%C3%ADn-cartel/flag_hu3e64b00a570c3829ebcefe7bb7c620d4_10490_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -153,10 +153,10 @@
         </item>
         <item>
         <title>Checkout my socials 1</title>
-        <link>https://qiaonpc.github.io/post/checkout-my-socials-1/</link>
+        <link>http://localhost:1313/post/checkout-my-socials-1/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/checkout-my-socials-1/</guid>
+        <guid>http://localhost:1313/post/checkout-my-socials-1/</guid>
         <description>&lt;h1 id=&#34;checkout-my-socials-1---ctf-challenge-writeup&#34;&gt;Checkout my socials 1 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Checkout my socials 1&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -208,10 +208,10 @@ Category: OSINT (Open-Source Intelligence)&lt;/p&gt;
         </item>
         <item>
         <title>Checkout my socials 3</title>
-        <link>https://qiaonpc.github.io/post/checkout-my-socials-3/</link>
+        <link>http://localhost:1313/post/checkout-my-socials-3/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/checkout-my-socials-3/</guid>
+        <guid>http://localhost:1313/post/checkout-my-socials-3/</guid>
         <description>&lt;h1 id=&#34;checkout-my-socials-3---ctf-challenge-writeup&#34;&gt;Checkout my socials 3 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Checkout my socials 3&lt;br&gt;
 Points: 50&lt;br&gt;

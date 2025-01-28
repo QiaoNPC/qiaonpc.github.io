@@ -1,17 +1,2384 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Forensics on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/tags/forensics/</link>
-        <description>Recent content in Forensics on Sum Ting Wong&#39;s Blog</description>
+        <title>Forensics on </title>
+        <link>http://localhost:1313/tags/forensics/</link>
+        <description>Recent content in Forensics on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/forensics/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 05 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/forensics/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Baby Shark</title>
+        <link>http://localhost:1313/post/baby-shark/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/baby-shark/</guid>
+        <description>&lt;h1 id=&#34;baby-shark-ctf-challenge-writeup&#34;&gt;Baby Shark CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Baby Shark&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 100&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze a pcap file to find and decode a hidden flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Baby Shark&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Open the pcap File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Open the provided pcap file using Wireshark, a tool commonly used for analyzing network traffic captures.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Examine the Protocol Hierarchy&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Before diving into the packet details, check the protocol hierarchy in Wireshark to get a general overview of the captured traffic.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/baby-shark/protocol%20hieirarchy.png&#34;
+	width=&#34;1447&#34;
+	height=&#34;753&#34;
+	srcset=&#34;http://localhost:1313/post/baby-shark/protocol%20hieirarchy_hue9467fe44a6acaf99acdedb97c2cc1dd_186032_480x0_resize_box_3.png 480w, http://localhost:1313/post/baby-shark/protocol%20hieirarchy_hue9467fe44a6acaf99acdedb97c2cc1dd_186032_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Protocol Hieirarchy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;461px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Filter for HTTP Traffic&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Since HTTP traffic is typically straightforward to analyze, apply an HTTP filter in Wireshark to isolate it from other protocols.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/baby-shark/found%20http.png&#34;
+	width=&#34;1758&#34;
+	height=&#34;131&#34;
+	srcset=&#34;http://localhost:1313/post/baby-shark/found%20http_hu542d5d497d9e86e1badee290515504a4_32407_480x0_resize_box_3.png 480w, http://localhost:1313/post/baby-shark/found%20http_hu542d5d497d9e86e1badee290515504a4_32407_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;HTTP&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1341&#34;
+		data-flex-basis=&#34;3220px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identify the Suspicious HTTP Request&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upon inspecting the HTTP traffic, you will notice a path that appears to be base64 encoded.&lt;/li&gt;
+&lt;li&gt;This encoded string is likely the key to retrieving the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decode the Seemingly Base64 String&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Copy the seemingly base64 encoded string and paste it into CyberChef&lt;/li&gt;
+&lt;li&gt;Use the &amp;ldquo;Magic&amp;rdquo; operation in CyberChef to decode the string, it turns out to be base58&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Retrieve the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The decoded string reveals the flag for the challenge.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/baby-shark/flag.png&#34;
+	width=&#34;1504&#34;
+	height=&#34;694&#34;
+	srcset=&#34;http://localhost:1313/post/baby-shark/flag_hu2acbda5491bd00837c2f47128beb3ca9_32248_480x0_resize_box_3.png 480w, http://localhost:1313/post/baby-shark/flag_hu2acbda5491bd00837c2f47128beb3ca9_32248_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;216&#34;
+		data-flex-basis=&#34;520px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Call for Protocols</title>
+        <link>http://localhost:1313/post/call-for-protocols/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/call-for-protocols/</guid>
+        <description>&lt;h1 id=&#34;call-for-protocols-ctf-challenge-writeup&#34;&gt;Call for Protocols CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Call for Protocols&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 200&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze encrypted TLS traffic to extract the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Investigation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Upon examining the HTTP requests, I discovered two important files: &lt;code&gt;sslkeylog.txt&lt;/code&gt; and &lt;code&gt;brothers.pcapng&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;At first, I assumed that the &lt;code&gt;sslkeylog.txt&lt;/code&gt; file was meant to decrypt the &lt;code&gt;call-of-protocols.pcapng&lt;/code&gt; file, but further inspection of the protocol hierarchy suggested otherwise.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/call-for-protocols/found%20files.png&#34;
+	width=&#34;431&#34;
+	height=&#34;98&#34;
+	srcset=&#34;http://localhost:1313/post/call-for-protocols/found%20files_hu7938edd9bf01bcedc35dfd72c26ab1d7_20390_480x0_resize_box_3.png 480w, http://localhost:1313/post/call-for-protocols/found%20files_hu7938edd9bf01bcedc35dfd72c26ab1d7_20390_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found files&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;439&#34;
+		data-flex-basis=&#34;1055px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;File Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I exported both files and began analyzing the &lt;code&gt;brothers.pcapng&lt;/code&gt; file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A closer look at the protocol hierarchy revealed a significant amount of TLS traffic, indicating that this data was encrypted and needed decryption.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/call-for-protocols/identify%20when%20to%20use%20ssl.png&#34;
+	width=&#34;1390&#34;
+	height=&#34;752&#34;
+	srcset=&#34;http://localhost:1313/post/call-for-protocols/identify%20when%20to%20use%20ssl_hud834d209d9baefff0dacaf123436be02_154683_480x0_resize_box_3.png 480w, http://localhost:1313/post/call-for-protocols/identify%20when%20to%20use%20ssl_hud834d209d9baefff0dacaf123436be02_154683_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;TLS&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;184&#34;
+		data-flex-basis=&#34;443px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decryption Process&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;To decrypt the TLS traffic, I utilized the &lt;code&gt;sslkeylog.txt&lt;/code&gt; file. Navigate to &lt;strong&gt;Edit&lt;/strong&gt; → &lt;strong&gt;Preferences&lt;/strong&gt; → &lt;strong&gt;Protocols&lt;/strong&gt; → &lt;strong&gt;TLS&lt;/strong&gt; and adding the Master Secret log file.&lt;/li&gt;
+&lt;li&gt;After importing the key log file, the TLS traffic was successfully decrypted, and I could see that some of the encrypted packets had been converted into readable HTTP traffic.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag Retrieval&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I browsed through the decrypted HTTP traffic and located the flag within the relevant packets.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/call-for-protocols/flag.png&#34;
+	width=&#34;1209&#34;
+	height=&#34;639&#34;
+	srcset=&#34;http://localhost:1313/post/call-for-protocols/flag_hu0abacec4b1f9172a0684a8968a466e4d_118591_480x0_resize_box_3.png 480w, http://localhost:1313/post/call-for-protocols/flag_hu0abacec4b1f9172a0684a8968a466e4d_118591_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;189&#34;
+		data-flex-basis=&#34;454px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Graded Reels</title>
+        <link>http://localhost:1313/post/graded-reels/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/graded-reels/</guid>
+        <description>&lt;h1 id=&#34;graded-reels-ctf-challenge-writeup&#34;&gt;Graded Reels CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Graded Reels&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 150&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze an image with a partially hidden flag by manipulating its properties.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Graded Reels&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Inspection&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Open the provided image. At first glance, it seems like the flag is partially cut off at the bottom.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Using Online Tools&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Attempt to use tools like &lt;a class=&#34;link&#34; href=&#34;https://fotoforensics.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FotoForensics&lt;/a&gt; to reveal any hidden or manipulated pixels at the bottom of the image.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unfortunately, FotoForensics does not clearly display the hidden portion of the flag, which means you will need to manually modify the image.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graded-reels/fotoforensics%20failed.png&#34;
+	width=&#34;1110&#34;
+	height=&#34;776&#34;
+	srcset=&#34;http://localhost:1313/post/graded-reels/fotoforensics%20failed_hu30311d3ccaeeca047abe08ada8a5520c_187003_480x0_resize_box_3.png 480w, http://localhost:1313/post/graded-reels/fotoforensics%20failed_hu30311d3ccaeeca047abe08ada8a5520c_187003_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Fotoforensics Failed&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;143&#34;
+		data-flex-basis=&#34;343px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Manual Image Manipulation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;strong&gt;ExifTool&lt;/strong&gt; to extract the metadata of the image, including its height.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once you find the height value in the metadata, convert this value from decimal to hexadecimal.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graded-reels/find%20height%20of%20image.png&#34;
+	width=&#34;587&#34;
+	height=&#34;121&#34;
+	srcset=&#34;http://localhost:1313/post/graded-reels/find%20height%20of%20image_hu9a6c2c58001ae1396280801162d203c5_21017_480x0_resize_box_3.png 480w, http://localhost:1313/post/graded-reels/find%20height%20of%20image_hu9a6c2c58001ae1396280801162d203c5_21017_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Find height of image&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;485&#34;
+		data-flex-basis=&#34;1164px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graded-reels/turn%20to%20hex.png&#34;
+	width=&#34;571&#34;
+	height=&#34;449&#34;
+	srcset=&#34;http://localhost:1313/post/graded-reels/turn%20to%20hex_hu39f5207f8c23b5e59c1a7ac895b7d167_29937_480x0_resize_box_3.png 480w, http://localhost:1313/post/graded-reels/turn%20to%20hex_hu39f5207f8c23b5e59c1a7ac895b7d167_29937_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Turn value to hex&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;127&#34;
+		data-flex-basis=&#34;305px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hex Editing&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Open the image file in &lt;strong&gt;HexEdit&lt;/strong&gt; (or any hex editor).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Locate the height value in the hex editor by searching for the hexadecimal representation of the height you found earlier.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graded-reels/find%20position%20of%20hex%20in%20hexedit.png&#34;
+	width=&#34;1336&#34;
+	height=&#34;182&#34;
+	srcset=&#34;http://localhost:1313/post/graded-reels/find%20position%20of%20hex%20in%20hexedit_huf186f000fcc98cb7dfc6c1e7e5e2aa6a_44162_480x0_resize_box_3.png 480w, http://localhost:1313/post/graded-reels/find%20position%20of%20hex%20in%20hexedit_huf186f000fcc98cb7dfc6c1e7e5e2aa6a_44162_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Find position of hex&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;734&#34;
+		data-flex-basis=&#34;1761px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Modify the Image&amp;rsquo;s Height&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Increase the height of the image by modifying the corresponding value in the hex editor.&lt;/li&gt;
+&lt;li&gt;After increasing the value, save the changes to the image file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Reveal the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Open the modified image, and you should now be able to see the previously hidden portion of the image, revealing the complete flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graded-reels/flag.png&#34;
+	width=&#34;629&#34;
+	height=&#34;422&#34;
+	srcset=&#34;http://localhost:1313/post/graded-reels/flag_huefecb820cc9e31d89157e9f0401b9b21_107901_480x0_resize_box_3.png 480w, http://localhost:1313/post/graded-reels/flag_huefecb820cc9e31d89157e9f0401b9b21_107901_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;149&#34;
+		data-flex-basis=&#34;357px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Graduation Letter</title>
+        <link>http://localhost:1313/post/graduation-letter/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/graduation-letter/</guid>
+        <description>&lt;h1 id=&#34;graduation-letter-ctf-challenge-writeup&#34;&gt;Graduation Letter CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Graduation Letter&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 200&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Extract hidden information from an image, leading to a password-protected PDF, and ultimately retrieve the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Graduation Letter&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Open the provided image, but at first glance, it appears to be a normal image with no visible clues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Use ExifTool&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;strong&gt;ExifTool&lt;/strong&gt; on the image to extract its metadata.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This reveals a hidden password embedded within the metadata, indicating that steganography might be involved.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graduation-letter/found%20password.png&#34;
+	width=&#34;972&#34;
+	height=&#34;138&#34;
+	srcset=&#34;http://localhost:1313/post/graduation-letter/found%20password_hu5a59f4028979890afc14b652290a3ac1_23547_480x0_resize_box_3.png 480w, http://localhost:1313/post/graduation-letter/found%20password_hu5a59f4028979890afc14b652290a3ac1_23547_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;704&#34;
+		data-flex-basis=&#34;1690px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Attempt Steghide&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Based on the hint of a password, attempt to use &lt;strong&gt;Steghide&lt;/strong&gt; to extract hidden data from the image.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;However, &lt;strong&gt;Steghide&lt;/strong&gt; fails to retrieve anything.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graduation-letter/steghide%20failed.png&#34;
+	width=&#34;806&#34;
+	height=&#34;141&#34;
+	srcset=&#34;http://localhost:1313/post/graduation-letter/steghide%20failed_hu1a6a8280ba0b9407372e64d821e5ce99_25784_480x0_resize_box_3.png 480w, http://localhost:1313/post/graduation-letter/steghide%20failed_hu1a6a8280ba0b9407372e64d821e5ce99_25784_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Steghide failed&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;571&#34;
+		data-flex-basis=&#34;1371px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Try Binwalk&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Since Steghide didn’t work, use &lt;strong&gt;Binwalk&lt;/strong&gt; to analyze the image for any embedded files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Binwalk successfully extracts a &lt;strong&gt;ZIP&lt;/strong&gt; file from the image.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graduation-letter/binwalk%20extracted.png&#34;
+	width=&#34;1350&#34;
+	height=&#34;330&#34;
+	srcset=&#34;http://localhost:1313/post/graduation-letter/binwalk%20extracted_hu23d13f05e1351938bd0018af5ff2d0a9_72050_480x0_resize_box_3.png 480w, http://localhost:1313/post/graduation-letter/binwalk%20extracted_hu23d13f05e1351938bd0018af5ff2d0a9_72050_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Binwalk extracted items&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;409&#34;
+		data-flex-basis=&#34;981px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extract and Unzip&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Unzip the extracted file using the password found earlier via ExifTool.&lt;/li&gt;
+&lt;li&gt;This reveals a &lt;strong&gt;password-protected PDF&lt;/strong&gt; file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cracking the PDF&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;It is hinted that &lt;strong&gt;John the Ripper&lt;/strong&gt; can help crack the PDF’s password.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;strong&gt;pdf2john&lt;/strong&gt; to convert the PDF file into a format that John the Ripper can process.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;strong&gt;John&lt;/strong&gt; to crack the PDF password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graduation-letter/cracked%20password.png&#34;
+	width=&#34;1194&#34;
+	height=&#34;483&#34;
+	srcset=&#34;http://localhost:1313/post/graduation-letter/cracked%20password_hud98e043e4bf73b9b45cb9ff1b0413556_119061_480x0_resize_box_3.png 480w, http://localhost:1313/post/graduation-letter/cracked%20password_hud98e043e4bf73b9b45cb9ff1b0413556_119061_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Cracked password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;247&#34;
+		data-flex-basis=&#34;593px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Open the PDF&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use the cracked password to open the PDF, and you will find the flag inside.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/graduation-letter/flag.png&#34;
+	width=&#34;658&#34;
+	height=&#34;451&#34;
+	srcset=&#34;http://localhost:1313/post/graduation-letter/flag_hu88352d7d4f1efaa0482555d48ecfc436_135323_480x0_resize_box_3.png 480w, http://localhost:1313/post/graduation-letter/flag_hu88352d7d4f1efaa0482555d48ecfc436_135323_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;145&#34;
+		data-flex-basis=&#34;350px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Lost Memories 1</title>
+        <link>http://localhost:1313/post/lost-memories-1/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/lost-memories-1/</guid>
+        <description>&lt;h1 id=&#34;lost-memories-1-ctf-challenge-writeup&#34;&gt;Lost Memories 1 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Lost Memories 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 100&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Determine the exact time when the memory dump was taken from a given memory dump file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve &amp;ldquo;Lost Memories 1&amp;rdquo;, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Overview&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Lost Memories&amp;rdquo; is a series of five challenges related to memory forensics. The challenges can be solved in any order.&lt;/li&gt;
+&lt;li&gt;In this specific challenge, the goal is to determine the time when the memory dump was taken.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analyzing the Memory Dump&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The challenge provides a &lt;strong&gt;memory dump&lt;/strong&gt; file.&lt;/li&gt;
+&lt;li&gt;I chose to analyze it using &lt;strong&gt;memprocfs&lt;/strong&gt;, which allows mounting the memory dump as a file system.&lt;/li&gt;
+&lt;li&gt;Memprocfs is useful as it provides a quick overview of the system&amp;rsquo;s processes, files, and other critical components, helping to piece together the system&amp;rsquo;s state.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying the Memory Dump Timing&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To find when the memory dump was created, I decided to examine the running processes in the memory dump.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Typically, user-initiated processes are associated with &lt;strong&gt;explorer.exe&lt;/strong&gt; as the parent process, since most user applications are launched from the Windows Explorer interface.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I searched through the process tree for any unusual processes that could indicate memory dumping activity.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;winpmem_mini_x&lt;/strong&gt; stood out as a likely candidate for creating the memory dump.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-1/processes.png&#34;
+	width=&#34;1223&#34;
+	height=&#34;508&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-1/processes_hudd8b1943f6f05227840f39dd4bcd96b5_81101_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-1/processes_hudd8b1943f6f05227840f39dd4bcd96b5_81101_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Processes&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;240&#34;
+		data-flex-basis=&#34;577px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Final Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The flag is based on the timestamp of the memory dump, however, at the time of writing this writeup, I have already forgotten whether the flag requires the time to be in &lt;strong&gt;+08:00&lt;/strong&gt; or &lt;strong&gt;+00:00&lt;/strong&gt; timezone.&lt;/li&gt;
+&lt;li&gt;Adjust the time accordingly based on the flag format.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Lost Memories 2</title>
+        <link>http://localhost:1313/post/lost-memories-2/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/lost-memories-2/</guid>
+        <description>&lt;h1 id=&#34;lost-memories-2-ctf-challenge-writeup&#34;&gt;Lost Memories 2 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Lost Memories 2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 150&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Find the password of the system user.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Overview&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Lost Memories&amp;rdquo; is a series of five challenges. This particular challenge asks us to retrieve the &lt;strong&gt;system user’s password&lt;/strong&gt; from a memory dump.&lt;/li&gt;
+&lt;li&gt;From the previous challenge, we know that the system user is &lt;strong&gt;warlocksmurf&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analyzing the Memory Dump&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Although I used &lt;strong&gt;memprocfs&lt;/strong&gt; in the first challenge for quick analysis, it’s not suitable for dumping password hashes. So, I switched to using &lt;strong&gt;Volatility&lt;/strong&gt;, which is more effective for this specific task.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Dumping Password Hashes&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;There are two primary Volatility plugins used for extracting password hashes: &lt;strong&gt;hashdump&lt;/strong&gt; and &lt;strong&gt;lsadump&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I first attempted the &lt;strong&gt;hashdump&lt;/strong&gt; plugin:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This gave me the &lt;strong&gt;NTLM&lt;/strong&gt; and &lt;strong&gt;LM&lt;/strong&gt; hashes of the user &lt;strong&gt;warlocksmurf&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In case &lt;strong&gt;hashdump&lt;/strong&gt; doesn’t work, &lt;strong&gt;lsadump&lt;/strong&gt; is another option, but hashdump was successful in this case.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-2/found%20hash.png&#34;
+	width=&#34;1360&#34;
+	height=&#34;257&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-2/found%20hash_hu4192405d8b0d45f3763a33f504797012_56697_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-2/found%20hash_hu4192405d8b0d45f3763a33f504797012_56697_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;hashdump&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;529&#34;
+		data-flex-basis=&#34;1270px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cracking the Password&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I took the retrieved password hashes and submitted them to &lt;strong&gt;CrackStation&lt;/strong&gt;, an online tool for cracking hashed passwords.&lt;/li&gt;
+&lt;li&gt;CrackStation successfully revealed the plaintext password from the NTLM hash.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Submitting the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The cracked password is submitted as the flag, wrapped in &lt;code&gt;sunctf{}&lt;/code&gt; format.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-2/flag.png&#34;
+	width=&#34;1411&#34;
+	height=&#34;145&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-2/flag_hu14917d3d4479554fe9037ead2f13a12b_11232_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-2/flag_hu14917d3d4479554fe9037ead2f13a12b_11232_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;973&#34;
+		data-flex-basis=&#34;2335px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Lost Memories 3</title>
+        <link>http://localhost:1313/post/lost-memories-3/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/lost-memories-3/</guid>
+        <description>&lt;h1 id=&#34;lost-memories-3-ctf-challenge-writeup&#34;&gt;Lost Memories 3 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Lost Memories 3&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 200&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Identify the malicious process, its process ID, and its parent process ID.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Overview&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;Lost Memories&amp;rdquo; is a series of five challenges that can be solved in any order. In this challenge, the goal is to find:
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;malicious process executable&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;process ID&lt;/strong&gt; (PID).&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;parent process ID&lt;/strong&gt; (PPID).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Using Memprocfs&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I returned to &lt;strong&gt;memprocfs&lt;/strong&gt;, a tool I’ve used previously for memory analysis. It allows for easy navigation and process enumeration.&lt;/li&gt;
+&lt;li&gt;By examining the processes running on the system, I was able to identify the malicious process.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Key Findings&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;malicious executable&lt;/strong&gt;: &lt;code&gt;inject0r.exe&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;process ID (PID)&lt;/strong&gt;: &lt;code&gt;5904&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;parent process ID (PPID)&lt;/strong&gt;: &lt;code&gt;7780&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Compiling the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Using the collected information, I submitted the flag in the required format: &lt;code&gt;sunctf{}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-3/flag.png&#34;
+	width=&#34;830&#34;
+	height=&#34;83&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-3/flag_hu9179f49ce59c670f5d153ef066493058_11688_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-3/flag_hu9179f49ce59c670f5d153ef066493058_11688_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1000&#34;
+		data-flex-basis=&#34;2400px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Lost Memories 4</title>
+        <link>http://localhost:1313/post/lost-memories-4/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/lost-memories-4/</guid>
+        <description>&lt;h1 id=&#34;lost-memories-4-ctf-challenge-writeup&#34;&gt;Lost Memories 4 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Lost Memories 4&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 300&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Extract the flag generated by the &lt;code&gt;inject0r.exe&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Overview&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The goal is to extract the flag that is generated by the malicious process &lt;code&gt;inject0r.exe&lt;/code&gt;. This challenge is part of the &amp;ldquo;Lost Memories&amp;rdquo; series, and solving it requires analyzing how the flag is handled during runtime.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Approach&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I first dumped the process memory of &lt;code&gt;inject0r.exe&lt;/code&gt; using &lt;strong&gt;strings&lt;/strong&gt; in hopes of finding the flag directly in the executable&amp;rsquo;s memory. This approach failed.&lt;/li&gt;
+&lt;li&gt;I then dumped the process memory of &lt;strong&gt;notepad.exe&lt;/strong&gt;, which was a child process of &lt;code&gt;inject0r.exe&lt;/code&gt;, suspecting the flag would be written there. Unfortunately, this also did not reveal the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Running the Binary&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;After multiple failed attempts, I decided to run &lt;code&gt;inject0r.exe&lt;/code&gt; directly to observe its behavior. Initially, I thought the flag would be written to the &lt;strong&gt;notepad&lt;/strong&gt; application, but it wasn’t.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Instead, I realized the flag is dynamically stored in memory during runtime, and the address changes with every execution.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-4/flag%20is%20not%20in%20notepad.png&#34;
+	width=&#34;1342&#34;
+	height=&#34;679&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-4/flag%20is%20not%20in%20notepad_hu7cb9ac8e83f5f60e19cfac215620abb1_26257_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-4/flag%20is%20not%20in%20notepad_hu7cb9ac8e83f5f60e19cfac215620abb1_26257_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag not in notepad&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;197&#34;
+		data-flex-basis=&#34;474px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Using Cheat Engine&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I launched &lt;strong&gt;Cheat Engine&lt;/strong&gt; for runtime analysis.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By searching for the string &lt;code&gt;&amp;quot;flag&amp;quot;&lt;/code&gt;, since it was mentioned that the flag would be stored it certain addresses.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-4/encoded%20flag.png&#34;
+	width=&#34;990&#34;
+	height=&#34;807&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-4/encoded%20flag_huff98360fe794fab24d3035254a63e3e6_70862_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-4/encoded%20flag_huff98360fe794fab24d3035254a63e3e6_70862_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;122&#34;
+		data-flex-basis=&#34;294px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Final Steps&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I extracted the base64-encoded flag from memory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Decoded the base64 string to reveal the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-4/flag.png&#34;
+	width=&#34;1098&#34;
+	height=&#34;672&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-4/flag_hu06ff1717a1d84216ad4c81b334faae02_25450_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-4/flag_hu06ff1717a1d84216ad4c81b334faae02_25450_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;163&#34;
+		data-flex-basis=&#34;392px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Lost Memories 5</title>
+        <link>http://localhost:1313/post/lost-memories-5/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/lost-memories-5/</guid>
+        <description>&lt;h1 id=&#34;lost-memories-5-ctf-challenge-writeup&#34;&gt;Lost Memories 5 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Lost Memories 5&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Retrieve notes hidden in the computer of a user named &amp;ldquo;warlocksmurf.&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Overview&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In this final challenge of the &amp;ldquo;Lost Memories&amp;rdquo; series, the task is to find specific notes hidden on warlocksmurf&amp;rsquo;s computer. The challenge focuses on extracting hidden information, particularly from document files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analyzing the Memory Dump&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I began by analyzing the memory dump for relevant files. While exploring, I found some &lt;strong&gt;DOCX&lt;/strong&gt; files, which hinted that the notes could be hidden within these documents.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-5/found%20note.png&#34;
+	width=&#34;1060&#34;
+	height=&#34;302&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-5/found%20note_hudf09b07c73d600c72fa5e604b22c9d7e_23524_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-5/found%20note_hudf09b07c73d600c72fa5e604b22c9d7e_23524_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found note&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;350&#34;
+		data-flex-basis=&#34;842px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Suspecting Macros&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DOCX files are often used to hide information using macros, so I suspected that the solution could involve extracting and analyzing any embedded macros in the document files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Using &lt;code&gt;olevba&lt;/code&gt;&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I used &lt;strong&gt;olevba&lt;/strong&gt;, a tool for analyzing macros in Office files, to extract and review the macros in the DOCX file. The macros contained the necessary clues to recover the hidden notes.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Final Steps&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;After reviewing the macros, I found the flag embedded within the macro scripts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Retrieved the flag and submitted it in the required format.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lost-memories-5/flag.png&#34;
+	width=&#34;457&#34;
+	height=&#34;318&#34;
+	srcset=&#34;http://localhost:1313/post/lost-memories-5/flag_hu83625b7b19e2099a6a745a9264479c48_36555_480x0_resize_box_3.png 480w, http://localhost:1313/post/lost-memories-5/flag_hu83625b7b19e2099a6a745a9264479c48_36555_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;143&#34;
+		data-flex-basis=&#34;344px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>MasterFanumTax</title>
+        <link>http://localhost:1313/post/masterfanumtax/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/masterfanumtax/</guid>
+        <description>&lt;h1 id=&#34;masterfanumtax-ctf-challenge-writeup&#34;&gt;MasterFanumTax CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: MasterFanumTax&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 100&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Recover and decode the flag from a Master File Table (MFT) file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Understanding MFT&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;Master File Table (MFT)&lt;/strong&gt; is a crucial component of the &lt;strong&gt;NTFS&lt;/strong&gt; file system. It stores metadata about every file and directory on the system, including attributes such as file name, size, creation/modification timestamps, and file content location on the disk. By analyzing the MFT, forensic analysts can reconstruct file activities, including deleted files and hidden data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Parsing the MFT&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I used &lt;strong&gt;Eric Zimmerman&amp;rsquo;s MFTECmd&lt;/strong&gt; tool to parse the provided MFT file. This tool is excellent for extracting file names, timestamps, and other metadata from MFT entries.&lt;/li&gt;
+&lt;li&gt;MFTECmd revealed the existence of a file named &lt;code&gt;flag.txt&lt;/code&gt;, which likely contained the flag. However, I was unable to retrieve the actual contents of this file using this tool alone.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extracting File Contents&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To retrieve the content of &lt;code&gt;flag.txt&lt;/code&gt;, I switched to &lt;strong&gt;MFTExplorer&lt;/strong&gt;, another tool by Eric Zimmerman. MFTExplorer allowed me to explore the contents of the MFT in greater detail and successfully retrieve the encoded data from the file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/masterfanumtax/found%20flag.png&#34;
+	width=&#34;1561&#34;
+	height=&#34;817&#34;
+	srcset=&#34;http://localhost:1313/post/masterfanumtax/found%20flag_hu697eb1dcc57ed866178981a17a0fa6c9_514946_480x0_resize_box_3.png 480w, http://localhost:1313/post/masterfanumtax/found%20flag_hu697eb1dcc57ed866178981a17a0fa6c9_514946_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;191&#34;
+		data-flex-basis=&#34;458px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decoding the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The retrieved flag was encoded. I decoded the encoded flag into plaintext, which revealed the correct flag for submission.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/masterfanumtax/flag.png&#34;
+	width=&#34;853&#34;
+	height=&#34;696&#34;
+	srcset=&#34;http://localhost:1313/post/masterfanumtax/flag_hu5cf2613f85c7f76bc78ce2d96d512f6c_12127_480x0_resize_box_3.png 480w, http://localhost:1313/post/masterfanumtax/flag_hu5cf2613f85c7f76bc78ce2d96d512f6c_12127_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;122&#34;
+		data-flex-basis=&#34;294px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Sussy Disk 1</title>
+        <link>http://localhost:1313/post/sussy-disk-1/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/sussy-disk-1/</guid>
+        <description>&lt;h1 id=&#34;sussy-disk-1-ctf-challenge-writeup&#34;&gt;Sussy Disk 1 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Sussy Disk 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 100&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze the disk image to recover the flag hidden in the web browsing history.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Context&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Sussy Disk&lt;/em&gt; is a multi-part challenge series where each challenge involves analyzing different aspects of a disk image. In this first part, we are tasked with finding the flag by investigating web browsing history.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Investigation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Since this is a Windows-based challenge, I started by checking artifacts related to the default web browser, &lt;strong&gt;Microsoft Edge&lt;/strong&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After examining the history files for Edge, I found that the few URLs visited were related to downloading &lt;strong&gt;Google Chrome&lt;/strong&gt;, suggesting that Chrome was used for most of the browsing activity.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-1/download%20google.png&#34;
+	width=&#34;1165&#34;
+	height=&#34;341&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-1/download%20google_hue96cc67d693c58b9fba94989d6b10311_33152_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-1/download%20google_hue96cc67d693c58b9fba94989d6b10311_33152_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Download Google&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;341&#34;
+		data-flex-basis=&#34;819px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Google Chrome Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Next, I searched for Google Chrome artifacts on the disk. Chrome stores browsing history in an SQLite database located in the user profile directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Using a tool like &lt;strong&gt;DB Browser for SQLite&lt;/strong&gt;, I navigated to Chrome&amp;rsquo;s &lt;code&gt;History&lt;/code&gt; file and extracted the browsing history.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After reviewing the visited URLs, I found the flag embedded in the browsing history.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-1/google%20history%20db%20file.png&#34;
+	width=&#34;1266&#34;
+	height=&#34;369&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-1/google%20history%20db%20file_hu26f5f62f38ceee3fa390df3293de24fb_59198_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-1/google%20history%20db%20file_hu26f5f62f38ceee3fa390df3293de24fb_59198_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Google DB File&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;343&#34;
+		data-flex-basis=&#34;823px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The flag was hidden in the browsing history of Google Chrome and was recovered by analyzing the browser&amp;rsquo;s SQLite database.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-1/flag.png&#34;
+	width=&#34;368&#34;
+	height=&#34;151&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-1/flag_hu04515218cf4060267e681cfbdc9b4ca6_6663_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-1/flag_hu04515218cf4060267e681cfbdc9b4ca6_6663_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;243&#34;
+		data-flex-basis=&#34;584px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Sussy Disk 2</title>
+        <link>http://localhost:1313/post/sussy-disk-2/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/sussy-disk-2/</guid>
+        <description>&lt;h1 id=&#34;sussy-disk-2-ctf-challenge-writeup&#34;&gt;Sussy Disk 2 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Sussy Disk 2&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 150&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Recover a deleted file from the disk image.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Context&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;em&gt;Sussy Disk&lt;/em&gt; series continues with the second challenge, which involves recovering a deleted file from the disk image. Deleted files can often be restored from the Recycle Bin.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Understanding $I and $R Files&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In Windows, when a file is deleted, it is not immediately removed from the disk. Instead, it is moved to the Recycle Bin, where it is represented by two types of files:
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;$I Files&lt;/strong&gt;: These are the information files that store metadata about the deleted file, such as the original filename, path, and deletion date.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$R Files&lt;/strong&gt;: These are the actual data files that contain the content of the deleted file. They typically have the same base name as their corresponding $I files.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding the Deleted File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I navigated to the &lt;code&gt;$Recycle.Bin&lt;/code&gt; directory on the disk image, where the deleted files are stored.&lt;/li&gt;
+&lt;li&gt;I looked for pairs of $I and $R files to identify potential candidates for recovery. By examining the $R files, I was able to find the one corresponding to the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Clicking on the relevant $R file successfully revealed the hidden flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-2/flag.png&#34;
+	width=&#34;667&#34;
+	height=&#34;484&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-2/flag_hubbfb45ab55668ae4f80f719162a45e79_40721_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-2/flag_hubbfb45ab55668ae4f80f719162a45e79_40721_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;137&#34;
+		data-flex-basis=&#34;330px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Sussy Disk 4</title>
+        <link>http://localhost:1313/post/sussy-disk-4/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/sussy-disk-4/</guid>
+        <description>&lt;h1 id=&#34;sussy-disk-4-ctf-challenge-writeup&#34;&gt;Sussy Disk 4 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Sussy Disk 4&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 400&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Unzip a password-protected zip file and retrieve the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Context&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This challenge is part of the &lt;em&gt;Sussy Disk&lt;/em&gt; series, where the main objective is to recover information from various digital artifacts. The fourth challenge involves unzipping a password-protected zip file found in the user&amp;rsquo;s document folder.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Investigation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upon searching for the zip file in the documents folder, I quickly identified it but struggled to locate the password needed for extraction.&lt;/li&gt;
+&lt;li&gt;I spent considerable time looking for hints throughout the disk image without success.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Reading the Challenge Description&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;After several hours, I finally took a closer look at the challenge description, which mentioned that the user frequently utilized PowerShell. This was a critical hint that led me to consider that the zip file might have been created using PowerShell&amp;rsquo;s &lt;code&gt;Compress-Archive&lt;/code&gt; cmdlet, which sometimes uses passwords that could be referenced in the PowerShell command history.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding the Password&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I accessed the PowerShell console history and searched through it to find any commands that could contain the password for the zip file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After a thorough search, I successfully located the password used to create the zip file.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-4/found%20password.png&#34;
+	width=&#34;1002&#34;
+	height=&#34;448&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-4/found%20password_hu52cb0a255e2ed935dbc2846493b414b3_21580_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-4/found%20password_hu52cb0a255e2ed935dbc2846493b414b3_21580_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;found password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;223&#34;
+		data-flex-basis=&#34;536px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extracting the Zip File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;With the password in hand, I used it to unzip the protected zip file.&lt;/li&gt;
+&lt;li&gt;Inside the extracted contents, I found a base64 encoded message.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decoding the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;I decoded the base64 message using a decoding tool to retrieve the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-4/flag.png&#34;
+	width=&#34;824&#34;
+	height=&#34;614&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-4/flag_hu560bd339caa34d61db59a0253409d59b_13898_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-4/flag_hu560bd339caa34d61db59a0253409d59b_13898_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;134&#34;
+		data-flex-basis=&#34;322px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Sussy Disk 5</title>
+        <link>http://localhost:1313/post/sussy-disk-5/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/sussy-disk-5/</guid>
+        <description>&lt;h1 id=&#34;sussy-disk-5-ctf-challenge-writeup&#34;&gt;Sussy Disk 5 CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Sussy Disk 5&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 590&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Find the flag through various hidden artifacts across the disk.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Challenge Context&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This challenge is the final part of the &lt;em&gt;Sussy Disk&lt;/em&gt; series. It involves locating a flag that is split into three parts, each hidden in different locations or formats.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding Part 1&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The first part of the flag is located in a file named &lt;code&gt;trojan.ps1&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I opened this PowerShell script and found an encrypted text.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After decoding the encrypted text, I successfully revealed the first part of the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-5/part1.png&#34;
+	width=&#34;1019&#34;
+	height=&#34;319&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-5/part1_hu6b40abc17421fcd7eebbbf394c3fe30a_27595_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-5/part1_hu6b40abc17421fcd7eebbbf394c3fe30a_27595_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Part 1&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;319&#34;
+		data-flex-basis=&#34;766px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding Part 2&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The second part of the flag was hidden in the &lt;code&gt;Pictures&lt;/code&gt; folder.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In this folder, I discovered a PowerShell script responsible for encrypting an image file named &lt;code&gt;part2.png&lt;/code&gt; by using an XOR operation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To retrieve the second part of the flag, I had to reverse the XOR process. I XORed the encrypted image with the same key to decrypt it, revealing the second part of the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-5/part2.png&#34;
+	width=&#34;1545&#34;
+	height=&#34;754&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-5/part2_hu16a29eaf5ca3e8c38383f43136857e5c_197276_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-5/part2_hu16a29eaf5ca3e8c38383f43136857e5c_197276_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Part 2&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;204&#34;
+		data-flex-basis=&#34;491px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding Part 3&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The third part of the flag was located in a text file at &lt;code&gt;warlocksmurf\AppData\Local\Temp\brainrot.txt&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I navigated to the specified path and opened the &lt;code&gt;brainrot.txt&lt;/code&gt; file to find the last part of the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/sussy-disk-5/part3.png&#34;
+	width=&#34;290&#34;
+	height=&#34;607&#34;
+	srcset=&#34;http://localhost:1313/post/sussy-disk-5/part3_hu88d340c7dfad865043a3649439305139_7708_480x0_resize_box_3.png 480w, http://localhost:1313/post/sussy-disk-5/part3_hu88d340c7dfad865043a3649439305139_7708_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Part 3&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;47&#34;
+		data-flex-basis=&#34;114px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Zelda Phishing Pond</title>
+        <link>http://localhost:1313/post/zelda-phishing-pond/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/zelda-phishing-pond/</guid>
+        <description>&lt;h1 id=&#34;zelda-phishing-pond-ctf-challenge-writeup&#34;&gt;Zelda Phishing Pond CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Zelda Phishing Pond&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 200&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze a phishing email and extract the flag from encoded contents.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The challenge began with an email that contained encoded contents, which I needed to decode.&lt;/li&gt;
+&lt;li&gt;Normally, files that are sent through email are encoded in base64 format&lt;/li&gt;
+&lt;li&gt;Identify where the files are and decode the files using base64&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decoding Base64&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Upon decoding the first chunk of Base64, I found that it revealed an HTML page. However, this did not provide any useful information related to the flag.&lt;/li&gt;
+&lt;li&gt;I then moved on to the second chunk of Base64, which resulted in a ZIP file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Unzipping the File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;After unzipping the ZIP file, I discovered a &lt;code&gt;.lnk&lt;/code&gt; file (a Windows shortcut). To extract useful information from this file, I used the &lt;code&gt;lnkinfo&lt;/code&gt; tool.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extracting Data from the LNK File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Running &lt;code&gt;lnkinfo&lt;/code&gt; on the &lt;code&gt;.lnk&lt;/code&gt; file revealed that there were Base64 encoded messages contained within it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I proceeded to decode this Base64 encoded message, which revealed a PowerShell script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/zelda-phishing-pond/lnkinfo.png&#34;
+	width=&#34;1355&#34;
+	height=&#34;288&#34;
+	srcset=&#34;http://localhost:1313/post/zelda-phishing-pond/lnkinfo_hu8d9dd9a546e76e9a42d2aef4d58e7c67_164441_480x0_resize_box_3.png 480w, http://localhost:1313/post/zelda-phishing-pond/lnkinfo_hu8d9dd9a546e76e9a42d2aef4d58e7c67_164441_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;LNK Info&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;470&#34;
+		data-flex-basis=&#34;1129px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Final Decoding&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Inside the PowerShell script, there was another Base64 encoded message. I decoded this final message to uncover the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/zelda-phishing-pond/powershell.png&#34;
+	width=&#34;866&#34;
+	height=&#34;569&#34;
+	srcset=&#34;http://localhost:1313/post/zelda-phishing-pond/powershell_hu381ada1184305e2259a34f6022fcb621_147516_480x0_resize_box_3.png 480w, http://localhost:1313/post/zelda-phishing-pond/powershell_hu381ada1184305e2259a34f6022fcb621_147516_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Powershell&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;152&#34;
+		data-flex-basis=&#34;365px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/zelda-phishing-pond/flag.png&#34;
+	width=&#34;815&#34;
+	height=&#34;495&#34;
+	srcset=&#34;http://localhost:1313/post/zelda-phishing-pond/flag_hu7acc1f49e47bb829163868b7fa8cb3a2_35197_480x0_resize_box_3.png 480w, http://localhost:1313/post/zelda-phishing-pond/flag_hu7acc1f49e47bb829163868b7fa8cb3a2_35197_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;395px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Apache Logs</title>
+        <link>http://localhost:1313/post/apache-logs/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/apache-logs/</guid>
+        <description>&lt;h1 id=&#34;forensics-ctf-challenge-writeup&#34;&gt;Forensics CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Apache Logs&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze the Apache log file to uncover and decode suspicious data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Log Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The provided Apache log file is relatively short.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Upon reviewing the logs, identify a URL with &lt;strong&gt;URL-encoded&lt;/strong&gt; suspicious data.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/apache-logs/found%20url%20encoded.png&#34;
+	width=&#34;1433&#34;
+	height=&#34;286&#34;
+	srcset=&#34;http://localhost:1313/post/apache-logs/found%20url%20encoded_hud36002e879f66875a9519217911e17fa_40464_480x0_resize_box_3.png 480w, http://localhost:1313/post/apache-logs/found%20url%20encoded_hud36002e879f66875a9519217911e17fa_40464_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found URL Encoding&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;501&#34;
+		data-flex-basis=&#34;1202px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;URL Decoding&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Decode the URL using standard URL decoding techniques to reveal an ASCII representation of letters.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/apache-logs/decode%20url%20encoding.png&#34;
+	width=&#34;1405&#34;
+	height=&#34;737&#34;
+	srcset=&#34;http://localhost:1313/post/apache-logs/decode%20url%20encoding_hu880b7d47b08b0f2b1dbef2c706a387b1_112955_480x0_resize_box_3.png 480w, http://localhost:1313/post/apache-logs/decode%20url%20encoding_hu880b7d47b08b0f2b1dbef2c706a387b1_112955_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Decode URL Encoding&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;190&#34;
+		data-flex-basis=&#34;457px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Conversion&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Convert the ASCII representation into readable text, which reveals the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/apache-logs/flag.png&#34;
+	width=&#34;809&#34;
+	height=&#34;289&#34;
+	srcset=&#34;http://localhost:1313/post/apache-logs/flag_hucae165c9f7bab897570a7cb81e66df86_7120_480x0_resize_box_3.png 480w, http://localhost:1313/post/apache-logs/flag_hucae165c9f7bab897570a7cb81e66df86_7120_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;279&#34;
+		data-flex-basis=&#34;671px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;FSIIECTF{XXXXXXXXXX}&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Auth Log</title>
+        <link>http://localhost:1313/post/auth-log/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/auth-log/</guid>
+        <description>&lt;h1 id=&#34;forensics-ctf-challenge-writeup&#34;&gt;Forensics CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Auth Log&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Answer five questions based on the provided authentication logs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Attack Type&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;By analyzing the logs, it becomes evident that there are multiple failed login attempts, indicating a &lt;strong&gt;brute force attack&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/auth-log/brute%20force%20login.png&#34;
+	width=&#34;931&#34;
+	height=&#34;390&#34;
+	srcset=&#34;http://localhost:1313/post/auth-log/brute%20force%20login_huc39495ac7917608915afde1cb9b7bb16_67642_480x0_resize_box_3.png 480w, http://localhost:1313/post/auth-log/brute%20force%20login_huc39495ac7917608915afde1cb9b7bb16_67642_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Brute Force Attack&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;238&#34;
+		data-flex-basis=&#34;572px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Protocol&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The protocol used in the attack is &lt;strong&gt;SSH&lt;/strong&gt;, as seen in the logs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Vulnerability Used&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The attack involved privilege escalation, specifically related to &lt;strong&gt;sudo&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/auth-log/sudo.png&#34;
+	width=&#34;1377&#34;
+	height=&#34;212&#34;
+	srcset=&#34;http://localhost:1313/post/auth-log/sudo_hue7795272f71a5027516fa988db9c1f7a_36333_480x0_resize_box_3.png 480w, http://localhost:1313/post/auth-log/sudo_hue7795272f71a5027516fa988db9c1f7a_36333_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Sudo&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;649&#34;
+		data-flex-basis=&#34;1558px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Vulnerable Binary&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;There are command logs mentioning &lt;strong&gt;openvpn&lt;/strong&gt;, which is the vulnerable binary.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;MITRE Sub Technique ID&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A search identified the relevant MITRE ID for this attack: &lt;strong&gt;T1136.001&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/auth-log/persistence.png&#34;
+	width=&#34;1375&#34;
+	height=&#34;337&#34;
+	srcset=&#34;http://localhost:1313/post/auth-log/persistence_hua59122f5c56fe0749f09213e17087c98_58189_480x0_resize_box_3.png 480w, http://localhost:1313/post/auth-log/persistence_hua59122f5c56fe0749f09213e17087c98_58189_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Persistence&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;408&#34;
+		data-flex-basis=&#34;979px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;FSIIECTF{bruteforce_ssh_sudo_openvpn_T1136.001}&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>USBChall</title>
+        <link>http://localhost:1313/post/usbchall/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/usbchall/</guid>
+        <description>&lt;h1 id=&#34;forensics-ctf-challenge-writeup&#34;&gt;Forensics CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: USBChall&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 1&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Forensics&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;I started by running the &lt;strong&gt;file&lt;/strong&gt; command on the given mysterious file.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;It identified the file as a &lt;strong&gt;Linux file system&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/usbchall/enumeration.png&#34;
+	width=&#34;1227&#34;
+	height=&#34;73&#34;
+	srcset=&#34;http://localhost:1313/post/usbchall/enumeration_hue58b4f90ce3568ae27d66ba60c5df8a5_4257_480x0_resize_box_3.png 480w, http://localhost:1313/post/usbchall/enumeration_hue58b4f90ce3568ae27d66ba60c5df8a5_4257_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Enumeration&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;1680&#34;
+		data-flex-basis=&#34;4033px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I used &lt;strong&gt;foremost&lt;/strong&gt; to extract the files from the system.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Only two files were extracted: a &lt;strong&gt;docx&lt;/strong&gt; file and an &lt;strong&gt;image&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The contents of both the &lt;strong&gt;docx&lt;/strong&gt; and the &lt;strong&gt;image&lt;/strong&gt; seemed empty and provided no useful information.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;I then used &lt;strong&gt;exiftool&lt;/strong&gt; on the image, and this revealed the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/usbchall/flag.png&#34;
+	width=&#34;957&#34;
+	height=&#34;200&#34;
+	srcset=&#34;http://localhost:1313/post/usbchall/flag_hu67478114379dc6e9feddeb5166650748_9396_480x0_resize_box_3.png 480w, http://localhost:1313/post/usbchall/flag_hu67478114379dc6e9feddeb5166650748_9396_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;478&#34;
+		data-flex-basis=&#34;1148px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;FSIIECTF{XXXXXXXXXX}&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Lock?</title>
+        <link>http://localhost:1313/post/lock/</link>
+        <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/lock/</guid>
+        <description>&lt;h1 id=&#34;lock-ctf-challenge-writeup&#34;&gt;Lock? CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Lock?&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: DFIR (Digital Forensics and Incident Response)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Recover the flag from a BitLocker-encrypted disk image by analyzing logs and decrypting the image.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lock/challenge.png&#34;
+	width=&#34;653&#34;
+	height=&#34;948&#34;
+	srcset=&#34;http://localhost:1313/post/lock/challenge_hu120854b6ac4413d85b0f0cf2e5c86454_116125_480x0_resize_box_3.png 480w, http://localhost:1313/post/lock/challenge_hu120854b6ac4413d85b0f0cf2e5c86454_116125_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Challenge&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;68&#34;
+		data-flex-basis=&#34;165px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Lock?&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We are provided with multiple files, including various event logs.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analyzing Event Logs&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use Hayabusa to analyze the &lt;code&gt;.evtx&lt;/code&gt; files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Although Hayabusa didn’t provide extensive results, it revealed a password useful for decrypting the BitLocker image.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lock/hayabusa%20output.png&#34;
+	width=&#34;1233&#34;
+	height=&#34;488&#34;
+	srcset=&#34;http://localhost:1313/post/lock/hayabusa%20output_huc2abd5c305811c56c5999d3a553bb96e_29756_480x0_resize_box_3.png 480w, http://localhost:1313/post/lock/hayabusa%20output_huc2abd5c305811c56c5999d3a553bb96e_29756_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Bitlocker Output&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;252&#34;
+		data-flex-basis=&#34;606px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Handling the Disk Image&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;.img&lt;/code&gt; file is identified as a DOS file based on the &lt;code&gt;file&lt;/code&gt; command output.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Attempt to mount the image using Autopsy, but encounter an error indicating that it is a BitLocker-encrypted volume.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lock/file%20output.png&#34;
+	width=&#34;1317&#34;
+	height=&#34;187&#34;
+	srcset=&#34;http://localhost:1313/post/lock/file%20output_huf0d32ca2c86369b329adf1ad9fe9d748_49628_480x0_resize_box_3.png 480w, http://localhost:1313/post/lock/file%20output_huf0d32ca2c86369b329adf1ad9fe9d748_49628_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;File Output&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;704&#34;
+		data-flex-basis=&#34;1690px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lock/autopsy.png&#34;
+	width=&#34;1365&#34;
+	height=&#34;708&#34;
+	srcset=&#34;http://localhost:1313/post/lock/autopsy_hucded28c6ec367bdf12ac5bff531db922_83457_480x0_resize_box_3.png 480w, http://localhost:1313/post/lock/autopsy_hucded28c6ec367bdf12ac5bff531db922_83457_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Autopsy&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;462px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Mounting the Disk Image&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Research shows that double-clicking the &lt;code&gt;.img&lt;/code&gt; file on Linux can automatically mount the disk.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enter the password obtained from the logs to unlock and mount the encrypted disk image.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lock/mount.png&#34;
+	width=&#34;1367&#34;
+	height=&#34;748&#34;
+	srcset=&#34;http://localhost:1313/post/lock/mount_hufdebe59e3807e09518bb92b68edbb941_513724_480x0_resize_box_3.png 480w, http://localhost:1313/post/lock/mount_hufdebe59e3807e09518bb92b68edbb941_513724_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Mount&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;182&#34;
+		data-flex-basis=&#34;438px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extracting the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Once the disk is mounted, navigate through the filesystem to locate the flag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Retrieve the flag from the accessible filesystem.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lock/flag.png&#34;
+	width=&#34;1023&#34;
+	height=&#34;417&#34;
+	srcset=&#34;http://localhost:1313/post/lock/flag_hu908995cec0deb171addd5820ef1c0817_44029_480x0_resize_box_3.png 480w, http://localhost:1313/post/lock/flag_hu908995cec0deb171addd5820ef1c0817_44029_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;245&#34;
+		data-flex-basis=&#34;588px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag&lt;/strong&gt;: &amp;ldquo;ihack24{6f6450f1695e405557486a2be402dc27}&amp;rdquo;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Memory</title>
+        <link>http://localhost:1313/post/memory/</link>
+        <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/memory/</guid>
+        <description>&lt;h1 id=&#34;memory-ctf-challenge-writeup&#34;&gt;Memory CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Memory&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: DFIR (Digital Forensics and Incident Response)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Identify the user that was created based on a memory dump from a Windows system.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/memory/challenge.png&#34;
+	width=&#34;680&#34;
+	height=&#34;899&#34;
+	srcset=&#34;http://localhost:1313/post/memory/challenge_hu8d943007e1db52133e46709e65b3b886_140588_480x0_resize_box_3.png 480w, http://localhost:1313/post/memory/challenge_hu8d943007e1db52133e46709e65b3b886_140588_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Challenge&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;75&#34;
+		data-flex-basis=&#34;181px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Memory&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Setup&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We are tasked with finding the user created on a Windows system based on a memory dump.&lt;/li&gt;
+&lt;li&gt;Given the filename suggests a Windows environment, use &lt;code&gt;memprocfs&lt;/code&gt; to streamline the analysis of the memory dump, avoiding manual extraction with tools like Volatility.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Analyzing Powershell Commands&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to &lt;code&gt;/sys/proc/proc-v.txt&lt;/code&gt; within &lt;code&gt;memprocfs&lt;/code&gt; to locate and review PowerShell commands executed during the memory capture.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Search for commands that involve executing base64 encoded strings.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/memory/powershell.png&#34;
+	width=&#34;1654&#34;
+	height=&#34;857&#34;
+	srcset=&#34;http://localhost:1313/post/memory/powershell_hue65ed31818b4dd708707f0361788db9c_127081_480x0_resize_box_3.png 480w, http://localhost:1313/post/memory/powershell_hue65ed31818b4dd708707f0361788db9c_127081_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Powershell&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;192&#34;
+		data-flex-basis=&#34;463px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Decoding Base64 Commands&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Identify and extract the base64 encoded strings from the PowerShell commands.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Decode the base64 strings to reveal the underlying PowerShell commands.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/memory/decoded%20base64.png&#34;
+	width=&#34;961&#34;
+	height=&#34;655&#34;
+	srcset=&#34;http://localhost:1313/post/memory/decoded%20base64_hu1bdccd6f67bbc62de5df5f17f71ece72_78051_480x0_resize_box_3.png 480w, http://localhost:1313/post/memory/decoded%20base64_hu1bdccd6f67bbc62de5df5f17f71ece72_78051_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Decoded Base64&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;146&#34;
+		data-flex-basis=&#34;352px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Executing and Reversing PowerShell Commands&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Run the decoded PowerShell commands to reveal their functionality.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Analyze the output to determine which user was created.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/memory/powrshell%20executed.png&#34;
+	width=&#34;1905&#34;
+	height=&#34;786&#34;
+	srcset=&#34;http://localhost:1313/post/memory/powrshell%20executed_hue222b5147006b13eb2d294ecc62a763b_89320_480x0_resize_box_3.png 480w, http://localhost:1313/post/memory/powrshell%20executed_hue222b5147006b13eb2d294ecc62a763b_89320_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Powershell Executed&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;242&#34;
+		data-flex-basis=&#34;581px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;With the user information identified from the PowerShell commands, make the flag&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/memory/flalg.png&#34;
+	width=&#34;446&#34;
+	height=&#34;620&#34;
+	srcset=&#34;http://localhost:1313/post/memory/flalg_huc76f719ed256e5c2a64a1faeb5f83f53_11865_480x0_resize_box_3.png 480w, http://localhost:1313/post/memory/flalg_huc76f719ed256e5c2a64a1faeb5f83f53_11865_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;71&#34;
+		data-flex-basis=&#34;172px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag&lt;/strong&gt;: &lt;strong&gt;ihack24{sysadmin_SYSAdmin}&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>Mystery File</title>
+        <link>http://localhost:1313/post/mystery-file/</link>
+        <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/mystery-file/</guid>
+        <description>&lt;h1 id=&#34;mystery-file-ctf-challenge-writeup&#34;&gt;Mystery File CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Mystery File&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: DFIR (Digital Forensics and Incident Response)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Deobfuscate a script within a ZIP file to uncover a domain and retrieve the flag from the associated webpage.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/challenge.png&#34;
+	width=&#34;658&#34;
+	height=&#34;949&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/challenge_hu0d2feb64800025e2a7752003c4e43b04_107338_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/challenge_hu0d2feb64800025e2a7752003c4e43b04_107338_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Challenge&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;69&#34;
+		data-flex-basis=&#34;166px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Mystery File&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;We are given a file named &lt;code&gt;program.bin&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the &lt;code&gt;file&lt;/code&gt; command to identify the nature of the file, which reveals it is a ZIP archive.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/found%20zip%20file.png&#34;
+	width=&#34;1124&#34;
+	height=&#34;119&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/found%20zip%20file_hu0c975e5c8d5da052906b6db9206065cf_26423_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/found%20zip%20file_hu0c975e5c8d5da052906b6db9206065cf_26423_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Zip File&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;944&#34;
+		data-flex-basis=&#34;2266px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extracting the ZIP File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Unzip &lt;code&gt;program.bin&lt;/code&gt; to obtain its contents, which include a large, obfuscated Bash script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/obfsucataed%201.png&#34;
+	width=&#34;1532&#34;
+	height=&#34;755&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/obfsucataed%201_huc85426c768a5dd35125b4f561d3ca1d8_299139_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/obfsucataed%201_huc85426c768a5dd35125b4f561d3ca1d8_299139_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Obfuscated&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;202&#34;
+		data-flex-basis=&#34;486px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Running the Script&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;To handle the obfuscation, use an online Bash interpreter such as &lt;a class=&#34;link&#34; href=&#34;https://tio.run/#bash&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TIO.run&lt;/a&gt; to execute the script.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The initial execution of the script shows no useful output.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/nothing%20to%20see%20here.png&#34;
+	width=&#34;800&#34;
+	height=&#34;200&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/nothing%20to%20see%20here_hue8d2dd89dd546cb49f8d59182eb2339e_11969_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/nothing%20to%20see%20here_hue8d2dd89dd546cb49f8d59182eb2339e_11969_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Nothing to see&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;400&#34;
+		data-flex-basis=&#34;960px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Deobfuscating the Script&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Modify the script to replace &lt;code&gt;eval&lt;/code&gt; with &lt;code&gt;echo&lt;/code&gt;. This allows you to see the script&amp;rsquo;s output, revealing a new, similarly obfuscated Bash script.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Repeat the process of replacing &lt;code&gt;eval&lt;/code&gt; with &lt;code&gt;echo&lt;/code&gt; to progressively reveal less obfuscated versions of the script.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/less%20obfuscated.png&#34;
+	width=&#34;1565&#34;
+	height=&#34;556&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/less%20obfuscated_hud96892a3ef132c5bc0f45259f4868424_97552_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/less%20obfuscated_hud96892a3ef132c5bc0f45259f4868424_97552_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Less Obfuscated&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;281&#34;
+		data-flex-basis=&#34;675px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Uncovering the Domain and Flag Location&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;After several iterations, the script becomes sufficiently deobfuscated to understand its content.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The script contains two base64 encoded strings. Decode the first string to reveal a domain name.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Decode the second string to find the URL where the flag can be obtained.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/beef.png&#34;
+	width=&#34;1900&#34;
+	height=&#34;751&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/beef_hu9dc06f89b3f9b884981a5a9876a7b6fa_131978_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/beef_hu9dc06f89b3f9b884981a5a9876a7b6fa_131978_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Beef&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;252&#34;
+		data-flex-basis=&#34;607px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/flag%20link.png&#34;
+	width=&#34;980&#34;
+	height=&#34;792&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/flag%20link_hu5413b8efa87feb0ad89dd91e45ddf6cc_59774_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/flag%20link_hu5413b8efa87feb0ad89dd91e45ddf6cc_59774_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Link&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;123&#34;
+		data-flex-basis=&#34;296px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Retrieving the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Visit the webpage indicated by the decoded domain to locate and extract the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mystery-file/flag.png&#34;
+	width=&#34;1436&#34;
+	height=&#34;412&#34;
+	srcset=&#34;http://localhost:1313/post/mystery-file/flag_hu0eaebece33cc29eb0fe6df467c3b5562_22785_480x0_resize_box_3.png 480w, http://localhost:1313/post/mystery-file/flag_hu0eaebece33cc29eb0fe6df467c3b5562_22785_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;348&#34;
+		data-flex-basis=&#34;836px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag&lt;/strong&gt;: &lt;strong&gt;ihack24{0bfusc4t3d_thr34t3}&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>SSH Compromised</title>
+        <link>http://localhost:1313/post/ssh-compromised/</link>
+        <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/ssh-compromised/</guid>
+        <description>&lt;h1 id=&#34;ssh-compromised-ctf-challenge-writeup&#34;&gt;SSH Compromised CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: SSH Compromised&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Incident Handling&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze a large log file to identify a compromised SSH login.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;SSH Compromised&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Start by examining the large log file provided for clues regarding SSH logins.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Filtering the Log File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Reduce the amount of noise in the log file by removing lines containing common failure and error messages:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Remove lines with&lt;/strong&gt;: &amp;ldquo;fail&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Remove lines with&lt;/strong&gt;: &amp;ldquo;error&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Remove lines with&lt;/strong&gt;: &amp;ldquo;invalid&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Remove lines with&lt;/strong&gt;: &amp;ldquo;unknown&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Remove lines with&lt;/strong&gt;: &amp;ldquo;closed&amp;rdquo; and &amp;ldquo;disconnect&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Remove lines with&lt;/strong&gt;: &amp;ldquo;ignoring&amp;rdquo;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Remove lines with&lt;/strong&gt;: &amp;ldquo;reset&amp;rdquo; and &amp;ldquo;unable&amp;rdquo;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/ssh-compromised/removing%20fail.png&#34;
+	width=&#34;1655&#34;
+	height=&#34;492&#34;
+	srcset=&#34;http://localhost:1313/post/ssh-compromised/removing%20fail_hu086a0563318a2698c8c85c5872b0efec_443907_480x0_resize_box_3.png 480w, http://localhost:1313/post/ssh-compromised/removing%20fail_hu086a0563318a2698c8c85c5872b0efec_443907_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Fail Removed&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;336&#34;
+		data-flex-basis=&#34;807px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/ssh-compromised/removing%20error.png&#34;
+	width=&#34;1653&#34;
+	height=&#34;465&#34;
+	srcset=&#34;http://localhost:1313/post/ssh-compromised/removing%20error_hu107b2f7b35640c4cad1e86e5ea675a10_420869_480x0_resize_box_3.png 480w, http://localhost:1313/post/ssh-compromised/removing%20error_hu107b2f7b35640c4cad1e86e5ea675a10_420869_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Error Removed&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;355&#34;
+		data-flex-basis=&#34;853px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/ssh-compromised/removed%20almost%20everything.png&#34;
+	width=&#34;1575&#34;
+	height=&#34;720&#34;
+	srcset=&#34;http://localhost:1313/post/ssh-compromised/removed%20almost%20everything_hu277baf15dff4a3b28f3dedd5dd9ebafb_675357_480x0_resize_box_3.png 480w, http://localhost:1313/post/ssh-compromised/removed%20almost%20everything_hu277baf15dff4a3b28f3dedd5dd9ebafb_675357_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Removed Almost Everything&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;525px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identifying Successful Logins&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;After filtering, focus on the remaining lines to identify successful logins.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Search for entries related to the user &lt;code&gt;sysadmin&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/ssh-compromised/foud%20stuff.png&#34;
+	width=&#34;1385&#34;
+	height=&#34;262&#34;
+	srcset=&#34;http://localhost:1313/post/ssh-compromised/foud%20stuff_huda2b7c3376e573deae58f166edb2372f_231376_480x0_resize_box_3.png 480w, http://localhost:1313/post/ssh-compromised/foud%20stuff_huda2b7c3376e573deae58f166edb2372f_231376_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Found Stuff&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;528&#34;
+		data-flex-basis=&#34;1268px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Extracting Relevant Information&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;From the filtered results, find entries showing successful logins for the user &lt;code&gt;sysadmin&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Identify the IP address associated with these logins. In this case, the IP address is &lt;code&gt;149.102.244.68&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Finding the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Use the extracted IP address and user information to locate the flag related to the SSH compromise.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/ssh-compromised/flag.png&#34;
+	width=&#34;1643&#34;
+	height=&#34;331&#34;
+	srcset=&#34;http://localhost:1313/post/ssh-compromised/flag_hudb47794599e6a68ebc99d45af972e165_324345_480x0_resize_box_3.png 480w, http://localhost:1313/post/ssh-compromised/flag_hudb47794599e6a68ebc99d45af972e165_324345_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;496&#34;
+		data-flex-basis=&#34;1191px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag&lt;/strong&gt;: &lt;strong&gt;ihack24{149.102.244.68_sysadmin}&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>LastHope</title>
-        <link>https://qiaonpc.github.io/post/lasthope/</link>
+        <link>http://localhost:1313/post/lasthope/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/lasthope/</guid>
+        <guid>http://localhost:1313/post/lasthope/</guid>
         <description>&lt;h1 id=&#34;lasthope-ctf-challenge-writeup&#34;&gt;LastHope CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -31,10 +2398,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Observed a large number of 802.11 packets, indicating WiFi traffic.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/protocol%20hierachy.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lasthope/protocol%20hierachy.png&#34;
 	width=&#34;1395&#34;
 	height=&#34;255&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_480x0_resize_box_3.png 480w, http://localhost:1313/post/lasthope/protocol%20hierachy_hu82ad58b3f730d6069585f2b3db44868f_51407_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Protocol Hierachy&#34;
@@ -56,10 +2423,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Identified the SSID of the WiFi network as &amp;ldquo;Rawsec Command Centre.&amp;rdquo;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/mac%20address.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lasthope/mac%20address.png&#34;
 	width=&#34;1617&#34;
 	height=&#34;147&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_480x0_resize_box_3.png 480w, http://localhost:1313/post/lasthope/mac%20address_hu51b309c2d8624f944de44d225e546455_98599_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Mac Address &amp; SSID&#34;
@@ -78,10 +2445,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Used a tool like Aircrack-ng with the rockyou.txt wordlist to crack the WiFi password associated with the captured packets.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/aircrack.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lasthope/aircrack.png&#34;
 	width=&#34;1333&#34;
 	height=&#34;706&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_480x0_resize_box_3.png 480w, http://localhost:1313/post/lasthope/aircrack_hu253836f781200c0690abd60451664c9c_105195_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Aircrack&#34;
@@ -100,10 +2467,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;The cracked WiFi password is the flag for this challenge.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lasthope/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lasthope/flag.png&#34;
 	width=&#34;1345&#34;
 	height=&#34;704&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_480x0_resize_box_3.png 480w, http://localhost:1313/post/lasthope/flag_hu07f59e773c7e8a57ac3de7e578ee5b9a_123782_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -124,10 +2491,10 @@
         </item>
         <item>
         <title>Mobile</title>
-        <link>https://qiaonpc.github.io/post/mobile/</link>
+        <link>http://localhost:1313/post/mobile/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/mobile/</guid>
+        <guid>http://localhost:1313/post/mobile/</guid>
         <description>&lt;h1 id=&#34;mobile-ctf-challenge-writeup&#34;&gt;Mobile CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -147,10 +2514,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Noticed that certain pages were scribbled over, indicating potential hidden information.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/scribble.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mobile/scribble.png&#34;
 	width=&#34;747&#34;
 	height=&#34;557&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_480x0_resize_box_3.png 480w, http://localhost:1313/post/mobile/scribble_hubf6dd8a4bb6ed3cf7bd45a784343ae80_46714_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Scribble&#34;
@@ -180,10 +2547,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Noticed a suspicious SHA-1 hash that was out of place and bolded, hinting at its significance.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/sus%20hash.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mobile/sus%20hash.png&#34;
 	width=&#34;404&#34;
 	height=&#34;211&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_480x0_resize_box_3.png 480w, http://localhost:1313/post/mobile/sus%20hash_huf3d4bb54bcefe2188729b582753f105a_17118_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Sus Hash&#34;
@@ -219,10 +2586,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The decrypted value revealed the flag, solving the challenge.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mobile/flag.png&#34;
 	width=&#34;1338&#34;
 	height=&#34;700&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_480x0_resize_box_3.png 480w, http://localhost:1313/post/mobile/flag_hu7a4bbcc04279aa17a4f78640b4e975b2_95747_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -241,10 +2608,10 @@
 &lt;/h2&gt;&lt;p&gt;The Mobile CTF challenge involved extracting a hidden flag from a large PDF document related to mobile forensics. Despite initial attempts to extract information from the PDF images, the solution was found in a suspicious SHA-1 hash within the document. By decrypting this hash using a Python script, the flag was successfully obtained, completing the challenge.&lt;/p&gt;
 &lt;h2 id=&#34;notes-for-this-challenge&#34;&gt;Notes for this challenge
 &lt;/h2&gt;&lt;p&gt;Despite the gruesome challenge, there were highlights that are worth mentioning. Attached below are my favourite parts of this challenge.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat%201.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mobile/cat%201.png&#34;
 	width=&#34;744&#34;
 	height=&#34;762&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_480x0_resize_box_3.png 480w, http://localhost:1313/post/mobile/cat%201_hu4424d80b1e7b5cb8fe05420076543371_378686_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Cat&#34;
@@ -255,10 +2622,10 @@
 		data-flex-basis=&#34;234px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat%202.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mobile/cat%202.png&#34;
 	width=&#34;665&#34;
 	height=&#34;655&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_480x0_resize_box_3.png 480w, http://localhost:1313/post/mobile/cat%202_hue5be9727b7f35c3664110edad699b0e8_386304_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Cat&#34;
@@ -269,10 +2636,10 @@
 		data-flex-basis=&#34;243px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat%203.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mobile/cat%203.png&#34;
 	width=&#34;740&#34;
 	height=&#34;718&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_480x0_resize_box_3.png 480w, http://localhost:1313/post/mobile/cat%203_hu600fba7d4f61738c07d5067323a6cf99_325035_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Cat&#34;
@@ -283,10 +2650,10 @@
 		data-flex-basis=&#34;247px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/mobile/cat.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mobile/cat.png&#34;
 	width=&#34;759&#34;
 	height=&#34;682&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_480x0_resize_box_3.png 480w, http://localhost:1313/post/mobile/cat_hu47f1642a0d2e87e9f950e276360a8f27_506505_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Cat&#34;
@@ -301,10 +2668,10 @@
         </item>
         <item>
         <title>Compromised</title>
-        <link>https://qiaonpc.github.io/post/compromised/</link>
+        <link>http://localhost:1313/post/compromised/</link>
         <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/compromised/</guid>
+        <guid>http://localhost:1313/post/compromised/</guid>
         <description>&lt;h1 id=&#34;compromised---ctf-challenge-writeup&#34;&gt;Compromised - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -326,10 +2693,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Using the &lt;code&gt;tree&lt;/code&gt; command, I quickly located the flag within the directory structure. However, it was a zip file itself, requiring further steps for extraction.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/tree%20to%20find%20flag.png&#34;
 	width=&#34;471&#34;
 	height=&#34;262&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Tree to find flag&#34;
@@ -340,10 +2707,10 @@
 		data-flex-basis=&#34;431px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/flag%20zip.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/flag%20zip.png&#34;
 	width=&#34;1091&#34;
 	height=&#34;119&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag is a zip&#34;
@@ -365,10 +2732,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Used &lt;code&gt;John The Ripper&lt;/code&gt; to crack the zip file password, which proved unsuccessful, prompting a search for the password.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/john%20failed.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/john%20failed.png&#34;
 	width=&#34;1295&#34;
 	height=&#34;353&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;John Failed&#34;
@@ -390,10 +2757,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;Cache0000.bin&lt;/code&gt; contains data related to Remote Desktop Protocol (RDP) cache.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/found%20cache.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/found%20cache.png&#34;
 	width=&#34;490&#34;
 	height=&#34;225&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Cache File Found&#34;
@@ -413,10 +2780,10 @@
 &lt;li&gt;
 &lt;p&gt;Employed the tool &lt;code&gt;bmc-tools&lt;/code&gt; (&lt;a class=&#34;link&#34; href=&#34;https://github.com/ANSSI-FR/bmc-tools&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/ANSSI-FR/bmc-tools&lt;/a&gt;) to extract pictures from &lt;code&gt;Cache0000.bin&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/bmc%20tools.png&#34;
 	width=&#34;1265&#34;
 	height=&#34;713&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;BMC Tool Output&#34;
@@ -438,10 +2805,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Noticed segments of the flag within the combined image, visible upon zooming in.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/bmc%20tools%20zoomed.png&#34;
 	width=&#34;965&#34;
 	height=&#34;231&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;BMC Tool Flag Segment&#34;
@@ -461,10 +2828,10 @@
 &lt;li&gt;
 &lt;p&gt;Utilized  &lt;code&gt;RDPCacheStitcher&lt;/code&gt; (&lt;a class=&#34;link&#34; href=&#34;https://github.com/BSI-Bund/RdpCacheStitcher/releases/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/BSI-Bund/RdpCacheStitcher/releases/&lt;/a&gt;) to assemble the segments as if solving a puzzle.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/stitcher.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/stitcher.png&#34;
 	width=&#34;1459&#34;
 	height=&#34;715&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Stitcher&#34;
@@ -489,10 +2856,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Successfully unzipped the flag from the zip file using the obtained password.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/flag.png&#34;
 	width=&#34;951&#34;
 	height=&#34;271&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -514,10 +2881,10 @@
         </item>
         <item>
         <title>FurElise</title>
-        <link>https://qiaonpc.github.io/post/furelise/</link>
+        <link>http://localhost:1313/post/furelise/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/furelise/</guid>
+        <guid>http://localhost:1313/post/furelise/</guid>
         <description>&lt;h1 id=&#34;furelise---ctf-challenge-writeup&#34;&gt;FurElise - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -532,10 +2899,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Upon inspecting the provided file, it was evident that it is a PowerShell script containing obfuscated code.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/challenge.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/challenge.png&#34;
 	width=&#34;700&#34;
 	height=&#34;797&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Challenge&#34;
@@ -557,10 +2924,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The initial step involved removing the &lt;code&gt;&amp;amp;&lt;/code&gt; present throughout the script.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/removed%20and.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/removed%20and.png&#34;
 	width=&#34;469&#34;
 	height=&#34;150&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Removed &amp;&#34;
@@ -582,10 +2949,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;This step helped in revealing clearer, relevant content within the script.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/removed%20everything.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/removed%20everything.png&#34;
 	width=&#34;866&#34;
 	height=&#34;720&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Removed Everything&#34;
@@ -607,10 +2974,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The first link provided the initial part of the flag.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%201.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/flag%20part%201.png&#34;
 	width=&#34;272&#34;
 	height=&#34;69&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag Part 1&#34;
@@ -629,10 +2996,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;The second link presented another PowerShell script. However, caution was exercised against executing it directly on a host machine due to safety concerns.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/1%20powershell.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/1%20powershell.png&#34;
 	width=&#34;1911&#34;
 	height=&#34;946&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Powershell Part 1&#34;
@@ -654,10 +3021,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;To understand its functionality, portions of the script were cautiously executed one by one, avoiding potential risks and aiming to decode it progressively.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/decode%20base64.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/decode%20base64.png&#34;
 	width=&#34;1697&#34;
 	height=&#34;867&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Decode Base64&#34;
@@ -668,10 +3035,10 @@
 		data-flex-basis=&#34;469px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/2%20powershell.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/2%20powershell.png&#34;
 	width=&#34;1433&#34;
 	height=&#34;578&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Powershell Part 2&#34;
@@ -690,10 +3057,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;While decoding the PowerShell script, a link was discovered halfway through the process, leading to the final part of the flag.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/decoding.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/decoding.png&#34;
 	width=&#34;1677&#34;
 	height=&#34;791&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Decoding&#34;
@@ -712,10 +3079,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Navigating to the obtained link revealed the last segment of the flag, completing the puzzle.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%202.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/flag%20part%202.png&#34;
 	width=&#34;825&#34;
 	height=&#34;127&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag Part 2&#34;
@@ -738,10 +3105,10 @@
         </item>
         <item>
         <title>Threat Hunting Challenge 1</title>
-        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</link>
+        <link>http://localhost:1313/post/threat-hunting-challenge-1/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</guid>
+        <guid>http://localhost:1313/post/threat-hunting-challenge-1/</guid>
         <description>&lt;h1 id=&#34;threat-hunting-challenge-1---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 1 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -767,10 +3134,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Therefore, it is safe to assumed that the ransomware executable has already been executed.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/ransomware%20attack.png&#34;
 	width=&#34;960&#34;
 	height=&#34;603&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Ransomware&#34;
@@ -798,10 +3165,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Shimcache, another Windows artifact, also records information about executed programs but in a different format. However, in this challenge, the Shimcache files are intentionally corrupted.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcache.png&#34;
 	width=&#34;1046&#34;
 	height=&#34;190&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Amcache&#34;
@@ -829,10 +3196,10 @@
 &lt;li&gt;
 &lt;p&gt;Running AmcacheParser generated multiple CSV files, which I exported for easier analysis. These files can be explored using applications like Timeline Explorer or by downloading them from &lt;a class=&#34;link&#34; href=&#34;https://ericzimmerman.github.io/#!index.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Eric Zimmerman&amp;rsquo;s website&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcacheparser.png&#34;
 	width=&#34;1500&#34;
 	height=&#34;806&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;AmcacheParser&#34;
@@ -851,10 +3218,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;By examining the generated CSV files, I eventually identified something suspicious among the data, indicating the executable responsible for the encryption.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/sus.png&#34;
 	width=&#34;810&#34;
 	height=&#34;152&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Suspicious&#34;
@@ -883,10 +3250,10 @@
         </item>
         <item>
         <title>Threat Hunting Challenge 2</title>
-        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</link>
+        <link>http://localhost:1313/post/threat-hunting-challenge-2/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</guid>
+        <guid>http://localhost:1313/post/threat-hunting-challenge-2/</guid>
         <description>&lt;h1 id=&#34;threat-hunting-challenge-2---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 2 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -915,10 +3282,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The powershell script showed symptoms of reading files and encrypting it and I am suspecting that this is the file they are looking for, but not 100% certain.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-2/three%20executable.png&#34;
 	width=&#34;774&#34;
 	height=&#34;214&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Executables&#34;
@@ -929,10 +3296,10 @@
 		data-flex-basis=&#34;868px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-2/powershell%20script.png&#34;
 	width=&#34;1674&#34;
 	height=&#34;768&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Powershell Script&#34;
@@ -975,10 +3342,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;At the time of writing this writeup, I have forgotten which one was the flag. Im sorry.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-2/sha256%20value.png&#34;
 	width=&#34;1165&#34;
 	height=&#34;235&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Hash Value&#34;
@@ -1001,10 +3368,10 @@
         </item>
         <item>
         <title>Threat Hunting Challenge 3</title>
-        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</link>
+        <link>http://localhost:1313/post/threat-hunting-challenge-3/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</guid>
+        <guid>http://localhost:1313/post/threat-hunting-challenge-3/</guid>
         <description>&lt;h1 id=&#34;threat-hunting-challenge-3---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 3 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -1027,10 +3394,10 @@
 &lt;ul&gt;
 &lt;li&gt;Upon reviewing the analysis results from the previous challenge (VirusTotal and HybridAnalysis), I observed that both executables made external connections to IP addresses. However, one particular connection stood out among the rest.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-3/not%20sus.png&#34;
 	width=&#34;790&#34;
 	height=&#34;238&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Not Sus&#34;
@@ -1041,10 +3408,10 @@
 		data-flex-basis=&#34;796px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-3/sus.png&#34;
 	width=&#34;683&#34;
 	height=&#34;273&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Sus&#34;
@@ -1075,10 +3442,10 @@
         </item>
         <item>
         <title>Intruding the Hidden Society</title>
-        <link>https://qiaonpc.github.io/post/intruding-the-hidden-society/</link>
+        <link>http://localhost:1313/post/intruding-the-hidden-society/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/intruding-the-hidden-society/</guid>
+        <guid>http://localhost:1313/post/intruding-the-hidden-society/</guid>
         <description>&lt;h1 id=&#34;intruding-the-hidden-society---ctf-challenge-writeup&#34;&gt;Intruding the Hidden Society - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Intruding the Hidden Society&lt;br&gt;
 Points: 200&lt;br&gt;
@@ -1190,10 +3557,10 @@ Category: Forensics&lt;/p&gt;
         </item>
         <item>
         <title>m3m0irs</title>
-        <link>https://qiaonpc.github.io/post/m3m0irs/</link>
+        <link>http://localhost:1313/post/m3m0irs/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/m3m0irs/</guid>
+        <guid>http://localhost:1313/post/m3m0irs/</guid>
         <description>&lt;h1 id=&#34;m3m0irs---ctf-challenge-writeup&#34;&gt;m3m0irs - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: m3m0irs&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -1235,10 +3602,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;During your analysis, you may find &lt;code&gt;Azureus&lt;/code&gt; to be suspicious as it spawned &lt;code&gt;AzureusTor&lt;/code&gt;. This is the software that shouldn&amp;rsquo;t be running.
-&lt;img src=&#34;https://qiaonpc.github.io/post/m3m0irs/Sus.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/m3m0irs/Sus.png&#34;
 	width=&#34;1428&#34;
 	height=&#34;231&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_480x0_resize_box_3.png 480w, http://localhost:1313/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Azureus &amp; AzureusTor&#34;
@@ -1262,10 +3629,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Puzzles of An Altered History</title>
-        <link>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</link>
+        <link>http://localhost:1313/post/puzzles-of-an-altered-history/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</guid>
+        <guid>http://localhost:1313/post/puzzles-of-an-altered-history/</guid>
         <description>&lt;h1 id=&#34;puzzles-of-an-altered-history---ctf-challenge-writeup&#34;&gt;Puzzles of An Altered History - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Puzzles of An Altered History&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -1326,7 +3693,7 @@ Category: Wireless Networking&lt;/p&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;Password Recovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&amp;ldquo;aircrack-ng&amp;rdquo; will attempt to recover the password by testing combinations from the wordlist.&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;aircrack-ng&amp;rdquo; will attempt to recover the password by iHack Prelim 2024 combinations from the wordlist.&lt;/li&gt;
 &lt;li&gt;When aircrack-ng successfully finds the correct password, it will display the password in the terminal.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -1345,10 +3712,10 @@ Category: Wireless Networking&lt;/p&gt;
         </item>
         <item>
         <title>Temporal Traffic Traces</title>
-        <link>https://qiaonpc.github.io/post/temporal-traffic-traces/</link>
+        <link>http://localhost:1313/post/temporal-traffic-traces/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/temporal-traffic-traces/</guid>
+        <guid>http://localhost:1313/post/temporal-traffic-traces/</guid>
         <description>&lt;h1 id=&#34;temporal-traffic-traces---ctf-challenge-writeup&#34;&gt;Temporal Traffic Traces - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Temporal Traffic Traces&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -1368,10 +3735,10 @@ Category: Network Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Check Protocol Hierarchy&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Examine the protocol hierarchy within the pcap file. Look for any anomalies or unusual combinations of protocols.
-&lt;img src=&#34;https://qiaonpc.github.io/post/temporal-traffic-traces/protocol.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/temporal-traffic-traces/protocol.png&#34;
 	width=&#34;1380&#34;
 	height=&#34;759&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_480x0_resize_box_3.png 480w, http://localhost:1313/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Protocol Hierarchy&#34;
@@ -1425,10 +3792,10 @@ Category: Network Forensics&lt;/p&gt;
         </item>
         <item>
         <title>The Early Quantum Supercomputer I</title>
-        <link>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</link>
+        <link>http://localhost:1313/post/the-early-quantum-supercomputer-i/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</guid>
+        <guid>http://localhost:1313/post/the-early-quantum-supercomputer-i/</guid>
         <description>&lt;h1 id=&#34;the-early-quantum-supercomputer-i---ctf-challenge-writeup&#34;&gt;The Early Quantum Supercomputer I - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: The Early Quantum Supercomputer I&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -1454,10 +3821,10 @@ Category: Network Forensics, Operational Technology&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Identify Uncommon Protocols&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Pay close attention to the protocols being used. Look for any uncommon or unusual protocols that may stand out.
-&lt;img src=&#34;https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/the-early-quantum-supercomputer-i/protocol.png&#34;
 	width=&#34;1396&#34;
 	height=&#34;795&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_480x0_resize_box_3.png 480w, http://localhost:1313/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Protocols&#34;
@@ -1493,10 +3860,10 @@ Category: Network Forensics, Operational Technology&lt;/p&gt;
         </item>
         <item>
         <title>Unearth the Enigmatic Codebreaker&#39;s Challenge</title>
-        <link>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</link>
+        <link>http://localhost:1313/post/unearth-the-enigmatic-codebreakers-challenge/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</guid>
+        <guid>http://localhost:1313/post/unearth-the-enigmatic-codebreakers-challenge/</guid>
         <description>&lt;h1 id=&#34;unearth-the-enigmatic-codebreakers-challenge---ctf-challenge-writeup&#34;&gt;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -1547,10 +3914,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Unearth the Long Lost Cipher</title>
-        <link>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</link>
+        <link>http://localhost:1313/post/unearth-the-long-lost-cipher/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</guid>
+        <guid>http://localhost:1313/post/unearth-the-long-lost-cipher/</guid>
         <description>&lt;h1 id=&#34;unearth-the-long-lost-cipher---ctf-challenge-writeup&#34;&gt;Unearth the Long Lost Cipher - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Unearth the Long Lost Cipher&lt;br&gt;
 Points: 150&lt;br&gt;
@@ -1588,10 +3955,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Locate SECRET.txt File&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;During the file scan, you may discover a file named &amp;ldquo;SECRET.txt.&amp;rdquo; Extract this file from the memory dump using the command: &lt;code&gt;volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; dumpfiles -Q &amp;lt;memory-location&amp;gt; -D &amp;lt;directory-where-you-wish-to-place-the-file&amp;gt;&lt;/code&gt;.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/filescan.png&#34;
 	width=&#34;1709&#34;
 	height=&#34;327&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;SECRETS.txt&#34;
@@ -1614,10 +3981,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Password Clues&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Dexter constructed his password using his favorite animal and a mysterious &amp;ldquo;MMYY.&amp;rdquo; Your task is to determine the animal and decode the password using the provided clues.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/secret.png&#34;
 	width=&#34;1246&#34;
 	height=&#34;213&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Password Construction&#34;
@@ -1640,10 +4007,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Multiple Panther Instances&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;After examining Dexter&amp;rsquo;s files, you may discover two instances of the word &amp;ldquo;panther.&amp;rdquo; Assume this is his favorite animal and forms the first part of the flag (7 letters).
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/panther%20hint.png&#34;
 	width=&#34;1704&#34;
 	height=&#34;551&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;2 Instances of Panther&#34;
@@ -1666,10 +4033,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Password Discovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;To narrow down the possibilities, investigate when the &amp;ldquo;notepad&amp;rdquo; application was used. You may find only two dates in the memory dump, so try both as potential password combinations.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/usage%20of%20notepad.png&#34;
 	width=&#34;1715&#34;
 	height=&#34;128&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_480x0_resize_box_3.png 480w, http://localhost:1313/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Usage of Notepad&#34;
@@ -1693,10 +4060,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Unlock the Time Traveller&#39;s Dilemma</title>
-        <link>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</link>
+        <link>http://localhost:1313/post/unlock-the-time-travellers-dilemma/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</guid>
+        <guid>http://localhost:1313/post/unlock-the-time-travellers-dilemma/</guid>
         <description>&lt;h1 id=&#34;unlock-the-time-travellers-dilemma---ctf-challenge-writeup&#34;&gt;Unlock the Time Traveller&amp;rsquo;s Dilemma - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Unlock the Time Traveller&amp;rsquo;s Dilemma&lt;br&gt;
 Points: 200&lt;br&gt;
@@ -1722,10 +4089,10 @@ Category: Memory Forensics&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Flag Discovery&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Although the clipboard content didn&amp;rsquo;t immediately resemble the flag, but I tried it anyways and solved the challenge.
-&lt;img src=&#34;https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard.png&#34;
+&lt;img src=&#34;http://localhost:1313/post/unlock-the-time-travellers-dilemma/clipboard.png&#34;
 	width=&#34;1409&#34;
 	height=&#34;330&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_480x0_resize_box_3.png 480w, http://localhost:1313/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Clipboard&#34;
@@ -1749,10 +4116,10 @@ Category: Memory Forensics&lt;/p&gt;
         </item>
         <item>
         <title>Witness the Quantum Entanglement</title>
-        <link>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</link>
+        <link>http://localhost:1313/post/witness-the-quantum-entanglement/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</guid>
+        <guid>http://localhost:1313/post/witness-the-quantum-entanglement/</guid>
         <description>&lt;h1 id=&#34;witness-the-quantum-entanglement---ctf-challenge-writeup&#34;&gt;Witness the Quantum Entanglement - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Witness the Quantum Entanglement&lt;br&gt;
 Points: 100&lt;br&gt;

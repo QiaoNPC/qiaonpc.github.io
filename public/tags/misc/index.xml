@@ -1,17 +1,95 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Misc on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/tags/misc/</link>
-        <description>Recent content in Misc on Sum Ting Wong&#39;s Blog</description>
+        <title>Misc on </title>
+        <link>http://localhost:1313/tags/misc/</link>
+        <description>Recent content in Misc on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/misc/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Just A Normal EXE</title>
+        <link>http://localhost:1313/post/just-a-normal-exe/</link>
+        <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/just-a-normal-exe/</guid>
+        <description>&lt;h1 id=&#34;just-a-normal-exe-ctf-challenge-writeup&#34;&gt;Just A Normal EXE CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Just A Normal EXE&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 500&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Meoware&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Analyze a malware file to find the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/just-a-normal-exe/challenge.png&#34;
+	width=&#34;654&#34;
+	height=&#34;920&#34;
+	srcset=&#34;http://localhost:1313/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_480x0_resize_box_3.png 480w, http://localhost:1313/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Challenge&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;71&#34;
+		data-flex-basis=&#34;170px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;Just A Normal EXE&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Used VirusTotal to scan the provided malware file. This helps to get a preliminary analysis and detect any immediate issues.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Review VirusTotal Results&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Access the detailed report from VirusTotal, available &lt;a class=&#34;link&#34; href=&#34;https://www.virustotal.com/gui/file/01eeac6d706e078645f78e100bf6c2d808a443c4d85b3257b63fa087eef228cc/relations&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;here&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Identify Key Findings&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In the VirusTotal output, we found &lt;code&gt;s3cr3t5.txt&lt;/code&gt; file mentioned in the relations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Access the Flag&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Visit the URL associated with &lt;code&gt;s3cr3t5.txt&lt;/code&gt; to retrieve the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/just-a-normal-exe/flag.png&#34;
+	width=&#34;871&#34;
+	height=&#34;275&#34;
+	srcset=&#34;http://localhost:1313/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_480x0_resize_box_3.png 480w, http://localhost:1313/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;316&#34;
+		data-flex-basis=&#34;760px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Flag&lt;/strong&gt; : &lt;strong&gt;ihack24{obFusCat!on_Alw4ys_w0rK}&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>ButterCup</title>
-        <link>https://qiaonpc.github.io/post/buttercup/</link>
+        <link>http://localhost:1313/post/buttercup/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/buttercup/</guid>
+        <guid>http://localhost:1313/post/buttercup/</guid>
         <description>&lt;h1 id=&#34;buttercup-ctf-challenge-writeup&#34;&gt;ButterCup CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -38,10 +116,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Discovered the words &lt;code&gt;3XP3RT_&lt;/code&gt; at around 14 seconds and &lt;code&gt;1N_&lt;/code&gt; at around 2:52 in the video.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/part%201.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/buttercup/part%201.png&#34;
 	width=&#34;912&#34;
 	height=&#34;684&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_480x0_resize_box_3.png 480w, http://localhost:1313/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Part 1&#34;
@@ -52,10 +130,10 @@
 		data-flex-basis=&#34;320px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/part%202.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/buttercup/part%202.png&#34;
 	width=&#34;1287&#34;
 	height=&#34;776&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_480x0_resize_box_3.png 480w, http://localhost:1313/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Part 2&#34;
@@ -83,10 +161,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Not the clearest picture of the last part, but we were able to deducde its &lt;code&gt;4UD1O&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/configuration.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/buttercup/configuration.jpg&#34;
 	width=&#34;528&#34;
 	height=&#34;388&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_480x0_resize_q75_box.jpg 480w, http://localhost:1313/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Configuration&#34;
@@ -97,10 +175,10 @@
 		data-flex-basis=&#34;326px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/buttercup/last%20part.jpg&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/buttercup/last%20part.jpg&#34;
 	width=&#34;338&#34;
 	height=&#34;344&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_1024x0_resize_q75_box.jpg 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_480x0_resize_q75_box.jpg 480w, http://localhost:1313/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_1024x0_resize_q75_box.jpg 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Last Part&#34;
@@ -131,10 +209,10 @@
         </item>
         <item>
         <title>I Hope You Have The Software</title>
-        <link>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</link>
+        <link>http://localhost:1313/post/i-hope-you-have-the-software/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</guid>
+        <guid>http://localhost:1313/post/i-hope-you-have-the-software/</guid>
         <description>&lt;h1 id=&#34;i-hope-you-have-the-software-ctf-challenge-writeup&#34;&gt;I Hope You Have The Software CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -154,10 +232,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Noticed two servers stacked on top of each other, suggesting a hidden layer.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/i-hope-you-have-the-software/stacked.png&#34;
 	width=&#34;585&#34;
 	height=&#34;609&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_480x0_resize_box_3.png 480w, http://localhost:1313/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Stacked&#34;
@@ -183,10 +261,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Extracted the flag from the HTML file.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/i-hope-you-have-the-software/flag.png&#34;
 	width=&#34;595&#34;
 	height=&#34;321&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_480x0_resize_box_3.png 480w, http://localhost:1313/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -205,10 +283,10 @@
         </item>
         <item>
         <title>STOP SPAMMING</title>
-        <link>https://qiaonpc.github.io/post/stop-spamming/</link>
+        <link>http://localhost:1313/post/stop-spamming/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/stop-spamming/</guid>
+        <guid>http://localhost:1313/post/stop-spamming/</guid>
         <description>&lt;h1 id=&#34;stop-spamming---ctf-challenge-writeup&#34;&gt;STOP SPAMMING - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: STOP SPAMMING&lt;br&gt;
 Points: 100&lt;br&gt;

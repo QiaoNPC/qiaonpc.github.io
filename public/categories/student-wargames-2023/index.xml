@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Student Wargames 2023 on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/categories/student-wargames-2023/</link>
-        <description>Recent content in Student Wargames 2023 on Sum Ting Wong&#39;s Blog</description>
+        <title>Student Wargames 2023 on </title>
+        <link>http://localhost:1313/categories/student-wargames-2023/</link>
+        <description>Recent content in Student Wargames 2023 on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 17 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/student-wargames-2023/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 17 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/student-wargames-2023/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Compromised</title>
-        <link>https://qiaonpc.github.io/post/compromised/</link>
+        <link>http://localhost:1313/post/compromised/</link>
         <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/compromised/</guid>
+        <guid>http://localhost:1313/post/compromised/</guid>
         <description>&lt;h1 id=&#34;compromised---ctf-challenge-writeup&#34;&gt;Compromised - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -33,10 +33,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Using the &lt;code&gt;tree&lt;/code&gt; command, I quickly located the flag within the directory structure. However, it was a zip file itself, requiring further steps for extraction.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/tree%20to%20find%20flag.png&#34;
 	width=&#34;471&#34;
 	height=&#34;262&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Tree to find flag&#34;
@@ -47,10 +47,10 @@
 		data-flex-basis=&#34;431px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/flag%20zip.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/flag%20zip.png&#34;
 	width=&#34;1091&#34;
 	height=&#34;119&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag is a zip&#34;
@@ -72,10 +72,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Used &lt;code&gt;John The Ripper&lt;/code&gt; to crack the zip file password, which proved unsuccessful, prompting a search for the password.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/john%20failed.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/john%20failed.png&#34;
 	width=&#34;1295&#34;
 	height=&#34;353&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;John Failed&#34;
@@ -97,10 +97,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;code&gt;Cache0000.bin&lt;/code&gt; contains data related to Remote Desktop Protocol (RDP) cache.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/found%20cache.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/found%20cache.png&#34;
 	width=&#34;490&#34;
 	height=&#34;225&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Cache File Found&#34;
@@ -120,10 +120,10 @@
 &lt;li&gt;
 &lt;p&gt;Employed the tool &lt;code&gt;bmc-tools&lt;/code&gt; (&lt;a class=&#34;link&#34; href=&#34;https://github.com/ANSSI-FR/bmc-tools&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/ANSSI-FR/bmc-tools&lt;/a&gt;) to extract pictures from &lt;code&gt;Cache0000.bin&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/bmc%20tools.png&#34;
 	width=&#34;1265&#34;
 	height=&#34;713&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;BMC Tool Output&#34;
@@ -145,10 +145,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Noticed segments of the flag within the combined image, visible upon zooming in.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/bmc%20tools%20zoomed.png&#34;
 	width=&#34;965&#34;
 	height=&#34;231&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;BMC Tool Flag Segment&#34;
@@ -168,10 +168,10 @@
 &lt;li&gt;
 &lt;p&gt;Utilized  &lt;code&gt;RDPCacheStitcher&lt;/code&gt; (&lt;a class=&#34;link&#34; href=&#34;https://github.com/BSI-Bund/RdpCacheStitcher/releases/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://github.com/BSI-Bund/RdpCacheStitcher/releases/&lt;/a&gt;) to assemble the segments as if solving a puzzle.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/stitcher.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/stitcher.png&#34;
 	width=&#34;1459&#34;
 	height=&#34;715&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Stitcher&#34;
@@ -196,10 +196,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Successfully unzipped the flag from the zip file using the obtained password.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/compromised/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/compromised/flag.png&#34;
 	width=&#34;951&#34;
 	height=&#34;271&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_480x0_resize_box_3.png 480w, http://localhost:1313/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -221,10 +221,10 @@
         </item>
         <item>
         <title>Linux Memory Usage</title>
-        <link>https://qiaonpc.github.io/post/linux-memory-usage/</link>
+        <link>http://localhost:1313/post/linux-memory-usage/</link>
         <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/linux-memory-usage/</guid>
+        <guid>http://localhost:1313/post/linux-memory-usage/</guid>
         <description>&lt;h1 id=&#34;linux-memory-usage---ctf-challenge-writeup&#34;&gt;Linux Memory Usage - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -260,10 +260,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Processing queries involved reading and parsing the data structure I coded to provide the desired output efficiently.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/linux-memory-usage/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/linux-memory-usage/flag.png&#34;
 	width=&#34;1740&#34;
 	height=&#34;566&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/linux-memory-usage/flag_hu13642636212e61a304de085073f35b0e_50720_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/linux-memory-usage/flag_hu13642636212e61a304de085073f35b0e_50720_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/linux-memory-usage/flag_hu13642636212e61a304de085073f35b0e_50720_480x0_resize_box_3.png 480w, http://localhost:1313/post/linux-memory-usage/flag_hu13642636212e61a304de085073f35b0e_50720_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -375,10 +375,10 @@
         </item>
         <item>
         <title>Lokami Temple</title>
-        <link>https://qiaonpc.github.io/post/lokami-temple/</link>
+        <link>http://localhost:1313/post/lokami-temple/</link>
         <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/lokami-temple/</guid>
+        <guid>http://localhost:1313/post/lokami-temple/</guid>
         <description>&lt;h1 id=&#34;lokami-temple---ctf-challenge-writeup&#34;&gt;Lokami Temple - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -440,10 +440,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;The challenge resolution involved a systematic approach of identifying the longest paths to each door, selecting the door with the shortest path to the exit, and exploring paths through the chosen door.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/lokami-temple/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/lokami-temple/flag.png&#34;
 	width=&#34;1722&#34;
 	height=&#34;558&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/lokami-temple/flag_hua10048479c43ea6df0f010016cda7f3b_47437_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lokami-temple/flag_hua10048479c43ea6df0f010016cda7f3b_47437_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/lokami-temple/flag_hua10048479c43ea6df0f010016cda7f3b_47437_480x0_resize_box_3.png 480w, http://localhost:1313/post/lokami-temple/flag_hua10048479c43ea6df0f010016cda7f3b_47437_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;

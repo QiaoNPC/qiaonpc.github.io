@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Cryptography on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/tags/cryptography/</link>
-        <description>Recent content in Cryptography on Sum Ting Wong&#39;s Blog</description>
+        <title>Cryptography on </title>
+        <link>http://localhost:1313/tags/cryptography/</link>
+        <description>Recent content in Cryptography on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/cryptography/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/cryptography/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Round and Round</title>
-        <link>https://qiaonpc.github.io/post/round-and-round/</link>
+        <link>http://localhost:1313/post/round-and-round/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/round-and-round/</guid>
+        <guid>http://localhost:1313/post/round-and-round/</guid>
         <description>&lt;h1 id=&#34;round-and-round-ctf-challenge-writeup&#34;&gt;Round and Round CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -50,10 +50,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;This is a very stupid gimmick to be honest, since the flag cannot be constructed without knowing this.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/round-and-round/workings.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/round-and-round/workings.png&#34;
 	width=&#34;1467&#34;
 	height=&#34;2164&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_480x0_resize_box_3.png 480w, http://localhost:1313/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Workings&#34;
@@ -81,10 +81,10 @@
         </item>
         <item>
         <title>May The Force Be With You</title>
-        <link>https://qiaonpc.github.io/post/may-the-force-be-with-you/</link>
+        <link>http://localhost:1313/post/may-the-force-be-with-you/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/may-the-force-be-with-you/</guid>
+        <guid>http://localhost:1313/post/may-the-force-be-with-you/</guid>
         <description>&lt;h1 id=&#34;may-the-force-be-with-you---ctf-challenge-writeup&#34;&gt;May The Force Be With You - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -191,10 +191,10 @@
         </item>
         <item>
         <title>Small Sage</title>
-        <link>https://qiaonpc.github.io/post/small-sage/</link>
+        <link>http://localhost:1313/post/small-sage/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/small-sage/</guid>
+        <guid>http://localhost:1313/post/small-sage/</guid>
         <description>&lt;h1 id=&#34;small-sage---ctf-challenge-writeup&#34;&gt;Small Sage - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -212,10 +212,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Additionally, the &lt;code&gt;out.txt&lt;/code&gt; file contained variables &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;N&lt;/code&gt;, and &lt;code&gt;e&lt;/code&gt;, further indicating an RSA encryption problem.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/nce.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/small-sage/nce.png&#34;
 	width=&#34;1311&#34;
 	height=&#34;328&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_480x0_resize_box_3.png 480w, http://localhost:1313/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;NCE&#34;
@@ -226,10 +226,10 @@
 		data-flex-basis=&#34;959px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/npq.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/small-sage/npq.png&#34;
 	width=&#34;863&#34;
 	height=&#34;438&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_480x0_resize_box_3.png 480w, http://localhost:1313/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;NPQ&#34;
@@ -265,10 +265,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The deciphered message revealed the flag: &lt;code&gt;ABOH23{rocky0ubrr!}&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/small-sage/flag.png&#34;
 	width=&#34;760&#34;
 	height=&#34;136&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_480x0_resize_box_3.png 480w, http://localhost:1313/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -323,10 +323,10 @@
         </item>
         <item>
         <title>Cryptic Raven</title>
-        <link>https://qiaonpc.github.io/post/cryptic-raven/</link>
+        <link>http://localhost:1313/post/cryptic-raven/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/cryptic-raven/</guid>
+        <guid>http://localhost:1313/post/cryptic-raven/</guid>
         <description>&lt;h1 id=&#34;cryptic-raven---ctf-challenge-writeup&#34;&gt;Cryptic Raven - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Cryptic Raven&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -340,7 +340,7 @@ Category: Cryptography&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Message Deciphering&lt;/strong&gt;:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Begin by examining the provided message. The challenge does not disclose the specific encryption technique used.
-&lt;img src=&#34;https://qiaonpc.github.io/Challenge.png&#34;
+&lt;img src=&#34;http://localhost:1313/Challenge.png&#34;
 	
 	
 	
@@ -383,10 +383,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>Harmonic Secrets</title>
-        <link>https://qiaonpc.github.io/post/harmonic-secrets/</link>
+        <link>http://localhost:1313/post/harmonic-secrets/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/harmonic-secrets/</guid>
+        <guid>http://localhost:1313/post/harmonic-secrets/</guid>
         <description>&lt;h1 id=&#34;harmonic-secrets---ctf-challenge-writeup&#34;&gt;Harmonic Secrets - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Harmonic Secrets&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -423,10 +423,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>Marx&#39;s Melodic Memoir</title>
-        <link>https://qiaonpc.github.io/post/marxs-melodic-memoir/</link>
+        <link>http://localhost:1313/post/marxs-melodic-memoir/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/marxs-melodic-memoir/</guid>
+        <guid>http://localhost:1313/post/marxs-melodic-memoir/</guid>
         <description>&lt;h1 id=&#34;marxs-melodic-memoir---ctf-challenge-writeup&#34;&gt;Marx&amp;rsquo;s Melodic Memoir - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: Marx&amp;rsquo;s Melodic Memoir&lt;br&gt;
 Points: 100&lt;br&gt;
@@ -471,10 +471,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>The Enigmatic Manuscript</title>
-        <link>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</link>
+        <link>http://localhost:1313/post/the-enigmatic-manuscript/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</guid>
+        <guid>http://localhost:1313/post/the-enigmatic-manuscript/</guid>
         <description>&lt;h1 id=&#34;the-enigmatic-manuscript---ctf-challenge-writeup&#34;&gt;The Enigmatic Manuscript - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: The Enigmatic Manuscript&lt;br&gt;
 Points: 50&lt;br&gt;
@@ -519,10 +519,10 @@ Category: Cryptography&lt;/p&gt;
         </item>
         <item>
         <title>The Quantum Nexus Prototype</title>
-        <link>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</link>
+        <link>http://localhost:1313/post/the-quantum-nexus-prototype/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</guid>
+        <guid>http://localhost:1313/post/the-quantum-nexus-prototype/</guid>
         <description>&lt;h1 id=&#34;the-quantum-nexus-prototype---ctf-challenge-writeup&#34;&gt;The Quantum Nexus Prototype - CTF Challenge Writeup
 &lt;/h1&gt;&lt;p&gt;Challenge: The Quantum Nexus Prototype&lt;br&gt;
 Points: 50&lt;br&gt;

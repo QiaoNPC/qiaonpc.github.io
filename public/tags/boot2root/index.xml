@@ -1,17 +1,756 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Boot2Root on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/tags/boot2root/</link>
-        <description>Recent content in Boot2Root on Sum Ting Wong&#39;s Blog</description>
+        <title>Boot2Root on </title>
+        <link>http://localhost:1313/tags/boot2root/</link>
+        <description>Recent content in Boot2Root on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/boot2root/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/boot2root/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>MCC 2024 Box</title>
+        <link>http://localhost:1313/post/mcc-2024-box/</link>
+        <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/mcc-2024-box/</guid>
+        <description>&lt;h1 id=&#34;mcc-2024-box-ctf-challenge-writeup&#34;&gt;MCC 2024 Box CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: MCC 2024 Box&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 90&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Boot2Root&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Gain root access to the machine by exploiting vulnerabilities and misconfigurations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;MCC 2024 Box&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Information Gathering&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;First, obtained the IP address of the target machine and ran an &lt;code&gt;nmap&lt;/code&gt; scan to identify open ports.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The scan revealed ports &lt;code&gt;21 (FTP)&lt;/code&gt;, &lt;code&gt;22 (SSH)&lt;/code&gt;, and &lt;code&gt;80 (HTTP)&lt;/code&gt; were open.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Port 21 (FTP) allowed &lt;code&gt;anonymous login&lt;/code&gt;, which could be useful for data retrieval.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/nmap.png&#34;
+	width=&#34;564&#34;
+	height=&#34;341&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/nmap_hu12fc4ccc58efd7be18aac849603ac2d4_161541_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/nmap_hu12fc4ccc58efd7be18aac849603ac2d4_161541_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nmap&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;165&#34;
+		data-flex-basis=&#34;396px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Accessing the FTP Server&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Connected to the FTP server on port 21 and disabled passive mode to list the available files.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Downloaded a &lt;code&gt;.pcap&lt;/code&gt; file from the FTP server for further analysis.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/Disable%20Passive%20Mode.png&#34;
+	width=&#34;602&#34;
+	height=&#34;75&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/Disable%20Passive%20Mode_hu39b6de949a9922a79a9524647d10f1f7_27477_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/Disable%20Passive%20Mode_hu39b6de949a9922a79a9524647d10f1f7_27477_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Disable passive mode&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;802&#34;
+		data-flex-basis=&#34;1926px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/download%20net.pcap.png&#34;
+	width=&#34;602&#34;
+	height=&#34;103&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/download%20net.pcap_hu095f4c6559818f5ac15ded728e0736c3_39921_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/download%20net.pcap_hu095f4c6559818f5ac15ded728e0736c3_39921_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Download net pcap file&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;584&#34;
+		data-flex-basis=&#34;1402px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;PCAP File Analysis&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Opened the &lt;code&gt;.pcap&lt;/code&gt; file and analyzed the network traffic.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered user credentials (&lt;code&gt;chris&lt;/code&gt; and &lt;code&gt;alexander&lt;/code&gt;), the domain name, and some WordPress-related endpoints.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/credentials.png&#34;
+	width=&#34;609&#34;
+	height=&#34;279&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/credentials_hu00803302dd6b22595edc006b81f37a79_97784_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/credentials_hu00803302dd6b22595edc006b81f37a79_97784_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Credentials&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;523px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploring WordPress&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Ran &lt;code&gt;feroxbuster&lt;/code&gt; to brute force additional directories, which revealed several interesting files:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;changelog.md&lt;/code&gt;, &lt;code&gt;secret/login.html&lt;/code&gt;, &lt;code&gt;xmlrpc.php&lt;/code&gt;, and &lt;code&gt;wp-admin.php&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tried logging into WordPress admin and the secret login page using the credentials from the PCAP file, but it didn’t work.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Attempted SQL injection on the login pages, but it was unsuccessful.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Tried exploiting xmlrpc.php, but that also failed.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/feroxbuster.png&#34;
+	width=&#34;602&#34;
+	height=&#34;241&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/feroxbuster_hu3b2e4f81d1c152bce649ba3fd166a40d_136477_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/feroxbuster_hu3b2e4f81d1c152bce649ba3fd166a40d_136477_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Feroxbuster&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;249&#34;
+		data-flex-basis=&#34;599px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Reviewing Changelog for CUPS Vulnerabilities&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A hint pointed us back to the &lt;code&gt;changelog.md&lt;/code&gt; file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Inside, we found that &lt;code&gt;CUPS&lt;/code&gt; (Common Unix Printing System) had 4 CVEs related to it, which might be exploitable.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/changelog.png&#34;
+	width=&#34;902&#34;
+	height=&#34;570&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/changelog_hue586ed3376140e0551ba1e3cd256cc2f_147703_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/changelog_hue586ed3376140e0551ba1e3cd256cc2f_147703_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Changelog&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;158&#34;
+		data-flex-basis=&#34;379px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/cups%20cve.png&#34;
+	width=&#34;1226&#34;
+	height=&#34;577&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/cups%20cve_hucb39637e430163f1318ac9434df1c8c5_92186_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/cups%20cve_hucb39637e430163f1318ac9434df1c8c5_92186_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;CUPS CVE&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;212&#34;
+		data-flex-basis=&#34;509px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Attempting CVE Exploits&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;We tried several &lt;code&gt;POCs&lt;/code&gt; (Proof of Concepts) related to the CUPS vulnerabilities, but none of them worked.&lt;/li&gt;
+&lt;li&gt;Despite trying every known POC available, we couldn&amp;rsquo;t gain further access.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Revisiting the PCAP File&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;A hint suggested revisiting the &lt;code&gt;.pcap&lt;/code&gt; file for additional clues.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After further inspection, we discovered a port knocking sequence.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The sequence was &lt;code&gt;77, 67, 2024, 631&lt;/code&gt;, which was similar to techniques seen in previous CTF challenges like the one in Petronas CTF 2023.&lt;/li&gt;
+&lt;li&gt;The PCAP file showed a failed connection attempt to port 631, followed by a successful connection after the knocking sequence.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/port%20knocking.png&#34;
+	width=&#34;602&#34;
+	height=&#34;139&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/port%20knocking_hu8ddc6076546b96cd8b3223ebf0219757_125708_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/port%20knocking_hu8ddc6076546b96cd8b3223ebf0219757_125708_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Port knocking&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;433&#34;
+		data-flex-basis=&#34;1039px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Performing Port Knocking&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;We attempted the port knocking sequence by connecting to ports &lt;code&gt;77, 67, 2024&lt;/code&gt;, and then port &lt;code&gt;631&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After knocking on the correct ports, we were able to successfully connect to port 631, which provided access to the CUPS service.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/knock%20ports.png&#34;
+	width=&#34;602&#34;
+	height=&#34;463&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/knock%20ports_huab9a3dc679572626910bb9ed512cc70a_170047_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/knock%20ports_huab9a3dc679572626910bb9ed512cc70a_170047_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Knock Ports&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;130&#34;
+		data-flex-basis=&#34;312px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/port%20631%20open.png&#34;
+	width=&#34;602&#34;
+	height=&#34;292&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/port%20631%20open_hu5e4bc079dccb40b47a2d3149532c8e54_40267_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/port%20631%20open_hu5e4bc079dccb40b47a2d3149532c8e54_40267_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Port 631 open&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;206&#34;
+		data-flex-basis=&#34;494px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploiting CUPS for RCE&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Using an RCE exploit found in a similar writeup on the &lt;a class=&#34;link&#34; href=&#34;https://0xdf.gitlab.io/2024/10/02/htb-evilcups.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;0xdf blog&lt;/a&gt;, we were able to execute remote code on the machine as the &lt;code&gt;LP&lt;/code&gt; user.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/lp%20user.png&#34;
+	width=&#34;602&#34;
+	height=&#34;131&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/lp%20user_hue032841261edbe3f5d5f0c256b3780e6_57202_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/lp%20user_hue032841261edbe3f5d5f0c256b3780e6_57202_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;LP user&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;459&#34;
+		data-flex-basis=&#34;1102px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/lp%20user%20flag.png&#34;
+	width=&#34;602&#34;
+	height=&#34;209&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/lp%20user%20flag_hufd313f084620c2a10fbd59ad0366a828_55799_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/lp%20user%20flag_hufd313f084620c2a10fbd59ad0366a828_55799_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;LP user flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;288&#34;
+		data-flex-basis=&#34;691px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Privilege Escalation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;As the &lt;code&gt;LP&lt;/code&gt; user, we found some &lt;code&gt;SUID binaries&lt;/code&gt; that could be useful for privilege escalation and escalated to the &lt;code&gt;alexander&lt;/code&gt; user.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/SUID%20Binary.png&#34;
+	width=&#34;436&#34;
+	height=&#34;585&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/SUID%20Binary_hu5106d98e2883b57bb274ce2fc451f048_163928_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/SUID%20Binary_hu5106d98e2883b57bb274ce2fc451f048_163928_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;SUID Binary&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;74&#34;
+		data-flex-basis=&#34;178px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Due to the unstable shell, running automated tools like &lt;code&gt;linpeas.sh&lt;/code&gt; was not feasible, so we manually enumerated the &lt;code&gt;alexander&lt;/code&gt; user’s environment.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/alexander%20and%20flag.png&#34;
+	width=&#34;602&#34;
+	height=&#34;585&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/alexander%20and%20flag_hu4a78abbd982db0124c956ec448a4f63a_157617_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/alexander%20and%20flag_hu4a78abbd982db0124c956ec448a4f63a_157617_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Alexander and flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;102&#34;
+		data-flex-basis=&#34;246px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Eventually, we discovered SSH keys that could potentially provide further access.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/ssh%20keys.png&#34;
+	width=&#34;602&#34;
+	height=&#34;127&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/ssh%20keys_hu1b90d5adf54d22314bf7bb6e427fc0d0_32166_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/ssh%20keys_hu1b90d5adf54d22314bf7bb6e427fc0d0_32166_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;SSH Keys&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;474&#34;
+		data-flex-basis=&#34;1137px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Cracking the Passphrase for SSH Keys&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Attempted to use the SSH keys, but they were passphrase-protected.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We explored &lt;code&gt;notes.txt&lt;/code&gt; and tried several password combinations, including those we found earlier (for &lt;code&gt;alexander&lt;/code&gt; and &lt;code&gt;LP&lt;/code&gt;), as well as MD5 hashes of those values, but none of them worked.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/trying%20password.png&#34;
+	width=&#34;839&#34;
+	height=&#34;322&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/trying%20password_hu424a51eb4a376624713d537f6cee0053_37104_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/trying%20password_hu424a51eb4a376624713d537f6cee0053_37104_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Trying Password&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;260&#34;
+		data-flex-basis=&#34;625px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Finally, we used &lt;code&gt;John the Ripper&lt;/code&gt; to crack the passphrase, and successfully retrieved the SSH key’s passphrase.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/john%20the%20ripper.png&#34;
+	width=&#34;554&#34;
+	height=&#34;173&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/john%20the%20ripper_hucc0fbc6ee2712ea7f418fe8d460d20da_17846_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/john%20the%20ripper_hucc0fbc6ee2712ea7f418fe8d460d20da_17846_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;John the ripper&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;320&#34;
+		data-flex-basis=&#34;768px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Gaining Stable Shell&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;After logging in as &lt;code&gt;alexander&lt;/code&gt;, we finally had a stable shell and could run any tools required for further enumeration but it is not needed in this case.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We ran &lt;code&gt;sudo -l&lt;/code&gt; and discovered that the user &lt;code&gt;alexander&lt;/code&gt; had permission to edit any file on the system.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/sudo%20l.png&#34;
+	width=&#34;602&#34;
+	height=&#34;92&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/sudo%20l_hu77da1306484f351bd737db68f157f9f9_41954_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/sudo%20l_hu77da1306484f351bd737db68f157f9f9_41954_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;sudo l&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;654&#34;
+		data-flex-basis=&#34;1570px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;We modified the &lt;code&gt;sudoers&lt;/code&gt; file to grant &lt;code&gt;alexander&lt;/code&gt; full root privileges.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/changing%20sudoers%20file.png&#34;
+	width=&#34;438&#34;
+	height=&#34;193&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/changing%20sudoers%20file_hud33a3fcea2ca5097962a9ff6c6eabe9f_51763_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/changing%20sudoers%20file_hud33a3fcea2ca5097962a9ff6c6eabe9f_51763_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Changing sudoers file&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;226&#34;
+		data-flex-basis=&#34;544px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Achieving Root Access&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;With the &lt;code&gt;sudoers&lt;/code&gt; file modified, we gained root access to the machine.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/mcc-2024-box/final%20flag.png&#34;
+	width=&#34;602&#34;
+	height=&#34;275&#34;
+	srcset=&#34;http://localhost:1313/post/mcc-2024-box/final%20flag_hu64ecac949e35d2f5a8d9e9959b4c7a42_100198_480x0_resize_box_3.png 480w, http://localhost:1313/post/mcc-2024-box/final%20flag_hu64ecac949e35d2f5a8d9e9959b4c7a42_100198_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Final Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;218&#34;
+		data-flex-basis=&#34;525px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;MCC24{h3ll0_fr0m_pr1nt1ng_s3rv1c3s}&lt;br&gt;
+MCC24{4bus1ng_su1d}&lt;br&gt;
+MCC24{g00d_j0b_3v3ry0n3}&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Oren</title>
+        <link>http://localhost:1313/post/oren/</link>
+        <pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/oren/</guid>
+        <description>&lt;h1 id=&#34;oren&#34;&gt;Oren
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: Oren&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 100&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Boot2Root&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Exploit the target machine and retrieve the flag.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initial Connection&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Me and Han Kai connected the local challenge machine to NAT and used &lt;strong&gt;netdiscover&lt;/strong&gt; to identify its IP address.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/netdiscover.png&#34;
+	width=&#34;723&#34;
+	height=&#34;253&#34;
+	srcset=&#34;http://localhost:1313/post/oren/netdiscover_hu342f3545c2327a46936c9b2fe83f4da7_39281_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/netdiscover_hu342f3545c2327a46936c9b2fe83f4da7_39281_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Netdiscover&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;285&#34;
+		data-flex-basis=&#34;685px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Enumeration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Scanned the machine using &lt;strong&gt;nmap&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Found that we are attacking a &lt;strong&gt;Windows machine&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/nmap.png&#34;
+	width=&#34;1138&#34;
+	height=&#34;785&#34;
+	srcset=&#34;http://localhost:1313/post/oren/nmap_hu1d2d844d46132811c5264a273ea0e05f_232908_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/nmap_hu1d2d844d46132811c5264a273ea0e05f_232908_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;nmap&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;144&#34;
+		data-flex-basis=&#34;347px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Explored the web application on port &lt;code&gt;8080&lt;/code&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Discovered &lt;code&gt;admin.php&lt;/code&gt;, &lt;code&gt;phpinfo.php&lt;/code&gt;, and &lt;code&gt;index.php&lt;/code&gt; using &lt;strong&gt;feroxbuster&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;Attempted &lt;strong&gt;SQL injection&lt;/strong&gt; on &lt;code&gt;admin.php&lt;/code&gt; using &lt;strong&gt;sqlmap&lt;/strong&gt;, but it failed.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/web-enum.png&#34;
+	width=&#34;1382&#34;
+	height=&#34;842&#34;
+	srcset=&#34;http://localhost:1313/post/oren/web-enum_huc93567fb2428118661ef6b1bcaa49fcd_257087_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/web-enum_huc93567fb2428118661ef6b1bcaa49fcd_257087_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Feroxbuster&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;164&#34;
+		data-flex-basis=&#34;393px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/index_php.png&#34;
+	width=&#34;1918&#34;
+	height=&#34;1198&#34;
+	srcset=&#34;http://localhost:1313/post/oren/index_php_hu5f383b641683aa61cb5bca325353ce9e_61050_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/index_php_hu5f383b641683aa61cb5bca325353ce9e_61050_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;index page&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/admin_php.png&#34;
+	width=&#34;1918&#34;
+	height=&#34;1192&#34;
+	srcset=&#34;http://localhost:1313/post/oren/admin_php_hu1346169967d87384a57800822243c696_46875_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/admin_php_hu1346169967d87384a57800822243c696_46875_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;admin page&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;386px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/phpinfo_php.png&#34;
+	width=&#34;1918&#34;
+	height=&#34;1198&#34;
+	srcset=&#34;http://localhost:1313/post/oren/phpinfo_php_hu37b08bd3bc1d09b3f427eb251861f792_190328_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/phpinfo_php_hu37b08bd3bc1d09b3f427eb251861f792_190328_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;phpinfo&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;160&#34;
+		data-flex-basis=&#34;384px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Kerberos Enumeration&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Han Kai then re-scanned using &lt;strong&gt;nmap&lt;/strong&gt; for potential users.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Found usernames but failed to crack them via password spraying or brute-forcing the login page.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/kerberoastable.png&#34;
+	width=&#34;1007&#34;
+	height=&#34;292&#34;
+	srcset=&#34;http://localhost:1313/post/oren/kerberoastable_huc5cddddda95c1e195963f189f2a60f52_70665_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/kerberoastable_huc5cddddda95c1e195963f189f2a60f52_70665_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Users&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;344&#34;
+		data-flex-basis=&#34;827px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploit Development&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Found PHP version &lt;code&gt;8.1.25&lt;/code&gt; from &lt;code&gt;phpinfo.php&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Searched for related exploits but none of the existing POCs worked.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The challenge hint suggested focusing on the title &lt;strong&gt;Oren&lt;/strong&gt;, which led to discovering an exploit for &lt;strong&gt;PHP 8.1.25 &amp;ldquo;orange&amp;rdquo;&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/php%20orange.png&#34;
+	width=&#34;1031&#34;
+	height=&#34;465&#34;
+	srcset=&#34;http://localhost:1313/post/oren/php%20orange_hu7df5621db061faf8f8485bb59f5c6f17_68745_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/php%20orange_hu7df5621db061faf8f8485bb59f5c6f17_68745_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Orange&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;221&#34;
+		data-flex-basis=&#34;532px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/php%20orange%20poc.png&#34;
+	width=&#34;1418&#34;
+	height=&#34;896&#34;
+	srcset=&#34;http://localhost:1313/post/oren/php%20orange%20poc_hu6360d5908c5139e64f09fca53365cedf_131055_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/php%20orange%20poc_hu6360d5908c5139e64f09fca53365cedf_131055_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;POC Orange&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;158&#34;
+		data-flex-basis=&#34;379px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Gaining Access&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Used the &lt;strong&gt;PHP 8.1.25 orange exploit&lt;/strong&gt; to gain access as the &lt;code&gt;webadmin&lt;/code&gt; user.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Privilege Escalation&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Enumerated the box and discovered files related to the flag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Found a &lt;strong&gt;PowerShell script&lt;/strong&gt; that, when executed, revealed the password for &lt;code&gt;user.zip&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Unzipped the archive to retrieve the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/files%20related%20to%20flag.png&#34;
+	width=&#34;1011&#34;
+	height=&#34;492&#34;
+	srcset=&#34;http://localhost:1313/post/oren/files%20related%20to%20flag_hubd13c78667cc85a2fc795e317a3e1116_135155_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/files%20related%20to%20flag_hubd13c78667cc85a2fc795e317a3e1116_135155_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Files related to flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;205&#34;
+		data-flex-basis=&#34;493px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/ps1%20script.png&#34;
+	width=&#34;1654&#34;
+	height=&#34;556&#34;
+	srcset=&#34;http://localhost:1313/post/oren/ps1%20script_hud88992e6e3ae58ab1e2bd52e8c41a727_186729_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/ps1%20script_hud88992e6e3ae58ab1e2bd52e8c41a727_186729_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;PS1 Script&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;297&#34;
+		data-flex-basis=&#34;713px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/running%20ps1%20script.png&#34;
+	width=&#34;1343&#34;
+	height=&#34;171&#34;
+	srcset=&#34;http://localhost:1313/post/oren/running%20ps1%20script_hu8b347dc16a324b8dc35a25f542800e04_39417_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/running%20ps1%20script_hu8b347dc16a324b8dc35a25f542800e04_39417_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Running PS1 script&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;785&#34;
+		data-flex-basis=&#34;1884px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/oren/flag.png&#34;
+	width=&#34;714&#34;
+	height=&#34;195&#34;
+	srcset=&#34;http://localhost:1313/post/oren/flag_hu7aeb3327cacc4317f9343847ae0cbe46_11829_480x0_resize_box_3.png 480w, http://localhost:1313/post/oren/flag_hu7aeb3327cacc4317f9343847ae0cbe46_11829_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;366&#34;
+		data-flex-basis=&#34;878px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Flag&lt;/strong&gt;: &lt;code&gt;SHCTF24{XXXXXXXXXX}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>DigiDoc</title>
-        <link>https://qiaonpc.github.io/post/digidoc/</link>
+        <link>http://localhost:1313/post/digidoc/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/digidoc/</guid>
+        <guid>http://localhost:1313/post/digidoc/</guid>
         <description>&lt;h1 id=&#34;digidoc---ctf-challenge-writeup&#34;&gt;DigiDoc - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -26,10 +765,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;I started by performing an initial scan using Nmap on the provided IP address, which revealed open ports: FTP, SSH, and HTTP.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/nmap.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/nmap.png&#34;
 	width=&#34;1155&#34;
 	height=&#34;762&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Nmap Scan&#34;
@@ -48,10 +787,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Investigating the FTP service, I logged in anonymously and found two files. Downloading these files revealed an ECB key that would be useful later.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/anonymous%20login.png&#34;
 	width=&#34;653&#34;
 	height=&#34;280&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Anonymous Login&#34;
@@ -62,10 +801,10 @@
 		data-flex-basis=&#34;559px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/files.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/files.png&#34;
 	width=&#34;884&#34;
 	height=&#34;145&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Files&#34;
@@ -76,10 +815,10 @@
 		data-flex-basis=&#34;1463px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/reading%20files.png&#34;
 	width=&#34;1699&#34;
 	height=&#34;560&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Reading Files&#34;
@@ -98,10 +837,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Moving to the HTTP service, I ran a directory brute force using Gobuster. Eventually, it identified a login page.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/home%20page.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/home%20page.png&#34;
 	width=&#34;1185&#34;
 	height=&#34;728&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Home Page&#34;
@@ -112,10 +851,10 @@
 		data-flex-basis=&#34;390px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/gobuster.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/gobuster.png&#34;
 	width=&#34;1230&#34;
 	height=&#34;411&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Gobuster&#34;
@@ -129,10 +868,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Logging in as a guest revealed an upload page, indicating a potential upload vulnerability. However, admin access was required.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/login%20page.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/login%20page.png&#34;
 	width=&#34;943&#34;
 	height=&#34;620&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Login Page&#34;
@@ -143,10 +882,10 @@
 		data-flex-basis=&#34;365px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/admin%20required.png&#34;
 	width=&#34;1640&#34;
 	height=&#34;467&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Admin Required&#34;
@@ -168,10 +907,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;IDOR vulnerability involves manipulating user IDs or object references to gain unauthorized access.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/IDOR.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/IDOR.png&#34;
 	width=&#34;1367&#34;
 	height=&#34;610&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;IDOR&#34;
@@ -193,10 +932,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Following recommendations from hacktricks, I discovered that the &lt;code&gt;.phtml&lt;/code&gt; extension allowed successful uploads, enabling me to upload a reverse shell.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/phtml%20poc.png&#34;
 	width=&#34;943&#34;
 	height=&#34;247&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;PHTML POC&#34;
@@ -207,10 +946,10 @@
 		data-flex-basis=&#34;916px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/phtml.png&#34;
 	width=&#34;517&#34;
 	height=&#34;118&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;PHTML Code&#34;
@@ -221,10 +960,10 @@
 		data-flex-basis=&#34;1051px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/web-shell.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/web-shell.png&#34;
 	width=&#34;1532&#34;
 	height=&#34;750&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Web Shell&#34;
@@ -243,10 +982,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Accessing the server, I realized I was the &lt;code&gt;www-data&lt;/code&gt; user. To achieve root access, I explored the home directory, finding two users: Alvin and Dave.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/dave.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/dave.png&#34;
 	width=&#34;573&#34;
 	height=&#34;84&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Dave&#34;
@@ -260,10 +999,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Decoding a base64-encoded string in Alvin&amp;rsquo;s directory, using the previously obtained ECB key, revealed a plaintext password.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/base64%20password.png&#34;
 	width=&#34;613&#34;
 	height=&#34;92&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Base64 Password&#34;
@@ -274,10 +1013,10 @@
 		data-flex-basis=&#34;1599px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/decode.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/decode.png&#34;
 	width=&#34;459&#34;
 	height=&#34;576&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Decoded&#34;
@@ -296,10 +1035,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;SSHing into the server using Alvin&amp;rsquo;s credentials, I discovered an ability for Alvin to execute a hidden Python script as root using sudo.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/sudo%20l.png&#34;
 	width=&#34;1236&#34;
 	height=&#34;206&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Sudo -l&#34;
@@ -321,10 +1060,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Creating a new &lt;code&gt;shutil.py&lt;/code&gt; file, spawning a shell using &lt;code&gt;os&lt;/code&gt;, escalated privileges to root.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacking.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/hijacking.png&#34;
 	width=&#34;475&#34;
 	height=&#34;111&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Hijacking&#34;
@@ -343,10 +1082,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;The obtained flag through the intended solution: &lt;code&gt;ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacked.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/hijacked.png&#34;
 	width=&#34;904&#34;
 	height=&#34;233&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Hijacked&#34;

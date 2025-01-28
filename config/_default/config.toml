@@ -1,7 +1,8 @@
 # Change baseurl before deploy
 baseurl = "https://qiaonpc.github.io"
 languageCode = "en-us"
-paginate = 5
+[pagination]
+  pagerSize = 10
 title = "Sum Ting Wong's Blog"
 
 # Theme i18n support

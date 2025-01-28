@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>ABOH 2023 on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/categories/aboh-2023/</link>
-        <description>Recent content in ABOH 2023 on Sum Ting Wong&#39;s Blog</description>
+        <title>ABOH 2023 on </title>
+        <link>http://localhost:1313/categories/aboh-2023/</link>
+        <description>Recent content in ABOH 2023 on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/aboh-2023/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 02 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/aboh-2023/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>DigiDoc</title>
-        <link>https://qiaonpc.github.io/post/digidoc/</link>
+        <link>http://localhost:1313/post/digidoc/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/digidoc/</guid>
+        <guid>http://localhost:1313/post/digidoc/</guid>
         <description>&lt;h1 id=&#34;digidoc---ctf-challenge-writeup&#34;&gt;DigiDoc - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -26,10 +26,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;I started by performing an initial scan using Nmap on the provided IP address, which revealed open ports: FTP, SSH, and HTTP.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/nmap.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/nmap.png&#34;
 	width=&#34;1155&#34;
 	height=&#34;762&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Nmap Scan&#34;
@@ -48,10 +48,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Investigating the FTP service, I logged in anonymously and found two files. Downloading these files revealed an ECB key that would be useful later.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/anonymous%20login.png&#34;
 	width=&#34;653&#34;
 	height=&#34;280&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Anonymous Login&#34;
@@ -62,10 +62,10 @@
 		data-flex-basis=&#34;559px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/files.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/files.png&#34;
 	width=&#34;884&#34;
 	height=&#34;145&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Files&#34;
@@ -76,10 +76,10 @@
 		data-flex-basis=&#34;1463px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/reading%20files.png&#34;
 	width=&#34;1699&#34;
 	height=&#34;560&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Reading Files&#34;
@@ -98,10 +98,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Moving to the HTTP service, I ran a directory brute force using Gobuster. Eventually, it identified a login page.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/home%20page.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/home%20page.png&#34;
 	width=&#34;1185&#34;
 	height=&#34;728&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Home Page&#34;
@@ -112,10 +112,10 @@
 		data-flex-basis=&#34;390px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/gobuster.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/gobuster.png&#34;
 	width=&#34;1230&#34;
 	height=&#34;411&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Gobuster&#34;
@@ -129,10 +129,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Logging in as a guest revealed an upload page, indicating a potential upload vulnerability. However, admin access was required.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/login%20page.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/login%20page.png&#34;
 	width=&#34;943&#34;
 	height=&#34;620&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Login Page&#34;
@@ -143,10 +143,10 @@
 		data-flex-basis=&#34;365px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/admin%20required.png&#34;
 	width=&#34;1640&#34;
 	height=&#34;467&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Admin Required&#34;
@@ -168,10 +168,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;IDOR vulnerability involves manipulating user IDs or object references to gain unauthorized access.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/IDOR.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/IDOR.png&#34;
 	width=&#34;1367&#34;
 	height=&#34;610&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;IDOR&#34;
@@ -193,10 +193,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Following recommendations from hacktricks, I discovered that the &lt;code&gt;.phtml&lt;/code&gt; extension allowed successful uploads, enabling me to upload a reverse shell.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/phtml%20poc.png&#34;
 	width=&#34;943&#34;
 	height=&#34;247&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;PHTML POC&#34;
@@ -207,10 +207,10 @@
 		data-flex-basis=&#34;916px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/phtml.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/phtml.png&#34;
 	width=&#34;517&#34;
 	height=&#34;118&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;PHTML Code&#34;
@@ -221,10 +221,10 @@
 		data-flex-basis=&#34;1051px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/web-shell.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/web-shell.png&#34;
 	width=&#34;1532&#34;
 	height=&#34;750&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Web Shell&#34;
@@ -243,10 +243,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Accessing the server, I realized I was the &lt;code&gt;www-data&lt;/code&gt; user. To achieve root access, I explored the home directory, finding two users: Alvin and Dave.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/dave.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/dave.png&#34;
 	width=&#34;573&#34;
 	height=&#34;84&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Dave&#34;
@@ -260,10 +260,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Decoding a base64-encoded string in Alvin&amp;rsquo;s directory, using the previously obtained ECB key, revealed a plaintext password.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/base64%20password.png&#34;
 	width=&#34;613&#34;
 	height=&#34;92&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Base64 Password&#34;
@@ -274,10 +274,10 @@
 		data-flex-basis=&#34;1599px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/decode.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/decode.png&#34;
 	width=&#34;459&#34;
 	height=&#34;576&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Decoded&#34;
@@ -296,10 +296,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;SSHing into the server using Alvin&amp;rsquo;s credentials, I discovered an ability for Alvin to execute a hidden Python script as root using sudo.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/sudo%20l.png&#34;
 	width=&#34;1236&#34;
 	height=&#34;206&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Sudo -l&#34;
@@ -321,10 +321,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Creating a new &lt;code&gt;shutil.py&lt;/code&gt; file, spawning a shell using &lt;code&gt;os&lt;/code&gt;, escalated privileges to root.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacking.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/hijacking.png&#34;
 	width=&#34;475&#34;
 	height=&#34;111&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Hijacking&#34;
@@ -343,10 +343,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;The obtained flag through the intended solution: &lt;code&gt;ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/digidoc/hijacked.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/digidoc/hijacked.png&#34;
 	width=&#34;904&#34;
 	height=&#34;233&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, http://localhost:1313/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Hijacked&#34;
@@ -369,10 +369,10 @@
         </item>
         <item>
         <title>FurElise</title>
-        <link>https://qiaonpc.github.io/post/furelise/</link>
+        <link>http://localhost:1313/post/furelise/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/furelise/</guid>
+        <guid>http://localhost:1313/post/furelise/</guid>
         <description>&lt;h1 id=&#34;furelise---ctf-challenge-writeup&#34;&gt;FurElise - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -387,10 +387,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Upon inspecting the provided file, it was evident that it is a PowerShell script containing obfuscated code.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/challenge.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/challenge.png&#34;
 	width=&#34;700&#34;
 	height=&#34;797&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/challenge_hu52c94fe41ed6b2850a143aab34f47bba_88923_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Challenge&#34;
@@ -412,10 +412,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The initial step involved removing the &lt;code&gt;&amp;amp;&lt;/code&gt; present throughout the script.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/removed%20and.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/removed%20and.png&#34;
 	width=&#34;469&#34;
 	height=&#34;150&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/removed%20and_hufd6c2d8b792b1e2a51a3dcb160d7ba04_24607_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Removed &amp;&#34;
@@ -437,10 +437,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;This step helped in revealing clearer, relevant content within the script.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/removed%20everything.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/removed%20everything.png&#34;
 	width=&#34;866&#34;
 	height=&#34;720&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/removed%20everything_hue16cb2addcb830c6f1878e65f08fbb39_121978_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Removed Everything&#34;
@@ -462,10 +462,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The first link provided the initial part of the flag.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%201.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/flag%20part%201.png&#34;
 	width=&#34;272&#34;
 	height=&#34;69&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/flag%20part%201_hu73ac2e76d6cb3e0360beb90ba3cf4664_4379_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag Part 1&#34;
@@ -484,10 +484,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;The second link presented another PowerShell script. However, caution was exercised against executing it directly on a host machine due to safety concerns.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/1%20powershell.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/1%20powershell.png&#34;
 	width=&#34;1911&#34;
 	height=&#34;946&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/1%20powershell_hu2ee3e47d86d7275063b3f6a1f17ca00c_708094_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Powershell Part 1&#34;
@@ -509,10 +509,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;To understand its functionality, portions of the script were cautiously executed one by one, avoiding potential risks and aiming to decode it progressively.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/decode%20base64.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/decode%20base64.png&#34;
 	width=&#34;1697&#34;
 	height=&#34;867&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/decode%20base64_hud2c8eaf53f089c2d161c4de5967dc0ff_161759_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Decode Base64&#34;
@@ -523,10 +523,10 @@
 		data-flex-basis=&#34;469px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/2%20powershell.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/2%20powershell.png&#34;
 	width=&#34;1433&#34;
 	height=&#34;578&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/2%20powershell_hu33729ff4a8293c68e620114a11f43c78_84265_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Powershell Part 2&#34;
@@ -545,10 +545,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;While decoding the PowerShell script, a link was discovered halfway through the process, leading to the final part of the flag.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/decoding.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/decoding.png&#34;
 	width=&#34;1677&#34;
 	height=&#34;791&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/decoding_huff680a42f1afe527ef62a146ceb31062_161855_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Decoding&#34;
@@ -567,10 +567,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;Navigating to the obtained link revealed the last segment of the flag, completing the puzzle.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%202.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/furelise/flag%20part%202.png&#34;
 	width=&#34;825&#34;
 	height=&#34;127&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_480x0_resize_box_3.png 480w, http://localhost:1313/post/furelise/flag%20part%202_hu1146f4119bae5f434e11a3f79a1674d0_7850_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag Part 2&#34;
@@ -593,10 +593,10 @@
         </item>
         <item>
         <title>May The Force Be With You</title>
-        <link>https://qiaonpc.github.io/post/may-the-force-be-with-you/</link>
+        <link>http://localhost:1313/post/may-the-force-be-with-you/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/may-the-force-be-with-you/</guid>
+        <guid>http://localhost:1313/post/may-the-force-be-with-you/</guid>
         <description>&lt;h1 id=&#34;may-the-force-be-with-you---ctf-challenge-writeup&#34;&gt;May The Force Be With You - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -703,10 +703,10 @@
         </item>
         <item>
         <title>Small Sage</title>
-        <link>https://qiaonpc.github.io/post/small-sage/</link>
+        <link>http://localhost:1313/post/small-sage/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/small-sage/</guid>
+        <guid>http://localhost:1313/post/small-sage/</guid>
         <description>&lt;h1 id=&#34;small-sage---ctf-challenge-writeup&#34;&gt;Small Sage - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -724,10 +724,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Additionally, the &lt;code&gt;out.txt&lt;/code&gt; file contained variables &lt;code&gt;C&lt;/code&gt;, &lt;code&gt;N&lt;/code&gt;, and &lt;code&gt;e&lt;/code&gt;, further indicating an RSA encryption problem.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/nce.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/small-sage/nce.png&#34;
 	width=&#34;1311&#34;
 	height=&#34;328&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_480x0_resize_box_3.png 480w, http://localhost:1313/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;NCE&#34;
@@ -738,10 +738,10 @@
 		data-flex-basis=&#34;959px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/npq.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/small-sage/npq.png&#34;
 	width=&#34;863&#34;
 	height=&#34;438&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_480x0_resize_box_3.png 480w, http://localhost:1313/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;NPQ&#34;
@@ -777,10 +777,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The deciphered message revealed the flag: &lt;code&gt;ABOH23{rocky0ubrr!}&lt;/code&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/small-sage/flag.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/small-sage/flag.png&#34;
 	width=&#34;760&#34;
 	height=&#34;136&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_480x0_resize_box_3.png 480w, http://localhost:1313/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Flag&#34;
@@ -835,10 +835,10 @@
         </item>
         <item>
         <title>Threat Hunting Challenge 1</title>
-        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</link>
+        <link>http://localhost:1313/post/threat-hunting-challenge-1/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-1/</guid>
+        <guid>http://localhost:1313/post/threat-hunting-challenge-1/</guid>
         <description>&lt;h1 id=&#34;threat-hunting-challenge-1---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 1 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -864,10 +864,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Therefore, it is safe to assumed that the ransomware executable has already been executed.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/ransomware%20attack.png&#34;
 	width=&#34;960&#34;
 	height=&#34;603&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/ransomware%20attack_huf2d4846ab62b7c55cc4f29abe0a68af8_51975_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Ransomware&#34;
@@ -895,10 +895,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;Shimcache, another Windows artifact, also records information about executed programs but in a different format. However, in this challenge, the Shimcache files are intentionally corrupted.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcache.png&#34;
 	width=&#34;1046&#34;
 	height=&#34;190&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/amcache_hu9ab704e260e68e51a80cd99f4a2ab227_11591_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Amcache&#34;
@@ -926,10 +926,10 @@
 &lt;li&gt;
 &lt;p&gt;Running AmcacheParser generated multiple CSV files, which I exported for easier analysis. These files can be explored using applications like Timeline Explorer or by downloading them from &lt;a class=&#34;link&#34; href=&#34;https://ericzimmerman.github.io/#!index.md&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Eric Zimmerman&amp;rsquo;s website&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcacheparser.png&#34;
 	width=&#34;1500&#34;
 	height=&#34;806&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/amcacheparser_hubf85dfcffaee4596696d5efb4f0aef14_143237_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;AmcacheParser&#34;
@@ -948,10 +948,10 @@
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;By examining the generated CSV files, I eventually identified something suspicious among the data, indicating the executable responsible for the encryption.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-1/sus.png&#34;
 	width=&#34;810&#34;
 	height=&#34;152&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-1/sus_hu825c2b5bc3321b00e7ad01e7abf7c299_48577_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Suspicious&#34;
@@ -980,10 +980,10 @@
         </item>
         <item>
         <title>Threat Hunting Challenge 2</title>
-        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</link>
+        <link>http://localhost:1313/post/threat-hunting-challenge-2/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-2/</guid>
+        <guid>http://localhost:1313/post/threat-hunting-challenge-2/</guid>
         <description>&lt;h1 id=&#34;threat-hunting-challenge-2---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 2 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -1012,10 +1012,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;The powershell script showed symptoms of reading files and encrypting it and I am suspecting that this is the file they are looking for, but not 100% certain.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-2/three%20executable.png&#34;
 	width=&#34;774&#34;
 	height=&#34;214&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-2/three%20executable_hua8e7bf6b9f574b0427628f2dd97b8fd1_76975_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Executables&#34;
@@ -1026,10 +1026,10 @@
 		data-flex-basis=&#34;868px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-2/powershell%20script.png&#34;
 	width=&#34;1674&#34;
 	height=&#34;768&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-2/powershell%20script_hu6d9613f4c54035822c78fbacb4d15890_51033_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Powershell Script&#34;
@@ -1072,10 +1072,10 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;At the time of writing this writeup, I have forgotten which one was the flag. Im sorry.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-2/sha256%20value.png&#34;
 	width=&#34;1165&#34;
 	height=&#34;235&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-2/sha256%20value_hufc30c8e24cba1206f3fb8da856b7e08e_82116_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Hash Value&#34;
@@ -1098,10 +1098,10 @@
         </item>
         <item>
         <title>Threat Hunting Challenge 3</title>
-        <link>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</link>
+        <link>http://localhost:1313/post/threat-hunting-challenge-3/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/threat-hunting-challenge-3/</guid>
+        <guid>http://localhost:1313/post/threat-hunting-challenge-3/</guid>
         <description>&lt;h1 id=&#34;threat-hunting-challenge-3---ctf-challenge-writeup&#34;&gt;Threat Hunting: Challenge 3 - CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;
@@ -1124,10 +1124,10 @@
 &lt;ul&gt;
 &lt;li&gt;Upon reviewing the analysis results from the previous challenge (VirusTotal and HybridAnalysis), I observed that both executables made external connections to IP addresses. However, one particular connection stood out among the rest.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-3/not%20sus.png&#34;
 	width=&#34;790&#34;
 	height=&#34;238&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-3/not%20sus_hu2d234b8a00b92d1ae34d4d4e3a7ca2cf_35013_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Not Sus&#34;
@@ -1138,10 +1138,10 @@
 		data-flex-basis=&#34;796px&#34;
 	
 &gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus.png&#34;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/threat-hunting-challenge-3/sus.png&#34;
 	width=&#34;683&#34;
 	height=&#34;273&#34;
-	srcset=&#34;https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_1024x0_resize_box_3.png 1024w&#34;
+	srcset=&#34;http://localhost:1313/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_480x0_resize_box_3.png 480w, http://localhost:1313/post/threat-hunting-challenge-3/sus_hu3ceebf911f963a2061961d59ed7e16ab_26679_1024x0_resize_box_3.png 1024w&#34;
 	loading=&#34;lazy&#34;
 	
 		alt=&#34;Sus&#34;

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Hardware on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/tags/hardware/</link>
-        <description>Recent content in Hardware on Sum Ting Wong&#39;s Blog</description>
+        <title>Hardware on </title>
+        <link>http://localhost:1313/tags/hardware/</link>
+        <description>Recent content in Hardware on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/hardware/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/hardware/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Assemble</title>
-        <link>https://qiaonpc.github.io/post/assemble/</link>
+        <link>http://localhost:1313/post/assemble/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/post/assemble/</guid>
+        <guid>http://localhost:1313/post/assemble/</guid>
         <description>&lt;h1 id=&#34;assemble-ctf-challenge-writeup&#34;&gt;Assemble CTF Challenge Writeup
 &lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
 &lt;/h2&gt;&lt;ul&gt;

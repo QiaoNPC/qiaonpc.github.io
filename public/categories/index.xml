@@ -1,57 +1,97 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Categories on Sum Ting Wong&#39;s Blog</title>
-        <link>https://qiaonpc.github.io/categories/</link>
-        <description>Recent content in Categories on Sum Ting Wong&#39;s Blog</description>
+        <title>Categories on </title>
+        <link>http://localhost:1313/categories/</link>
+        <description>Recent content in Categories on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CTF Writeup</title>
-        <link>https://qiaonpc.github.io/categories/ctf-writeup/</link>
-        <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
+        <link>http://localhost:1313/categories/ctf-writeup/</link>
+        <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/categories/ctf-writeup/</guid>
+        <guid>http://localhost:1313/categories/ctf-writeup/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>MCC 2024</title>
+        <link>http://localhost:1313/categories/mcc-2024/</link>
+        <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/mcc-2024/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SherpaCTF 2024</title>
+        <link>http://localhost:1313/categories/sherpactf-2024/</link>
+        <pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/sherpactf-2024/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>PWC HackADay 2024</title>
+        <link>http://localhost:1313/categories/pwc-hackaday-2024/</link>
+        <pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/pwc-hackaday-2024/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SunCTF 2024</title>
+        <link>http://localhost:1313/categories/sunctf-2024/</link>
+        <pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/sunctf-2024/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>FSIIECTF 2024</title>
+        <link>http://localhost:1313/categories/fsiiectf-2024/</link>
+        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/fsiiectf-2024/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>iHack Prelim 2024</title>
+        <link>http://localhost:1313/categories/ihack-prelim-2024/</link>
+        <pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/ihack-prelim-2024/</guid>
         <description></description>
         </item>
         <item>
         <title>rENTAS rawSEC CTF 2024</title>
-        <link>https://qiaonpc.github.io/categories/rentas-rawsec-ctf-2024/</link>
+        <link>http://localhost:1313/categories/rentas-rawsec-ctf-2024/</link>
         <pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/categories/rentas-rawsec-ctf-2024/</guid>
+        <guid>http://localhost:1313/categories/rentas-rawsec-ctf-2024/</guid>
         <description></description>
         </item>
         <item>
         <title>Student Wargames 2023</title>
-        <link>https://qiaonpc.github.io/categories/student-wargames-2023/</link>
+        <link>http://localhost:1313/categories/student-wargames-2023/</link>
         <pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/categories/student-wargames-2023/</guid>
+        <guid>http://localhost:1313/categories/student-wargames-2023/</guid>
         <description></description>
         </item>
         <item>
         <title>ABOH 2023</title>
-        <link>https://qiaonpc.github.io/categories/aboh-2023/</link>
+        <link>http://localhost:1313/categories/aboh-2023/</link>
         <pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/categories/aboh-2023/</guid>
+        <guid>http://localhost:1313/categories/aboh-2023/</guid>
         <description></description>
         </item>
         <item>
         <title>Petronas Interuniversity CTF 2023</title>
-        <link>https://qiaonpc.github.io/categories/petronas-interuniversity-ctf-2023/</link>
+        <link>http://localhost:1313/categories/petronas-interuniversity-ctf-2023/</link>
         <pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate>
         
-        <guid>https://qiaonpc.github.io/categories/petronas-interuniversity-ctf-2023/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>iHack 2024 Preliminary</title>
-        <link>https://qiaonpc.github.io/categories/ihack-prelim-2024/</link>
-        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-        
-        <guid>https://qiaonpc.github.io/categories/ihack-prelim-2024/</guid>
+        <guid>http://localhost:1313/categories/petronas-interuniversity-ctf-2023/</guid>
         <description></description>
         </item>
         
