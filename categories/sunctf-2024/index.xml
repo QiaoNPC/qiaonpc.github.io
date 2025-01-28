@@ -1,0 +1,1248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SunCTF 2024 on</title><link>https://qiaonpc.github.io/categories/sunctf-2024/</link><description>Recent content in SunCTF 2024 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 05 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/sunctf-2024/index.xml" rel="self" type="application/rss+xml"/><item><title>Baby Shark</title><link>https://qiaonpc.github.io/post/baby-shark/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/baby-shark/</guid><description>&lt;h1 id="baby-shark-ctf-challenge-writeup">Baby Shark CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Baby Shark&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a pcap file to find and decode a hidden flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Baby Shark&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Open the pcap File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Open the provided pcap file using Wireshark, a tool commonly used for analyzing network traffic captures.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine the Protocol Hierarchy&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Before diving into the packet details, check the protocol hierarchy in Wireshark to get a general overview of the captured traffic.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/baby-shark/protocol%20hieirarchy.png"
+width="1447"
+height="753"
+srcset="https://qiaonpc.github.io/post/baby-shark/protocol%20hieirarchy_hue9467fe44a6acaf99acdedb97c2cc1dd_186032_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/baby-shark/protocol%20hieirarchy_hue9467fe44a6acaf99acdedb97c2cc1dd_186032_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Protocol Hieirarchy"
+class="gallery-image"
+data-flex-grow="192"
+data-flex-basis="461px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Filter for HTTP Traffic&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Since HTTP traffic is typically straightforward to analyze, apply an HTTP filter in Wireshark to isolate it from other protocols.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/baby-shark/found%20http.png"
+width="1758"
+height="131"
+srcset="https://qiaonpc.github.io/post/baby-shark/found%20http_hu542d5d497d9e86e1badee290515504a4_32407_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/baby-shark/found%20http_hu542d5d497d9e86e1badee290515504a4_32407_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="HTTP"
+class="gallery-image"
+data-flex-grow="1341"
+data-flex-basis="3220px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify the Suspicious HTTP Request&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon inspecting the HTTP traffic, you will notice a path that appears to be base64 encoded.&lt;/li>
+&lt;li>This encoded string is likely the key to retrieving the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decode the Seemingly Base64 String&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Copy the seemingly base64 encoded string and paste it into CyberChef&lt;/li>
+&lt;li>Use the &amp;ldquo;Magic&amp;rdquo; operation in CyberChef to decode the string, it turns out to be base58&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieve the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The decoded string reveals the flag for the challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/baby-shark/flag.png"
+width="1504"
+height="694"
+srcset="https://qiaonpc.github.io/post/baby-shark/flag_hu2acbda5491bd00837c2f47128beb3ca9_32248_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/baby-shark/flag_hu2acbda5491bd00837c2f47128beb3ca9_32248_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="216"
+data-flex-basis="520px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Call for Protocols</title><link>https://qiaonpc.github.io/post/call-for-protocols/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/call-for-protocols/</guid><description>&lt;h1 id="call-for-protocols-ctf-challenge-writeup">Call for Protocols CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Call for Protocols&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 200&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze encrypted TLS traffic to extract the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Investigation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Upon examining the HTTP requests, I discovered two important files: &lt;code>sslkeylog.txt&lt;/code> and &lt;code>brothers.pcapng&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At first, I assumed that the &lt;code>sslkeylog.txt&lt;/code> file was meant to decrypt the &lt;code>call-of-protocols.pcapng&lt;/code> file, but further inspection of the protocol hierarchy suggested otherwise.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/call-for-protocols/found%20files.png"
+width="431"
+height="98"
+srcset="https://qiaonpc.github.io/post/call-for-protocols/found%20files_hu7938edd9bf01bcedc35dfd72c26ab1d7_20390_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/call-for-protocols/found%20files_hu7938edd9bf01bcedc35dfd72c26ab1d7_20390_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found files"
+class="gallery-image"
+data-flex-grow="439"
+data-flex-basis="1055px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I exported both files and began analyzing the &lt;code>brothers.pcapng&lt;/code> file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A closer look at the protocol hierarchy revealed a significant amount of TLS traffic, indicating that this data was encrypted and needed decryption.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/call-for-protocols/identify%20when%20to%20use%20ssl.png"
+width="1390"
+height="752"
+srcset="https://qiaonpc.github.io/post/call-for-protocols/identify%20when%20to%20use%20ssl_hud834d209d9baefff0dacaf123436be02_154683_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/call-for-protocols/identify%20when%20to%20use%20ssl_hud834d209d9baefff0dacaf123436be02_154683_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="TLS"
+class="gallery-image"
+data-flex-grow="184"
+data-flex-basis="443px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decryption Process&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To decrypt the TLS traffic, I utilized the &lt;code>sslkeylog.txt&lt;/code> file. Navigate to &lt;strong>Edit&lt;/strong> → &lt;strong>Preferences&lt;/strong> → &lt;strong>Protocols&lt;/strong> → &lt;strong>TLS&lt;/strong> and adding the Master Secret log file.&lt;/li>
+&lt;li>After importing the key log file, the TLS traffic was successfully decrypted, and I could see that some of the encrypted packets had been converted into readable HTTP traffic.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I browsed through the decrypted HTTP traffic and located the flag within the relevant packets.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/call-for-protocols/flag.png"
+width="1209"
+height="639"
+srcset="https://qiaonpc.github.io/post/call-for-protocols/flag_hu0abacec4b1f9172a0684a8968a466e4d_118591_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/call-for-protocols/flag_hu0abacec4b1f9172a0684a8968a466e4d_118591_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="189"
+data-flex-basis="454px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Graded Reels</title><link>https://qiaonpc.github.io/post/graded-reels/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/graded-reels/</guid><description>&lt;h1 id="graded-reels-ctf-challenge-writeup">Graded Reels CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Graded Reels&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 150&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze an image with a partially hidden flag by manipulating its properties.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Graded Reels&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Open the provided image. At first glance, it seems like the flag is partially cut off at the bottom.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Using Online Tools&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempt to use tools like &lt;a class="link" href="https://fotoforensics.com/" target="_blank" rel="noopener"
+>FotoForensics&lt;/a> to reveal any hidden or manipulated pixels at the bottom of the image.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unfortunately, FotoForensics does not clearly display the hidden portion of the flag, which means you will need to manually modify the image.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graded-reels/fotoforensics%20failed.png"
+width="1110"
+height="776"
+srcset="https://qiaonpc.github.io/post/graded-reels/fotoforensics%20failed_hu30311d3ccaeeca047abe08ada8a5520c_187003_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graded-reels/fotoforensics%20failed_hu30311d3ccaeeca047abe08ada8a5520c_187003_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Fotoforensics Failed"
+class="gallery-image"
+data-flex-grow="143"
+data-flex-basis="343px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Manual Image Manipulation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use &lt;strong>ExifTool&lt;/strong> to extract the metadata of the image, including its height.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once you find the height value in the metadata, convert this value from decimal to hexadecimal.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graded-reels/find%20height%20of%20image.png"
+width="587"
+height="121"
+srcset="https://qiaonpc.github.io/post/graded-reels/find%20height%20of%20image_hu9a6c2c58001ae1396280801162d203c5_21017_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graded-reels/find%20height%20of%20image_hu9a6c2c58001ae1396280801162d203c5_21017_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Find height of image"
+class="gallery-image"
+data-flex-grow="485"
+data-flex-basis="1164px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graded-reels/turn%20to%20hex.png"
+width="571"
+height="449"
+srcset="https://qiaonpc.github.io/post/graded-reels/turn%20to%20hex_hu39f5207f8c23b5e59c1a7ac895b7d167_29937_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graded-reels/turn%20to%20hex_hu39f5207f8c23b5e59c1a7ac895b7d167_29937_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Turn value to hex"
+class="gallery-image"
+data-flex-grow="127"
+data-flex-basis="305px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Hex Editing&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Open the image file in &lt;strong>HexEdit&lt;/strong> (or any hex editor).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Locate the height value in the hex editor by searching for the hexadecimal representation of the height you found earlier.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graded-reels/find%20position%20of%20hex%20in%20hexedit.png"
+width="1336"
+height="182"
+srcset="https://qiaonpc.github.io/post/graded-reels/find%20position%20of%20hex%20in%20hexedit_huf186f000fcc98cb7dfc6c1e7e5e2aa6a_44162_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graded-reels/find%20position%20of%20hex%20in%20hexedit_huf186f000fcc98cb7dfc6c1e7e5e2aa6a_44162_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Find position of hex"
+class="gallery-image"
+data-flex-grow="734"
+data-flex-basis="1761px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Modify the Image&amp;rsquo;s Height&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Increase the height of the image by modifying the corresponding value in the hex editor.&lt;/li>
+&lt;li>After increasing the value, save the changes to the image file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reveal the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Open the modified image, and you should now be able to see the previously hidden portion of the image, revealing the complete flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graded-reels/flag.png"
+width="629"
+height="422"
+srcset="https://qiaonpc.github.io/post/graded-reels/flag_huefecb820cc9e31d89157e9f0401b9b21_107901_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graded-reels/flag_huefecb820cc9e31d89157e9f0401b9b21_107901_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="flag"
+class="gallery-image"
+data-flex-grow="149"
+data-flex-basis="357px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Graduation Letter</title><link>https://qiaonpc.github.io/post/graduation-letter/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/graduation-letter/</guid><description>&lt;h1 id="graduation-letter-ctf-challenge-writeup">Graduation Letter CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Graduation Letter&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 200&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Extract hidden information from an image, leading to a password-protected PDF, and ultimately retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Graduation Letter&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Open the provided image, but at first glance, it appears to be a normal image with no visible clues.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Use ExifTool&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Run &lt;strong>ExifTool&lt;/strong> on the image to extract its metadata.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This reveals a hidden password embedded within the metadata, indicating that steganography might be involved.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graduation-letter/found%20password.png"
+width="972"
+height="138"
+srcset="https://qiaonpc.github.io/post/graduation-letter/found%20password_hu5a59f4028979890afc14b652290a3ac1_23547_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graduation-letter/found%20password_hu5a59f4028979890afc14b652290a3ac1_23547_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found password"
+class="gallery-image"
+data-flex-grow="704"
+data-flex-basis="1690px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Attempt Steghide&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Based on the hint of a password, attempt to use &lt;strong>Steghide&lt;/strong> to extract hidden data from the image.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>However, &lt;strong>Steghide&lt;/strong> fails to retrieve anything.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graduation-letter/steghide%20failed.png"
+width="806"
+height="141"
+srcset="https://qiaonpc.github.io/post/graduation-letter/steghide%20failed_hu1a6a8280ba0b9407372e64d821e5ce99_25784_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graduation-letter/steghide%20failed_hu1a6a8280ba0b9407372e64d821e5ce99_25784_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Steghide failed"
+class="gallery-image"
+data-flex-grow="571"
+data-flex-basis="1371px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Try Binwalk&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Since Steghide didn’t work, use &lt;strong>Binwalk&lt;/strong> to analyze the image for any embedded files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Binwalk successfully extracts a &lt;strong>ZIP&lt;/strong> file from the image.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graduation-letter/binwalk%20extracted.png"
+width="1350"
+height="330"
+srcset="https://qiaonpc.github.io/post/graduation-letter/binwalk%20extracted_hu23d13f05e1351938bd0018af5ff2d0a9_72050_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graduation-letter/binwalk%20extracted_hu23d13f05e1351938bd0018af5ff2d0a9_72050_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Binwalk extracted items"
+class="gallery-image"
+data-flex-grow="409"
+data-flex-basis="981px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extract and Unzip&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Unzip the extracted file using the password found earlier via ExifTool.&lt;/li>
+&lt;li>This reveals a &lt;strong>password-protected PDF&lt;/strong> file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking the PDF&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>It is hinted that &lt;strong>John the Ripper&lt;/strong> can help crack the PDF’s password.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use &lt;strong>pdf2john&lt;/strong> to convert the PDF file into a format that John the Ripper can process.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Run &lt;strong>John&lt;/strong> to crack the PDF password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graduation-letter/cracked%20password.png"
+width="1194"
+height="483"
+srcset="https://qiaonpc.github.io/post/graduation-letter/cracked%20password_hud98e043e4bf73b9b45cb9ff1b0413556_119061_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graduation-letter/cracked%20password_hud98e043e4bf73b9b45cb9ff1b0413556_119061_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cracked password"
+class="gallery-image"
+data-flex-grow="247"
+data-flex-basis="593px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Open the PDF&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use the cracked password to open the PDF, and you will find the flag inside.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/graduation-letter/flag.png"
+width="658"
+height="451"
+srcset="https://qiaonpc.github.io/post/graduation-letter/flag_hu88352d7d4f1efaa0482555d48ecfc436_135323_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/graduation-letter/flag_hu88352d7d4f1efaa0482555d48ecfc436_135323_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="145"
+data-flex-basis="350px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Lost Memories 1</title><link>https://qiaonpc.github.io/post/lost-memories-1/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lost-memories-1/</guid><description>&lt;h1 id="lost-memories-1-ctf-challenge-writeup">Lost Memories 1 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lost Memories 1&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Determine the exact time when the memory dump was taken from a given memory dump file.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve &amp;ldquo;Lost Memories 1&amp;rdquo;, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Overview&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;Lost Memories&amp;rdquo; is a series of five challenges related to memory forensics. The challenges can be solved in any order.&lt;/li>
+&lt;li>In this specific challenge, the goal is to determine the time when the memory dump was taken.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Memory Dump&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge provides a &lt;strong>memory dump&lt;/strong> file.&lt;/li>
+&lt;li>I chose to analyze it using &lt;strong>memprocfs&lt;/strong>, which allows mounting the memory dump as a file system.&lt;/li>
+&lt;li>Memprocfs is useful as it provides a quick overview of the system&amp;rsquo;s processes, files, and other critical components, helping to piece together the system&amp;rsquo;s state.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Memory Dump Timing&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>To find when the memory dump was created, I decided to examine the running processes in the memory dump.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Typically, user-initiated processes are associated with &lt;strong>explorer.exe&lt;/strong> as the parent process, since most user applications are launched from the Windows Explorer interface.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I searched through the process tree for any unusual processes that could indicate memory dumping activity.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>winpmem_mini_x&lt;/strong> stood out as a likely candidate for creating the memory dump.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-1/processes.png"
+width="1223"
+height="508"
+srcset="https://qiaonpc.github.io/post/lost-memories-1/processes_hudd8b1943f6f05227840f39dd4bcd96b5_81101_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-1/processes_hudd8b1943f6f05227840f39dd4bcd96b5_81101_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Processes"
+class="gallery-image"
+data-flex-grow="240"
+data-flex-basis="577px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The flag is based on the timestamp of the memory dump, however, at the time of writing this writeup, I have already forgotten whether the flag requires the time to be in &lt;strong>+08:00&lt;/strong> or &lt;strong>+00:00&lt;/strong> timezone.&lt;/li>
+&lt;li>Adjust the time accordingly based on the flag format.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Lost Memories 2</title><link>https://qiaonpc.github.io/post/lost-memories-2/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lost-memories-2/</guid><description>&lt;h1 id="lost-memories-2-ctf-challenge-writeup">Lost Memories 2 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lost Memories 2&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 150&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Find the password of the system user.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Overview&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;Lost Memories&amp;rdquo; is a series of five challenges. This particular challenge asks us to retrieve the &lt;strong>system user’s password&lt;/strong> from a memory dump.&lt;/li>
+&lt;li>From the previous challenge, we know that the system user is &lt;strong>warlocksmurf&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Memory Dump&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Although I used &lt;strong>memprocfs&lt;/strong> in the first challenge for quick analysis, it’s not suitable for dumping password hashes. So, I switched to using &lt;strong>Volatility&lt;/strong>, which is more effective for this specific task.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Dumping Password Hashes&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>There are two primary Volatility plugins used for extracting password hashes: &lt;strong>hashdump&lt;/strong> and &lt;strong>lsadump&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I first attempted the &lt;strong>hashdump&lt;/strong> plugin:&lt;/p>
+&lt;ul>
+&lt;li>This gave me the &lt;strong>NTLM&lt;/strong> and &lt;strong>LM&lt;/strong> hashes of the user &lt;strong>warlocksmurf&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>In case &lt;strong>hashdump&lt;/strong> doesn’t work, &lt;strong>lsadump&lt;/strong> is another option, but hashdump was successful in this case.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-2/found%20hash.png"
+width="1360"
+height="257"
+srcset="https://qiaonpc.github.io/post/lost-memories-2/found%20hash_hu4192405d8b0d45f3763a33f504797012_56697_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-2/found%20hash_hu4192405d8b0d45f3763a33f504797012_56697_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="hashdump"
+class="gallery-image"
+data-flex-grow="529"
+data-flex-basis="1270px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking the Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I took the retrieved password hashes and submitted them to &lt;strong>CrackStation&lt;/strong>, an online tool for cracking hashed passwords.&lt;/li>
+&lt;li>CrackStation successfully revealed the plaintext password from the NTLM hash.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Submitting the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The cracked password is submitted as the flag, wrapped in &lt;code>sunctf{}&lt;/code> format.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-2/flag.png"
+width="1411"
+height="145"
+srcset="https://qiaonpc.github.io/post/lost-memories-2/flag_hu14917d3d4479554fe9037ead2f13a12b_11232_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-2/flag_hu14917d3d4479554fe9037ead2f13a12b_11232_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="973"
+data-flex-basis="2335px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Lost Memories 3</title><link>https://qiaonpc.github.io/post/lost-memories-3/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lost-memories-3/</guid><description>&lt;h1 id="lost-memories-3-ctf-challenge-writeup">Lost Memories 3 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lost Memories 3&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 200&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify the malicious process, its process ID, and its parent process ID.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Overview&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;Lost Memories&amp;rdquo; is a series of five challenges that can be solved in any order. In this challenge, the goal is to find:
+&lt;ul>
+&lt;li>The &lt;strong>malicious process executable&lt;/strong>.&lt;/li>
+&lt;li>The &lt;strong>process ID&lt;/strong> (PID).&lt;/li>
+&lt;li>The &lt;strong>parent process ID&lt;/strong> (PPID).&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Using Memprocfs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I returned to &lt;strong>memprocfs&lt;/strong>, a tool I’ve used previously for memory analysis. It allows for easy navigation and process enumeration.&lt;/li>
+&lt;li>By examining the processes running on the system, I was able to identify the malicious process.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Key Findings&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The &lt;strong>malicious executable&lt;/strong>: &lt;code>inject0r.exe&lt;/code>.&lt;/li>
+&lt;li>The &lt;strong>process ID (PID)&lt;/strong>: &lt;code>5904&lt;/code>.&lt;/li>
+&lt;li>The &lt;strong>parent process ID (PPID)&lt;/strong>: &lt;code>7780&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Compiling the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Using the collected information, I submitted the flag in the required format: &lt;code>sunctf{}&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-3/flag.png"
+width="830"
+height="83"
+srcset="https://qiaonpc.github.io/post/lost-memories-3/flag_hu9179f49ce59c670f5d153ef066493058_11688_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-3/flag_hu9179f49ce59c670f5d153ef066493058_11688_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="1000"
+data-flex-basis="2400px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Lost Memories 4</title><link>https://qiaonpc.github.io/post/lost-memories-4/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lost-memories-4/</guid><description>&lt;h1 id="lost-memories-4-ctf-challenge-writeup">Lost Memories 4 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lost Memories 4&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 300&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Extract the flag generated by the &lt;code>inject0r.exe&lt;/code> file.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Overview&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The goal is to extract the flag that is generated by the malicious process &lt;code>inject0r.exe&lt;/code>. This challenge is part of the &amp;ldquo;Lost Memories&amp;rdquo; series, and solving it requires analyzing how the flag is handled during runtime.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Initial Approach&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I first dumped the process memory of &lt;code>inject0r.exe&lt;/code> using &lt;strong>strings&lt;/strong> in hopes of finding the flag directly in the executable&amp;rsquo;s memory. This approach failed.&lt;/li>
+&lt;li>I then dumped the process memory of &lt;strong>notepad.exe&lt;/strong>, which was a child process of &lt;code>inject0r.exe&lt;/code>, suspecting the flag would be written there. Unfortunately, this also did not reveal the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Running the Binary&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After multiple failed attempts, I decided to run &lt;code>inject0r.exe&lt;/code> directly to observe its behavior. Initially, I thought the flag would be written to the &lt;strong>notepad&lt;/strong> application, but it wasn’t.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Instead, I realized the flag is dynamically stored in memory during runtime, and the address changes with every execution.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-4/flag%20is%20not%20in%20notepad.png"
+width="1342"
+height="679"
+srcset="https://qiaonpc.github.io/post/lost-memories-4/flag%20is%20not%20in%20notepad_hu7cb9ac8e83f5f60e19cfac215620abb1_26257_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-4/flag%20is%20not%20in%20notepad_hu7cb9ac8e83f5f60e19cfac215620abb1_26257_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag not in notepad"
+class="gallery-image"
+data-flex-grow="197"
+data-flex-basis="474px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Using Cheat Engine&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I launched &lt;strong>Cheat Engine&lt;/strong> for runtime analysis.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>By searching for the string &lt;code>&amp;quot;flag&amp;quot;&lt;/code>, since it was mentioned that the flag would be stored it certain addresses.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-4/encoded%20flag.png"
+width="990"
+height="807"
+srcset="https://qiaonpc.github.io/post/lost-memories-4/encoded%20flag_huff98360fe794fab24d3035254a63e3e6_70862_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-4/encoded%20flag_huff98360fe794fab24d3035254a63e3e6_70862_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="122"
+data-flex-basis="294px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Steps&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I extracted the base64-encoded flag from memory.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoded the base64 string to reveal the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-4/flag.png"
+width="1098"
+height="672"
+srcset="https://qiaonpc.github.io/post/lost-memories-4/flag_hu06ff1717a1d84216ad4c81b334faae02_25450_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-4/flag_hu06ff1717a1d84216ad4c81b334faae02_25450_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="163"
+data-flex-basis="392px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Lost Memories 5</title><link>https://qiaonpc.github.io/post/lost-memories-5/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lost-memories-5/</guid><description>&lt;h1 id="lost-memories-5-ctf-challenge-writeup">Lost Memories 5 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lost Memories 5&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Retrieve notes hidden in the computer of a user named &amp;ldquo;warlocksmurf.&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Overview&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In this final challenge of the &amp;ldquo;Lost Memories&amp;rdquo; series, the task is to find specific notes hidden on warlocksmurf&amp;rsquo;s computer. The challenge focuses on extracting hidden information, particularly from document files.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Memory Dump&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I began by analyzing the memory dump for relevant files. While exploring, I found some &lt;strong>DOCX&lt;/strong> files, which hinted that the notes could be hidden within these documents.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-5/found%20note.png"
+width="1060"
+height="302"
+srcset="https://qiaonpc.github.io/post/lost-memories-5/found%20note_hudf09b07c73d600c72fa5e604b22c9d7e_23524_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-5/found%20note_hudf09b07c73d600c72fa5e604b22c9d7e_23524_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found note"
+class="gallery-image"
+data-flex-grow="350"
+data-flex-basis="842px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Suspecting Macros&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>DOCX files are often used to hide information using macros, so I suspected that the solution could involve extracting and analyzing any embedded macros in the document files.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Using &lt;code>olevba&lt;/code>&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I used &lt;strong>olevba&lt;/strong>, a tool for analyzing macros in Office files, to extract and review the macros in the DOCX file. The macros contained the necessary clues to recover the hidden notes.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Steps&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After reviewing the macros, I found the flag embedded within the macro scripts.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Retrieved the flag and submitted it in the required format.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lost-memories-5/flag.png"
+width="457"
+height="318"
+srcset="https://qiaonpc.github.io/post/lost-memories-5/flag_hu83625b7b19e2099a6a745a9264479c48_36555_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lost-memories-5/flag_hu83625b7b19e2099a6a745a9264479c48_36555_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="flag"
+class="gallery-image"
+data-flex-grow="143"
+data-flex-basis="344px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>MasterFanumTax</title><link>https://qiaonpc.github.io/post/masterfanumtax/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/masterfanumtax/</guid><description>&lt;h1 id="masterfanumtax-ctf-challenge-writeup">MasterFanumTax CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: MasterFanumTax&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Recover and decode the flag from a Master File Table (MFT) file.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Understanding MFT&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The &lt;strong>Master File Table (MFT)&lt;/strong> is a crucial component of the &lt;strong>NTFS&lt;/strong> file system. It stores metadata about every file and directory on the system, including attributes such as file name, size, creation/modification timestamps, and file content location on the disk. By analyzing the MFT, forensic analysts can reconstruct file activities, including deleted files and hidden data.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Parsing the MFT&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I used &lt;strong>Eric Zimmerman&amp;rsquo;s MFTECmd&lt;/strong> tool to parse the provided MFT file. This tool is excellent for extracting file names, timestamps, and other metadata from MFT entries.&lt;/li>
+&lt;li>MFTECmd revealed the existence of a file named &lt;code>flag.txt&lt;/code>, which likely contained the flag. However, I was unable to retrieve the actual contents of this file using this tool alone.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting File Contents&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>To retrieve the content of &lt;code>flag.txt&lt;/code>, I switched to &lt;strong>MFTExplorer&lt;/strong>, another tool by Eric Zimmerman. MFTExplorer allowed me to explore the contents of the MFT in greater detail and successfully retrieve the encoded data from the file.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/masterfanumtax/found%20flag.png"
+width="1561"
+height="817"
+srcset="https://qiaonpc.github.io/post/masterfanumtax/found%20flag_hu697eb1dcc57ed866178981a17a0fa6c9_514946_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/masterfanumtax/found%20flag_hu697eb1dcc57ed866178981a17a0fa6c9_514946_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Flag"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="458px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The retrieved flag was encoded. I decoded the encoded flag into plaintext, which revealed the correct flag for submission.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/masterfanumtax/flag.png"
+width="853"
+height="696"
+srcset="https://qiaonpc.github.io/post/masterfanumtax/flag_hu5cf2613f85c7f76bc78ce2d96d512f6c_12127_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/masterfanumtax/flag_hu5cf2613f85c7f76bc78ce2d96d512f6c_12127_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="122"
+data-flex-basis="294px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Packman</title><link>https://qiaonpc.github.io/post/packman/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/packman/</guid><description>&lt;h1 id="packman-ctf-challenge-writeup">Packman CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Packman&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 300&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Reverse Engineering&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Reverse engineer a Python-compiled Windows executable to retrieve a flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>File Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon receiving the reverse engineering file, the first step was to enumerate the details.&lt;/li>
+&lt;li>The filename indicated it was a Windows executable due to the &lt;code>.exe&lt;/code> extension.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Binary Type&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>By running the &lt;code>strings&lt;/code> command on the file, I identified it as a Python-compiled executable rather than one compiled with C, C++, or Rust.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The presence of Python libraries and mentions of &lt;code>pyc&lt;/code> and &lt;code>pyz&lt;/code> in the output confirmed this.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/packman/presence%20of%20python.png"
+width="894"
+height="492"
+srcset="https://qiaonpc.github.io/post/packman/presence%20of%20python_hu4708178e992922a6307ac9a80cfca258_134495_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/packman/presence%20of%20python_hu4708178e992922a6307ac9a80cfca258_134495_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Presence of Python"
+class="gallery-image"
+data-flex-grow="181"
+data-flex-basis="436px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decompilation Process&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>For Python-compiled binaries, the typical approach is to reverse it to obtain the original Python code.&lt;/li>
+&lt;li>I utilized &lt;code>pyinstxtractor&lt;/code> to extract the &lt;code>.pyc&lt;/code> file from the executable.&lt;/li>
+&lt;li>After obtaining the &lt;code>.pyc&lt;/code> file, I used &lt;code>pycdc&lt;/code> to convert the &lt;code>.pyc&lt;/code> back into readable Python code.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>With the decompiled Python code, I searched through the functions and identified one that would generate or return the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I executed the relevant function to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/packman/flag.png"
+width="1178"
+height="555"
+srcset="https://qiaonpc.github.io/post/packman/flag_hu1e683adedef06da897c5fa70857c7348_204641_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/packman/flag_hu1e683adedef06da897c5fa70857c7348_204641_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="509px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Sussy Disk 1</title><link>https://qiaonpc.github.io/post/sussy-disk-1/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/sussy-disk-1/</guid><description>&lt;h1 id="sussy-disk-1-ctf-challenge-writeup">Sussy Disk 1 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Sussy Disk 1&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze the disk image to recover the flag hidden in the web browsing history.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>Sussy Disk&lt;/em> is a multi-part challenge series where each challenge involves analyzing different aspects of a disk image. In this first part, we are tasked with finding the flag by investigating web browsing history.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Initial Investigation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Since this is a Windows-based challenge, I started by checking artifacts related to the default web browser, &lt;strong>Microsoft Edge&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After examining the history files for Edge, I found that the few URLs visited were related to downloading &lt;strong>Google Chrome&lt;/strong>, suggesting that Chrome was used for most of the browsing activity.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-1/download%20google.png"
+width="1165"
+height="341"
+srcset="https://qiaonpc.github.io/post/sussy-disk-1/download%20google_hue96cc67d693c58b9fba94989d6b10311_33152_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-1/download%20google_hue96cc67d693c58b9fba94989d6b10311_33152_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Download Google"
+class="gallery-image"
+data-flex-grow="341"
+data-flex-basis="819px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Google Chrome Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Next, I searched for Google Chrome artifacts on the disk. Chrome stores browsing history in an SQLite database located in the user profile directory.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Using a tool like &lt;strong>DB Browser for SQLite&lt;/strong>, I navigated to Chrome&amp;rsquo;s &lt;code>History&lt;/code> file and extracted the browsing history.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After reviewing the visited URLs, I found the flag embedded in the browsing history.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-1/google%20history%20db%20file.png"
+width="1266"
+height="369"
+srcset="https://qiaonpc.github.io/post/sussy-disk-1/google%20history%20db%20file_hu26f5f62f38ceee3fa390df3293de24fb_59198_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-1/google%20history%20db%20file_hu26f5f62f38ceee3fa390df3293de24fb_59198_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Google DB File"
+class="gallery-image"
+data-flex-grow="343"
+data-flex-basis="823px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Conclusion&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The flag was hidden in the browsing history of Google Chrome and was recovered by analyzing the browser&amp;rsquo;s SQLite database.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-1/flag.png"
+width="368"
+height="151"
+srcset="https://qiaonpc.github.io/post/sussy-disk-1/flag_hu04515218cf4060267e681cfbdc9b4ca6_6663_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-1/flag_hu04515218cf4060267e681cfbdc9b4ca6_6663_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="243"
+data-flex-basis="584px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Sussy Disk 2</title><link>https://qiaonpc.github.io/post/sussy-disk-2/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/sussy-disk-2/</guid><description>&lt;h1 id="sussy-disk-2-ctf-challenge-writeup">Sussy Disk 2 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Sussy Disk 2&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 150&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Recover a deleted file from the disk image.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The &lt;em>Sussy Disk&lt;/em> series continues with the second challenge, which involves recovering a deleted file from the disk image. Deleted files can often be restored from the Recycle Bin.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Understanding $I and $R Files&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In Windows, when a file is deleted, it is not immediately removed from the disk. Instead, it is moved to the Recycle Bin, where it is represented by two types of files:
+&lt;ul>
+&lt;li>&lt;strong>$I Files&lt;/strong>: These are the information files that store metadata about the deleted file, such as the original filename, path, and deletion date.&lt;/li>
+&lt;li>&lt;strong>$R Files&lt;/strong>: These are the actual data files that contain the content of the deleted file. They typically have the same base name as their corresponding $I files.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding the Deleted File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I navigated to the &lt;code>$Recycle.Bin&lt;/code> directory on the disk image, where the deleted files are stored.&lt;/li>
+&lt;li>I looked for pairs of $I and $R files to identify potential candidates for recovery. By examining the $R files, I was able to find the one corresponding to the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Conclusion&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Clicking on the relevant $R file successfully revealed the hidden flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-2/flag.png"
+width="667"
+height="484"
+srcset="https://qiaonpc.github.io/post/sussy-disk-2/flag_hubbfb45ab55668ae4f80f719162a45e79_40721_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-2/flag_hubbfb45ab55668ae4f80f719162a45e79_40721_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="137"
+data-flex-basis="330px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Sussy Disk 4</title><link>https://qiaonpc.github.io/post/sussy-disk-4/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/sussy-disk-4/</guid><description>&lt;h1 id="sussy-disk-4-ctf-challenge-writeup">Sussy Disk 4 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Sussy Disk 4&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 400&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Unzip a password-protected zip file and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is part of the &lt;em>Sussy Disk&lt;/em> series, where the main objective is to recover information from various digital artifacts. The fourth challenge involves unzipping a password-protected zip file found in the user&amp;rsquo;s document folder.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Initial Investigation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon searching for the zip file in the documents folder, I quickly identified it but struggled to locate the password needed for extraction.&lt;/li>
+&lt;li>I spent considerable time looking for hints throughout the disk image without success.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reading the Challenge Description&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After several hours, I finally took a closer look at the challenge description, which mentioned that the user frequently utilized PowerShell. This was a critical hint that led me to consider that the zip file might have been created using PowerShell&amp;rsquo;s &lt;code>Compress-Archive&lt;/code> cmdlet, which sometimes uses passwords that could be referenced in the PowerShell command history.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding the Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I accessed the PowerShell console history and searched through it to find any commands that could contain the password for the zip file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After a thorough search, I successfully located the password used to create the zip file.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-4/found%20password.png"
+width="1002"
+height="448"
+srcset="https://qiaonpc.github.io/post/sussy-disk-4/found%20password_hu52cb0a255e2ed935dbc2846493b414b3_21580_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-4/found%20password_hu52cb0a255e2ed935dbc2846493b414b3_21580_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="found password"
+class="gallery-image"
+data-flex-grow="223"
+data-flex-basis="536px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting the Zip File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>With the password in hand, I used it to unzip the protected zip file.&lt;/li>
+&lt;li>Inside the extracted contents, I found a base64 encoded message.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I decoded the base64 message using a decoding tool to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-4/flag.png"
+width="824"
+height="614"
+srcset="https://qiaonpc.github.io/post/sussy-disk-4/flag_hu560bd339caa34d61db59a0253409d59b_13898_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-4/flag_hu560bd339caa34d61db59a0253409d59b_13898_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="flag"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="322px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Sussy Disk 5</title><link>https://qiaonpc.github.io/post/sussy-disk-5/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/sussy-disk-5/</guid><description>&lt;h1 id="sussy-disk-5-ctf-challenge-writeup">Sussy Disk 5 CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Sussy Disk 5&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 590&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Find the flag through various hidden artifacts across the disk.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is the final part of the &lt;em>Sussy Disk&lt;/em> series. It involves locating a flag that is split into three parts, each hidden in different locations or formats.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Part 1&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The first part of the flag is located in a file named &lt;code>trojan.ps1&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I opened this PowerShell script and found an encrypted text.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After decoding the encrypted text, I successfully revealed the first part of the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-5/part1.png"
+width="1019"
+height="319"
+srcset="https://qiaonpc.github.io/post/sussy-disk-5/part1_hu6b40abc17421fcd7eebbbf394c3fe30a_27595_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-5/part1_hu6b40abc17421fcd7eebbbf394c3fe30a_27595_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Part 1"
+class="gallery-image"
+data-flex-grow="319"
+data-flex-basis="766px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Part 2&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The second part of the flag was hidden in the &lt;code>Pictures&lt;/code> folder.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In this folder, I discovered a PowerShell script responsible for encrypting an image file named &lt;code>part2.png&lt;/code> by using an XOR operation.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To retrieve the second part of the flag, I had to reverse the XOR process. I XORed the encrypted image with the same key to decrypt it, revealing the second part of the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-5/part2.png"
+width="1545"
+height="754"
+srcset="https://qiaonpc.github.io/post/sussy-disk-5/part2_hu16a29eaf5ca3e8c38383f43136857e5c_197276_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-5/part2_hu16a29eaf5ca3e8c38383f43136857e5c_197276_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Part 2"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="491px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Part 3&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The third part of the flag was located in a text file at &lt;code>warlocksmurf\AppData\Local\Temp\brainrot.txt&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I navigated to the specified path and opened the &lt;code>brainrot.txt&lt;/code> file to find the last part of the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sussy-disk-5/part3.png"
+width="290"
+height="607"
+srcset="https://qiaonpc.github.io/post/sussy-disk-5/part3_hu88d340c7dfad865043a3649439305139_7708_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sussy-disk-5/part3_hu88d340c7dfad865043a3649439305139_7708_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Part 3"
+class="gallery-image"
+data-flex-grow="47"
+data-flex-basis="114px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Zelda Phishing Pond</title><link>https://qiaonpc.github.io/post/zelda-phishing-pond/</link><pubDate>Sat, 05 Oct 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/zelda-phishing-pond/</guid><description>&lt;h1 id="zelda-phishing-pond-ctf-challenge-writeup">Zelda Phishing Pond CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Zelda Phishing Pond&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 200&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a phishing email and extract the flag from encoded contents.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge began with an email that contained encoded contents, which I needed to decode.&lt;/li>
+&lt;li>Normally, files that are sent through email are encoded in base64 format&lt;/li>
+&lt;li>Identify where the files are and decode the files using base64&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding Base64&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon decoding the first chunk of Base64, I found that it revealed an HTML page. However, this did not provide any useful information related to the flag.&lt;/li>
+&lt;li>I then moved on to the second chunk of Base64, which resulted in a ZIP file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Unzipping the File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After unzipping the ZIP file, I discovered a &lt;code>.lnk&lt;/code> file (a Windows shortcut). To extract useful information from this file, I used the &lt;code>lnkinfo&lt;/code> tool.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting Data from the LNK File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Running &lt;code>lnkinfo&lt;/code> on the &lt;code>.lnk&lt;/code> file revealed that there were Base64 encoded messages contained within it.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I proceeded to decode this Base64 encoded message, which revealed a PowerShell script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/zelda-phishing-pond/lnkinfo.png"
+width="1355"
+height="288"
+srcset="https://qiaonpc.github.io/post/zelda-phishing-pond/lnkinfo_hu8d9dd9a546e76e9a42d2aef4d58e7c67_164441_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/zelda-phishing-pond/lnkinfo_hu8d9dd9a546e76e9a42d2aef4d58e7c67_164441_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LNK Info"
+class="gallery-image"
+data-flex-grow="470"
+data-flex-basis="1129px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Inside the PowerShell script, there was another Base64 encoded message. I decoded this final message to uncover the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/zelda-phishing-pond/powershell.png"
+width="866"
+height="569"
+srcset="https://qiaonpc.github.io/post/zelda-phishing-pond/powershell_hu381ada1184305e2259a34f6022fcb621_147516_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/zelda-phishing-pond/powershell_hu381ada1184305e2259a34f6022fcb621_147516_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell"
+class="gallery-image"
+data-flex-grow="152"
+data-flex-basis="365px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/zelda-phishing-pond/flag.png"
+width="815"
+height="495"
+srcset="https://qiaonpc.github.io/post/zelda-phishing-pond/flag_hu7acc1f49e47bb829163868b7fa8cb3a2_35197_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/zelda-phishing-pond/flag_hu7acc1f49e47bb829163868b7fa8cb3a2_35197_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="164"
+data-flex-basis="395px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>
