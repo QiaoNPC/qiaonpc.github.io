@@ -13,7 +13,7 @@ weight: 1
 
 ## Challenge Information
 - **Name**: Phantom Protocol III  
-- **Points**: 100  
+- **Points**: 100
 - **Category**: Forensics  
 - **Objective**: Identify and extract a base64-encoded command hidden in WebSocket traffic that reveals the flag.
 

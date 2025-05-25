@@ -1,6 +1,6 @@
 ---
 title: NETSA CTF 2025
-description: This blog contains concise writeups for diverse NETSA CTF 2025, covering domains like Forensics, IOT, Crypto and more. Let's explore and enhance our cybersecurity skills together.   
+description: This blog contains concise writeups for diverse NETSA CTF 2025, covering domains like Forensics, IOT, Crypto and more. Let's explore and enhance our cybersecurity skills together.
 image:
 
 # Badge style
