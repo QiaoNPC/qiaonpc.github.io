@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud on</title><link>https://qiaonpc.github.io/tags/cloud/</link><description>Recent content in Cloud on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 11 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/cloud/index.xml" rel="self" type="application/rss+xml"/><item><title>Cloud 1 - Finding AWS Endpoint</title><link>https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/</link><pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/</guid><description>&lt;h1 id="cloud-1---finding-aws-endpoint">Cloud 1 - Finding AWS Endpoint
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Cloud 1 - Finding AWS Endpoint&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 50&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Cloud&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Discover the AWS endpoint associated with the challenge and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Exploration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Started by viewing the source code of the entry page (CTRL+U) in search of any AWS-related links or references.&lt;/li>
+&lt;li>No relevant links were found.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image.png"
+width="944"
+height="451"
+srcset="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image_hu1b0634b765ad81a81f62a3e0d7e422a3_391096_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image_hu1b0634b765ad81a81f62a3e0d7e422a3_391096_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="No Links Found"
+class="gallery-image"
+data-flex-grow="209"
+data-flex-basis="502px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Brute Forcing Directories&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Attempted directory enumeration using &lt;code>feroxbuster&lt;/code> to discover hidden paths but abandoned this method midway, recalling this was primarily an AWS-focused challenge.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Login Page&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Realized the presence of a &lt;code>login.html&lt;/code> page, which led to further exploration.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-1.png"
+width="940"
+height="417"
+srcset="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-1_hud9588eec16be93a8c9ba9ea83c74b417_110749_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-1_hud9588eec16be93a8c9ba9ea83c74b417_110749_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Login Page"
+class="gallery-image"
+data-flex-grow="225"
+data-flex-basis="541px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Discovering AWS Endpoint&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Within the &lt;code>login.html&lt;/code> page, noticed a 404 error image that contained the AWS endpoint in its metadata.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieving the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After obtaining the AWS endpoint, used the AWS CLI or a GUI tool to interact with the endpoint and extract the flag.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-2.png"
+width="940"
+height="428"
+srcset="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-2_hu918d955611217821808ce04444c5eec5_216646_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-2_hu918d955611217821808ce04444c5eec5_216646_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Flag"
+class="gallery-image"
+data-flex-grow="219"
+data-flex-basis="527px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-3.png"
+width="940"
+height="129"
+srcset="https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-3_huf556207dd107dc05de368e30a25544d0_51168_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-1-finding-aws-endpoint/image-3_huf556207dd107dc05de368e30a25544d0_51168_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="728"
+data-flex-basis="1748px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="commands-if-using-cli">Commands (if using CLI):
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Viewing files in s3 bucket&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">aws s3 ls s3://&amp;lt;s3 bucket&amp;gt; --profile &amp;lt;aws profile&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Viewing the contents of file without downloading it&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">aws s3 cp s3://&amp;lt;s3 bucket&amp;gt; - --profile &amp;lt;aws profile&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Downloading the file&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">aws s3 cp s3://&amp;lt;s3 bucekt&amp;gt; flag.txt –profile &amp;lt;aws profile&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Cloud 2 - Time Travel</title><link>https://qiaonpc.github.io/post/cloud-2-time-travel/</link><pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/cloud-2-time-travel/</guid><description>&lt;h1 id="cloud-2---time-travel">Cloud 2 - Time Travel
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Cloud 2 - Time Travel&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Cloud&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Retrieve an older version of a file (&lt;code>flag.txt&lt;/code>) stored in an AWS S3 bucket.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="gui-approach">GUI Approach
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>Append &lt;code>/?versions&lt;/code> to the challenge-provided URL to access the versioning view of the S3 bucket.&lt;/p>
+&lt;ul>
+&lt;li>Example: &lt;code>http://&amp;lt;bucket-url&amp;gt;/?versions&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Observe two versions of &lt;code>flag.txt&lt;/code>:&lt;/p>
+&lt;ul>
+&lt;li>One is &lt;strong>70 KB&lt;/strong>, and the other is &lt;strong>71 KB&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-2-time-travel/image.png"
+width="940"
+height="796"
+srcset="https://qiaonpc.github.io/post/cloud-2-time-travel/image_huacb41137b5ed421bcfd37ce48f0aae2d_407716_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-2-time-travel/image_huacb41137b5ed421bcfd37ce48f0aae2d_407716_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="118"
+data-flex-basis="283px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>As far as I know, GUI does not support direct access to older versions of the file&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Hence, CLI is required to proceed&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>But I might be wrong&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="cli-approach">CLI Approach
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Check S3 Bucket Versioning&lt;/strong>: Use the following command to confirm bucket versioning and list available versions&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">aws s3api get-bucket-versioning --bucket &amp;lt;s3-bucket-name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>List Object Versions&lt;/strong>: Retrieve all versions of flag.txt with&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">aws s3api list-object-versions --bucket &amp;lt;s3-bucket-name&amp;gt; --prefix &lt;span class="s2">&amp;#34;flag.txt&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieve the Old File&lt;/strong>: Use the specific VersionId for the older version (e.g., KjCs3l2ZKNtHVTKB1R8IdzoidxwuQwFt) to download the file&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">aws s3api get-object --bucket &amp;lt;bucket&amp;gt;&lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --key &lt;span class="s2">&amp;#34;flag.txt&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> --version-id &lt;span class="s2">&amp;#34;KjCs3l2ZKNtHVTKB1R8IdzoidxwuQwFt&amp;#34;&lt;/span> &lt;span class="se">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="se">&lt;/span> oldflag --profile ccx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-2-time-travel/image-1.png"
+width="940"
+height="134"
+srcset="https://qiaonpc.github.io/post/cloud-2-time-travel/image-1_hu2632ba6a808a735c8c45304599e55f1c_92522_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-2-time-travel/image-1_hu2632ba6a808a735c8c45304599e55f1c_92522_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="701"
+data-flex-basis="1683px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Cloud 3 - Role Hijacking</title><link>https://qiaonpc.github.io/post/cloud-3-role-hijacking/</link><pubDate>Mon, 11 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/cloud-3-role-hijacking/</guid><description>&lt;h1 id="cloud-3---role-hijacking">Cloud 3 - Role Hijacking
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Cloud 3 - Role Hijacking&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 150&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Cloud&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Use role hijacking techniques to escalate privileges and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Accessing the Test User&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Using the method earlier to access older version of files, you should already know that you will be needing the old &lt;code>accessKeys.csv&lt;/code>&lt;/li>
+&lt;li>The old &lt;code>accessKeys.csv&lt;/code> file contains credentials for the &lt;code>testuser&lt;/code>.&lt;/li>
+&lt;li>Used these keys to log in to the AWS account.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image.png"
+width="940"
+height="158"
+srcset="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image_hud51f1fc94b12c90bdc64664ae7ded90c_104271_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-3-role-hijacking/image_hud51f1fc94b12c90bdc64664ae7ded90c_104271_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Old Access Keys"
+class="gallery-image"
+data-flex-grow="594"
+data-flex-basis="1427px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-1.png"
+width="940"
+height="295"
+srcset="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-1_hud37e3e32b82704aa38e5e583eafe3e74_177421_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-1_hud37e3e32b82704aa38e5e583eafe3e74_177421_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Whoami"
+class="gallery-image"
+data-flex-grow="318"
+data-flex-basis="764px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Enumerating Permissions&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Manual Enumeration&lt;/strong>:
+&lt;ul>
+&lt;li>Doing some basic enumeration, it indicated that &lt;code>testuser&lt;/code> had limited permissions, leading to a dead end.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>Automated Tools&lt;/strong>:
+&lt;ul>
+&lt;li>But I still used &lt;strong>PMapper&lt;/strong> and &lt;strong>CloudFox&lt;/strong> for more in-depth enumeration just in case I missed some
+&lt;ul>
+&lt;li>&lt;strong>PMapper&lt;/strong>:
+&lt;ul>
+&lt;li>Builds a permissions graph similar to BloodHound but for AWS accounts.&lt;/li>
+&lt;li>Identified no direct escalation paths or relationships for &lt;code>testuser&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>CloudFox&lt;/strong>:
+&lt;ul>
+&lt;li>Automated enumeration of potential AWS vulnerabilities and permissions.&lt;/li>
+&lt;li>Revealed a &lt;strong>&lt;code>secret_reader&lt;/code> role&lt;/strong>, capable of reading AWS contents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Role Hijacking&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The &lt;code>secret_reader&lt;/code> role permissions indicated a regex check on usernames, allowing anyone with a matching username to assume the role.&lt;/li>
+&lt;li>Created a new username in the account&amp;rsquo;s Cognito (or relevant IAM platform) profile to match the regex.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-2.png"
+width="944"
+height="389"
+srcset="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-2_hu43b82faf12652610c4468c42d54e5392_61553_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-2_hu43b82faf12652610c4468c42d54e5392_61553_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Regex Role"
+class="gallery-image"
+data-flex-grow="242"
+data-flex-basis="582px"
+>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>You can definitely create a user that matches the regex using GUI, but I prefer to use CLI&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The commands I used are:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Creating a user with matching regex&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> aws iam create-user --user-name hackaday2024_Malaysia_Chai_Cheng_Xun --profile ccx
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Creating access keys for this user&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> aws iam create-access-key --user-name hackaday2024_Malaysia_Chai_Cheng_Xun –profile ccx
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Attaching full IAM policy to this user just in case&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> aws iam attach-user-policy --user-name hackaday2024_Malaysia_Chai_Cheng_Xun --policy-arn arn:aws:iam::aws:policy/IAMFullAccess --profile ccx
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Attaching sts:assumeRole so that this user can assume a role. I made sure that this user can only assume the challenge role&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> aws iam put-user-policy --user-name hackaday2024_Malaysia_Chai_Cheng_Xun --policy-name AllowAssumeSecretRole --policy-document &lt;span class="s1">&amp;#39;{ &amp;#34;Version&amp;#34;: &amp;#34;2012-10-17&amp;#34;, &amp;#34;Statement&amp;#34;: [ { &amp;#34;Effect&amp;#34;: &amp;#34;Allow&amp;#34;, &amp;#34;Action&amp;#34;: &amp;#34;sts:AssumeRole&amp;#34;, &amp;#34;Resource&amp;#34;: &amp;#34;arn:aws:iam::491085415612:role/secret_role&amp;#34; } ] }&amp;#39;&lt;/span> --profile ccx
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Assuming the Role&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used the new username and applied the following command to assume the &lt;code>secret_reader&lt;/code> role:&lt;/li>
+&lt;li>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">aws sts assume-role --role-arn arn:aws:iam::491085415612:role/secret_role --role-session-name hackaday --profile hijack
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>Received new &lt;strong>Access Key&lt;/strong> and &lt;strong>Secret Access Key&lt;/strong> for the &lt;code>secret_reader&lt;/code> role.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieving the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>With elevated permissions, accessed the resources tied to the &lt;code>secret_reader&lt;/code> role and retrieved the flag.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-3.png"
+width="940"
+height="442"
+srcset="https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-3_hu68a224541bbd1df7905f44309c0e77ec_288639_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cloud-3-role-hijacking/image-3_hu68a224541bbd1df7905f44309c0e77ec_288639_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="510px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

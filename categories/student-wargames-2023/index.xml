@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Student Wargames 2023 on</title><link>https://qiaonpc.github.io/categories/student-wargames-2023/</link><description>Recent content in Student Wargames 2023 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 17 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/student-wargames-2023/index.xml" rel="self" type="application/rss+xml"/><item><title>Compromised</title><link>https://qiaonpc.github.io/post/compromised/</link><pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/compromised/</guid><description>&lt;h1 id="compromised---ctf-challenge-writeup">Compromised - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Compromised&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Compromised&amp;rdquo; CTF challenge is to extract a hidden flag embedded within a complex set of files and directories.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully solve the &amp;ldquo;Compromised&amp;rdquo; challenge, I executed the following steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Unzipped the provided challenge file, revealing a directory structure reminiscent of a Windows directory.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Using the &lt;code>tree&lt;/code> command, I quickly located the flag within the directory structure. However, it was a zip file itself, requiring further steps for extraction.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag.png"
+width="471"
+height="262"
+srcset="https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/tree%20to%20find%20flag_hu56c72202b0be96a693adac30d28ac80c_48522_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Tree to find flag"
+class="gallery-image"
+data-flex-grow="179"
+data-flex-basis="431px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/flag%20zip.png"
+width="1091"
+height="119"
+srcset="https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag%20zip_hu233af82ed692c2c7c834e048aff1323d_57618_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag is a zip"
+class="gallery-image"
+data-flex-grow="916"
+data-flex-basis="2200px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Brute Forcing the Zip File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempted to brute force the password for the zip file. Initially faced permission issues, resolved by changing permissions using &lt;code>chmod&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used &lt;code>John The Ripper&lt;/code> to crack the zip file password, which proved unsuccessful, prompting a search for the password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/john%20failed.png"
+width="1295"
+height="353"
+srcset="https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/john%20failed_hub44e5245703d27a185866e2d02b5fd8d_213403_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="John Failed"
+class="gallery-image"
+data-flex-grow="366"
+data-flex-basis="880px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Locating Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After some exploration, identified the crucial file named &lt;code>Cache0000.bin&lt;/code>, which holds significant data for the challenge.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;code>Cache0000.bin&lt;/code> contains data related to Remote Desktop Protocol (RDP) cache.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/found%20cache.png"
+width="490"
+height="225"
+srcset="https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/found%20cache_hu2452617720dde5cad47c10fc5979e3bf_50341_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cache File Found"
+class="gallery-image"
+data-flex-grow="217"
+data-flex-basis="522px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting Images from Cache File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Employed the tool &lt;code>bmc-tools&lt;/code> (&lt;a class="link" href="https://github.com/ANSSI-FR/bmc-tools" target="_blank" rel="noopener"
+>https://github.com/ANSSI-FR/bmc-tools&lt;/a>) to extract pictures from &lt;code>Cache0000.bin&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/bmc%20tools.png"
+width="1265"
+height="713"
+srcset="https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools_hub0467e995eebc7c55c80afca5a188a2f_766412_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="BMC Tool Output"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="425px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Revealing Flag within Images&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extracted over 2000 images, one of which combines all the segments of the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Noticed segments of the flag within the combined image, visible upon zooming in.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed.png"
+width="965"
+height="231"
+srcset="https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/bmc%20tools%20zoomed_hu345ff2b754f4a8aef7066e7ce748a8be_78176_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="BMC Tool Flag Segment"
+class="gallery-image"
+data-flex-grow="417"
+data-flex-basis="1002px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Combining Segments into Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Utilized &lt;code>RDPCacheStitcher&lt;/code> (&lt;a class="link" href="https://github.com/BSI-Bund/RdpCacheStitcher/releases/" target="_blank" rel="noopener"
+>https://github.com/BSI-Bund/RdpCacheStitcher/releases/&lt;/a>) to assemble the segments as if solving a puzzle.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/stitcher.png"
+width="1459"
+height="715"
+srcset="https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/stitcher_hu03fdf24debb36753327432bc02609da7_38614_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Stitcher"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="489px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Obtaining Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Discovered the password &lt;code>WGMY_P4ssw0rd_N0t_V3ry_H4rd!!!&lt;/code> while assembling the image segments.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Final Flag Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Successfully unzipped the flag from the zip file using the obtained password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/compromised/flag.png"
+width="951"
+height="271"
+srcset="https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/compromised/flag_hu12614d797c54e94c43ac1cb33d0f927d_95998_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="350"
+data-flex-basis="842px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>wgmy{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>This writeup delineates the process of navigating through a directory, extracting images from a cache file, assembling image segments, and obtaining the hidden flag in the &amp;ldquo;Compromised&amp;rdquo; CTF challenge. For any further queries or clarifications, please feel free to ask.&lt;/p></description></item><item><title>Linux Memory Usage</title><link>https://qiaonpc.github.io/post/linux-memory-usage/</link><pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/linux-memory-usage/</guid><description>&lt;h1 id="linux-memory-usage---ctf-challenge-writeup">Linux Memory Usage - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Linux Memory Usage&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: PPC / Leet Code&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Linux Memory Usage&amp;rdquo; CTF challenge is to efficiently manage and process memory usage data for different processes based on given inputs.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Encountering a Leet Code challenge within a CTF was an interesting experience. Here&amp;rsquo;s how I tackled it:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Understanding Inputs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This was my first encounter with a Leet Code style challenge in a CTF context, very very fun.&lt;/li>
+&lt;li>The problem consisted of three types of inputs:
+&lt;ol>
+&lt;li>Variables N and Q: Representing the number of processes and queries.&lt;/li>
+&lt;li>Processes&amp;rsquo; Data: Including process id, parent process id, and memory usage.&lt;/li>
+&lt;li>Queries: Containing necessary information for further analysis.&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Memory Mapping&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Utilizing the received inputs, I structured the memory by creating a dictionary.&lt;/li>
+&lt;li>The dictionary&amp;rsquo;s key-value pairs were organized to represent parent processes and their corresponding children processes, facilitating efficient data retrieval.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Handling Queries&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Processing queries involved reading and parsing the data structure I coded to provide the desired output efficiently.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/linux-memory-usage/flag.png"
+width="1740"
+height="566"
+srcset="https://qiaonpc.github.io/post/linux-memory-usage/flag_hu13642636212e61a304de085073f35b0e_50720_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/linux-memory-usage/flag_hu13642636212e61a304de085073f35b0e_50720_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="307"
+data-flex-basis="737px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">collections&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">defaultdict&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">calculate_memory_usage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">q&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">children&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">defaultdict&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">list&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">memory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">p&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">memory&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">c&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">children&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">memo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">results&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">query&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">q&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">stack&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">total_memory&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">while&lt;/span> &lt;span class="n">stack&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">current_pid&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">stack&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">pop&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">current_pid&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">memo&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">total_memory&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">memo&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">current_pid&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">continue&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">total_memory&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">memory&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">current_pid&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">children_list&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">children&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">current_pid&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">child&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">children_list&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">stack&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">child&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">results&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">total_memory&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">memo&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">query&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">total_memory&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">results&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">N&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">Q&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">input&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">p&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nb">list&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">input&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">()))&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">N&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">q&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">input&lt;/span>&lt;span class="p">())&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">Q&lt;/span>&lt;span class="p">)]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">results&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">calculate_memory_usage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">p&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">q&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">results&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>wgmy{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>This writeup demonstrates the process of efficiently managing and processing memory usage data in the &amp;ldquo;Linux Memory Usage&amp;rdquo; CTF challenge using appropriate data structures and systematic query handling. For any further inquiries or clarifications, feel free to ask.&lt;/p></description></item><item><title>Lokami Temple</title><link>https://qiaonpc.github.io/post/lokami-temple/</link><pubDate>Sun, 17 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lokami-temple/</guid><description>&lt;h1 id="lokami-temple---ctf-challenge-writeup">Lokami Temple - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lokami Temple&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: PPC / Leet Code&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Lokami Temple&amp;rdquo; CTF challenge is to navigate a graph problem by determining the shortest path for all doors to exit.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Encountering a Leet Code challenge within a CTF was an intriguing experience. Here&amp;rsquo;s my approach to solving it:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Graph Problem Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Opted to use Depth-First Search (DFS) due to its comprehensibility, although Breadth-First Search (BFS) could potentially be faster.&lt;/li>
+&lt;li>Utilized DFS templates available from resources like Geek4Geeks to implement the algorithm.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Contradictory Challenge Instructions&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Initially, the challenge instructions seemed contradictory, as it asked to find both the longest and shortest paths for doors.&lt;/li>
+&lt;li>Decided to prioritize identifying the longest path to each door first, considering the logical progression of the problem.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Longest Paths for Each Door&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Calculated the longest path from each door to the exit.&lt;/li>
+&lt;li>For example:
+&lt;ul>
+&lt;li>Door 1: 6 steps to Exit 10&lt;/li>
+&lt;li>Door 2: 6 steps to Exit 10&lt;/li>
+&lt;li>Door 3: 5 steps to Exit 10&lt;/li>
+&lt;li>Evaluated each door&amp;rsquo;s longest path to determine the shortest length.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Selecting Shortest Path&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Chose the door with the shortest path to the exit among the calculated values.&lt;/li>
+&lt;li>In the example, if Door 3 requires only 5 steps while Doors 1 and 2 need 6 steps, Door 3 becomes the selected choice.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Exit Paths via Selected Door&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Explored and mapped all potential paths to the exit through the selected door (in this case, Door 3).
+&lt;ul>
+&lt;li>Door 3 can exit through Door 1, Door 2, Door 5, basically any door&lt;/li>
+&lt;li>Select the longest path for Door 3 to exit in this step&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Conclusion&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The challenge resolution involved a systematic approach of identifying the longest paths to each door, selecting the door with the shortest path to the exit, and exploring paths through the chosen door.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lokami-temple/flag.png"
+width="1722"
+height="558"
+srcset="https://qiaonpc.github.io/post/lokami-temple/flag_hua10048479c43ea6df0f010016cda7f3b_47437_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lokami-temple/flag_hua10048479c43ea6df0f010016cda7f3b_47437_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="308"
+data-flex-basis="740px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">collections&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">defaultdict&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">find_longest_paths&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_doors&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">connections&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">graph&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">defaultdict&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">list&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">connections&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">graph&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">graph&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">def&lt;/span> &lt;span class="nf">dfs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">visited&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">visited&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">add&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">max_path_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">neighbor&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">graph&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">neighbor&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">visited&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dfs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">neighbor&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">visited&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">max_path_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">max&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">max_path_length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">path_length&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">visited&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">remove&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">node&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">max_path_length&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">longest_paths&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">door&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">num_doors&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">path_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">dfs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">door&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">set&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">longest_paths&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">door&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">path_length&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">longest_paths&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">get_longest_paths&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">max_path_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">max&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">lambda&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">])[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">doors_with_max_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">door&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">door&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">path_length&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">path_length&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">max_path_length&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">max_path_length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">doors_with_max_length&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">num_doors&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">input&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">connections&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_doors&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">input&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">connections&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">a&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">b&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">find_longest_paths&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">num_doors&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">connections&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">min_path_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">min&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">lambda&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">])[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">doors_with_min_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">door&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">door&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">path_length&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">result&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">path_length&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">min_path_length&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">max_path_length&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">doors_with_max_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_longest_paths&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">print_exit&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">doors_with_max_length&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">print_door_min_length&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">map&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">doors_with_min_length&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Entrance(s): &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">print_door_min_length&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Exit(s): &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">print_exit&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Path Length: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">min_path_length&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>wgmy{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>This writeup illustrates the approach taken to navigate a graph problem, determining the shortest path for all doors to exit in the &amp;ldquo;Lokami Temple&amp;rdquo; CTF challenge. For any further queries or clarifications, feel free to inquire.&lt;/p></description></item></channel></rss>
