@@ -1,12 +1,12 @@
 ---
-title: Kapas
+title: Blink Logic
 description: The goal of this challenge is to analyze a firmware file and determine the correct keypad input to unlock an IoT system running on Wokwi simulation.
 date: 2025-05-26 00:00:00+0000
 categories:
    - NETSA CTF 2025
    - CTF Writeup
 tags:
-   - Steganography
+   - IoT
 weight: 1     
 ---
 # Blink Logic CTF Challenge Writeup
