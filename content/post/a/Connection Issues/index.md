@@ -3,7 +3,7 @@ title: Connection Issues
 description: The goal of this challenge is to analyze suspicious network traffic to identify ARP poisoning activity and extract the exfiltrated flag data.
 date: 2025-06-08 00:00:00+0000
 categories:
-   - NUS GreyHats 2025
+   - a
    - CTF Writeup
 tags:
    - Forensics
