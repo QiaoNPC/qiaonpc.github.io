@@ -1,3 +1,14 @@
+---
+title: Notsus.exe
+description: The goal of this challenge is to analyze and decrypt files extracted from a ZIP archive using a known plaintext attack and reverse engineer a bundled Python executable to extract the final flag
+date: 2025-06-08 00:00:00+0000
+categories:
+   - NUS GreyHats 2025
+   - CTF Writeup
+tags:
+   - Forensics
+weight: 1     
+---
 # Notsus.exe CTF Challenge Writeup
 
 ## Challenge Information
