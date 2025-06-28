@@ -9,7 +9,7 @@ tags:
    - Forensics
 weight: 1     
 ---
-# Initial Vector - CTF Challenge Writeup
+# 1 Initial Vector - CTF Challenge Writeup
 
 ## Challenge Information
 - **Name**: Initial Vector  

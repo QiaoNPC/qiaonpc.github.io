@@ -9,7 +9,7 @@ tags:
    - Forensics
 weight: 1     
 ---
-# Privesc - CTF Challenge Writeup
+# 2 Privesc - CTF Challenge Writeup
 
 ## Challenge Information
 - **Name**: Privesc  

@@ -1,5 +1,5 @@
 ---
-title: 2 C2
+title: 3 C2
 description: Analyze a suspected command-and-control (C2) component discovered in a previously compromised system. Reverse engineer the binary to identify communication mechanisms, retrieve the bot token, and understand or replicate the exfiltration process.
 date: 2025-06-28 00:00:00+0000
 categories:
@@ -9,7 +9,7 @@ tags:
    - Forensics
 weight: 1     
 ---
-# C2 - CTF Challenge Writeup
+# 3 C2 - CTF Challenge Writeup
 
 ## Challenge Information
 - **Name**: C2  
