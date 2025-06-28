@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cydes Qualifications 2025 on</title><link>https://qiaonpc.github.io/categories/cydes-qualifications-2025/</link><description>Recent content in Cydes Qualifications 2025 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 28 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/cydes-qualifications-2025/index.xml" rel="self" type="application/rss+xml"/><item><title>0 Forensic Sanity Check</title><link>https://qiaonpc.github.io/post/0-forensic-sanity-check/</link><pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/0-forensic-sanity-check/</guid><description>&lt;h1 id="0-forensic-sanity-check---ctf-challenge-writeup">0 Forensic Sanity Check - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: 0 Forensic Sanity Check&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensic&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: A basic sanity check challenge meant to ensure players can access and retrieve files from a shared forensic resource. Serves as a warm-up to verify setup and tool readiness.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-access-the-provided-resource">1. &lt;strong>Access the Provided Resource&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Navigate to the shared Google Drive folder:&lt;br>
+&lt;a class="link" href="https://drive.google.com/drive/folders/1WVtgX9iRCgv20AhcITdq_s3F9kF64MKw?usp=sharing" target="_blank" rel="noopener"
+>Forensic Challenge Files&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-locate-the-flag">2. &lt;strong>Locate the Flag&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Within the folder, a file named &lt;code>flag.txt&lt;/code> is clearly visible.&lt;/li>
+&lt;li>Download and open the file to reveal the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>prelim{warming_up_your_forensics_skills_for_real}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>The &amp;ldquo;0 Forensic Sanity Check&amp;rdquo; challenge is a simple introductory task designed to verify that participants are able to access external resources and interact with basic forensic files. No analysis or tools are needed — just a functional internet connection and a browser.&lt;/p>
+&lt;hr></description></item><item><title>1 Initial Vector</title><link>https://qiaonpc.github.io/post/1-initial-vector/</link><pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/1-initial-vector/</guid><description>&lt;h1 id="1-initial-vector---ctf-challenge-writeup">1 Initial Vector - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Initial Vector&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensic&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Investigate a compromised WordPress server, identify the attack vector, and determine which file was uploaded by the attacker using forensic analysis of the web server structure and logs.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-initial-clue-wordpress-server">1. &lt;strong>Initial Clue: WordPress Server&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>From the description and directory structure, it’s clear we’re dealing with a &lt;strong>web server&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Navigated to the common web root: &lt;code>/var/www/html&lt;/code> and identified a &lt;strong>WordPress installation&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/1-initial-vector/wp.png"
+width="1082"
+height="567"
+srcset="https://qiaonpc.github.io/post/1-initial-vector/wp_hu9cc35c0b3d19b7b7053893d01ff82fec_220675_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/1-initial-vector/wp_hu9cc35c0b3d19b7b7053893d01ff82fec_220675_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Wordpress"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="457px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-focusing-on-plugins">2. &lt;strong>Focusing on Plugins&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>WordPress plugins are often vulnerable, so the next step was to &lt;strong>enumerate installed plugins&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>There were only &lt;strong>four plugins&lt;/strong>, making enumeration quick and focused.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/1-initial-vector/four%20plugins.png"
+width="1064"
+height="295"
+srcset="https://qiaonpc.github.io/post/1-initial-vector/four%20plugins_hucecb3303a472a8ad486136739d1876e4_126974_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/1-initial-vector/four%20plugins_hucecb3303a472a8ad486136739d1876e4_126974_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Four Plugins Only"
+class="gallery-image"
+data-flex-grow="360"
+data-flex-basis="865px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-identifying-a-known-vulnerability">3. &lt;strong>Identifying a Known Vulnerability&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Only one plugin — &lt;strong>Forminator&lt;/strong> — returned positive results for vulnerabilities.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Reference: &lt;a class="link" href="https://patchstack.com/database/wordpress/plugin/forminator/vulnerability/wordpress-forminator-plugin-1-24-6-unauthenticated-arbitrary-file-upload-vulnerability" target="_blank" rel="noopener"
+>Patchstack CVE&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Version &lt;strong>1.24.6&lt;/strong> of Forminator is affected by &lt;strong>CVE-2023-4596&lt;/strong>, which allows &lt;strong>unauthenticated arbitrary file uploads&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/1-initial-vector/vulnerable%20formiator.png"
+width="1058"
+height="770"
+srcset="https://qiaonpc.github.io/post/1-initial-vector/vulnerable%20formiator_hu831df23b057b7b772703a876c9e44d9c_263447_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/1-initial-vector/vulnerable%20formiator_hu831df23b057b7b772703a876c9e44d9c_263447_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Vulnerable Forminator"
+class="gallery-image"
+data-flex-grow="137"
+data-flex-basis="329px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="4-understanding-the-exploit">4. &lt;strong>Understanding the Exploit&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Found a public Proof-of-Concept exploit script: &lt;a class="link" href="https://github.com/E1A/CVE-2023-4596/blob/main/exploit.py" target="_blank" rel="noopener"
+>GitHub PoC&lt;/a>&lt;/li>
+&lt;li>The script uploads a malicious file via a &lt;code>POST&lt;/code> request to &lt;code>wp-admin/admin-ajax.php&lt;/code>, then attempts to access it under the &lt;code>wp-content/uploads/YYYY/MM/&lt;/code> path.&lt;/li>
+&lt;li>Access logs on the server reflected a &lt;strong>similar pattern&lt;/strong> of exploitation.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="5-hunting-for-the-uploaded-file">5. &lt;strong>Hunting for the Uploaded File&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>The hardest part of this challenge is the md5 hash as I didn&amp;rsquo;t know the format of the md5 hash, but we will go into it later.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So after understanding the CVE, it is clear that after a POST request to wp-admin/admin-ajax.php, the script will go on to visit the uploads/2025/month folder for the things they uploaded.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At first I didn&amp;rsquo;t really understand the attack, and just submitted the md5 hash of all the files directly under wp-admin/admin-ajax.php but most of what im submitting, at this point, is 192.168.x.x local addresses, which makes it useless as it is already stated that an attacker attacked them, no way the attacker is from local.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So I started to pivot to look at other IP addresses. And I submitted random files as i go along, until i found a sus file, which is an image disguised php.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/1-initial-vector/disguised%20png.png"
+width="1074"
+height="677"
+srcset="https://qiaonpc.github.io/post/1-initial-vector/disguised%20png_huf0e588d6e51c850834d66a0e0b447fee_274857_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/1-initial-vector/disguised%20png_huf0e588d6e51c850834d66a0e0b447fee_274857_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Disguied PNG"
+class="gallery-image"
+data-flex-grow="158"
+data-flex-basis="380px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So i also submitted the md5 hash of the above mentioned file. But it didnt work.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/1-initial-vector/submit%20hash.png"
+width="1066"
+height="269"
+srcset="https://qiaonpc.github.io/post/1-initial-vector/submit%20hash_huf1d836b0f4f069c1ebb21685e75346aa_84918_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/1-initial-vector/submit%20hash_huf1d836b0f4f069c1ebb21685e75346aa_84918_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Submit Hash"
+class="gallery-image"
+data-flex-grow="396"
+data-flex-basis="951px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="6-final-struggle">6. &lt;strong>Final Struggle&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>I eventually gave up and just got the md5 of every file in the uploads folder and upload, and still fail. Which resulted in the following beautiful statistics.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/1-initial-vector/beautiful.png"
+width="1061"
+height="661"
+srcset="https://qiaonpc.github.io/post/1-initial-vector/beautiful_hueedc97fcdafe6b0e8f7b0bcc0632c9f9_159612_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/1-initial-vector/beautiful_hueedc97fcdafe6b0e8f7b0bcc0632c9f9_159612_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Beautiful"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="385px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="7-flag">7. &lt;strong>Flag&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>I then changed my approach and submitted the lowercase md5 hash of the file and got the flag 💀&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>prelim{CVE-2023-4596_6abb43dc87e07140ba94beafda03baad}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>&amp;ldquo;Initial Vector&amp;rdquo; was a forensic challenge centered on real-world web exploitation techniques. By identifying a known plugin vulnerability, analyzing server logs, and tracking uploaded payloads, players practiced both offensive understanding and defensive forensics. The final hurdle was simple yet sneaky — the &lt;strong>formatting of the MD5 hash&lt;/strong> — a subtle but effective way to test attention to detail.&lt;/p>
+&lt;hr></description></item><item><title>2 Privesc</title><link>https://qiaonpc.github.io/post/2-privesc/</link><pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/2-privesc/</guid><description>&lt;h1 id="2-privesc---ctf-challenge-writeup">2 Privesc - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Privesc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensic&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Investigate a suspected privilege escalation attack on a compromised Linux system. Identify traces of exploitation, determine the method used (e.g., kernel-level exploits), and locate the attacker’s payload or tool to recover the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-challenge-context">1. &lt;strong>Challenge Context&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>This challenge is a &lt;strong>continuation&lt;/strong> of a previous one involving a compromised web server.&lt;/li>
+&lt;li>The focus now shifts from initial access to &lt;strong>post-exploitation and privilege escalation&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-identifying-the-exploit">2. &lt;strong>Identifying the Exploit&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>By analyzing &lt;code>auth.log&lt;/code>, strong evidence suggested the use of &lt;strong>Dirty Pipe (CVE-2022-0847)&lt;/strong>, a well-known Linux privilege escalation vulnerability.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Searched &lt;code>/tmp&lt;/code> for related payloads, but no direct Dirty Pipe exploit scripts were found.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>However, the logs clearly indicated its probable use, especially due to &lt;code>/tmp/dirty-pipe&lt;/code> references.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications.png"
+width="1081"
+height="133"
+srcset="https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications_hud07adaab45f12808be33927454a86da5_69769_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications_hud07adaab45f12808be33927454a86da5_69769_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Indication One"
+class="gallery-image"
+data-flex-grow="812"
+data-flex-basis="1950px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications%201.png"
+width="1075"
+height="759"
+srcset="https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications%201_hu61e173451e26ce70e22b5fff65bad9f7_222548_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications%201_hu61e173451e26ce70e22b5fff65bad9f7_222548_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Indication Two"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="339px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications%202.png"
+width="1076"
+height="259"
+srcset="https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications%202_hud992c5234fa824ab4ae42c81b353e00a_48637_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-privesc/dirtypipe-indications%202_hud992c5234fa824ab4ae42c81b353e00a_48637_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Indication Three"
+class="gallery-image"
+data-flex-grow="415"
+data-flex-basis="997px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-following-false-leads">3. &lt;strong>Following False Leads&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Then I found the metasploit folder, which turns out to be a big rabbit hole, but I didn&amp;rsquo;t know back then.&lt;/li>
+&lt;li>So i thought, oh, the dirtypipe was actually attacked but no files? And I saw a metasploit. Means the attacker used metasploit to attack.&lt;/li>
+&lt;li>But metasploit has no artifact folders, so it&amp;rsquo;s hard to analyse and that is when I knew it was a rabbit hole.&lt;/li>
+&lt;li>But I did learn some stuff through the metasploit, I looked into how the dirtypipe is used, how the exploits are made and eventually found that you can selectively attack binaries for dirtypipe.&lt;/li>
+&lt;li>For examples, I can dirtypipe /bin/su so everytime you do su, you are root. For example&lt;/li>
+&lt;li>With that in mind, I then assumed and guessed that when the log /tmp/dirty-pipe happened, that is around the time the dirtypipe attack took place.&lt;/li>
+&lt;li>So the idea that I had was to find binaries that are modified during the time when dirtypipe attack took place. But this assumption turned out to be wrong but I still got the flag. 😂&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="4-using-timestamp-forensics">4. &lt;strong>Using Timestamp Forensics&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Based on &lt;code>/tmp/dirty-pipe&lt;/code> logs, the estimated time of attack was around &lt;code>2025-06-13 16:33&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-privesc/dirtypipe%20attack.png"
+width="1076"
+height="208"
+srcset="https://qiaonpc.github.io/post/2-privesc/dirtypipe%20attack_huf69fdcf6004c87e5a94a841502c0d253_168264_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-privesc/dirtypipe%20attack_huf69fdcf6004c87e5a94a841502c0d253_168264_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="DirtyPipe Attack"
+class="gallery-image"
+data-flex-grow="517"
+data-flex-basis="1241px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used a shell one-liner to find &lt;strong>files modified around that timestamp&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> f in *&lt;span class="p">;&lt;/span> &lt;span class="k">do&lt;/span> stat &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span> &lt;span class="p">|&lt;/span> grep -E &lt;span class="s1">&amp;#39;Change|Birth&amp;#39;&lt;/span> &lt;span class="p">|&lt;/span> grep -q &lt;span class="s1">&amp;#39;2025-06-13 1[6-9]:\|2025-06-13 2[0-3]:&amp;#39;&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nb">echo&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="k">done&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-privesc/binaries.png"
+width="1038"
+height="435"
+srcset="https://qiaonpc.github.io/post/2-privesc/binaries_hu355ce13a31edb2540cf3488dfd7352b8_36922_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-privesc/binaries_hu355ce13a31edb2540cf3488dfd7352b8_36922_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Binaries"
+class="gallery-image"
+data-flex-grow="238"
+data-flex-basis="572px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This surfaced several modified binaries. The key suspects were:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>upx&lt;/code> – also mentioned in &lt;code>errors.log&lt;/code>&lt;/li>
+&lt;li>&lt;code>dpipe&lt;/code> – likely short for “dirty pipe”&lt;/li>
+&lt;li>&lt;code>telexfil&lt;/code> – possibly “telegram exfiltration”&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="5-finding-the-flag">5. &lt;strong>Finding the Flag&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Focused on &lt;code>dpipe&lt;/code>, since the name directly aligned with the exploit.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Running &lt;code>strings&lt;/code> on &lt;code>dpipe&lt;/code> revealed embedded data, including the &lt;strong>flag&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-privesc/image.png"
+width="1047"
+height="476"
+srcset="https://qiaonpc.github.io/post/2-privesc/image_hu8b7b47ddfd79391c4c81978de8a3c681_247458_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-privesc/image_hu8b7b47ddfd79391c4c81978de8a3c681_247458_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Base64 Encoded Flag"
+class="gallery-image"
+data-flex-grow="219"
+data-flex-basis="527px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-privesc/image-1.png"
+width="1024"
+height="150"
+srcset="https://qiaonpc.github.io/post/2-privesc/image-1_huaa94ba4620f709c53fee1775d33ecd27_93656_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-privesc/image-1_huaa94ba4620f709c53fee1775d33ecd27_93656_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="682"
+data-flex-basis="1638px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>prelim{n4sty_l1nux_8ug_f0r_pr1v_3sc}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>&amp;ldquo;Privesc&amp;rdquo; walks players through the reality of Linux post-exploitation forensics. By correlating timestamps, exploit logs, and suspicious binaries, the challenge simulates real-world attacker behavior using known CVEs like &lt;strong>Dirty Pipe&lt;/strong>. Despite some misdirections, thorough file inspection and creative assumptions led to successful flag extraction.&lt;/p>
+&lt;hr></description></item><item><title>3 C2</title><link>https://qiaonpc.github.io/post/3-c2/</link><pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/3-c2/</guid><description>&lt;h1 id="3-c2---ctf-challenge-writeup">3 C2 - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: C2&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensic&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a suspected command-and-control (C2) component discovered in a previously compromised system. Reverse engineer the binary to identify communication mechanisms, retrieve the bot token, and understand or replicate the exfiltration process.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-starting-point-telexfil">1. &lt;strong>Starting Point: telexfil&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>From the previous challenge, we already identified a suspicious binary named &lt;code>telexfil&lt;/code>, likely short for &lt;strong>Telegram Exfiltration&lt;/strong>.&lt;/li>
+&lt;li>This is the logical starting point for analyzing the C2 mechanism.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-reverse-engineering-the-binary">2. &lt;strong>Reverse Engineering the Binary&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Disassembling or reverse engineering &lt;code>telexfil&lt;/code> revealed:
+&lt;ul>
+&lt;li>
+&lt;p>Usage of the &lt;strong>Telegram Bot API&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A hardcoded &lt;strong>chat ID&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>However, the &lt;strong>bot token&lt;/strong> was not directly visible.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image.png"
+width="788"
+height="637"
+srcset="https://qiaonpc.github.io/post/3-c2/image_hud759ddfc3f40911cd18676c6fc65bfd4_141495_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image_hud759ddfc3f40911cd18676c6fc65bfd4_141495_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Hardcoded Configurations"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="296px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-locating-the-encrypted-token">3. &lt;strong>Locating the Encrypted Token&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Tracing the logic further, we identified:&lt;/p>
+&lt;ul>
+&lt;li>A function responsible for transforming/decrypting the token.&lt;/li>
+&lt;li>The &lt;strong>encrypted bot token&lt;/strong> was hardcoded within the binary.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Wrote a custom &lt;strong>decryption script&lt;/strong> to recover the bot token.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-1.png"
+width="717"
+height="516"
+srcset="https://qiaonpc.github.io/post/3-c2/image-1_hu4afa1ce9a7a502f736297b274cb6aca9_94622_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-1_hu4afa1ce9a7a502f736297b274cb6aca9_94622_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decryption Function"
+class="gallery-image"
+data-flex-grow="138"
+data-flex-basis="333px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-2.png"
+width="779"
+height="92"
+srcset="https://qiaonpc.github.io/post/3-c2/image-2_hubec1a8e93bf6db0299b4c7f51753be91_15811_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-2_hubec1a8e93bf6db0299b4c7f51753be91_15811_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Bot Token"
+class="gallery-image"
+data-flex-grow="846"
+data-flex-basis="2032px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-3.png"
+width="761"
+height="671"
+srcset="https://qiaonpc.github.io/post/3-c2/image-3_huc44a26edf8dbb8823e04945480ac258c_77201_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-3_huc44a26edf8dbb8823e04945480ac258c_77201_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decryption"
+class="gallery-image"
+data-flex-grow="113"
+data-flex-basis="272px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="4-reconstructing-the-telegram-api-calls">4. &lt;strong>Reconstructing the Telegram API Calls&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>With the decrypted bot token, we now had access to multiple Telegram Bot API endpoints:
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Get bot info&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">https://api.telegram.org/bot&amp;lt;TOKEN&amp;gt;/getMe
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-5.png"
+width="597"
+height="352"
+srcset="https://qiaonpc.github.io/post/3-c2/image-5_hu3e439c8b2235c4fe0110913f5906cf53_41960_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-5_hu3e439c8b2235c4fe0110913f5906cf53_41960_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Get Bot Information"
+class="gallery-image"
+data-flex-grow="169"
+data-flex-basis="407px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Get chat details (description, etc.)&lt;/strong>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">https://api.telegram.org/bot&amp;lt;TOKEN&amp;gt;/getChat?chat_id=&amp;lt;CHAT_ID&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-4.png"
+width="438"
+height="351"
+srcset="https://qiaonpc.github.io/post/3-c2/image-4_hu0e42dfd720f136d84e4fcd68116aa1f5_33298_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-4_hu0e42dfd720f136d84e4fcd68116aa1f5_33298_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Get Chat"
+class="gallery-image"
+data-flex-grow="124"
+data-flex-basis="299px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="5-interacting-with-the-c2-bot">5. &lt;strong>Interacting with the C2 Bot&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Another fun thing that you can do is to exfiltrate someone else’s chat, assuming that the bot has permission.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>You will need a few information, you need&lt;/p>
+&lt;ul>
+&lt;li>Target ChatID&lt;/li>
+&lt;li>Bot Token&lt;/li>
+&lt;li>Your ChatID&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>To get your ChatID, initiate a chat with the bot via: &lt;a class="link" href="https://t.me/dump_my1_bot" target="_blank" rel="noopener"
+>https://t.me/dump_my1_bot&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After sending a message, you can get your &lt;strong>own chat ID&lt;/strong> using the API above.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This enabled the simulation of &lt;strong>exfiltrating messages&lt;/strong> from one chat to another, leveraging the bot’s access.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-6.png"
+width="703"
+height="583"
+srcset="https://qiaonpc.github.io/post/3-c2/image-6_huac7949ec0ae07607684236da0a65687a_53933_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-6_huac7949ec0ae07607684236da0a65687a_53933_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Your ChatID"
+class="gallery-image"
+data-flex-grow="120"
+data-flex-basis="289px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="6-exfiltration">6. &lt;strong>Exfiltration&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Once you are done, you can actually forward the messages sent to another person’s chat into yours. And you can brute this via&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-7.png"
+width="1034"
+height="663"
+srcset="https://qiaonpc.github.io/post/3-c2/image-7_hu76d5cfee5775f69831e92ce3bbfb9ca4_134106_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-7_hu76d5cfee5775f69831e92ce3bbfb9ca4_134106_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Exfiltration Brute"
+class="gallery-image"
+data-flex-grow="155"
+data-flex-basis="374px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>If you done it right, you will be able to see forwarded messages in your own telegram&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-8.png"
+width="532"
+height="818"
+srcset="https://qiaonpc.github.io/post/3-c2/image-8_hu3120735ff2b20dc8bc20ed086f7659b7_100685_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-8_hu3120735ff2b20dc8bc20ed086f7659b7_100685_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Exfiltrated Text"
+class="gallery-image"
+data-flex-grow="65"
+data-flex-basis="156px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-c2/image-9.png"
+width="504"
+height="336"
+srcset="https://qiaonpc.github.io/post/3-c2/image-9_hu843dcfdc7893efa3cbfa53f975ee6a47_51898_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-c2/image-9_hu843dcfdc7893efa3cbfa53f975ee6a47_51898_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="360px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>prelim{y0u_f0und_th3_c2_h3ck_y3ah}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>The &amp;ldquo;C2&amp;rdquo; challenge combines &lt;strong>malware reverse engineering&lt;/strong> with &lt;strong>Telegram bot abuse&lt;/strong>. By uncovering a hidden bot token, players gained access to an attacker-controlled communication channel. The challenge emphasized not just identifying the exfiltration vector, but also interacting with it — simulating real-world incident response scenarios where understanding attacker infrastructure is key.&lt;/p>
+&lt;hr></description></item><item><title>5 Persistent</title><link>https://qiaonpc.github.io/post/5-persistent/</link><pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/5-persistent/</guid><description>&lt;h1 id="5-persistent---ctf-challenge-writeup">5 Persistent - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Persistent&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify evidence of attacker persistence by analyzing remnants left on a compromised system, including outbound communication artifacts such as Pastebin links. Use digital forensic techniques to trace how the attacker maintained access or control.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-context-from-prior-challenges">1. &lt;strong>Context from Prior Challenges&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>While working on earlier forensic challenges, multiple references to &lt;strong>Pastebin links&lt;/strong> were observed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This led to a hunch that attackers may have used public paste services for &lt;strong>command-and-control&lt;/strong> or persistence mechanisms.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/5-persistent/image.png"
+width="1262"
+height="755"
+srcset="https://qiaonpc.github.io/post/5-persistent/image_hu12ab8ccd8c0a1219cb26b202543cd806_319594_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/5-persistent/image_hu12ab8ccd8c0a1219cb26b202543cd806_319594_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Pastebin Indication"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="401px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-artifact-discovery">2. &lt;strong>Artifact Discovery&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Initially found and viewed these links using tools like &lt;strong>FTK Imager&lt;/strong>, but over time, lost access to the original FTK session.&lt;/li>
+&lt;li>Pivoted to using &lt;code>strings&lt;/code> on the disk image or memory dump directly within a Linux environment to extract readable content.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-filtering-pastebin-links">3. &lt;strong>Filtering Pastebin Links&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Ran &lt;code>strings&lt;/code> and manually inspected output to &lt;strong>identify any suspicious URLs&lt;/strong>, especially those pointing to &lt;code>pastebin.com&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Several Pastebin links surfaced — a sign that the attacker might be using these to drop payloads or commands.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/5-persistent/image-1.png"
+width="1152"
+height="794"
+srcset="https://qiaonpc.github.io/post/5-persistent/image-1_hu07042da12bd7f9d5f6347bc117fce9a9_665680_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/5-persistent/image-1_hu07042da12bd7f9d5f6347bc117fce9a9_665680_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Pastebin Links"
+class="gallery-image"
+data-flex-grow="145"
+data-flex-basis="348px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="4-manual-link-checking">4. &lt;strong>Manual Link Checking&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Visited each of the Pastebin URLs manually.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Eventually discovered one link that &lt;strong>contained the flag directly&lt;/strong>, likely as part of a fake webshell, embedded configuration, or encoded marker.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/5-persistent/image-2.png"
+width="927"
+height="849"
+srcset="https://qiaonpc.github.io/post/5-persistent/image-2_hu78656774c43b55cd585f64934fc61c90_101497_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/5-persistent/image-2_hu78656774c43b55cd585f64934fc61c90_101497_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="109"
+data-flex-basis="262px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>prelim{b4yuf3dr4_m1n1_web5h3ll_p3rs15t3nt}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>&amp;ldquo;Persistent&amp;rdquo; is a light yet insightful forensics challenge centered around identifying how attackers can leverage &lt;strong>public tools&lt;/strong> (like Pastebin) for &lt;strong>persistence and covert data handling&lt;/strong>. It reinforces the value of string searches and manual validation when automated tools fall short or time is limited.&lt;/p>
+&lt;hr></description></item></channel></rss>
