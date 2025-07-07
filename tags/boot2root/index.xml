@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Boot2Root on</title><link>https://qiaonpc.github.io/tags/boot2root/</link><description>Recent content in Boot2Root on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/boot2root/index.xml" rel="self" type="application/rss+xml"/><item><title>MCC 2024 Box</title><link>https://qiaonpc.github.io/post/mcc-2024-box/</link><pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/mcc-2024-box/</guid><description>&lt;h1 id="mcc-2024-box-ctf-challenge-writeup">MCC 2024 Box CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: MCC 2024 Box&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 90&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Boot2Root&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Gain root access to the machine by exploiting vulnerabilities and misconfigurations.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;MCC 2024 Box&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Information Gathering&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>First, obtained the IP address of the target machine and ran an &lt;code>nmap&lt;/code> scan to identify open ports.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The scan revealed ports &lt;code>21 (FTP)&lt;/code>, &lt;code>22 (SSH)&lt;/code>, and &lt;code>80 (HTTP)&lt;/code> were open.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Port 21 (FTP) allowed &lt;code>anonymous login&lt;/code>, which could be useful for data retrieval.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/nmap.png"
+width="564"
+height="341"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/nmap_hu12fc4ccc58efd7be18aac849603ac2d4_161541_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/nmap_hu12fc4ccc58efd7be18aac849603ac2d4_161541_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="nmap"
+class="gallery-image"
+data-flex-grow="165"
+data-flex-basis="396px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Accessing the FTP Server&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Connected to the FTP server on port 21 and disabled passive mode to list the available files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Downloaded a &lt;code>.pcap&lt;/code> file from the FTP server for further analysis.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/Disable%20Passive%20Mode.png"
+width="602"
+height="75"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/Disable%20Passive%20Mode_hu39b6de949a9922a79a9524647d10f1f7_27477_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/Disable%20Passive%20Mode_hu39b6de949a9922a79a9524647d10f1f7_27477_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Disable passive mode"
+class="gallery-image"
+data-flex-grow="802"
+data-flex-basis="1926px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/download%20net.pcap.png"
+width="602"
+height="103"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/download%20net.pcap_hu095f4c6559818f5ac15ded728e0736c3_39921_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/download%20net.pcap_hu095f4c6559818f5ac15ded728e0736c3_39921_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Download net pcap file"
+class="gallery-image"
+data-flex-grow="584"
+data-flex-basis="1402px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>PCAP File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Opened the &lt;code>.pcap&lt;/code> file and analyzed the network traffic.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered user credentials (&lt;code>chris&lt;/code> and &lt;code>alexander&lt;/code>), the domain name, and some WordPress-related endpoints.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/credentials.png"
+width="609"
+height="279"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/credentials_hu00803302dd6b22595edc006b81f37a79_97784_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/credentials_hu00803302dd6b22595edc006b81f37a79_97784_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Credentials"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="523px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploring WordPress&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Ran &lt;code>feroxbuster&lt;/code> to brute force additional directories, which revealed several interesting files:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>changelog.md&lt;/code>, &lt;code>secret/login.html&lt;/code>, &lt;code>xmlrpc.php&lt;/code>, and &lt;code>wp-admin.php&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Tried logging into WordPress admin and the secret login page using the credentials from the PCAP file, but it didn’t work.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Attempted SQL injection on the login pages, but it was unsuccessful.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tried exploiting xmlrpc.php, but that also failed.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/feroxbuster.png"
+width="602"
+height="241"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/feroxbuster_hu3b2e4f81d1c152bce649ba3fd166a40d_136477_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/feroxbuster_hu3b2e4f81d1c152bce649ba3fd166a40d_136477_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Feroxbuster"
+class="gallery-image"
+data-flex-grow="249"
+data-flex-basis="599px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reviewing Changelog for CUPS Vulnerabilities&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>A hint pointed us back to the &lt;code>changelog.md&lt;/code> file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Inside, we found that &lt;code>CUPS&lt;/code> (Common Unix Printing System) had 4 CVEs related to it, which might be exploitable.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/changelog.png"
+width="902"
+height="570"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/changelog_hue586ed3376140e0551ba1e3cd256cc2f_147703_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/changelog_hue586ed3376140e0551ba1e3cd256cc2f_147703_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Changelog"
+class="gallery-image"
+data-flex-grow="158"
+data-flex-basis="379px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/cups%20cve.png"
+width="1226"
+height="577"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/cups%20cve_hucb39637e430163f1318ac9434df1c8c5_92186_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/cups%20cve_hucb39637e430163f1318ac9434df1c8c5_92186_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="CUPS CVE"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="509px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Attempting CVE Exploits&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>We tried several &lt;code>POCs&lt;/code> (Proof of Concepts) related to the CUPS vulnerabilities, but none of them worked.&lt;/li>
+&lt;li>Despite trying every known POC available, we couldn&amp;rsquo;t gain further access.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Revisiting the PCAP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>A hint suggested revisiting the &lt;code>.pcap&lt;/code> file for additional clues.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After further inspection, we discovered a port knocking sequence.&lt;/p>
+&lt;ul>
+&lt;li>The sequence was &lt;code>77, 67, 2024, 631&lt;/code>, which was similar to techniques seen in previous CTF challenges like the one in Petronas CTF 2023.&lt;/li>
+&lt;li>The PCAP file showed a failed connection attempt to port 631, followed by a successful connection after the knocking sequence.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/port%20knocking.png"
+width="602"
+height="139"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/port%20knocking_hu8ddc6076546b96cd8b3223ebf0219757_125708_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/port%20knocking_hu8ddc6076546b96cd8b3223ebf0219757_125708_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Port knocking"
+class="gallery-image"
+data-flex-grow="433"
+data-flex-basis="1039px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Performing Port Knocking&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>We attempted the port knocking sequence by connecting to ports &lt;code>77, 67, 2024&lt;/code>, and then port &lt;code>631&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After knocking on the correct ports, we were able to successfully connect to port 631, which provided access to the CUPS service.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/knock%20ports.png"
+width="602"
+height="463"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/knock%20ports_huab9a3dc679572626910bb9ed512cc70a_170047_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/knock%20ports_huab9a3dc679572626910bb9ed512cc70a_170047_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Knock Ports"
+class="gallery-image"
+data-flex-grow="130"
+data-flex-basis="312px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/port%20631%20open.png"
+width="602"
+height="292"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/port%20631%20open_hu5e4bc079dccb40b47a2d3149532c8e54_40267_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/port%20631%20open_hu5e4bc079dccb40b47a2d3149532c8e54_40267_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Port 631 open"
+class="gallery-image"
+data-flex-grow="206"
+data-flex-basis="494px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploiting CUPS for RCE&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Using an RCE exploit found in a similar writeup on the &lt;a class="link" href="https://0xdf.gitlab.io/2024/10/02/htb-evilcups.html" target="_blank" rel="noopener"
+>0xdf blog&lt;/a>, we were able to execute remote code on the machine as the &lt;code>LP&lt;/code> user.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user.png"
+width="602"
+height="131"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user_hue032841261edbe3f5d5f0c256b3780e6_57202_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/lp%20user_hue032841261edbe3f5d5f0c256b3780e6_57202_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LP user"
+class="gallery-image"
+data-flex-grow="459"
+data-flex-basis="1102px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user%20flag.png"
+width="602"
+height="209"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user%20flag_hufd313f084620c2a10fbd59ad0366a828_55799_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/lp%20user%20flag_hufd313f084620c2a10fbd59ad0366a828_55799_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LP user flag"
+class="gallery-image"
+data-flex-grow="288"
+data-flex-basis="691px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Privilege Escalation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>As the &lt;code>LP&lt;/code> user, we found some &lt;code>SUID binaries&lt;/code> that could be useful for privilege escalation and escalated to the &lt;code>alexander&lt;/code> user.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/SUID%20Binary.png"
+width="436"
+height="585"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/SUID%20Binary_hu5106d98e2883b57bb274ce2fc451f048_163928_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/SUID%20Binary_hu5106d98e2883b57bb274ce2fc451f048_163928_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="SUID Binary"
+class="gallery-image"
+data-flex-grow="74"
+data-flex-basis="178px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Due to the unstable shell, running automated tools like &lt;code>linpeas.sh&lt;/code> was not feasible, so we manually enumerated the &lt;code>alexander&lt;/code> user’s environment.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/alexander%20and%20flag.png"
+width="602"
+height="585"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/alexander%20and%20flag_hu4a78abbd982db0124c956ec448a4f63a_157617_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/alexander%20and%20flag_hu4a78abbd982db0124c956ec448a4f63a_157617_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Alexander and flag"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Eventually, we discovered SSH keys that could potentially provide further access.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/ssh%20keys.png"
+width="602"
+height="127"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/ssh%20keys_hu1b90d5adf54d22314bf7bb6e427fc0d0_32166_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/ssh%20keys_hu1b90d5adf54d22314bf7bb6e427fc0d0_32166_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="SSH Keys"
+class="gallery-image"
+data-flex-grow="474"
+data-flex-basis="1137px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking the Passphrase for SSH Keys&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempted to use the SSH keys, but they were passphrase-protected.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We explored &lt;code>notes.txt&lt;/code> and tried several password combinations, including those we found earlier (for &lt;code>alexander&lt;/code> and &lt;code>LP&lt;/code>), as well as MD5 hashes of those values, but none of them worked.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/trying%20password.png"
+width="839"
+height="322"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/trying%20password_hu424a51eb4a376624713d537f6cee0053_37104_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/trying%20password_hu424a51eb4a376624713d537f6cee0053_37104_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Trying Password"
+class="gallery-image"
+data-flex-grow="260"
+data-flex-basis="625px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Finally, we used &lt;code>John the Ripper&lt;/code> to crack the passphrase, and successfully retrieved the SSH key’s passphrase.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/john%20the%20ripper.png"
+width="554"
+height="173"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/john%20the%20ripper_hucc0fbc6ee2712ea7f418fe8d460d20da_17846_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/john%20the%20ripper_hucc0fbc6ee2712ea7f418fe8d460d20da_17846_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="John the ripper"
+class="gallery-image"
+data-flex-grow="320"
+data-flex-basis="768px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Gaining Stable Shell&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After logging in as &lt;code>alexander&lt;/code>, we finally had a stable shell and could run any tools required for further enumeration but it is not needed in this case.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We ran &lt;code>sudo -l&lt;/code> and discovered that the user &lt;code>alexander&lt;/code> had permission to edit any file on the system.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/sudo%20l.png"
+width="602"
+height="92"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/sudo%20l_hu77da1306484f351bd737db68f157f9f9_41954_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/sudo%20l_hu77da1306484f351bd737db68f157f9f9_41954_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="sudo l"
+class="gallery-image"
+data-flex-grow="654"
+data-flex-basis="1570px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We modified the &lt;code>sudoers&lt;/code> file to grant &lt;code>alexander&lt;/code> full root privileges.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/changing%20sudoers%20file.png"
+width="438"
+height="193"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/changing%20sudoers%20file_hud33a3fcea2ca5097962a9ff6c6eabe9f_51763_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/changing%20sudoers%20file_hud33a3fcea2ca5097962a9ff6c6eabe9f_51763_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Changing sudoers file"
+class="gallery-image"
+data-flex-grow="226"
+data-flex-basis="544px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Achieving Root Access&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>With the &lt;code>sudoers&lt;/code> file modified, we gained root access to the machine.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/final%20flag.png"
+width="602"
+height="275"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/final%20flag_hu64ecac949e35d2f5a8d9e9959b4c7a42_100198_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/final%20flag_hu64ecac949e35d2f5a8d9e9959b4c7a42_100198_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Final Flag"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="525px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>MCC24{h3ll0_fr0m_pr1nt1ng_s3rv1c3s}&lt;br>
+MCC24{4bus1ng_su1d}&lt;br>
+MCC24{g00d_j0b_3v3ry0n3}&lt;/p></description></item><item><title>Oren</title><link>https://qiaonpc.github.io/post/oren/</link><pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/oren/</guid><description>&lt;h1 id="oren">Oren
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Oren&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Boot2Root&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit the target machine and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Connection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Me and Han Kai connected the local challenge machine to NAT and used &lt;strong>netdiscover&lt;/strong> to identify its IP address.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/netdiscover.png"
+width="723"
+height="253"
+srcset="https://qiaonpc.github.io/post/oren/netdiscover_hu342f3545c2327a46936c9b2fe83f4da7_39281_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/netdiscover_hu342f3545c2327a46936c9b2fe83f4da7_39281_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Netdiscover"
+class="gallery-image"
+data-flex-grow="285"
+data-flex-basis="685px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Scanned the machine using &lt;strong>nmap&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Found that we are attacking a &lt;strong>Windows machine&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/nmap.png"
+width="1138"
+height="785"
+srcset="https://qiaonpc.github.io/post/oren/nmap_hu1d2d844d46132811c5264a273ea0e05f_232908_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/nmap_hu1d2d844d46132811c5264a273ea0e05f_232908_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="nmap"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Explored the web application on port &lt;code>8080&lt;/code>:&lt;/p>
+&lt;ul>
+&lt;li>Discovered &lt;code>admin.php&lt;/code>, &lt;code>phpinfo.php&lt;/code>, and &lt;code>index.php&lt;/code> using &lt;strong>feroxbuster&lt;/strong>.&lt;/li>
+&lt;li>Attempted &lt;strong>SQL injection&lt;/strong> on &lt;code>admin.php&lt;/code> using &lt;strong>sqlmap&lt;/strong>, but it failed.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/web-enum.png"
+width="1382"
+height="842"
+srcset="https://qiaonpc.github.io/post/oren/web-enum_huc93567fb2428118661ef6b1bcaa49fcd_257087_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/web-enum_huc93567fb2428118661ef6b1bcaa49fcd_257087_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Feroxbuster"
+class="gallery-image"
+data-flex-grow="164"
+data-flex-basis="393px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/index_php.png"
+width="1918"
+height="1198"
+srcset="https://qiaonpc.github.io/post/oren/index_php_hu5f383b641683aa61cb5bca325353ce9e_61050_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/index_php_hu5f383b641683aa61cb5bca325353ce9e_61050_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="index page"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/admin_php.png"
+width="1918"
+height="1192"
+srcset="https://qiaonpc.github.io/post/oren/admin_php_hu1346169967d87384a57800822243c696_46875_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/admin_php_hu1346169967d87384a57800822243c696_46875_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="admin page"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="386px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/phpinfo_php.png"
+width="1918"
+height="1198"
+srcset="https://qiaonpc.github.io/post/oren/phpinfo_php_hu37b08bd3bc1d09b3f427eb251861f792_190328_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/phpinfo_php_hu37b08bd3bc1d09b3f427eb251861f792_190328_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="phpinfo"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Kerberos Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Han Kai then re-scanned using &lt;strong>nmap&lt;/strong> for potential users.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found usernames but failed to crack them via password spraying or brute-forcing the login page.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/kerberoastable.png"
+width="1007"
+height="292"
+srcset="https://qiaonpc.github.io/post/oren/kerberoastable_huc5cddddda95c1e195963f189f2a60f52_70665_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/kerberoastable_huc5cddddda95c1e195963f189f2a60f52_70665_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Users"
+class="gallery-image"
+data-flex-grow="344"
+data-flex-basis="827px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploit Development&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Found PHP version &lt;code>8.1.25&lt;/code> from &lt;code>phpinfo.php&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Searched for related exploits but none of the existing POCs worked.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The challenge hint suggested focusing on the title &lt;strong>Oren&lt;/strong>, which led to discovering an exploit for &lt;strong>PHP 8.1.25 &amp;ldquo;orange&amp;rdquo;&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/php%20orange.png"
+width="1031"
+height="465"
+srcset="https://qiaonpc.github.io/post/oren/php%20orange_hu7df5621db061faf8f8485bb59f5c6f17_68745_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/php%20orange_hu7df5621db061faf8f8485bb59f5c6f17_68745_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Orange"
+class="gallery-image"
+data-flex-grow="221"
+data-flex-basis="532px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/php%20orange%20poc.png"
+width="1418"
+height="896"
+srcset="https://qiaonpc.github.io/post/oren/php%20orange%20poc_hu6360d5908c5139e64f09fca53365cedf_131055_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/php%20orange%20poc_hu6360d5908c5139e64f09fca53365cedf_131055_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="POC Orange"
+class="gallery-image"
+data-flex-grow="158"
+data-flex-basis="379px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Gaining Access&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used the &lt;strong>PHP 8.1.25 orange exploit&lt;/strong> to gain access as the &lt;code>webadmin&lt;/code> user.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Privilege Escalation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Enumerated the box and discovered files related to the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found a &lt;strong>PowerShell script&lt;/strong> that, when executed, revealed the password for &lt;code>user.zip&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unzipped the archive to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/files%20related%20to%20flag.png"
+width="1011"
+height="492"
+srcset="https://qiaonpc.github.io/post/oren/files%20related%20to%20flag_hubd13c78667cc85a2fc795e317a3e1116_135155_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/files%20related%20to%20flag_hubd13c78667cc85a2fc795e317a3e1116_135155_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Files related to flag"
+class="gallery-image"
+data-flex-grow="205"
+data-flex-basis="493px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/ps1%20script.png"
+width="1654"
+height="556"
+srcset="https://qiaonpc.github.io/post/oren/ps1%20script_hud88992e6e3ae58ab1e2bd52e8c41a727_186729_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/ps1%20script_hud88992e6e3ae58ab1e2bd52e8c41a727_186729_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="PS1 Script"
+class="gallery-image"
+data-flex-grow="297"
+data-flex-basis="713px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/running%20ps1%20script.png"
+width="1343"
+height="171"
+srcset="https://qiaonpc.github.io/post/oren/running%20ps1%20script_hu8b347dc16a324b8dc35a25f542800e04_39417_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/running%20ps1%20script_hu8b347dc16a324b8dc35a25f542800e04_39417_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Running PS1 script"
+class="gallery-image"
+data-flex-grow="785"
+data-flex-basis="1884px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/flag.png"
+width="714"
+height="195"
+srcset="https://qiaonpc.github.io/post/oren/flag_hu7aeb3327cacc4317f9343847ae0cbe46_11829_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/flag_hu7aeb3327cacc4317f9343847ae0cbe46_11829_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="366"
+data-flex-basis="878px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Flag&lt;/strong>: &lt;code>SHCTF24{XXXXXXXXXX}&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>DigiDoc</title><link>https://qiaonpc.github.io/post/digidoc/</link><pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/digidoc/</guid><description>&lt;h1 id="digidoc---ctf-challenge-writeup">DigiDoc - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: DigiDoc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;DigiDoc&amp;rdquo; CTF challenge is to gain root access to the target server by exploiting various vulnerabilities, including FTP, web application vulnerabilities (such as upload and IDOR), and privilege escalation.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully tackle the &amp;ldquo;DigiDoc&amp;rdquo; challenge, I executed the following steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Enumeration using Nmap&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I started by performing an initial scan using Nmap on the provided IP address, which revealed open ports: FTP, SSH, and HTTP.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/nmap.png"
+width="1155"
+height="762"
+srcset="https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/nmap_huacc799f52631517647687eb916c4df6e_397499_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Nmap Scan"
+class="gallery-image"
+data-flex-grow="151"
+data-flex-basis="363px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>FTP Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Investigating the FTP service, I logged in anonymously and found two files. Downloading these files revealed an ECB key that would be useful later.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/anonymous%20login.png"
+width="653"
+height="280"
+srcset="https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/anonymous%20login_hu910e3a432e7c94d8ce4a5856c1df7c08_54358_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Anonymous Login"
+class="gallery-image"
+data-flex-grow="233"
+data-flex-basis="559px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/files.png"
+width="884"
+height="145"
+srcset="https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/files_hu98b60356e7501ea2a98e630dadf4dec3_32218_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Files"
+class="gallery-image"
+data-flex-grow="609"
+data-flex-basis="1463px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/reading%20files.png"
+width="1699"
+height="560"
+srcset="https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/reading%20files_hu518d612650666c2ba2956d15ce6fc55e_111161_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Reading Files"
+class="gallery-image"
+data-flex-grow="303"
+data-flex-basis="728px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploring the HTTP Service&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Moving to the HTTP service, I ran a directory brute force using Gobuster. Eventually, it identified a login page.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/home%20page.png"
+width="1185"
+height="728"
+srcset="https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/home%20page_hu1c4eeca670dbb9ed11c0565c6625ab0f_506879_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Home Page"
+class="gallery-image"
+data-flex-grow="162"
+data-flex-basis="390px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/gobuster.png"
+width="1230"
+height="411"
+srcset="https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/gobuster_hu4d5104ed109b0f7878a1335a08b5ac35_204741_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Gobuster"
+class="gallery-image"
+data-flex-grow="299"
+data-flex-basis="718px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Logging in as a guest revealed an upload page, indicating a potential upload vulnerability. However, admin access was required.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/login%20page.png"
+width="943"
+height="620"
+srcset="https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/login%20page_hu065c7ca00d37d1af764cdb2522be616b_16980_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Login Page"
+class="gallery-image"
+data-flex-grow="152"
+data-flex-basis="365px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/admin%20required.png"
+width="1640"
+height="467"
+srcset="https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/admin%20required_hu528fa97ae04160beae25d0a404629024_34381_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Admin Required"
+class="gallery-image"
+data-flex-grow="351"
+data-flex-basis="842px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying IDOR Vulnerability&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Analyzing the accounts tab, I identified an Insecure Direct Object Reference (IDOR) vulnerability, allowing access to user IDs, crucial for admin privileges.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>IDOR vulnerability involves manipulating user IDs or object references to gain unauthorized access.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/IDOR.png"
+width="1367"
+height="610"
+srcset="https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/IDOR_hu00d9d97c53cc083902db81a860a08f13_64282_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="IDOR"
+class="gallery-image"
+data-flex-grow="224"
+data-flex-basis="537px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploiting Upload Vulnerability&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I attempted exploiting the upload vulnerability. Despite correctly written code and magic bytes, standard PHP file extensions didn&amp;rsquo;t work.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Following recommendations from hacktricks, I discovered that the &lt;code>.phtml&lt;/code> extension allowed successful uploads, enabling me to upload a reverse shell.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/phtml%20poc.png"
+width="943"
+height="247"
+srcset="https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml%20poc_hu83fb9e109be8a0c5747fd96a99498a65_26000_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="PHTML POC"
+class="gallery-image"
+data-flex-grow="381"
+data-flex-basis="916px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/phtml.png"
+width="517"
+height="118"
+srcset="https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/phtml_hua1221c02a1f8f71cab29b8eb8b9983ee_18845_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="PHTML Code"
+class="gallery-image"
+data-flex-grow="438"
+data-flex-basis="1051px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/web-shell.png"
+width="1532"
+height="750"
+srcset="https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/web-shell_hubcbd1f09ed26397a4cd079c9f91af6d5_227986_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Web Shell"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="490px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Escalating Privileges&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Accessing the server, I realized I was the &lt;code>www-data&lt;/code> user. To achieve root access, I explored the home directory, finding two users: Alvin and Dave.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/dave.png"
+width="573"
+height="84"
+srcset="https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/dave_hud365f73400d276d8a9fa45d540820115_18687_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Dave"
+class="gallery-image"
+data-flex-grow="682"
+data-flex-basis="1637px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoding a base64-encoded string in Alvin&amp;rsquo;s directory, using the previously obtained ECB key, revealed a plaintext password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/base64%20password.png"
+width="613"
+height="92"
+srcset="https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/base64%20password_hu9ba1912a634c238109d04e0a03cab34f_27873_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Base64 Password"
+class="gallery-image"
+data-flex-grow="666"
+data-flex-basis="1599px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/decode.png"
+width="459"
+height="576"
+srcset="https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/decode_hu9f604820793d823212f0fd5727651799_52530_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decoded"
+class="gallery-image"
+data-flex-grow="79"
+data-flex-basis="191px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Privilege Escalation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>SSHing into the server using Alvin&amp;rsquo;s credentials, I discovered an ability for Alvin to execute a hidden Python script as root using sudo.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/sudo%20l.png"
+width="1236"
+height="206"
+srcset="https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/sudo%20l_hu032ac83b1884401c1eacec3c7adc92ea_48819_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sudo -l"
+class="gallery-image"
+data-flex-grow="600"
+data-flex-basis="1440px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Privilege Escalation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The solution involved hijacking the libraries in a script file provided without modifying it.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Creating a new &lt;code>shutil.py&lt;/code> file, spawning a shell using &lt;code>os&lt;/code>, escalated privileges to root.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/hijacking.png"
+width="475"
+height="111"
+srcset="https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacking_huc11d1cdf7a6285295e6b5df284a4ab1f_23446_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Hijacking"
+class="gallery-image"
+data-flex-grow="427"
+data-flex-basis="1027px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The obtained flag through the intended solution: &lt;code>ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/digidoc/hijacked.png"
+width="904"
+height="233"
+srcset="https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/digidoc/hijacked_hub316e73250de2a91671aa0a323079052_67862_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Hijacked"
+class="gallery-image"
+data-flex-grow="387"
+data-flex-basis="931px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>The resolution of the &amp;ldquo;DigiDoc&amp;rdquo; challenge encompassed identifying multiple vulnerabilities, including FTP access, web application flaws, and privilege escalation, ultimately leading to obtaining the root flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>ABOH23{wh47_4_cr4pp7_s3rv1c3_c3nt3r}&lt;/code>.&lt;/p>
+&lt;p>This writeup demonstrates the process of identifying and exploiting various vulnerabilities to gain root access in the &amp;ldquo;DigiDoc&amp;rdquo; CTF challenge. For any further inquiries or clarifications, please feel free to ask.&lt;/p></description></item></channel></rss>
