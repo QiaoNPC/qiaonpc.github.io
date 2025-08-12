@@ -16,9 +16,9 @@ Let’s rewind to the start of the year and walk through my certification journe
 
 ## **CPTS Preparation: My HTB Marathon**  
 
-Originally, I planned to take the **CPTS** after PwC HackADay. My "preparation" was basically grinding HTB rank mode and I started in December 2024 until recently, not sure if I wanna stop the grind tho, since I already have CPTS. I went through every single ***easy*** and ***medium*** box during that time, missing only one or two due to Chinese New Year or other unskippable events.  
+Originally, I planned to take the **CPTS** after PwC HackADay. My "preparation" was basically grinding HTB rank and I started in December 2024 until recently, not sure if I wanna stop the grind tho, since I already have CPTS. I went through every single ***easy*** and ***medium*** box during that time, missing only one or two due to Chinese New Year or other unskippable events.  
 
-Interestingly, every Windows box during this period (except one) was **Active Directory** related. My AD skills skyrocketed because of it. But throughout this time, I didn't bother with hard or insane boxes because HTB's difficulty ratings just mean 'more steps'. In simplest terms, a medium box will have more 'steps' in its attack chain than an easy box will, a hard box will have more 'steps' in its attack chain than a medium box will, etc. So my logic was simple: ***two mediums = one hard***. Why spend time on one "hard" when I can knock out two mediums and learn just as much?  
+Interestingly, every Windows box during this period (except one) was **Active Directory** related. My AD skills skyrocketed because of it. But throughout this time, I didn't bother with hard or insane boxes because HTB's difficulty ratings just mean 'more steps'. In simplest terms, a medium box will have more 'steps' in its attack chain than an easy box will, a hard box will have more 'steps' in its attack chain than a medium box will, etc. And because of this, doing a hard box normally takes more time then 2 medium box combined. So my logic was simple: ***two mediums = one hard***. Why spend time on one "hard" when I can knock out two mediums and learn just as much?  
 
 ---
 
@@ -26,7 +26,7 @@ Interestingly, every Windows box during this period (except one) was **Active Di
 
 This was an impulse buy, thanks to a 90% discount. The exam was fully hands-on: you’re given an **IPA file** and have to hack it, finding “flags” along the way.  
 
-I relied heavily on the [OWASP MASTG](https://mas.owasp.org/MASTG/) as my guide. The exam questions are not directly related to MASTG, but I used the test cases and passed. Sounds simple, but it was tougher than expected, I needed two attempts and barely passed. Definitely a humbling start.  
+I relied heavily on the [OWASP MASTG](https://mas.owasp.org/MASTG/) as my guide. The exam questions are not directly related to MASTG tho, but I used the test cases and passed. Sounds simple, but it was tougher than expected, I needed two attempts to just barely passed. Definitely a humbling start.  
 
 ---
 
@@ -57,11 +57,11 @@ Earlier this year, TryHackMe gave away **PT1** to folks with Pentest+, OSCP, and
 - Active Directory  
 - Web  
 
-AD and Linux/Windows privilege escalation were a easy and I was able cleared them in about six hours. The **web** part, though, was a nightmare. It says its web, but its more towards API than web. Their XSS scenario was unrealistic (even some CTFs feel more realistic), and their "half-flag" concept was so confusing that I still couldnt figure it out after the exam, maybe someone who took PT1 can tell me. The IDOR setup also doesn't make sense to me. To anyone who wishes to take PT1, please read the ROE at the start, it explains how their XSS works and lists all possible web (API) vulnerabilities.  
+AD and Linux/Windows privilege escalation was easy and I was able cleared them in about six hours. The **web** part, though, was a nightmare. It says its web, but its more towards API than web. Their XSS scenario was unrealistic (even some CTFs feel more realistic), and their "half-flag" concept was so confusing that I still couldnt figure it out after the exam, maybe someone who took PT1 can tell me. The IDOR setup also doesn't make sense to me. To anyone who wishes to take PT1, please read the ROE at the start, it explains how their XSS works and lists all possible web (API) vulnerabilities.  
 
 ---
 
-## **CPTS — The Final Boss**  
+## **HTB CPTS**  
 
 So after all those ranked HTB, I started CPTS at the end of July 2025 and took about 7 days to capture 14 flags and finish my report. You need 12 flags to pass and there is a total of 14 flags to capture. You actually don't need to capture all 14 flags, as 12 flags is enough to pass, but that also depends on your reporting.
 
