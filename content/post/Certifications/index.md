@@ -8,8 +8,6 @@ tags:
    - Certifications
 weight: 1     
 ---
-# My 2025 Certification Journey — From CPTS to Mobile App Hacking  
-
 Let’s rewind to the start of the year and walk through my certification journey so far. 
 
 ---
