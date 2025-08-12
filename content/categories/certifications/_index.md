@@ -1,5 +1,5 @@
 ---
-title: Cert 2025
+title: Certifications
 description: This blog contains my review on the certifications I took this year, including CMPen (iOS & Android), Pentest+, CRTA, PT1 and CPTS.   
 image:
 
