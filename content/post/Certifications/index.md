@@ -8,37 +8,74 @@ tags:
    - Certifications
 weight: 1     
 ---
-# 0 Forensic Sanity Check - CTF Challenge Writeup
+# My 2025 Certification Journey — From CPTS to Mobile App Hacking  
 
-## Challenge Information
-- **Name**: 0 Forensic Sanity Check  
-- **Points**: 10  
-- **Category**: Forensic  
-- **Objective**: A basic sanity check challenge meant to ensure players can access and retrieve files from a shared forensic resource. Serves as a warm-up to verify setup and tool readiness.
+Let’s rewind to the start of the year and walk through my certification journey so far. 
 
 ---
 
-## Solution
+## **CPTS Preparation: My HTB Marathon**  
 
-### 1. **Access the Provided Resource**
-- Navigate to the shared Google Drive folder:  
-  [Forensic Challenge Files](https://drive.google.com/drive/folders/1WVtgX9iRCgv20AhcITdq_s3F9kF64MKw?usp=sharing)
+Originally, I planned to take the **CPTS** after PwC HackADay. My "preparation" was basically grinding HTB rank mode and I started in December 2024 until recently, not sure if I wanna stop the grind tho, since I already have CPTS. I went through every single ***easy*** and ***medium*** box during that time, missing only one or two due to Chinese New Year or other unskippable events.  
 
----
-
-### 2. **Locate the Flag**
-- Within the folder, a file named `flag.txt` is clearly visible.
-- Download and open the file to reveal the flag.
+Interestingly, every Windows box during this period (except one) was **Active Directory** related. My AD skills skyrocketed because of it. But throughout this time, I didn't bother with hard or insane boxes because HTB's difficulty ratings just mean 'more steps'. In simplest terms, a medium box will have more 'steps' in its attack chain than an easy box will, a hard box will have more 'steps' in its attack chain than a medium box will, etc. So my logic was simple: ***two mediums = one hard***. Why spend time on one "hard" when I can knock out two mediums and learn just as much?  
 
 ---
 
-## Flag
-The flag for this challenge is:  
-`prelim{warming_up_your_forensics_skills_for_real}`
+## **The SecOps CMPen iOS**  
+
+This was an impulse buy, thanks to a 90% discount. The exam was fully hands-on: you’re given an **IPA file** and have to hack it, finding “flags” along the way.  
+
+I relied heavily on the [OWASP MASTG](https://mas.owasp.org/MASTG/) as my guide. The exam questions are not directly related to MASTG, but I used the test cases and passed. Sounds simple, but it was tougher than expected, I needed two attempts and barely passed. Definitely a humbling start.  
 
 ---
 
-## Summary
-The "0 Forensic Sanity Check" challenge is a simple introductory task designed to verify that participants are able to access external resources and interact with basic forensic files. No analysis or tools are needed — just a functional internet connection and a browser.
+## **The SecOps CMPen Android**  
+
+Another 90% discount, so… why not? Same deal as iOS, but this time with an **APK file**. I used the same MASTG approach and found the flags. This one felt easier than iOS, and my score reflected that, though I’d still call it a "barely passed".  
 
 ---
+
+## **CompTIA Pentest+**  
+
+This one was a surprise win. During MCC, I actually won **Security+**, but I was able to redeem **Pentest+** with the voucher given to me, so why not. I definitely overprepared for this and I was able to  finish the MCQ exam in 20 minutes with flying colours. The format makes it forgiving: because it is MCQ, even if you don't know the answer, you can eliminate the obviously wrong ones.  
+
+---
+
+## **Cyber Warefare Labs CRTA**  
+
+I took the **Certified Red Team Analyst** because I wanna see  how far my CPTS prep had gotten me. But turns out CRTA was easier than an easy box on HTB. The exam is fully hands-on: you get a network, compromise it, and capture flags. It's straightforward, no guesswork, covering Linux and AD. 
+
+---
+
+## **TryHackMe Junior Penetration Tester**  
+
+Earlier this year, TryHackMe gave away **PT1** to folks with Pentest+, OSCP, and other similar certs. The exam covers:  
+
+- Linux privilege escalation  
+- Windows privilege escalation  
+- Active Directory  
+- Web  
+
+AD and Linux/Windows privilege escalation were a easy and I was able cleared them in about six hours. The **web** part, though, was a nightmare. It says its web, but its more towards API than web. Their XSS scenario was unrealistic (even some CTFs feel more realistic), and their "half-flag" concept was so confusing that I still couldnt figure it out after the exam, maybe someone who took PT1 can tell me. The IDOR setup also doesn't make sense to me. To anyone who wishes to take PT1, please read the ROE at the start, it explains how their XSS works and lists all possible web (API) vulnerabilities.  
+
+---
+
+## **CPTS — The Final Boss**  
+
+So after all those ranked HTB, I started CPTS at the end of July 2025 and took about 7 days to capture 14 flags and finish my report. You need 12 flags to pass and there is a total of 14 flags to capture. You actually don't need to capture all 14 flags, as 12 flags is enough to pass, but that also depends on your reporting.
+
+It feels like 7 medium HTB boxes chained together. Pivoting is definitely needed, so for anyone taking it, please learn the basics of pivoting, any form of pivoting works I believe, as I used a combination of a few during the exam.  
+
+- **Web**: My biggest weakness as I am absolutely dog shit in web. Every time I got stuck, it was web.  
+- **Linux PrivEsc**: Straightforward.  
+- **Windows PrivEsc**: Slightly harder than Linux but still manageable.  
+- **Active Directory**: Normally I use Linux for AD work, but during the exam I hit weird NetBIOS issues with CME/NXC. I had to switch to Windows tools, which slowed me down, but at least my module practice paid off.  
+
+All in all, CPTS was fun, balanced, and a great skill test.  
+
+---
+
+## Final Thoughts  
+
+hehe, back to CTFs now.
