@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Misc on</title><link>https://qiaonpc.github.io/tags/misc/</link><description>Recent content in Misc on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 07 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml"/><item><title>attack CNN?</title><link>https://qiaonpc.github.io/post/attack-cnn/</link><pubDate>Mon, 07 Jul 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/attack-cnn/</guid><description>&lt;h1 id="attack-cnn---ctf-challenge-writeup">attack CNN? - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: attack CNN?&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Perform an adversarial attack against two provided YOLO (You Only Look Once) models. Craft an image such that the two models produce &lt;strong>significantly different predictions&lt;/strong>, demonstrating an understanding of adversarial machine learning techniques.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-understanding-the-goal">1. &lt;strong>Understanding the Goal&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Given two object detection models:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>yolo_v8.pt&lt;/code>&lt;/li>
+&lt;li>&lt;code>yolo_v10.pt&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The objective is to &lt;strong>generate a single adversarial image&lt;/strong> that causes the models to output different results under the following conditions:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">different_prediction&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class_name&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class_name&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">confidence_gap&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mf">0.4&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Both conditions must be satisfied to consider the attack successful.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-choosing-the-attack-method">2. &lt;strong>Choosing the Attack Method&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>This is a classic use case for &lt;strong>adversarial machine learning&lt;/strong> techniques, targeting deep neural networks.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Two common attacks were considered:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>FGSM (Fast Gradient Sign Method)&lt;/strong> – faster, simpler&lt;/li>
+&lt;li>&lt;strong>PGD (Projected Gradient Descent)&lt;/strong> – more effective but slower&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>For this challenge, &lt;strong>PGD was used&lt;/strong> for better perturbation control and higher attack success rate.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-executing-the-attack">3. &lt;strong>Executing the Attack&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Loaded both YOLO models using an appropriate framework (e.g., PyTorch + Ultralytics YOLOv8).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Started from a base image and applied the &lt;strong>PGD adversarial attack&lt;/strong>, modifying the image iteratively to:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Change the prediction &lt;strong>class name&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a &lt;strong>≥ 0.4 confidence gap&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">cv2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">ultralytics&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">YOLO&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">device&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;cuda&amp;#34;&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">is_available&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="s2">&amp;#34;cpu&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model_v8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YOLO&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;yolo_v8.pt&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model_v10&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YOLO&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;yolo_v10.pt&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">load_image&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">640&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imread&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">resize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_BGR2RGB&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">img&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mf">255.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float32&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">unsqueeze&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@torch.no_grad&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image_tensor&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">results&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">predict&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_tensor&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">verbose&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">boxes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">results&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">boxes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">boxes&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cls&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;None&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.0&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">confs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">conf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">classes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cls&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">top&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">confs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">argmax&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">classes&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">top&lt;/span>&lt;span class="p">])),&lt;/span> &lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">float&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">confs&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">top&lt;/span>&lt;span class="p">])}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">add_random_start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">noise&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">empty_like&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">uniform_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">noise&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">pgd_with_dummy_grad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ori&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">iters&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requires_grad_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dummy_loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mean&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dummy_loss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">backward&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grad&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grad&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">alpha&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">grad&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sign&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">delta&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">ori&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">min&lt;/span>&lt;span class="o">=-&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">max&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ori&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">delta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">image&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">run_pgd_ctf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.03&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.005&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">40&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">max_restarts&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">out_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;pgd_ctf_out&amp;#34;&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">makedirs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">out_dir&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">exist_ok&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">base&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">load_image&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">max_restarts&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">add_random_start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">adv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pgd_with_dummy_grad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">start&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result_v10&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model_v10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result_v8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model_v8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;[&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">] v10: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">result_v10&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, v8: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="nb">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mf">0.4&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">squeeze&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">255&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">astype&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">uint8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_RGB2BGR&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imwrite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">out_dir&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">/pgd_success_&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;✅ CTF condition met.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;❌ CTF condition not met after max_restarts.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">run_pgd_ctf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;car.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.03&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.005&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">40&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The attack was successful when the altered image caused the two models to disagree both in classification and confidence, satisfying the provided formula.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/attack-cnn/flag.png"
+width="1148"
+height="763"
+srcset="https://qiaonpc.github.io/post/attack-cnn/flag_hue859d4d380f19cb6a0eeb5f76259ffae_891640_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/attack-cnn/flag_hue859d4d380f19cb6a0eeb5f76259ffae_891640_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="361px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>NHNC{you_kn0w_h0w_t0_d0_adv3rs3ria1_attack}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>The &amp;ldquo;attack CNN?&amp;rdquo; challenge introduces players to the field of &lt;strong>adversarial AI&lt;/strong>, focusing on image-based attacks against neural networks. By crafting subtle perturbations, players learn how seemingly minor changes can cause significant shifts in deep learning model outputs — an essential skill in both AI security and red-teaming contexts.&lt;/p>
+&lt;hr></description></item><item><title>Just A Normal EXE</title><link>https://qiaonpc.github.io/post/just-a-normal-exe/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/just-a-normal-exe/</guid><description>&lt;h1 id="just-a-normal-exe-ctf-challenge-writeup">Just A Normal EXE CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Just A Normal EXE&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Meoware&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a malware file to find the flag.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/just-a-normal-exe/challenge.png"
+width="654"
+height="920"
+srcset="https://qiaonpc.github.io/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="71"
+data-flex-basis="170px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Just A Normal EXE&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used VirusTotal to scan the provided malware file. This helps to get a preliminary analysis and detect any immediate issues.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Review VirusTotal Results&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Access the detailed report from VirusTotal, available &lt;a class="link" href="https://www.virustotal.com/gui/file/01eeac6d706e078645f78e100bf6c2d808a443c4d85b3257b63fa087eef228cc/relations" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify Key Findings&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In the VirusTotal output, we found &lt;code>s3cr3t5.txt&lt;/code> file mentioned in the relations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Access the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Visit the URL associated with &lt;code>s3cr3t5.txt&lt;/code> to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/just-a-normal-exe/flag.png"
+width="871"
+height="275"
+srcset="https://qiaonpc.github.io/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="316"
+data-flex-basis="760px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong> : &lt;strong>ihack24{obFusCat!on_Alw4ys_w0rK}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>ButterCup</title><link>https://qiaonpc.github.io/post/buttercup/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/buttercup/</guid><description>&lt;h1 id="buttercup-ctf-challenge-writeup">ButterCup CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: ButterCup&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 490&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves extracting three parts of the flag from a video, with two parts embedded in the video itself and one part hidden in the audio spectrum.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a detailed solution for the ButterCup CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Without hints, we definitely cannot solve this challenge.&lt;/li>
+&lt;li>We were told that there were three parts to the flag, with two parts embedded in the video and one part hidden in the audio spectrum.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Video Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Went through the video multiple times, including adjusting playback speed and brightness to catch any hidden elements.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered the words &lt;code>3XP3RT_&lt;/code> at around 14 seconds and &lt;code>1N_&lt;/code> at around 2:52 in the video.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/part%201.png"
+width="912"
+height="684"
+srcset="https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Part 1"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/part%202.png"
+width="1287"
+height="776"
+srcset="https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Part 2"
+class="gallery-image"
+data-flex-grow="165"
+data-flex-basis="398px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Audio Spectrum Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used audacity on the audio of the video to reveal hidden patterns.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Configured the spectrogram to enhance visibility of subtle details.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found a hint for the last part of the flag in the spectrogram.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Not the clearest picture of the last part, but we were able to deducde its &lt;code>4UD1O&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/configuration.jpg"
+width="528"
+height="388"
+srcset="https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="Configuration"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="326px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/last%20part.jpg"
+width="338"
+height="344"
+srcset="https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="Last Part"
+class="gallery-image"
+data-flex-grow="98"
+data-flex-basis="235px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Reconstruction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Combined the three parts of the flag obtained from the video and audio spectrum to reconstruct the complete flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Conclusion&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The ButterCup CTF challenge required a thorough analysis of both the video and audio spectrum to extract all parts of the flag. It demonstrated the importance of attention to detail and the use of specialized tools for multimedia analysis in CTF challenges.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>I Hope You Have The Software</title><link>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</guid><description>&lt;h1 id="i-hope-you-have-the-software-ctf-challenge-writeup">I Hope You Have The Software CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: I Hope You Have The Software&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 230&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Network&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of this challenge is to find the flag hidden in the HTML files served by the servers in the packet capture.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;I Hope You Have The Software&amp;rdquo; CTF challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Analyzed the packet capture and identified 12 servers.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Noticed two servers stacked on top of each other, suggesting a hidden layer.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked.png"
+width="585"
+height="609"
+srcset="https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Stacked"
+class="gallery-image"
+data-flex-grow="96"
+data-flex-basis="230px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>HTML File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Inspected the HTML files served by the servers.&lt;/li>
+&lt;li>Found the flag hidden within one of the HTML files.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extracted the flag from the HTML file.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag.png"
+width="595"
+height="321"
+srcset="https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="185"
+data-flex-basis="444px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>STOP SPAMMING</title><link>https://qiaonpc.github.io/post/stop-spamming/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/stop-spamming/</guid><description>&lt;h1 id="stop-spamming---ctf-challenge-writeup">STOP SPAMMING - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: STOP SPAMMING&lt;br>
+Points: 100&lt;br>
+Category: Miscellaneous&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the STOP SPAMMING challenge is to decode a provided spam message using a spam decoder tool. Your task is to utilize the tool to uncover the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the STOP SPAMMING challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Spam Message Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by examining the provided spam message. The challenge hints at using a spam decoder tool.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Spam Decoder Tool&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge simplifies the task by directing you to a specific spam decoder tool. You can use the following online tool to decode the spam message:
+&lt;a class="link" href="https://spammimic.com/decode.cgi" target="_blank" rel="noopener"
+>Spam Decoder Tool&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>By utilizing the provided tool, you will decode the spam message and reveal the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The STOP SPAMMING challenge, in this case, involves the straightforward use of a spam decoder tool to uncover the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the STOP SPAMMING challenge, you utilize a spam decoder tool to decode the spam message and reveal the flag. It&amp;rsquo;s a quick and straightforward solution to the challenge. Best of luck!&lt;/p></description></item></channel></rss>
