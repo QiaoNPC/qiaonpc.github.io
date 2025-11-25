@@ -1,5 +1,5 @@
 ---
-title: Eighteen
+title: 18 - Eighteen
 description: Log in as a specific user (Jim) in OWASP Juice Shop using SQL Injection to retrieve the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

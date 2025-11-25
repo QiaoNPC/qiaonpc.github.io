@@ -1,5 +1,5 @@
 ---
-title: Eleven
+title: 11 - Eleven
 description: Access and manipulate a custom Rubik’s Cube web challenge under restricted user sessions to retrieve the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

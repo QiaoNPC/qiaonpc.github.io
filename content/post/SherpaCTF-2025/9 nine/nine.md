@@ -1,5 +1,5 @@
 ---
-title: Nine
+title: 9 - Nine
 description: Analyze forensic artifacts to determine the real name of the threat actor based on their Telegram activity and archived file data.
 date: 2025-11-25 00:00:00+0000
 categories:

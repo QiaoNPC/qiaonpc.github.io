@@ -1,5 +1,5 @@
 ---
-title: Sixteen
+title: 16 - Sixteen
 description: Log in as admin via SQL Injection and delete all 5-star feedback entries to retrieve the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

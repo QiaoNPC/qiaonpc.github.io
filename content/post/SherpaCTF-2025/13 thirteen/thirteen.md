@@ -1,5 +1,5 @@
 ---
-title: Thirteen
+title: 13 - Thirteen
 description: Exploit a vulnerable custom web application that evaluates function names passed via URL parameters without proper validation.
 date: 2025-11-25 00:00:00+0000
 categories:

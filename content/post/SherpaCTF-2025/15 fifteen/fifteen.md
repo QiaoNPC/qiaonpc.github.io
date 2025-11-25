@@ -1,5 +1,5 @@
 ---
-title: Fifteen
+title: 15 - Fifteen
 description: Interact with a restricted terminal environment and extract the contents of the `flag.txt` file using limited command-line capabilities.
 date: 2025-11-25 00:00:00+0000
 categories:

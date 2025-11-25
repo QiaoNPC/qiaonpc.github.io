@@ -1,5 +1,5 @@
 ---
-title: Three
+title: 3 - Three
 description: Decode the hidden flag from a seemingly normal message given by User Two.
 date: 2025-11-25 00:00:00+0000
 categories:

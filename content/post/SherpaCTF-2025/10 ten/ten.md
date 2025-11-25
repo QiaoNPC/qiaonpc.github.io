@@ -1,5 +1,5 @@
 ---
-title: Ten
+title: 10 - Ten
 description: Exploit a vulnerable login form in OWASP Juice Shop using classic SQL Injection techniques to retrieve the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

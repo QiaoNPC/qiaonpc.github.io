@@ -1,5 +1,5 @@
 ---
-title: Twelve
+title: 12 - Twelve
 description: Exploit session manipulation in OWASP Juice Shop to gain access to another user's basket and retrieve the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

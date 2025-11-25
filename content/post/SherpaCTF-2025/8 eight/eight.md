@@ -1,5 +1,5 @@
 ---
-title: Eight
+title: 8 - Eight
 description: Explore the OWASP Juice Shop instance and retrieve the flag by reading the Privacy Policy page.
 date: 2025-11-25 00:00:00+0000
 categories:

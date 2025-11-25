@@ -1,5 +1,5 @@
 ---
-title: One
+title: 1 - One
 description: Identify and decode a simple obfuscated message left by a previous user.
 date: 2025-11-25 00:00:00+0000
 categories:

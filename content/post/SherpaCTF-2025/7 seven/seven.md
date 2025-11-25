@@ -1,5 +1,5 @@
 ---
-title: Seven
+title: 7 - Seven
 description: Identify the real IP address of the attacker from the data provided by User Six.
 date: 2025-11-25 00:00:00+0000
 categories:

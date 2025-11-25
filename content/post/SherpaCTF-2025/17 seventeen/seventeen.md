@@ -1,5 +1,5 @@
 ---
-title: Seventeen
+title: 17 - Seventeen
 description: Unzip a series of recursively compressed ZIP files, collect password fragments from each layer, and use the final combined password to extract the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

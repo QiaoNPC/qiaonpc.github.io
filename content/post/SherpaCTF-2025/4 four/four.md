@@ -1,5 +1,5 @@
 ---
-title: Four
+title: 4 - Four
 description: Access and explore an exposed FTP server tied to an OWASP Juice Shop challenge to retrieve confidential internal files, including the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

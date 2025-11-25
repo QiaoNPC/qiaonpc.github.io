@@ -1,5 +1,5 @@
 ---
-title: Six
+title: 6 - Six
 description: Interact with a newly added OWASP Juice Shop AI-based feature and identify how to retrieve a hidden flag through it.
 date: 2025-11-25 00:00:00+0000
 categories:

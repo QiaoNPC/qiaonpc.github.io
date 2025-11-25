@@ -1,5 +1,5 @@
 ---
-title: Fourteen
+title: 14 - Fourteen
 description: Exploit OWASP Juice Shop by registering a user with empty input values to trigger a vulnerable behavior and obtain the flag.
 date: 2025-11-25 00:00:00+0000
 categories:

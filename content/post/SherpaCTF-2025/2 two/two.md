@@ -1,5 +1,5 @@
 ---
-title: Two
+title: 2 - Two
 description: Access the Juice Shop instance running on port `42000` and locate the scoreboard to find the flag.
 date: 2025-11-25 00:00:00+0000
 categories:
