@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SherpaCTF 2025 on</title><link>https://qiaonpc.github.io/categories/sherpactf-2025/</link><description>Recent content in SherpaCTF 2025 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/sherpactf-2025/index.xml" rel="self" type="application/rss+xml"/><item><title>0 - Zero</title><link>https://qiaonpc.github.io/post/0-zero/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/0-zero/</guid><description>&lt;h1 id="zero---ctf-challenge-writeup">Zero - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Zero&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Locate and extract the flag by investigating a provided file or image (&lt;code>zero:welcome&lt;/code>). The goal is to navigate the user profile and identify credentials or indicators of compromise from accessible paths.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-navigating-to-the-desktop">1. &lt;strong>Navigating to the Desktop&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>given &lt;code>zero:welcome&lt;/code>, proceed to Desktop folder to find the password for User One.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/zero.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>sherpactf25&lt;/code>&lt;/p></description></item><item><title>1 - One</title><link>https://qiaonpc.github.io/post/1-one/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/1-one/</guid><description>&lt;h1 id="one---ctf-challenge-writeup">One - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: One&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify and decode a simple obfuscated message left by a previous user.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>From &lt;strong>User Zero&lt;/strong>, we find a file with a ciphered message.&lt;/li>
+&lt;li>The message appears to be &lt;strong>reversed text&lt;/strong>.&lt;/li>
+&lt;li>Wrote a quick Python script to reverse it:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;one.txt&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">read&lt;/span>&lt;span class="p">()[::&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/one.png"
+loading="lazy"
+alt="Challenge One"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/one_flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>SHERPACTF25{I_Kn3w_it_44}&lt;/code>&lt;/p></description></item><item><title>10 - Ten</title><link>https://qiaonpc.github.io/post/10-ten/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/10-ten/</guid><description>&lt;h1 id="ten---ctf-challenge-writeup">Ten - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Ten&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit a vulnerable login form in OWASP Juice Shop using classic SQL Injection techniques to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Nine&lt;/strong>, we’re given another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/ten.png"
+loading="lazy"
+alt="Challenge 10"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one is a &lt;strong>classic&lt;/strong> — good old &lt;strong>SQL Injection&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The login form is completely unprotected, no WAF, no input sanitization.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A simple payload like &lt;code>' OR 1=1 --&lt;/code> bypasses authentication.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After logging in using that injection, the &lt;strong>flag is revealed&lt;/strong> on the resulting page or via the admin panel.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>`690fa3247a99d651e0b26f947baf&lt;/p></description></item><item><title>11 - Eleven</title><link>https://qiaonpc.github.io/post/11-eleven/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/11-eleven/</guid><description>&lt;h1 id="eleven---ctf-challenge-writeup">Eleven - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Eleven&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Access and manipulate a custom Rubik’s Cube web challenge under restricted user sessions to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Ten&lt;/strong>, we’re given a &lt;strong>custom web challenge&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/eleven.png"
+loading="lazy"
+alt="Challenge 11"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At first, I couldn’t open the &lt;code>Rubiks.html&lt;/code> file due to &lt;strong>permission issues&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After &lt;strong>45 minutes of debugging&lt;/strong>, I realized I had been &lt;code>su&lt;/code>-ing through multiple users — causing nested shells under &lt;strong>User Zero’s terminal&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Because of that, although I was technically &lt;strong>User Ten&lt;/strong>, the permission context was messed up.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To fix this, I &lt;strong>logged out completely&lt;/strong> and logged in directly as &lt;strong>User Ten&lt;/strong>. That allowed me to open &lt;strong>Firefox&lt;/strong> and view the HTML page.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/login%20as%20eleven.png"
+loading="lazy"
+alt="Challenge 11"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The challenge was a &lt;strong>Rubik’s Cube simulation&lt;/strong>. As someone who can solve a cube physically, I considered solving it directly.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>But the page didn’t allow turning multiple layers, and I couldn’t mentally map 1-layer operations.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So instead, I chose the &lt;strong>easier way&lt;/strong>: modifying the &lt;strong>source code&lt;/strong> to force the check function to always &lt;strong>return true&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/src%20code%20modification.png"
+loading="lazy"
+alt="Src Code Modification"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>This trick worked — and the flag was revealed.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>RUBIKSCUBEMASTA&lt;/code>&lt;/p></description></item><item><title>12 - Twelve</title><link>https://qiaonpc.github.io/post/12-twelve/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/12-twelve/</guid><description>&lt;h1 id="twelve---ctf-challenge-writeup">Twelve - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Twelve&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit session manipulation in OWASP Juice Shop to gain access to another user&amp;rsquo;s basket and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Eleven&lt;/strong>, we’re handed yet another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/twelve.png"
+loading="lazy"
+alt="Challenge 12"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one revolves around accessing &lt;strong>another user&amp;rsquo;s basket&lt;/strong> — a classic session-based vulnerability.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The key here is that the &lt;strong>basket ID is stored in &lt;code>sessionStorage&lt;/code>&lt;/strong>, which is accessible via the browser&amp;rsquo;s developer tools.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>By manually modifying the &lt;code>bid&lt;/code> value in &lt;code>sessionStorage&lt;/code>, we can point our session to a different user’s basket.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After trying a few IDs, one of them &lt;strong>revealed the flag&lt;/strong> tied to that other user&amp;rsquo;s data.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>e6982b34b6734ceadd28e5019b251f929a80b815&lt;/code>&lt;/p></description></item><item><title>13 - Thirteen</title><link>https://qiaonpc.github.io/post/13-thirteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/13-thirteen/</guid><description>&lt;h1 id="thirteen---ctf-challenge-writeup">Thirteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Thirteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit a vulnerable custom web application that evaluates function names passed via URL parameters without proper validation.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Twelve&lt;/strong>, we’re given a &lt;strong>custom web app&lt;/strong>, different from the usual OWASP Juice Shop challenges.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/thirteen.png"
+loading="lazy"
+alt="Challenge 13"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/challenge.png"
+loading="lazy"
+alt="Challenge 13 2"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The challenge revolves around passing an &lt;strong>operator&lt;/strong> to the application through a query string.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The vulnerability lies in the fact that the &lt;strong>operator is executed as a function&lt;/strong>, without any restrictions or sanitization.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>That means arbitrary functions (like &lt;code>system&lt;/code>) can be invoked directly.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A crafted URL like below exploits this: &lt;code>http://localhost:8081?operator=system&amp;amp;num1=cat&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The application executes &lt;code>system('cat flag.txt')&lt;/code>, leaking the flag directly in the response.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{ARRRRRR\_CIIIIII\_EIEIEIE}&lt;/code>&lt;/p></description></item><item><title>14 - Fourteen</title><link>https://qiaonpc.github.io/post/14-fourteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/14-fourteen/</guid><description>&lt;h1 id="fourteen---ctf-challenge-writeup">Fourteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Fourteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit OWASP Juice Shop by registering a user with empty input values to trigger a vulnerable behavior and obtain the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Thirteen&lt;/strong>, we’re given &lt;strong>another OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/fourteen.png"
+loading="lazy"
+alt="Challenge 14"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The goal here is to &lt;strong>register a user with empty fields&lt;/strong> — which the frontend normally doesn’t allow.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Using &lt;strong>Firefox’s built-in repeater&lt;/strong> or dev tools, we can intercept the registration request and &lt;strong>manually edit the payload&lt;/strong> to submit empty values (e.g., empty email and password).&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/original%20request.png"
+loading="lazy"
+alt="Original Request"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/empty%20request.png"
+loading="lazy"
+alt="Sending Empty Request"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The backend fails to validate it properly, resulting in successful registration and exposure of the &lt;strong>flag&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>e58f8a9612c60985360e904b027535262c52f9dc&lt;/code>&lt;/p></description></item><item><title>15 - Fifteen</title><link>https://qiaonpc.github.io/post/15-fifteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/15-fifteen/</guid><description>&lt;h1 id="fifteen---ctf-challenge-writeup">Fifteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Fifteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Interact with a restricted terminal environment and extract the contents of the &lt;code>flag.txt&lt;/code> file using limited command-line capabilities.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Fourteen&lt;/strong>, we’re dropped into a &lt;strong>restricted terminal&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/fifteen.png"
+loading="lazy"
+alt="Challenge 15"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I’ve faced similar setups before, but didn’t take notes — so it took me around &lt;strong>an hour of trial and error&lt;/strong> to rediscover the solution.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In restricted shells where typical tools or flags are disabled, breaking down output is key.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The command that worked: &lt;code>grep -o . flag.txt&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This prints the flag &lt;strong>character by character&lt;/strong>, bypassing common output restrictions and filters.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{EZPZ}&lt;/code>&lt;/p></description></item><item><title>16 - Sixteen</title><link>https://qiaonpc.github.io/post/16-sixteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/16-sixteen/</guid><description>&lt;h1 id="sixteen---ctf-challenge-writeup">Sixteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Sixteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Log in as admin via SQL Injection and delete all 5-star feedback entries to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Fifteen&lt;/strong>, the challenge is to remove all &lt;strong>five-star feedbacks&lt;/strong> from the system.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/sixteen.png"
+loading="lazy"
+alt="Challenge 16"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To do that, we first need &lt;strong>admin access&lt;/strong>, which can be achieved using &lt;strong>SQL Injection&lt;/strong> on the login form.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After gaining access, navigate to the &lt;strong>feedback section&lt;/strong> of the OWASP Juice Shop dashboard.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Manually identify and &lt;strong>delete all entries with a 5-star rating&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once all high-rated feedbacks are cleared, the challenge marks as complete and the &lt;strong>flag is revealed&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>78231b75c0b2180b7e964dcbb1ab3c3f58639f2e&lt;/code>&lt;/p></description></item><item><title>17 - Seventeen</title><link>https://qiaonpc.github.io/post/17-seventeen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/17-seventeen/</guid><description>&lt;h1 id="seventeen---ctf-challenge-writeup">Seventeen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Seventeen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Unzip a series of recursively compressed ZIP files, collect password fragments from each layer, and use the final combined password to extract the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Sixteen&lt;/strong>, we&amp;rsquo;re presented with a challenge that involves unzipping &lt;strong>layered ZIP files&lt;/strong> — a total of &lt;strong>10 layers deep&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Each ZIP file is named with a &lt;strong>3-character password&lt;/strong>: either all lowercase, all uppercase, or all numbers.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Without access to GPT, scripting this was difficult, so I ended up doing most of the layers &lt;strong>manually&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At each level, the ZIP would extract into another ZIP, and inside each, a &lt;strong>snippet of the final password&lt;/strong> was hidden.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After collecting all the snippets across the 10 layers, I &lt;strong>combined them into a single string&lt;/strong>, which served as the password to unlock the &lt;strong>final ZIP file&lt;/strong> containing the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{Cr4ck_z1p5_3zpz}&lt;/code>&lt;/p></description></item><item><title>18 - Eighteen</title><link>https://qiaonpc.github.io/post/18-eighteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/18-eighteen/</guid><description>&lt;h1 id="eighteen---ctf-challenge-writeup">Eighteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Eighteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Log in as a specific user (Jim) in OWASP Juice Shop using SQL Injection to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Seventeen&lt;/strong>, we’re given another &lt;strong>OWASP Juice Shop&lt;/strong> challenge. This time, the task is to &lt;strong>log in as Jim&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/eighteen.png"
+loading="lazy"
+alt="Challenge 18"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Actually, we had already done something similar earlier when logging in as admin to delete five-star ratings.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The first step is to &lt;strong>find Jim&amp;rsquo;s email&lt;/strong>, which is typically:&lt;code>jim@juice-sh.op&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/jim%20email.png"
+loading="lazy"
+alt="Jim&amp;rsquo;s Email"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Then, use a &lt;strong>basic SQL injection&lt;/strong> payload to bypass the password check: &lt;code>jim@juice-sh.op'--&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This logs us in as Jim, and once authenticated, the &lt;strong>flag becomes accessible&lt;/strong> — either via the profile page or shown directly.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>de0806c1e34a5783b4b1672fa4eed440a9912378&lt;/code>&lt;/p></description></item><item><title>2 - Two</title><link>https://qiaonpc.github.io/post/2-two/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/2-two/</guid><description>&lt;h1 id="two---ctf-challenge-writeup">Two - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Two&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Access the Juice Shop instance running on port &lt;code>42000&lt;/code> and locate the scoreboard to find the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User One&lt;/strong>, we’re told to check a web app on port &lt;strong>42000&lt;/strong> — turns out it’s &lt;strong>OWASP Juice Shop&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/two.png"
+loading="lazy"
+alt="Challenge"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I’ve done this before, so it was familiar, but doing it again without internet or GPT made it more fun.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Checked the source code, looked around, found &lt;code>/score-board&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/two_link.png"
+loading="lazy"
+alt="Found score-board endpoint"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once you browse to the endpoint, the flag will automatically appear on the top of the screen.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>2614339936e8282e2f820f023d4d998a1f95e02a&lt;/code>&lt;/p></description></item><item><title>3 - Three</title><link>https://qiaonpc.github.io/post/3-three/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/3-three/</guid><description>&lt;h1 id="three---ctf-challenge-writeup">Three - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Three&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Decode the hidden flag from a seemingly normal message given by User Two.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Two&lt;/strong>, we’re given a regular-looking message, but the flag is &lt;strong>encoded&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/three.png"
+loading="lazy"
+alt="Challenge"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Just by eyeballing it, the pattern looked like &lt;strong>ROT13&lt;/strong> — common and easy to test manually.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoded it by counting through the letters manually, and got the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.jpg"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{Gh0st_in_Th3_W1r3s}&lt;/code>&lt;/p></description></item><item><title>4 - Four</title><link>https://qiaonpc.github.io/post/4-four/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/4-four/</guid><description>&lt;h1 id="four---ctf-challenge-writeup">Four - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Four&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Access and explore an exposed FTP server tied to an OWASP Juice Shop challenge to retrieve confidential internal files, including the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Three&lt;/strong>, we’re given another &lt;strong>OWASP Juice Shop&lt;/strong>-related challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/four.png"
+loading="lazy"
+alt="Challenge Four"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This time, the focus is on an &lt;strong>open FTP server&lt;/strong> that contains internal files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Browsing through the FTP, one of the files available is &lt;code>acquisitions.md&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Opening that file reveals the &lt;strong>flag directly&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>8d2072c6b0a455608ca1a293dc0c9579883fc6a5&lt;/code>&lt;/p></description></item><item><title>5 - Five</title><link>https://qiaonpc.github.io/post/5-five/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/5-five/</guid><description>&lt;h1 id="five---ctf-challenge-writeup">Five - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Five&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Investigate uploaded files to identify a malicious web shell used by an attacker.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Four&lt;/strong>, we’re tasked with finding &lt;strong>malicious files&lt;/strong> uploaded by an attacker.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/five.png"
+loading="lazy"
+alt="Challenge"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>By grepping for keywords like &lt;code>&amp;quot;upload&amp;quot;&lt;/code> in the logs or source files, we can trace file upload activity.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This leads us to a file named &lt;strong>&lt;code>nusa_shell.php&lt;/code>&lt;/strong> — clearly malicious and matches the context of a typical web shell.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>That filename itself is the &lt;strong>flag&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/grep.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{nusa_shell.php}&lt;/code>&lt;/p></description></item><item><title>6 - Six</title><link>https://qiaonpc.github.io/post/6-six/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/6-six/</guid><description>&lt;h1 id="six---ctf-challenge-writeup">Six - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Six&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Interact with a newly added OWASP Juice Shop AI-based feature and identify how to retrieve a hidden flag through it.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Five&lt;/strong>, we&amp;rsquo;re given another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/six.png"
+loading="lazy"
+alt="Challenge Six"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one felt different — it’s a &lt;strong>newer challenge&lt;/strong>, likely introduced after &lt;strong>AI pentesting features&lt;/strong> were added to the platform.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Spent quite a bit of time stuck, expecting a typical &lt;code>flag&lt;/code> to be revealed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Turns out, this challenge doesn&amp;rsquo;t deal with flags directly — instead, it uses a &lt;strong>coupon bot&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After repeatedly interacting with the bot and specifically &lt;strong>asking for a coupon&lt;/strong> multiple times, the &lt;strong>flag was finally returned&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/image.png"
+loading="lazy"
+alt="Asking for Coupon"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>9dd704b4c48bd310dd3187971a344c179213562d&lt;/code>&lt;/p></description></item><item><title>7 - Seven</title><link>https://qiaonpc.github.io/post/7-seven/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/7-seven/</guid><description>&lt;h1 id="seven---ctf-challenge-writeup">Seven - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Seven&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify the real IP address of the attacker from the data provided by User Six.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Six&lt;/strong>, the task was to determine the &lt;strong>real IP address&lt;/strong> of the attacker.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/seven.png"
+loading="lazy"
+alt="Challenge seven"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I went with a &lt;strong>brute-force approach&lt;/strong>, submitting all possible IPs found in the provided logs/data.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Eventually, one of them returned a &lt;strong>positive result&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/brute%20forcing.png"
+loading="lazy"
+alt="Brute Force"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>One important note: the flag format had a quirk — the platform &lt;strong>expected the flag without the &amp;lsquo;5&amp;rsquo;&lt;/strong> in &lt;code>SHERPACTF25&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So instead of &lt;code>SHERPACTF25{...}&lt;/code>, the correct format was &lt;strong>&lt;code>SHERPACTF2{...}&lt;/code>&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF2{103.17.24.77}&lt;/code>&lt;/p></description></item><item><title>8 - Eight</title><link>https://qiaonpc.github.io/post/8-eight/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/8-eight/</guid><description>&lt;h1 id="eight---ctf-challenge-writeup">Eight - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Eight&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Explore the OWASP Juice Shop instance and retrieve the flag by reading the Privacy Policy page.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Seven&lt;/strong>, we’re given yet another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/eight.png"
+loading="lazy"
+alt="Eight"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one is straightforward — all that’s needed is to &lt;strong>read the Privacy Policy&lt;/strong> page.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Upon opening the page, the &lt;strong>flag is displayed&lt;/strong>, either at the bottom or embedded in the text.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>13083493dec15380f7319596e5e2bc67437ce5c4&lt;/code>&lt;/p></description></item><item><title>9 - Nine</title><link>https://qiaonpc.github.io/post/9-nine/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/9-nine/</guid><description>&lt;h1 id="nine---ctf-challenge-writeup">Nine - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Nine&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze forensic artifacts to determine the real name of the threat actor based on their Telegram activity and archived file data.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Eight&lt;/strong>, we&amp;rsquo;re given a &lt;strong>forensic artifact&lt;/strong> similar to a previous challenge, but this time the goal is to find the &lt;strong>real name of the attacker&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/nine.png"
+loading="lazy"
+alt="Challenge Nine"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Opening &lt;code>telegram_profile.txt&lt;/code>, we can view the user&amp;rsquo;s &lt;strong>old usernames&lt;/strong>, one of which resembles a &lt;strong>last name&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/part%201.png"
+loading="lazy"
+alt="Last Name"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Separately, in &lt;code>nu5a-archiv3.txt&lt;/code>, another potential name appears — likely the &lt;strong>first name&lt;/strong>. Both names start with &lt;strong>R&lt;/strong>, which supports this link.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/part%202.png"
+loading="lazy"
+alt="First Name"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Combining the two gives us the full name: &lt;strong>&lt;code>RADITYA_PRATAMA&lt;/code>&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{RADITYA_PRATAMA}&lt;/code>&lt;/p></description></item></channel></rss>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>No Hack No CTF 2025 on</title><link>https://qiaonpc.github.io/categories/no-hack-no-ctf-2025/</link><description>Recent content in No Hack No CTF 2025 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 07 Jul 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/no-hack-no-ctf-2025/index.xml" rel="self" type="application/rss+xml"/><item><title>attack CNN?</title><link>https://qiaonpc.github.io/post/attack-cnn/</link><pubDate>Mon, 07 Jul 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/attack-cnn/</guid><description>&lt;h1 id="attack-cnn---ctf-challenge-writeup">attack CNN? - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: attack CNN?&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Perform an adversarial attack against two provided YOLO (You Only Look Once) models. Craft an image such that the two models produce &lt;strong>significantly different predictions&lt;/strong>, demonstrating an understanding of adversarial machine learning techniques.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-understanding-the-goal">1. &lt;strong>Understanding the Goal&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Given two object detection models:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>yolo_v8.pt&lt;/code>&lt;/li>
+&lt;li>&lt;code>yolo_v10.pt&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The objective is to &lt;strong>generate a single adversarial image&lt;/strong> that causes the models to output different results under the following conditions:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">different_prediction&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class_name&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class_name&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">confidence_gap&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mf">0.4&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Both conditions must be satisfied to consider the attack successful.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-choosing-the-attack-method">2. &lt;strong>Choosing the Attack Method&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>This is a classic use case for &lt;strong>adversarial machine learning&lt;/strong> techniques, targeting deep neural networks.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Two common attacks were considered:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>FGSM (Fast Gradient Sign Method)&lt;/strong> – faster, simpler&lt;/li>
+&lt;li>&lt;strong>PGD (Projected Gradient Descent)&lt;/strong> – more effective but slower&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>For this challenge, &lt;strong>PGD was used&lt;/strong> for better perturbation control and higher attack success rate.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-executing-the-attack">3. &lt;strong>Executing the Attack&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Loaded both YOLO models using an appropriate framework (e.g., PyTorch + Ultralytics YOLOv8).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Started from a base image and applied the &lt;strong>PGD adversarial attack&lt;/strong>, modifying the image iteratively to:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Change the prediction &lt;strong>class name&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a &lt;strong>≥ 0.4 confidence gap&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">cv2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">ultralytics&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">YOLO&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">device&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;cuda&amp;#34;&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">is_available&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="s2">&amp;#34;cpu&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model_v8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YOLO&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;yolo_v8.pt&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model_v10&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YOLO&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;yolo_v10.pt&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">load_image&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">640&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imread&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">resize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_BGR2RGB&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">img&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mf">255.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float32&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">unsqueeze&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@torch.no_grad&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image_tensor&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">results&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">predict&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_tensor&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">verbose&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">boxes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">results&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">boxes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">boxes&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cls&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;None&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.0&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">confs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">conf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">classes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cls&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">top&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">confs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">argmax&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">classes&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">top&lt;/span>&lt;span class="p">])),&lt;/span> &lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">float&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">confs&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">top&lt;/span>&lt;span class="p">])}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">add_random_start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">noise&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">empty_like&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">uniform_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">noise&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">pgd_with_dummy_grad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ori&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">iters&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requires_grad_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dummy_loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mean&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dummy_loss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">backward&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grad&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grad&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">alpha&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">grad&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sign&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">delta&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">ori&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">min&lt;/span>&lt;span class="o">=-&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">max&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ori&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">delta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">image&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">run_pgd_ctf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.03&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.005&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">40&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">max_restarts&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">out_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;pgd_ctf_out&amp;#34;&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">makedirs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">out_dir&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">exist_ok&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">base&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">load_image&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">max_restarts&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">add_random_start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">adv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pgd_with_dummy_grad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">start&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result_v10&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model_v10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result_v8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model_v8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;[&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">] v10: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">result_v10&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, v8: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="nb">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mf">0.4&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">squeeze&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">255&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">astype&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">uint8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_RGB2BGR&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imwrite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">out_dir&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">/pgd_success_&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;✅ CTF condition met.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;❌ CTF condition not met after max_restarts.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">run_pgd_ctf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;car.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.03&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.005&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">40&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The attack was successful when the altered image caused the two models to disagree both in classification and confidence, satisfying the provided formula.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/attack-cnn/flag.png"
+width="1148"
+height="763"
+srcset="https://qiaonpc.github.io/post/attack-cnn/flag_hue859d4d380f19cb6a0eeb5f76259ffae_891640_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/attack-cnn/flag_hue859d4d380f19cb6a0eeb5f76259ffae_891640_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="361px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>NHNC{you_kn0w_h0w_t0_d0_adv3rs3ria1_attack}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>The &amp;ldquo;attack CNN?&amp;rdquo; challenge introduces players to the field of &lt;strong>adversarial AI&lt;/strong>, focusing on image-based attacks against neural networks. By crafting subtle perturbations, players learn how seemingly minor changes can cause significant shifts in deep learning model outputs — an essential skill in both AI security and red-teaming contexts.&lt;/p>
+&lt;hr></description></item></channel></rss>
