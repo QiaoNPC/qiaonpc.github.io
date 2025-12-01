@@ -6,7 +6,181 @@
         <description>Recent content in Web on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 08 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 26 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/web/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>XorisEzy</title>
+        <link>http://localhost:1313/post/xorisezy/</link>
+        <pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/post/xorisezy/</guid>
+        <description>&lt;h1 id=&#34;xorisezy-ctf-challenge-writeup&#34;&gt;XorisEzy CTF Challenge Writeup
+&lt;/h1&gt;&lt;h2 id=&#34;challenge-information&#34;&gt;Challenge Information
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Name&lt;/strong&gt;: XorisEzy&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Points&lt;/strong&gt;: 100&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Category&lt;/strong&gt;: Web&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Objective&lt;/strong&gt;: Identify and exploit a SQL injection vulnerability in a user search feature, reverse the password obfuscation method, and retrieve the flag by logging in as the administrator.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;solution&#34;&gt;Solution
+&lt;/h2&gt;&lt;p&gt;To solve the &amp;ldquo;XorisEzy&amp;rdquo; challenge, follow these steps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploring the Application&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;After registering and logging into the web application, noticed a search functionality to look up user accounts.&lt;/li&gt;
+&lt;li&gt;Suspected this search feature might be vulnerable to either IDOR or SQL injection based on its behavior and error responses.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Testing for SQL Injection&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Inputting a single quote (&lt;code&gt;&#39;&lt;/code&gt;) into the search box triggered an SQL error message.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;This confirmed that the backend was not sanitizing user input, indicating a SQL injection vulnerability.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/xorisezy/sql%20error.png&#34;
+	width=&#34;983&#34;
+	height=&#34;308&#34;
+	srcset=&#34;http://localhost:1313/post/xorisezy/sql%20error_hu59464c0a6a5d785bdf72fdc741a037dd_125623_480x0_resize_box_3.png 480w, http://localhost:1313/post/xorisezy/sql%20error_hu59464c0a6a5d785bdf72fdc741a037dd_125623_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;SQL Error&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;319&#34;
+		data-flex-basis=&#34;765px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Exploiting the Vulnerability&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Crafted several payloads to enumerate the database, focusing on dumping data from the &lt;code&gt;information_schema.tables&lt;/code&gt; and related metadata.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Eventually retrieved usernames and their associated &amp;lsquo;hashed&amp;rsquo; passwords.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/xorisezy/dump%20information%20schema.png&#34;
+	width=&#34;977&#34;
+	height=&#34;514&#34;
+	srcset=&#34;http://localhost:1313/post/xorisezy/dump%20information%20schema_hu3d1bd2a094fea081cc5e20a018c6097a_311874_480x0_resize_box_3.png 480w, http://localhost:1313/post/xorisezy/dump%20information%20schema_hu3d1bd2a094fea081cc5e20a018c6097a_311874_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Dump Information Schema&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;190&#34;
+		data-flex-basis=&#34;456px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Investigating the Password Hashing&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Noticed that passwords were obfuscated using a simple method — likely XOR.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Registered a test account with a known password and retrieved the obfuscated version to reverse-engineer the XOR key.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Discovered that the key used for regular accounts was &lt;code&gt;KeyForX&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/xorisezy/find%20xor%20key.png&#34;
+	width=&#34;955&#34;
+	height=&#34;447&#34;
+	srcset=&#34;http://localhost:1313/post/xorisezy/find%20xor%20key_hu0db00a1d7b1b730c30fa263eb86d9d40_137820_480x0_resize_box_3.png 480w, http://localhost:1313/post/xorisezy/find%20xor%20key_hu0db00a1d7b1b730c30fa263eb86d9d40_137820_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Fnd XOR Key&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;213&#34;
+		data-flex-basis=&#34;512px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Bypassing XOR Obfuscation for Admin&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Tried to decode the administrator&amp;rsquo;s password using the same XOR key but failed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;After extensive trial and error, hypothesized the key might be a variation of &lt;code&gt;KeyForX&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Incrementally tested longer variants until &lt;code&gt;KeyForXor&lt;/code&gt; correctly decoded the admin password.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/xorisezy/xor%20key%20fail.png&#34;
+	width=&#34;953&#34;
+	height=&#34;464&#34;
+	srcset=&#34;http://localhost:1313/post/xorisezy/xor%20key%20fail_huac79d6032435fe5a5b4b62dd4c2c863a_144744_480x0_resize_box_3.png 480w, http://localhost:1313/post/xorisezy/xor%20key%20fail_huac79d6032435fe5a5b4b62dd4c2c863a_144744_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;XOR Key Failed&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;205&#34;
+		data-flex-basis=&#34;492px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/xorisezy/guess%20xor%20key.png&#34;
+	width=&#34;944&#34;
+	height=&#34;462&#34;
+	srcset=&#34;http://localhost:1313/post/xorisezy/guess%20xor%20key_hu0a24c456adef5555c59b76011dad4cc3_135890_480x0_resize_box_3.png 480w, http://localhost:1313/post/xorisezy/guess%20xor%20key_hu0a24c456adef5555c59b76011dad4cc3_135890_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Guess Key&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;204&#34;
+		data-flex-basis=&#34;490px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Logging in as Admin&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Used the recovered admin credentials to log in.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Upon successful login, the application revealed the flag.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/post/xorisezy/flag.png&#34;
+	width=&#34;818&#34;
+	height=&#34;187&#34;
+	srcset=&#34;http://localhost:1313/post/xorisezy/flag_hua97eab31d2a4e3caab7699cc44e3dbfe_52520_480x0_resize_box_3.png 480w, http://localhost:1313/post/xorisezy/flag_hua97eab31d2a4e3caab7699cc44e3dbfe_52520_1024x0_resize_box_3.png 1024w&#34;
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;Flag&#34;
+	
+	
+		class=&#34;gallery-image&#34; 
+		data-flex-grow=&#34;437&#34;
+		data-flex-basis=&#34;1049px&#34;
+	
+&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;flag&#34;&gt;Flag
+&lt;/h2&gt;&lt;p&gt;netsa{X0rI$@wes0mE}&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>IPORTE</title>
         <link>http://localhost:1313/post/iporte/</link>
         <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>

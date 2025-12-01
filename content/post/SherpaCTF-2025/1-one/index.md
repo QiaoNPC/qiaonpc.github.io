@@ -31,9 +31,9 @@ with open('one.txt', 'r') as file:
     print(data)
 ```
 
-![Challenge One](one.png)
+![Challenge One](./one.png)
 
-![Flag](one_flag.png)
+![Flag](./one_flag.png)
 
 ## Flag
 The flag for this challenge is:  

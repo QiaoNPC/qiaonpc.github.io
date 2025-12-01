@@ -6,12 +6,76 @@
         <description>Recent content in Categories on </description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>CTF Writeup</title>
         <link>http://localhost:1313/categories/ctf-writeup/</link>
-        <pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate>
+        <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
         
         <guid>http://localhost:1313/categories/ctf-writeup/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SherpaCTF 2025</title>
+        <link>http://localhost:1313/categories/sherpactf-2025/</link>
+        <pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/sherpactf-2025/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>SunCTF 2025</title>
+        <link>http://localhost:1313/categories/sunctf-2025/</link>
+        <pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/sunctf-2025/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Certifications</title>
+        <link>http://localhost:1313/categories/certifications/</link>
+        <pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/certifications/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>No Hack No CTF 2025</title>
+        <link>http://localhost:1313/categories/no-hack-no-ctf-2025/</link>
+        <pubDate>Mon, 07 Jul 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/no-hack-no-ctf-2025/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Cydes Qualifications 2025</title>
+        <link>http://localhost:1313/categories/cydes-qualifications-2025/</link>
+        <pubDate>Sat, 28 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/cydes-qualifications-2025/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>MaltaCTF 2025</title>
+        <link>http://localhost:1313/categories/maltactf-2025/</link>
+        <pubDate>Sun, 22 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/maltactf-2025/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>NUS GreyHats 2025</title>
+        <link>http://localhost:1313/categories/nus-greyhats-2025/</link>
+        <pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/nus-greyhats-2025/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>NETSA CTF 2025</title>
+        <link>http://localhost:1313/categories/netsa-ctf-2025/</link>
+        <pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate>
+        
+        <guid>http://localhost:1313/categories/netsa-ctf-2025/</guid>
         <description></description>
         </item>
         <item>
