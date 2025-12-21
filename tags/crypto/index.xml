@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Crypto on</title><link>https://qiaonpc.github.io/tags/crypto/</link><description>Recent content in Crypto on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 08 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/crypto/index.xml" rel="self" type="application/rss+xml"/><item><title>ASCII Hunt</title><link>https://qiaonpc.github.io/post/ascii-hunt/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/ascii-hunt/</guid><description>&lt;h1 id="ascii-hunt-ctf-challenge-writeup">ASCII Hunt CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: ASCII Hunt&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Crypto&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Decode the flag from a given set of arrays using missing numbers.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;ASCII Hunt&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are provided with a large Python array consisting of multiple sub-arrays.&lt;/li>
+&lt;li>Each sub-array has a length of 255, and there are 32 sub-arrays.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Understanding the Data&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Each sub-array likely represents a set of ASCII values.&lt;/li>
+&lt;li>Given that a flag is typically around 32 characters long, it is reasonable to assume that the 32 sub-arrays correspond to the characters in the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Arrays&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Went back and forth to the description and eventually found that each sub-array should ideally contain all values from 0 to 255.&lt;/li>
+&lt;li>Identify that some values are missing from these arrays.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding Missing Values&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Write a script to find the missing values in each sub-array. This involves sorting the arrays and determining which numbers from 0 to 255 are absent.
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">ast&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">file_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;enc.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file_contents&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">read&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">arrays&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ast&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">literal_eval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file_contents&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">full_range&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">256&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">flags&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">array&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">arrays&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">array&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sort&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Sort the array&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Find the missing numbers&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">missing&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">list&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">full_range&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="nb">set&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">array&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">missing&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sort&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1"># Sort the missing numbers&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">flags&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">missing&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Sorted Arrays: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">arrays&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Missing Numbers: &amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">([&lt;/span>&lt;span class="nb">chr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">char&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">char&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">flags&lt;/span>&lt;span class="p">]))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Constructing the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The missing numbers in the arrays correspond to the ASCII values of the characters in the flag.&lt;/li>
+&lt;li>Convert these missing numbers to their ASCII characters to reconstruct the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Implementing the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Example Python script to find missing values:&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Run the script to find the missing numbers and convert them to characters.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The resulting string is the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ascii-hunt/flag.png"
+width="1395"
+height="171"
+srcset="https://qiaonpc.github.io/post/ascii-hunt/flag_hud9a9462d769b6855a970318c366f06ea_52133_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ascii-hunt/flag_hud9a9462d769b6855a970318c366f06ea_52133_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="815"
+data-flex-basis="1957px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Cyberchef</title><link>https://qiaonpc.github.io/post/cyberchef/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/cyberchef/</guid><description>&lt;h1 id="crypto-ctf-challenge-writeup">Crypto CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Cyberchef&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Crypto&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>Simply use &lt;strong>CyberChef&lt;/strong> to analyze the input data, apply the appropriate decoding operations, and retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/cyberchef/flag.png"
+width="1543"
+height="768"
+srcset="https://qiaonpc.github.io/post/cyberchef/flag_hue64c4c928e8434569f2aacd1efc08d83_55546_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/cyberchef/flag_hue64c4c928e8434569f2aacd1efc08d83_55546_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="482px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>FSIIECTF{XXXXXXXXXX}&lt;/p></description></item><item><title>KeepJohn</title><link>https://qiaonpc.github.io/post/keepjohn/</link><pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/keepjohn/</guid><description>&lt;h1 id="cryptography-ctf-challenge-writeup">Cryptography CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: KeepJohn&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 1&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Cryptography&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Initially, I thought to use &lt;strong>keepass2john&lt;/strong> and then crack the password using &lt;strong>John the Ripper&lt;/strong>, but none of the passwords in the provided wordlist matched.&lt;/p>
+&lt;ul>
+&lt;li>Even after trying the entire &lt;strong>rockyou&lt;/strong> wordlist, it didn’t work.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Upon re-reading the challenge description, I realized it mentioned &lt;strong>variations of commonly used passwords&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Remembering John Hammond’s video on a tool that generates variations of passwords, I used &lt;strong>Munge&lt;/strong> (a tool designed for this purpose): &lt;a class="link" href="https://github.com/Th3S3cr3tAg3nt/Munge" target="_blank" rel="noopener"
+>Munge GitHub&lt;/a>.&lt;/p>
+&lt;ul>
+&lt;li>Maybe the John in the challenge refers to John Hammond? &lt;a class="link" href="https://www.youtube.com/watch?v=nNvhK1LUD48&amp;amp;t=608s" target="_blank" rel="noopener"
+>John Hammond Video&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>I generated a list of passwords using Munge, and this helped me find the correct password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/keepjohn/found%20password.png"
+width="1359"
+height="257"
+srcset="https://qiaonpc.github.io/post/keepjohn/found%20password_hu3fc71f5f7fe126b41b576f08aeb90d5e_121512_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/keepjohn/found%20password_hu3fc71f5f7fe126b41b576f08aeb90d5e_121512_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Password"
+class="gallery-image"
+data-flex-grow="528"
+data-flex-basis="1269px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After opening the &lt;strong>kdbx&lt;/strong> file with the found password, I retrieved the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/keepjohn/flag.png"
+width="1364"
+height="389"
+srcset="https://qiaonpc.github.io/post/keepjohn/flag_hufd0c90f4d0ebd14e1a03ee872020a0c7_35372_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/keepjohn/flag_hufd0c90f4d0ebd14e1a03ee872020a0c7_35372_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Flag"
+class="gallery-image"
+data-flex-grow="350"
+data-flex-basis="841px"
+>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>FSIIECTF{XXXXXXXXXX}&lt;/p></description></item></channel></rss>

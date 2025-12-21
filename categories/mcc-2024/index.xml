@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MCC 2024 on</title><link>https://qiaonpc.github.io/categories/mcc-2024/</link><description>Recent content in MCC 2024 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 01 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/mcc-2024/index.xml" rel="self" type="application/rss+xml"/><item><title>MCC 2024 Box</title><link>https://qiaonpc.github.io/post/mcc-2024-box/</link><pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/mcc-2024-box/</guid><description>&lt;h1 id="mcc-2024-box-ctf-challenge-writeup">MCC 2024 Box CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: MCC 2024 Box&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 90&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Boot2Root&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Gain root access to the machine by exploiting vulnerabilities and misconfigurations.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;MCC 2024 Box&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Information Gathering&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>First, obtained the IP address of the target machine and ran an &lt;code>nmap&lt;/code> scan to identify open ports.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The scan revealed ports &lt;code>21 (FTP)&lt;/code>, &lt;code>22 (SSH)&lt;/code>, and &lt;code>80 (HTTP)&lt;/code> were open.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Port 21 (FTP) allowed &lt;code>anonymous login&lt;/code>, which could be useful for data retrieval.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/nmap.png"
+width="564"
+height="341"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/nmap_hu12fc4ccc58efd7be18aac849603ac2d4_161541_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/nmap_hu12fc4ccc58efd7be18aac849603ac2d4_161541_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="nmap"
+class="gallery-image"
+data-flex-grow="165"
+data-flex-basis="396px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Accessing the FTP Server&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Connected to the FTP server on port 21 and disabled passive mode to list the available files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Downloaded a &lt;code>.pcap&lt;/code> file from the FTP server for further analysis.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/Disable%20Passive%20Mode.png"
+width="602"
+height="75"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/Disable%20Passive%20Mode_hu39b6de949a9922a79a9524647d10f1f7_27477_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/Disable%20Passive%20Mode_hu39b6de949a9922a79a9524647d10f1f7_27477_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Disable passive mode"
+class="gallery-image"
+data-flex-grow="802"
+data-flex-basis="1926px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/download%20net.pcap.png"
+width="602"
+height="103"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/download%20net.pcap_hu095f4c6559818f5ac15ded728e0736c3_39921_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/download%20net.pcap_hu095f4c6559818f5ac15ded728e0736c3_39921_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Download net pcap file"
+class="gallery-image"
+data-flex-grow="584"
+data-flex-basis="1402px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>PCAP File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Opened the &lt;code>.pcap&lt;/code> file and analyzed the network traffic.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered user credentials (&lt;code>chris&lt;/code> and &lt;code>alexander&lt;/code>), the domain name, and some WordPress-related endpoints.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/credentials.png"
+width="609"
+height="279"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/credentials_hu00803302dd6b22595edc006b81f37a79_97784_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/credentials_hu00803302dd6b22595edc006b81f37a79_97784_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Credentials"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="523px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploring WordPress&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Ran &lt;code>feroxbuster&lt;/code> to brute force additional directories, which revealed several interesting files:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>changelog.md&lt;/code>, &lt;code>secret/login.html&lt;/code>, &lt;code>xmlrpc.php&lt;/code>, and &lt;code>wp-admin.php&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Tried logging into WordPress admin and the secret login page using the credentials from the PCAP file, but it didn’t work.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Attempted SQL injection on the login pages, but it was unsuccessful.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tried exploiting xmlrpc.php, but that also failed.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/feroxbuster.png"
+width="602"
+height="241"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/feroxbuster_hu3b2e4f81d1c152bce649ba3fd166a40d_136477_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/feroxbuster_hu3b2e4f81d1c152bce649ba3fd166a40d_136477_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Feroxbuster"
+class="gallery-image"
+data-flex-grow="249"
+data-flex-basis="599px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reviewing Changelog for CUPS Vulnerabilities&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>A hint pointed us back to the &lt;code>changelog.md&lt;/code> file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Inside, we found that &lt;code>CUPS&lt;/code> (Common Unix Printing System) had 4 CVEs related to it, which might be exploitable.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/changelog.png"
+width="902"
+height="570"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/changelog_hue586ed3376140e0551ba1e3cd256cc2f_147703_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/changelog_hue586ed3376140e0551ba1e3cd256cc2f_147703_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Changelog"
+class="gallery-image"
+data-flex-grow="158"
+data-flex-basis="379px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/cups%20cve.png"
+width="1226"
+height="577"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/cups%20cve_hucb39637e430163f1318ac9434df1c8c5_92186_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/cups%20cve_hucb39637e430163f1318ac9434df1c8c5_92186_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="CUPS CVE"
+class="gallery-image"
+data-flex-grow="212"
+data-flex-basis="509px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Attempting CVE Exploits&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>We tried several &lt;code>POCs&lt;/code> (Proof of Concepts) related to the CUPS vulnerabilities, but none of them worked.&lt;/li>
+&lt;li>Despite trying every known POC available, we couldn&amp;rsquo;t gain further access.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Revisiting the PCAP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>A hint suggested revisiting the &lt;code>.pcap&lt;/code> file for additional clues.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After further inspection, we discovered a port knocking sequence.&lt;/p>
+&lt;ul>
+&lt;li>The sequence was &lt;code>77, 67, 2024, 631&lt;/code>, which was similar to techniques seen in previous CTF challenges like the one in Petronas CTF 2023.&lt;/li>
+&lt;li>The PCAP file showed a failed connection attempt to port 631, followed by a successful connection after the knocking sequence.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/port%20knocking.png"
+width="602"
+height="139"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/port%20knocking_hu8ddc6076546b96cd8b3223ebf0219757_125708_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/port%20knocking_hu8ddc6076546b96cd8b3223ebf0219757_125708_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Port knocking"
+class="gallery-image"
+data-flex-grow="433"
+data-flex-basis="1039px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Performing Port Knocking&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>We attempted the port knocking sequence by connecting to ports &lt;code>77, 67, 2024&lt;/code>, and then port &lt;code>631&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After knocking on the correct ports, we were able to successfully connect to port 631, which provided access to the CUPS service.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/knock%20ports.png"
+width="602"
+height="463"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/knock%20ports_huab9a3dc679572626910bb9ed512cc70a_170047_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/knock%20ports_huab9a3dc679572626910bb9ed512cc70a_170047_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Knock Ports"
+class="gallery-image"
+data-flex-grow="130"
+data-flex-basis="312px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/port%20631%20open.png"
+width="602"
+height="292"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/port%20631%20open_hu5e4bc079dccb40b47a2d3149532c8e54_40267_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/port%20631%20open_hu5e4bc079dccb40b47a2d3149532c8e54_40267_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Port 631 open"
+class="gallery-image"
+data-flex-grow="206"
+data-flex-basis="494px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploiting CUPS for RCE&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Using an RCE exploit found in a similar writeup on the &lt;a class="link" href="https://0xdf.gitlab.io/2024/10/02/htb-evilcups.html" target="_blank" rel="noopener"
+>0xdf blog&lt;/a>, we were able to execute remote code on the machine as the &lt;code>LP&lt;/code> user.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user.png"
+width="602"
+height="131"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user_hue032841261edbe3f5d5f0c256b3780e6_57202_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/lp%20user_hue032841261edbe3f5d5f0c256b3780e6_57202_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LP user"
+class="gallery-image"
+data-flex-grow="459"
+data-flex-basis="1102px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user%20flag.png"
+width="602"
+height="209"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/lp%20user%20flag_hufd313f084620c2a10fbd59ad0366a828_55799_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/lp%20user%20flag_hufd313f084620c2a10fbd59ad0366a828_55799_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="LP user flag"
+class="gallery-image"
+data-flex-grow="288"
+data-flex-basis="691px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Privilege Escalation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>As the &lt;code>LP&lt;/code> user, we found some &lt;code>SUID binaries&lt;/code> that could be useful for privilege escalation and escalated to the &lt;code>alexander&lt;/code> user.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/SUID%20Binary.png"
+width="436"
+height="585"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/SUID%20Binary_hu5106d98e2883b57bb274ce2fc451f048_163928_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/SUID%20Binary_hu5106d98e2883b57bb274ce2fc451f048_163928_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="SUID Binary"
+class="gallery-image"
+data-flex-grow="74"
+data-flex-basis="178px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Due to the unstable shell, running automated tools like &lt;code>linpeas.sh&lt;/code> was not feasible, so we manually enumerated the &lt;code>alexander&lt;/code> user’s environment.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/alexander%20and%20flag.png"
+width="602"
+height="585"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/alexander%20and%20flag_hu4a78abbd982db0124c956ec448a4f63a_157617_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/alexander%20and%20flag_hu4a78abbd982db0124c956ec448a4f63a_157617_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Alexander and flag"
+class="gallery-image"
+data-flex-grow="102"
+data-flex-basis="246px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Eventually, we discovered SSH keys that could potentially provide further access.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/ssh%20keys.png"
+width="602"
+height="127"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/ssh%20keys_hu1b90d5adf54d22314bf7bb6e427fc0d0_32166_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/ssh%20keys_hu1b90d5adf54d22314bf7bb6e427fc0d0_32166_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="SSH Keys"
+class="gallery-image"
+data-flex-grow="474"
+data-flex-basis="1137px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking the Passphrase for SSH Keys&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempted to use the SSH keys, but they were passphrase-protected.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We explored &lt;code>notes.txt&lt;/code> and tried several password combinations, including those we found earlier (for &lt;code>alexander&lt;/code> and &lt;code>LP&lt;/code>), as well as MD5 hashes of those values, but none of them worked.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/trying%20password.png"
+width="839"
+height="322"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/trying%20password_hu424a51eb4a376624713d537f6cee0053_37104_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/trying%20password_hu424a51eb4a376624713d537f6cee0053_37104_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Trying Password"
+class="gallery-image"
+data-flex-grow="260"
+data-flex-basis="625px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Finally, we used &lt;code>John the Ripper&lt;/code> to crack the passphrase, and successfully retrieved the SSH key’s passphrase.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/john%20the%20ripper.png"
+width="554"
+height="173"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/john%20the%20ripper_hucc0fbc6ee2712ea7f418fe8d460d20da_17846_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/john%20the%20ripper_hucc0fbc6ee2712ea7f418fe8d460d20da_17846_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="John the ripper"
+class="gallery-image"
+data-flex-grow="320"
+data-flex-basis="768px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Gaining Stable Shell&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After logging in as &lt;code>alexander&lt;/code>, we finally had a stable shell and could run any tools required for further enumeration but it is not needed in this case.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We ran &lt;code>sudo -l&lt;/code> and discovered that the user &lt;code>alexander&lt;/code> had permission to edit any file on the system.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/sudo%20l.png"
+width="602"
+height="92"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/sudo%20l_hu77da1306484f351bd737db68f157f9f9_41954_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/sudo%20l_hu77da1306484f351bd737db68f157f9f9_41954_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="sudo l"
+class="gallery-image"
+data-flex-grow="654"
+data-flex-basis="1570px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>We modified the &lt;code>sudoers&lt;/code> file to grant &lt;code>alexander&lt;/code> full root privileges.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/changing%20sudoers%20file.png"
+width="438"
+height="193"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/changing%20sudoers%20file_hud33a3fcea2ca5097962a9ff6c6eabe9f_51763_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/changing%20sudoers%20file_hud33a3fcea2ca5097962a9ff6c6eabe9f_51763_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Changing sudoers file"
+class="gallery-image"
+data-flex-grow="226"
+data-flex-basis="544px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Achieving Root Access&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>With the &lt;code>sudoers&lt;/code> file modified, we gained root access to the machine.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mcc-2024-box/final%20flag.png"
+width="602"
+height="275"
+srcset="https://qiaonpc.github.io/post/mcc-2024-box/final%20flag_hu64ecac949e35d2f5a8d9e9959b4c7a42_100198_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mcc-2024-box/final%20flag_hu64ecac949e35d2f5a8d9e9959b4c7a42_100198_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Final Flag"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="525px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>MCC24{h3ll0_fr0m_pr1nt1ng_s3rv1c3s}&lt;br>
+MCC24{4bus1ng_su1d}&lt;br>
+MCC24{g00d_j0b_3v3ry0n3}&lt;/p></description></item></channel></rss>

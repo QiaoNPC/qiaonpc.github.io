@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Certifications on</title><link>https://qiaonpc.github.io/categories/certifications/</link><description>Recent content in Certifications on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 12 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/certifications/index.xml" rel="self" type="application/rss+xml"/><item><title>2025 Certifications</title><link>https://qiaonpc.github.io/post/2025-certifications/</link><pubDate>Tue, 12 Aug 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/2025-certifications/</guid><description>&lt;p>Let’s rewind to the start of the year and walk through my certification journey so far.&lt;/p>
+&lt;hr>
+&lt;h2 id="cpts-preparation-my-htb-marathon">&lt;strong>CPTS Preparation: My HTB Marathon&lt;/strong>
+&lt;/h2>&lt;p>Originally, I planned to take the &lt;strong>CPTS&lt;/strong> after PwC HackADay. My &amp;ldquo;preparation&amp;rdquo; was basically grinding HTB rank and I started in December 2024 until recently, not sure if I wanna stop the grind tho, since I already have CPTS. I went through every single &lt;em>&lt;strong>easy&lt;/strong>&lt;/em> and &lt;em>&lt;strong>medium&lt;/strong>&lt;/em> box during that time, missing only one or two due to Chinese New Year or other unskippable events.&lt;/p>
+&lt;p>Interestingly, every Windows box during this period (except one) was &lt;strong>Active Directory&lt;/strong> related. My AD skills skyrocketed because of it. But throughout this time, I didn&amp;rsquo;t bother with hard or insane boxes because HTB&amp;rsquo;s difficulty ratings just mean &amp;lsquo;more steps&amp;rsquo;. In simplest terms, a medium box will have more &amp;lsquo;steps&amp;rsquo; in its attack chain than an easy box will, a hard box will have more &amp;lsquo;steps&amp;rsquo; in its attack chain than a medium box will, etc. And because of this, doing a hard box normally takes more time then 2 medium box combined. So my logic was simple: &lt;em>&lt;strong>two mediums = one hard&lt;/strong>&lt;/em>. Why spend time on one &amp;ldquo;hard&amp;rdquo; when I can knock out two mediums and learn just as much?&lt;/p>
+&lt;hr>
+&lt;h2 id="the-secops-cmpen-ios">&lt;strong>The SecOps CMPen iOS&lt;/strong>
+&lt;/h2>&lt;p>This was an impulse buy, thanks to a 90% discount. The exam was fully hands-on: you’re given an &lt;strong>IPA file&lt;/strong> and have to hack it, finding “flags” along the way.&lt;/p>
+&lt;p>I relied heavily on the &lt;a class="link" href="https://mas.owasp.org/MASTG/" target="_blank" rel="noopener"
+>OWASP MASTG&lt;/a> as my guide. The exam questions are not directly related to MASTG tho, but I used the test cases and passed. Sounds simple, but it was tougher than expected, I needed two attempts to just barely passed. Definitely a humbling start.&lt;/p>
+&lt;hr>
+&lt;h2 id="the-secops-cmpen-android">&lt;strong>The SecOps CMPen Android&lt;/strong>
+&lt;/h2>&lt;p>Another 90% discount, so… why not? Same deal as iOS, but this time with an &lt;strong>APK file&lt;/strong>. I used the same MASTG approach and found the flags. This one felt easier than iOS, and my score reflected that, though I’d still call it a &amp;ldquo;barely passed&amp;rdquo;.&lt;/p>
+&lt;hr>
+&lt;h2 id="comptia-pentest">&lt;strong>CompTIA Pentest+&lt;/strong>
+&lt;/h2>&lt;p>This one was a surprise win. During MCC, I actually won &lt;strong>Security+&lt;/strong>, but I was able to redeem &lt;strong>Pentest+&lt;/strong> with the voucher given to me, so why not. I definitely overprepared for this and I was able to finish the MCQ exam in 20 minutes with flying colours. The format makes it forgiving: because it is MCQ, even if you don&amp;rsquo;t know the answer, you can eliminate the obviously wrong ones.&lt;/p>
+&lt;hr>
+&lt;h2 id="cyber-warefare-labs-crta">&lt;strong>Cyber Warefare Labs CRTA&lt;/strong>
+&lt;/h2>&lt;p>I took the &lt;strong>Certified Red Team Analyst&lt;/strong> because I wanna see how far my CPTS prep had gotten me. But turns out CRTA was easier than an easy box on HTB. The exam is fully hands-on: you get a network, compromise it, and capture flags. It&amp;rsquo;s straightforward, no guesswork, covering Linux and AD.&lt;/p>
+&lt;hr>
+&lt;h2 id="tryhackme-junior-penetration-tester">&lt;strong>TryHackMe Junior Penetration Tester&lt;/strong>
+&lt;/h2>&lt;p>Earlier this year, TryHackMe gave away &lt;strong>PT1&lt;/strong> to folks with Pentest+, OSCP, and other similar certs. The exam covers:&lt;/p>
+&lt;ul>
+&lt;li>Linux privilege escalation&lt;/li>
+&lt;li>Windows privilege escalation&lt;/li>
+&lt;li>Active Directory&lt;/li>
+&lt;li>Web&lt;/li>
+&lt;/ul>
+&lt;p>AD and Linux/Windows privilege escalation was easy and I was able cleared them in about six hours. The &lt;strong>web&lt;/strong> part, though, was a nightmare. It says its web, but its more towards API than web. Their XSS scenario was unrealistic (even some CTFs feel more realistic), and their &amp;ldquo;half-flag&amp;rdquo; concept was so confusing that I still couldnt figure it out after the exam, maybe someone who took PT1 can tell me. The IDOR setup also doesn&amp;rsquo;t make sense to me. To anyone who wishes to take PT1, please read the ROE at the start, it explains how their XSS works and lists all possible web (API) vulnerabilities.&lt;/p>
+&lt;hr>
+&lt;h2 id="htb-cpts">&lt;strong>HTB CPTS&lt;/strong>
+&lt;/h2>&lt;p>So after all those ranked HTB, I started CPTS at the end of July 2025 and took about 7 days to capture 14 flags and finish my report. You need 12 flags to pass and there is a total of 14 flags to capture. You actually don&amp;rsquo;t need to capture all 14 flags, as 12 flags is enough to pass, but that also depends on your reporting.&lt;/p>
+&lt;p>It feels like 7 medium HTB boxes chained together. Pivoting is definitely needed, so for anyone taking it, please learn the basics of pivoting, any form of pivoting works I believe, as I used a combination of a few during the exam.&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Web&lt;/strong>: My biggest weakness as I am absolutely dog shit in web. Every time I got stuck, it was web.&lt;/li>
+&lt;li>&lt;strong>Linux PrivEsc&lt;/strong>: Straightforward.&lt;/li>
+&lt;li>&lt;strong>Windows PrivEsc&lt;/strong>: Slightly harder than Linux but still manageable.&lt;/li>
+&lt;li>&lt;strong>Active Directory&lt;/strong>: Normally I use Linux for AD work, but during the exam I hit weird NetBIOS issues with CME/NXC. I had to switch to Windows tools, which slowed me down, but at least my module practice paid off.&lt;/li>
+&lt;/ul>
+&lt;p>All in all, CPTS was fun, balanced, and a great skill test.&lt;/p>
+&lt;hr>
+&lt;h2 id="final-thoughts">Final Thoughts
+&lt;/h2>&lt;p>hehe, back to CTFs now.&lt;/p></description></item></channel></rss>

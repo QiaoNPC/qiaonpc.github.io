@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NUS GreyHats 2025 on</title><link>https://qiaonpc.github.io/categories/nus-greyhats-2025/</link><description>Recent content in NUS GreyHats 2025 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 02 Jun 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/nus-greyhats-2025/index.xml" rel="self" type="application/rss+xml"/><item><title>Connection Issues</title><link>https://qiaonpc.github.io/post/connection-issues/</link><pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/connection-issues/</guid><description>&lt;h1 id="connection-issues-ctf-challenge-writeup">Connection Issues CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Connection Issues&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze suspicious network traffic to identify ARP poisoning activity and extract the exfiltrated flag data.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Connection Issues&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Observations&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge involves analyzing a &lt;code>.pcap&lt;/code> file with suspicious network behavior.&lt;/li>
+&lt;li>One of the first hints is the presence of messages like &lt;code>duplicate use of &amp;lt;IP address&amp;gt; detected&lt;/code>, which indicates ARP spoofing or poisoning activity.&lt;/li>
+&lt;li>ARP poisoning is a technique often used to intercept traffic between devices on a network.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used &lt;code>tshark&lt;/code> to extract relevant data from the suspicious traffic:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">tshark -nr chall.pcap -Y &lt;span class="s1">&amp;#39;(eth.src == bc:24:11:78:c8:64) &amp;amp;&amp;amp; (eth.dst == bc:24:11:3e:f3:a5)&amp;#39;&lt;/span> -T fields -e &lt;span class="s2">&amp;#34;eth.trailer&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>By narrowing down the interaction, spotted an unusual pattern in the data fields.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Extracted payload strings contained fragments that, when reassembled, revealed the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/connection-issues/extraction.png"
+width="1310"
+height="798"
+srcset="https://qiaonpc.github.io/post/connection-issues/extraction_hua489d1ba28355aa40eae2abe0a4459fe_135566_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/connection-issues/extraction_hua489d1ba28355aa40eae2abe0a4459fe_135566_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Extracted"
+class="gallery-image"
+data-flex-grow="164"
+data-flex-basis="393px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/connection-issues/flag.png"
+width="1488"
+height="783"
+srcset="https://qiaonpc.github.io/post/connection-issues/flag_hueaafef108831ed7d06e09e26d1e4f530_90843_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/connection-issues/flag_hueaafef108831ed7d06e09e26d1e4f530_90843_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="456px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>grey{d1d_1_jus7_ge7_p01son3d}&lt;/p></description></item><item><title>notsus.exe</title><link>https://qiaonpc.github.io/post/notsus.exe/</link><pubDate>Mon, 02 Jun 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/notsus.exe/</guid><description>&lt;h1 id="notsusexe-ctf-challenge-writeup">Notsus.exe CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Notsus.exe&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze and decrypt files extracted from a ZIP archive using a known plaintext attack and reverse engineer a bundled Python executable to extract the final flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Understanding the Challenge&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Provided with a ZIP-based executable (&lt;code>dist-notsus.exe&lt;/code>) that, when unzipped, throws a bunch of errors.&lt;/li>
+&lt;li>From prior experience, this behavior hints at a &lt;strong>classic PKZIP encryption&lt;/strong> challenge solvable with &lt;code>bkcrack&lt;/code>, a known plaintext attack tool.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Initial File Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extracting the ZIP reveals two files:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>notsus.exe&lt;/code> — a Windows executable.&lt;/li>
+&lt;li>&lt;code>flag.txt.yorm&lt;/code> — a file with an unfamiliar &lt;code>.yorm&lt;/code> extension, likely custom or encrypted.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The path of least resistance is to first target the &lt;code>.exe&lt;/code>, since the standard DOS executable header often contains a predictable string:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">This program cannot be run in DOS mode.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/notsus.exe/files%20in%20zip.png"
+width="859"
+height="215"
+srcset="https://qiaonpc.github.io/post/notsus.exe/files%20in%20zip_hu67d2aeb7da56a75bb208a3063c335aae_55307_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/notsus.exe/files%20in%20zip_hu67d2aeb7da56a75bb208a3063c335aae_55307_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Files in Zip"
+class="gallery-image"
+data-flex-grow="399"
+data-flex-basis="958px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Known Plaintext Offset&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The known string appears mid-file, not at the start. Therefore, the correct offset is crucial.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use the command to locate it:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">grep -aob &lt;span class="s1">$&amp;#39;\x21This program&amp;#39;&lt;/span> known.exe
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>This returns the byte offset (e.g., &lt;code>78&lt;/code>) which will be passed to &lt;code>bkcrack&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/notsus.exe/finding%20offset.png"
+width="595"
+height="101"
+srcset="https://qiaonpc.github.io/post/notsus.exe/finding%20offset_hu1dc557c0bb423408dfcc261dba8dc14f_22310_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/notsus.exe/finding%20offset_hu1dc557c0bb423408dfcc261dba8dc14f_22310_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Finding Offset"
+class="gallery-image"
+data-flex-grow="589"
+data-flex-basis="1413px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Preparing for Known Plaintext Attack&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Save the known plaintext string to a file:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> -ne &lt;span class="s1">&amp;#39;This program cannot be run in DOS mode.\r\r\n&amp;#39;&lt;/span> &amp;gt; exe_offset_plain.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Perform the attack:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./bkcrack -C ../dist-notsus.exe/files.zip -c notsus.exe -p exe_offset_plain.txt -o &lt;span class="m">78&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>This reveals the internal encryption keys:&lt;br>
+&lt;code>d1608c35 d11d350a 4bc3da9c&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/notsus.exe/cracked.png"
+width="770"
+height="380"
+srcset="https://qiaonpc.github.io/post/notsus.exe/cracked_huea01ffdb82a159ad03f035c9ec8ae034_66036_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/notsus.exe/cracked_huea01ffdb82a159ad03f035c9ec8ae034_66036_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Cracked"
+class="gallery-image"
+data-flex-grow="202"
+data-flex-basis="486px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decrypting the ZIP Contents&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use the recovered keys to fully decrypt both files:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">./bkcrack -C ../dist-notsus.exe/files.zip -c notsus.exe -k d1608c35 d11d350a 4bc3da9c -d notsus.exe
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">./bkcrack -C ../dist-notsus.exe/files.zip -c flag.txt.yorm -k d1608c35 d11d350a 4bc3da9c -d flag.txt.yorm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reverse Engineering &lt;code>notsus.exe&lt;/code>&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The executable is actually a Python program bundled using &lt;strong>PyInstaller&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use the following tools to extract and decompile the executable:&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://pyinstxtractor-web.netlify.app/" target="_blank" rel="noopener"
+>Pyinstxtractor&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://pylingual.io/" target="_blank" rel="noopener"
+>Pylingual&lt;/a> (for decompiling .pyc files)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Analyzing the code reveals the logic to decrypt the &lt;code>flag.txt.yorm&lt;/code> file using a custom decryption routine.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/notsus.exe/decompiled.png"
+width="1238"
+height="699"
+srcset="https://qiaonpc.github.io/post/notsus.exe/decompiled_hu9c2dd01d078f8cce63a415bd556ac626_76692_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/notsus.exe/decompiled_hu9c2dd01d078f8cce63a415bd556ac626_76692_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decompiled"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="425px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decrypting the Flag File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Re-implement the decryption algorithm based on the logic found in the decompiled script.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Running it on &lt;code>flag.txt.yorm&lt;/code> reveals the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/notsus.exe/flag.png"
+width="584"
+height="310"
+srcset="https://qiaonpc.github.io/post/notsus.exe/flag_hu4d2ad73b5cf9b53d69a7f50ee04c12a6_56441_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/notsus.exe/flag_hu4d2ad73b5cf9b53d69a7f50ee04c12a6_56441_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="188"
+data-flex-basis="452px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>grey{this_program_cannot_be_run_in_dos_mode_hehe}&lt;/p></description></item></channel></rss>

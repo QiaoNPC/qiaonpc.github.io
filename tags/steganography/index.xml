@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Steganography on</title><link>https://qiaonpc.github.io/tags/steganography/</link><description>Recent content in Steganography on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/steganography/index.xml" rel="self" type="application/rss+xml"/><item><title>Kapas</title><link>https://qiaonpc.github.io/post/kapas/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/kapas/</guid><description>&lt;h1 id="kapas-ctf-challenge-writeup">Kapas CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Kapas&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Steganography&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a suspicious document file to uncover hidden malicious content and extract the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Kapas&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The file provided had no extension, making it unclear what type of file it was.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used the &lt;code>file&lt;/code> command on Linux to determine its format.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Identified as a &lt;code>.docx&lt;/code> (Microsoft Word) document.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/binwalk.png"
+width="1290"
+height="381"
+srcset="https://qiaonpc.github.io/post/kapas/binwalk_hud5d118e88d5f213c23e38148985f7d56_529552_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/binwalk_hud5d118e88d5f213c23e38148985f7d56_529552_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Binwalk"
+class="gallery-image"
+data-flex-grow="338"
+data-flex-basis="812px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting Contents&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used &lt;code>binwalk&lt;/code> to extract the contents of the &lt;code>.docx&lt;/code> file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This revealed various internal files and directories typical of Office documents, such as &lt;code>word/document.xml&lt;/code>, &lt;code>vbaProject.bin&lt;/code>, etc.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/binwalk2.png"
+width="1289"
+height="204"
+srcset="https://qiaonpc.github.io/post/kapas/binwalk2_hu83546e9951bedb9ad1fc683a46e734cc_114122_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/binwalk2_hu83546e9951bedb9ad1fc683a46e734cc_114122_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Extraction via Binwalk"
+class="gallery-image"
+data-flex-grow="631"
+data-flex-basis="1516px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reviewing Document Content&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Opened &lt;code>document.xml&lt;/code> to check for embedded content.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Filtered for strings containing &amp;ldquo;meow&amp;rdquo; (a recurring term in the document), but none were meaningful or led to the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/remove%20meow.png"
+width="1301"
+height="623"
+srcset="https://qiaonpc.github.io/post/kapas/remove%20meow_hu30fbf726317fcc616f317e1630c8eab7_320702_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/remove%20meow_hu30fbf726317fcc616f317e1630c8eab7_320702_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Remove MEOWS"
+class="gallery-image"
+data-flex-grow="208"
+data-flex-basis="501px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing VBA Macros&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempted to use tools like &lt;code>olevba&lt;/code> to analyze potential VBA macros.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>However, tools failed to parse the macros properly — possibly due to corruption or obfuscation.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decided to inspect the &lt;code>vbaProject.bin&lt;/code> file manually using the &lt;code>strings&lt;/code> command.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/olevba%20failed.png"
+width="1295"
+height="405"
+srcset="https://qiaonpc.github.io/post/kapas/olevba%20failed_hu7800c2e6b63b3fc389b9de1388c99188_357960_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/olevba%20failed_hu7800c2e6b63b3fc389b9de1388c99188_357960_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="OLEVBA Failed"
+class="gallery-image"
+data-flex-grow="319"
+data-flex-basis="767px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/decided%20to%20strings.png"
+width="1307"
+height="457"
+srcset="https://qiaonpc.github.io/post/kapas/decided%20to%20strings_hub9ab66ae034dc5d83bfcc0ac7db592fa_215220_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/decided%20to%20strings_hub9ab66ae034dc5d83bfcc0ac7db592fa_215220_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decided to Strings"
+class="gallery-image"
+data-flex-grow="285"
+data-flex-basis="686px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Discovering Obfuscated Payload&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Within the strings output, noticed several cryptography-related keywords (e.g., AES), but none led to useful results.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found a suspicious, compact string that resembled Brainfuck code.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/found%20crypto.png"
+width="951"
+height="663"
+srcset="https://qiaonpc.github.io/post/kapas/found%20crypto_hue34b1956da00975c9e05bbba8a4b3b6b_378401_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/found%20crypto_hue34b1956da00975c9e05bbba8a4b3b6b_378401_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Crypto"
+class="gallery-image"
+data-flex-grow="143"
+data-flex-basis="344px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/found%20possible%20brainfuck.png"
+width="945"
+height="81"
+srcset="https://qiaonpc.github.io/post/kapas/found%20possible%20brainfuck_hubeb118737051749d6f7addc059f9f71b_49105_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/found%20possible%20brainfuck_hubeb118737051749d6f7addc059f9f71b_49105_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Brainfuck"
+class="gallery-image"
+data-flex-grow="1166"
+data-flex-basis="2800px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Brainfuck Payload&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Confirmed the string was valid Brainfuck code.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used an online Brainfuck interpreter to decode the payload.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The decoded output revealed the flag in plaintext.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/confirmed%20brainfuck.png"
+width="943"
+height="454"
+srcset="https://qiaonpc.github.io/post/kapas/confirmed%20brainfuck_hu8d142071c3f4917b9d09276f9e664b79_205981_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/confirmed%20brainfuck_hu8d142071c3f4917b9d09276f9e664b79_205981_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Confirmed Brainfuck"
+class="gallery-image"
+data-flex-grow="207"
+data-flex-basis="498px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/flag.png"
+width="882"
+height="502"
+srcset="https://qiaonpc.github.io/post/kapas/flag_hu8a0bc605eac0ff693e2e83ba3fbd5f67_181546_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/flag_hu8a0bc605eac0ff693e2e83ba3fbd5f67_181546_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{m4l1c10us_d0cx}&lt;/p></description></item></channel></rss>

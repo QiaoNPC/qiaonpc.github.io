@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>IoT on</title><link>https://qiaonpc.github.io/tags/iot/</link><description>Recent content in IoT on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/iot/index.xml" rel="self" type="application/rss+xml"/><item><title>Blink Logic</title><link>https://qiaonpc.github.io/post/blink-logic/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/blink-logic/</guid><description>&lt;h1 id="blink-logic-ctf-challenge-writeup">Blink Logic CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Blink Logic&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: IoT&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a firmware file and determine the correct keypad input to unlock an IoT system running on Wokwi simulation.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Blink Logic&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Setup&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The challenge provides a compiled firmware file in &lt;code>.hex&lt;/code> format and instructs the user to simulate an IoT project using &lt;a class="link" href="https://wokwi.com" target="_blank" rel="noopener"
+>Wokwi&lt;/a>, a popular online Arduino/IoT simulation platform.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The goal is to determine the correct key combination on a virtual keypad to &amp;ldquo;unlock&amp;rdquo; the system and retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/challenge.png"
+width="617"
+height="667"
+srcset="https://qiaonpc.github.io/post/blink-logic/challenge_hubae76b2a5397748abcfcbbd49265c803_121741_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/challenge_hubae76b2a5397748abcfcbbd49265c803_121741_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="92"
+data-flex-basis="222px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Converting the Firmware&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Started by converting the &lt;code>.hex&lt;/code> file into a binary format using the &lt;code>objcopy&lt;/code> tool:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">objcopy -I ihex BlinkLogic.ino.hex firmware.bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>This step makes it easier to inspect the raw data inside the firmware.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/converting%20firmware.png"
+width="855"
+height="105"
+srcset="https://qiaonpc.github.io/post/blink-logic/converting%20firmware_hu33f104636e2656748016ea8fdc37fc5e_47016_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/converting%20firmware_hu33f104636e2656748016ea8fdc37fc5e_47016_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Converting Firmware"
+class="gallery-image"
+data-flex-grow="814"
+data-flex-basis="1954px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Static Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Ran the &lt;code>strings&lt;/code> command on the &lt;code>.bin&lt;/code> file to extract human-readable content.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">strings firmware.bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Among the output, several familiar keypad characters were visible (&lt;code>123A456B789C*0#D&lt;/code>), which appeared to represent a standard 4x4 keypad layout.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/analyse%20firmware.png"
+width="633"
+height="239"
+srcset="https://qiaonpc.github.io/post/blink-logic/analyse%20firmware_hu1519a7f7a13ab0674556f721369e28db_83156_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/analyse%20firmware_hu1519a7f7a13ab0674556f721369e28db_83156_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Analysing Firmware"
+class="gallery-image"
+data-flex-grow="264"
+data-flex-basis="635px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Noticed an unusual string near the end of the readable content: &lt;code>630B&lt;/code>.&lt;/li>
+&lt;li>This did not match the keypad layout directly but stood out from the rest of the data — suggesting it was the intended key sequence.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Testing the Key on Wokwi&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Loaded the given project on Wokwi and manually entered &lt;code>630B&lt;/code> on the virtual keypad.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The system responded with an &amp;ldquo;unlocked&amp;rdquo; message, confirming the key was correct.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/flag.png"
+width="565"
+height="658"
+srcset="https://qiaonpc.github.io/post/blink-logic/flag_hucd6dd23324fd7e6e06b827bdb2ab92ff_75903_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/flag_hucd6dd23324fd7e6e06b827bdb2ab92ff_75903_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="85"
+data-flex-basis="206px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{630B}&lt;/p></description></item></channel></rss>

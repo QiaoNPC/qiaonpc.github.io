@@ -1,0 +1,1085 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Petronas Interuniversity CTF 2023 on</title><link>https://qiaonpc.github.io/categories/petronas-interuniversity-ctf-2023/</link><description>Recent content in Petronas Interuniversity CTF 2023 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 10 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/petronas-interuniversity-ctf-2023/index.xml" rel="self" type="application/rss+xml"/><item><title>Checkout my socials 1</title><link>https://qiaonpc.github.io/post/checkout-my-socials-1/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/checkout-my-socials-1/</guid><description>&lt;h1 id="checkout-my-socials-1---ctf-challenge-writeup">Checkout my socials 1 - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Checkout my socials 1&lt;br>
+Points: 50&lt;br>
+Category: OSINT (Open-Source Intelligence)&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Checkout my socials 1&amp;rdquo; challenge is to gather information from publicly available sources (OSINT) to identify the username. You will be provided with a link, and your task is to find the username associated with it.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Checkout my socials 1&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Access the Provided Link&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Click on the link provided in the challenge: &lt;a class="link" href="https://imgur.com/xa4jBRt" target="_blank" rel="noopener"
+>https://imgur.com/xa4jBRt&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine the Content&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon visiting the link, you will be directed to a web page or image on Imgur.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify the Username&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Look for any visible information, such as a username, on the web page or image.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The username you find on the web page or image is the flag for this challenge.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you identify the username, you will uncover the hidden flag. The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and accessing the provided link, you will successfully retrieve the flag through OSINT techniques.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In &amp;ldquo;Checkout my socials 1&amp;rdquo; challenge, your task is to gather information from the provided link and identify the associated username. Best of luck!&lt;/p></description></item><item><title>Checkout my socials 3</title><link>https://qiaonpc.github.io/post/checkout-my-socials-3/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/checkout-my-socials-3/</guid><description>&lt;h1 id="checkout-my-socials-3---ctf-challenge-writeup">Checkout my socials 3 - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Checkout my socials 3&lt;br>
+Points: 50&lt;br>
+Category: OSINT (Open-Source Intelligence)&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Checkout my socials 3&amp;rdquo; challenge is to gather information from publicly available sources (OSINT) to uncover the hidden flag. The challenge provides hints related to birds, and your task is to identify the Twitter or other social media account associated with the user.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Checkout my socials 3&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the Challenge Hint&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge hints at birds, which implies you should look for a social media account related to birds or something bird-related.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Search for Social Media Accounts&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Start by searching for Twitter or other social media accounts associated with birds based on the hint.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Use Quipquip for the Cipher&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge likely involves deciphering a cipher. To solve it, use a tool like Quipquip.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Once you find the social media account and decipher the cipher, you will identify the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you follow the hints and decode the message, you will uncover the hidden flag. The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and using OSINT techniques along with Quipquip, you will successfully retrieve the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In &amp;ldquo;Checkout my socials 3&amp;rdquo; challenge, your task is to leverage the provided hint and OSINT techniques to find the relevant social media account and decode the flag. Best of luck!&lt;/p></description></item><item><title>Cryptic Raven</title><link>https://qiaonpc.github.io/post/cryptic-raven/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/cryptic-raven/</guid><description>&lt;h1 id="cryptic-raven---ctf-challenge-writeup">Cryptic Raven - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Cryptic Raven&lt;br>
+Points: 100&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the Cryptic Raven challenge is to decrypt a given message, which is encoded using an undisclosed encryption technique. Your task is to decipher the message and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the Cryptic Raven challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Message Deciphering&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by examining the provided message. The challenge does not disclose the specific encryption technique used.
+&lt;img src="https://qiaonpc.github.io/Challenge.png"
+loading="lazy"
+alt="Encrypted Text"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Caesar Cipher Brute Force&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Given the lack of information about the encryption method, you can try a brute force approach, specifically the Caesar cipher brute force.&lt;/li>
+&lt;li>The Caesar cipher is a simple and widely used substitution cipher where each letter in the plaintext is shifted a certain number of places down or up the alphabet.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Brute Force Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Implement a brute force decryption approach by trying all possible shifts within the Caesar cipher.&lt;/li>
+&lt;li>Continue shifting the letters and evaluating the results until you find a meaningful message.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After trying various shift values, you will eventually discover the flag concealed within the decrypted message.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By successfully using the Caesar cipher brute force method, you&amp;rsquo;ll unveil the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the Cryptic Raven challenge, your cryptography skills are tested as you employ a brute force approach to decipher the message and reveal the flag. Best of luck!&lt;/p></description></item><item><title>Getmecorrect</title><link>https://qiaonpc.github.io/post/getmecorrect/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/getmecorrect/</guid><description>&lt;h1 id="getmecorrect---ctf-challenge-writeup">Getmecorrect - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Getmecorrect&lt;br>
+Points: 150&lt;br>
+Category: Reverse Engineering&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Getmecorrect&amp;rdquo; challenge is to reverse engineer an APK file to uncover a hidden flag. The flag is divided into four parts, and you need to understand how these parts are constructed. However, a key part of the flag is implemented using native code, which is not available in the APK&amp;rsquo;s source code. Your task is to find a way to retrieve the missing part of the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Getmecorrect&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the APK File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Start by opening and examining the APK file using tools like jadx-gui. Look for clues that reveal how the flag is constructed.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Part 3 and Native Code&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>While analyzing the APK, you will identify that the third part of the flag relies on the &lt;code>getNativeFlag()&lt;/code> function. However, this function&amp;rsquo;s implementation is missing from the APK&amp;rsquo;s source code, and it is marked as &amp;ldquo;native.&amp;rdquo;
+&lt;img src="https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag.png"
+width="1377"
+height="523"
+srcset="https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag_hu575f026a9d1ba17783e0ad9f68de7d71_104924_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/getmecorrect/Construct%20Flag_hu575f026a9d1ba17783e0ad9f68de7d71_104924_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Construct Flag"
+class="gallery-image"
+data-flex-grow="263"
+data-flex-basis="631px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Understanding Native Code&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The keyword &amp;ldquo;native&amp;rdquo; in the function declaration indicates that the function is implemented using native code, often written in a different programming language like C or C++. This means the actual implementation of &lt;code>getNativeFlagPart&lt;/code> is not available in the provided APK source code.
+&lt;img src="https://qiaonpc.github.io/post/getmecorrect/Native%20Flag.png"
+width="470"
+height="69"
+srcset="https://qiaonpc.github.io/post/getmecorrect/Native%20Flag_hubd60ff486ce749f754de6321deaa2bf0_6312_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/getmecorrect/Native%20Flag_hubd60ff486ce749f754de6321deaa2bf0_6312_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="getNativeFlag() definition"
+class="gallery-image"
+data-flex-grow="681"
+data-flex-basis="1634px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reverse Engineering Native Code&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To retrieve the missing part of the flag, you need to reverse engineer the native code. Begin by converting the &lt;code>dynamic.apk&lt;/code> to &lt;code>dynamic.zip&lt;/code>, and then unzip the file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine the Lib Folder&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Navigate to the &lt;code>lib&lt;/code> folder, where you will find different architectures. Choose the one you are most comfortable with. In this case, the &lt;code>x86&lt;/code> architecture is used for analysis.
+&lt;img src="https://qiaonpc.github.io/post/getmecorrect/lib.png"
+width="1157"
+height="334"
+srcset="https://qiaonpc.github.io/post/getmecorrect/lib_hu1cb0493450aaae343ce82264b9d2b68e_96707_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/getmecorrect/lib_hu1cb0493450aaae343ce82264b9d2b68e_96707_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="lib Folder"
+class="gallery-image"
+data-flex-grow="346"
+data-flex-basis="831px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Ghidra Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Within Ghidra, look for a function with a name that resembles the naming convention used throughout &lt;code>dynamic.apk&lt;/code>. This function will likely contain the missing part of the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieve the Missing Flag Part&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>By examining the code in Ghidra, you can identify the third part of the flag. This part is not encrypted or hidden and is directly accessible in the function.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you combine the parts of the flag revealed during your analysis, you will uncover the complete hidden flag. The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps, you will successfully reverse engineer the APK and retrieve the missing part of the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Getmecorrect&amp;rdquo; challenge, you need to reverse engineer the APK to construct the flag correctly. Understanding native code and reverse engineering are crucial for solving this challenge. Best of luck!&lt;/p></description></item><item><title>Harmonic Secrets</title><link>https://qiaonpc.github.io/post/harmonic-secrets/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/harmonic-secrets/</guid><description>&lt;h1 id="harmonic-secrets---ctf-challenge-writeup">Harmonic Secrets - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Harmonic Secrets&lt;br>
+Points: 100&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>My objective in the Harmonic Secrets challenge was to decrypt a given ciphertext using the provided key, which I suspected to be a Vigenère cipher. My task was to apply the key and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the Harmonic Secrets challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Key Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I began by examining the provided key. Based on the challenge information, I suspected that it was a Vigenère cipher key.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Vigenère Cipher Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I applied the Vigenère decryption process using the provided key to decipher the given ciphertext.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After successfully decrypting the ciphertext with the Vigenère key, I revealed the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By following these steps and applying the Vigenère cipher decryption, I uncovered the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the Harmonic Secrets challenge, my cryptography skills came into play as I decrypted the Vigenère-encrypted message using the provided key to unveil the flag. It was a satisfying experience. Best of luck!&lt;/p></description></item><item><title>Intruding the Hidden Society</title><link>https://qiaonpc.github.io/post/intruding-the-hidden-society/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/intruding-the-hidden-society/</guid><description>&lt;h1 id="intruding-the-hidden-society---ctf-challenge-writeup">Intruding the Hidden Society - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Intruding the Hidden Society&lt;br>
+Points: 200&lt;br>
+Category: Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge is to extract hidden information from the provided pcap file and uncover the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Identified Patterns in DNS Packets&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon analyzing the pcap file, I noticed that a significant portion of the packets were DNS (Domain Name System) packets.&lt;/li>
+&lt;li>I started by filtering and analyzing these DNS packets.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Pattern Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Pay attention to the DNS packets with base64-like encodings.&lt;/li>
+&lt;li>These packets had accompanying numbers, indicating an order for reconstruction.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Packet Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The goal was to extract and reconstruct the base64-like encoded data. However, with more than 10,000 packets, manual extraction would be impractical.&lt;/li>
+&lt;li>I used the &amp;ldquo;tshark&amp;rdquo; command-line tool to extract relevant packets. The following query is an example of how I extracted packets related to the challenge:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">tshark -nr hiddensociety.pcap -Y &amp;#39;(ip.dst == 8.8.8.8) &amp;amp;&amp;amp; (dns.qry.name contains &amp;#34;challange.petronasgraduate.ctfd.io&amp;#34;)&amp;#39; &amp;gt; output.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>The output of the query was saved in the &amp;ldquo;output.txt&amp;rdquo; file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Data Extraction and Reconstruction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>I created a Python script to process the &amp;ldquo;output.txt&amp;rdquo; file and extract the base64-like encoded data.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The extracted data was reconstructed and written into a separate file.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">base64&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">base64_reconstructed&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;output.txt&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;r&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">content&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">readlines&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">line&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">content&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">extract_number_and_base64&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">line&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34; &amp;#34;&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;.challange.petronasgraduate.ctfd.io&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">extract_base64&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">extract_number_and_base64&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;.&amp;#34;&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">base64_reconstructed&lt;/span> &lt;span class="o">+=&lt;/span> &lt;span class="n">extract_base64&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;output&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;wb&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base64&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">b64decode&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base64_reconstructed&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identified the Data Type&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Using the &lt;code>file&lt;/code> command to determine the type of data contained in the reconstructed file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The reconstructed base64 is an image file.&lt;/li>
+&lt;li>Open and view the image&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By following these steps, I was able to successfully uncover the hidden flag within the pcap file and complete the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Intruding the Hidden Society&amp;rdquo; challenge, my goal was to decode and reconstruct base64-like encoded data found in DNS packets within a pcap file and reveal the flag concealed within the data.&lt;/p></description></item><item><title>m3m0irs</title><link>https://qiaonpc.github.io/post/m3m0irs/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/m3m0irs/</guid><description>&lt;h1 id="m3m0irs---ctf-challenge-writeup">m3m0irs - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: m3m0irs&lt;br>
+Points: 50&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the m3m0irs challenge is to perform memory forensics on a memory dump file to uncover suspicious activity. Your task is to analyze the memory dump to identify the software that should not be running and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the m3m0irs challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Memory Dump Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In any memory forensics challenge, the first step is to determine the architecture of the system. You can achieve this using the &lt;code>volatility&lt;/code> tool with the command: &lt;code>volatility -f &amp;lt;memory dump&amp;gt; imageinfo&lt;/code>.&lt;/li>
+&lt;li>The &lt;code>imageinfo&lt;/code> command will provide suggested architectures based on the memory dump&amp;rsquo;s analysis.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Architecture Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Try each of the suggested architectures until you find one that works for your analysis. You can use the following command to specify the architecture: &lt;code>volatility -f &amp;lt;memory dump&amp;gt; --profile=&amp;lt;architecture&amp;gt;&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Suspicious Software&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The main objective is to identify software that shouldn&amp;rsquo;t be running. You can often find this information in the process lists of the memory dump.&lt;/li>
+&lt;li>There are various ways to find processes in a memory dump, such as &lt;code>pstree&lt;/code>, &lt;code>pslist&lt;/code>, &lt;code>psscan&lt;/code> etc. &lt;code>pstree&lt;/code>&amp;quot; is a favorite among many analysts because it presents processes in a hierarchical manner, allowing you to easily trace parent and child processes.&lt;/li>
+&lt;li>You can identify suspicious software based on the processes and their relationships in the tree.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing with &amp;ldquo;pstree&amp;rdquo;&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use the following command to generate a &lt;code>pstree&lt;/code> analysis and save it to a file for reference: &lt;code>volatility -f &amp;lt;memory dump&amp;gt; --profile=&amp;lt;architecture&amp;gt; pstree &amp;gt; pstree.txt&lt;/code>.&lt;/li>
+&lt;li>Saving the output to a file ensures that you can revisit the analysis without repeating the same steps.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During your analysis, you may find &lt;code>Azureus&lt;/code> to be suspicious as it spawned &lt;code>AzureusTor&lt;/code>. This is the software that shouldn&amp;rsquo;t be running.
+&lt;img src="https://qiaonpc.github.io/post/m3m0irs/Sus.png"
+width="1428"
+height="231"
+srcset="https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/m3m0irs/Sus_huea1b4f4ce711ad357bca8481cd25f078_163190_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Azureus &amp; AzureusTor"
+class="gallery-image"
+data-flex-grow="618"
+data-flex-basis="1483px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and conducting memory forensics analysis, you will uncover the suspicious software and reveal the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the m3m0irs challenge, memory forensics skills are put to the test as you analyze a memory dump to identify the suspicious software that shouldn&amp;rsquo;t be running. Best of luck!&lt;/p></description></item><item><title>Marx's Melodic Memoir</title><link>https://qiaonpc.github.io/post/marxs-melodic-memoir/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/marxs-melodic-memoir/</guid><description>&lt;h1 id="marxs-melodic-memoir---ctf-challenge-writeup">Marx&amp;rsquo;s Melodic Memoir - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Marx&amp;rsquo;s Melodic Memoir&lt;br>
+Points: 100&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Marx&amp;rsquo;s Melodic Memoir&amp;rdquo; challenge is to decode a given music sheet to reveal the hidden flag. Your task is to find a music sheet decoder, manually input every element from the picture, and decipher the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Marx&amp;rsquo;s Melodic Memoir&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Music Sheet Provided&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are provided with a music sheet that contains encoded information.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Find a Music Sheet Decoder&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Your first step is to search for music sheet decoders or tools designed to interpret encoded musical notations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Manual Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Using the music sheet decoder you find, manually input every element and symbol from the provided picture.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you decode the music sheet, you will uncover the hidden flag, which follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and decoding the music sheet, you will successfully reveal the flag hidden within Marx&amp;rsquo;s Melodic Memoir.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Marx&amp;rsquo;s Melodic Memoir&amp;rdquo; challenge, your task is to decode the provided music sheet and unveil the hidden flag. Best of luck!&lt;/p></description></item><item><title>Puzzles of An Altered History</title><link>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/puzzles-of-an-altered-history/</guid><description>&lt;h1 id="puzzles-of-an-altered-history---ctf-challenge-writeup">Puzzles of An Altered History - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Puzzles of An Altered History&lt;br>
+Points: 150&lt;br>
+Category: Wireless Networking&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Puzzles of An Altered History&amp;rdquo; challenge is to crack the password for a given wireless network, which is stored in a provided pcap (packet capture) file. You will need to use a tool called &amp;ldquo;aircrack-ng&amp;rdquo; to successfully recover the network&amp;rsquo;s password.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Puzzles of An Altered History&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Download and Open the pcap File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by downloading the provided pcap file, which contains the network traffic data.&lt;/li>
+&lt;li>Open the pcap file using a network analysis tool like Wireshark.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking the Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use the &amp;ldquo;aircrack-ng&amp;rdquo; tool to attempt to crack the wireless network&amp;rsquo;s password.&lt;/li>
+&lt;li>The basic command structure for &amp;ldquo;aircrack-ng&amp;rdquo; is as follows:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">aircrack-ng &amp;lt;pcap file&amp;gt; -w &amp;lt;wordlist&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>&lt;code>&amp;lt;pcap file&amp;gt;&lt;/code>: Replace this with the name of the pcap file you are analyzing.&lt;/li>
+&lt;li>&lt;code>&amp;lt;wordlist&amp;gt;&lt;/code>: Specify the path to a wordlist file that &amp;ldquo;aircrack-ng&amp;rdquo; will use to attempt password combinations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Wordlist Selection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>For the wordlist, you can use a common password dictionary like &amp;ldquo;rockyou.txt,&amp;rdquo; which is available in various locations. You should specify the full path to the wordlist file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Run aircrack-ng&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Execute the &amp;ldquo;aircrack-ng&amp;rdquo; command in your terminal, providing the pcap file and wordlist as arguments. For example:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">aircrack-ng ctfwifi.cap -w /usr/share/wordlists/rockyou.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Recovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&amp;ldquo;aircrack-ng&amp;rdquo; will attempt to recover the password by iHack Prelim 2024 combinations from the wordlist.&lt;/li>
+&lt;li>When aircrack-ng successfully finds the correct password, it will display the password in the terminal.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The cracked password will resemble the format specified in the challenge. Retrieve and present it as the flag to complete the challenge.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By following these steps and using &amp;ldquo;aircrack-ng,&amp;rdquo; you can successfully crack the password for the wireless network captured in the pcap file and obtain the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Puzzles of An Altered History&amp;rdquo; challenge, your goal is to utilize network analysis tools to crack the wireless network&amp;rsquo;s password, revealing the flag upon successful recovery.&lt;/p></description></item><item><title>Reverseme</title><link>https://qiaonpc.github.io/post/reverseme/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/reverseme/</guid><description>&lt;h1 id="reverseme---ctf-challenge-writeup">Reverseme - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Reverseme&lt;br>
+Points: 150&lt;br>
+Category: Reverse Engineering&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Reverseme&amp;rdquo; challenge is to reverse engineer an Android APK file and retrieve the hidden flag. You need to understand how APK files are structured, how strings are stored, and how resources are referenced in Android app development.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Reverseme&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the APK File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Start by examining the APK file using jadx-gui or a similar tool. You will need to navigate through the app&amp;rsquo;s code to find the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During your analysis, you will come across a reference to the flag as &lt;code>R.string.flag&lt;/code>. This indicates that the flag is retrieved from the app&amp;rsquo;s string resources.
+&lt;img src="https://qiaonpc.github.io/post/reverseme/r%20string.png"
+width="1018"
+height="431"
+srcset="https://qiaonpc.github.io/post/reverseme/r%20string_hu4b8b27e34b33bfa87f019438e5d1fa74_74104_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/reverseme/r%20string_hu4b8b27e34b33bfa87f019438e5d1fa74_74104_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="R.String.Flag"
+class="gallery-image"
+data-flex-grow="236"
+data-flex-basis="566px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Accessing Resources&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In Android app development, the &lt;code>R.string&lt;/code> is a reference to a string resource defined in the app&amp;rsquo;s resources. An APK file contains all the resources and code needed to run an Android application.&lt;/li>
+&lt;li>When you see &lt;code>R.string.some_string&lt;/code>, it refers to a string resource defined in the app&amp;rsquo;s &lt;code>res/values/strings.xml&lt;/code> file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Strings.xml Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You need to locate the &lt;code>strings.xml&lt;/code> file within the APK&amp;rsquo;s resources. Navigate to the Resources folder, then to &lt;code>resources.arsc&lt;/code>, and finally, to &lt;code>res/values&lt;/code>.&lt;/li>
+&lt;li>Use the search function (&lt;code>CTRL+F&lt;/code>) to look for the &amp;ldquo;flag&amp;rdquo; string. This will allow you to find the flag in plain text.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>By examining the content of the &lt;code>strings.xml&lt;/code> file, you can retrieve the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you extract and decipher the flag, you will reveal the complete hidden flag. The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps, you will successfully reverse engineer the APK and uncover the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Reverseme&amp;rdquo; challenge, understanding how Android APK files store resources and references to string resources is crucial. By navigating the app&amp;rsquo;s code and examining the &lt;code>strings.xml&lt;/code> file, you can retrieve the flag and complete the challenge.&lt;/p></description></item><item><title>STOP SPAMMING</title><link>https://qiaonpc.github.io/post/stop-spamming/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/stop-spamming/</guid><description>&lt;h1 id="stop-spamming---ctf-challenge-writeup">STOP SPAMMING - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: STOP SPAMMING&lt;br>
+Points: 100&lt;br>
+Category: Miscellaneous&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the STOP SPAMMING challenge is to decode a provided spam message using a spam decoder tool. Your task is to utilize the tool to uncover the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the STOP SPAMMING challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Spam Message Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by examining the provided spam message. The challenge hints at using a spam decoder tool.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Spam Decoder Tool&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge simplifies the task by directing you to a specific spam decoder tool. You can use the following online tool to decode the spam message:
+&lt;a class="link" href="https://spammimic.com/decode.cgi" target="_blank" rel="noopener"
+>Spam Decoder Tool&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>By utilizing the provided tool, you will decode the spam message and reveal the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The STOP SPAMMING challenge, in this case, involves the straightforward use of a spam decoder tool to uncover the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the STOP SPAMMING challenge, you utilize a spam decoder tool to decode the spam message and reveal the flag. It&amp;rsquo;s a quick and straightforward solution to the challenge. Best of luck!&lt;/p></description></item><item><title>Temporal Traffic Traces</title><link>https://qiaonpc.github.io/post/temporal-traffic-traces/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/temporal-traffic-traces/</guid><description>&lt;h1 id="temporal-traffic-traces---ctf-challenge-writeup">Temporal Traffic Traces - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Temporal Traffic Traces&lt;br>
+Points: 100&lt;br>
+Category: Network Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Temporal Traffic Traces&amp;rdquo; challenge is to analyze a provided pcap file and extract the hidden flag. Your task is to investigate the protocol hierarchy, identify relevant data, and decode the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Temporal Traffic Traces&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the PCAP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are given a pcap file, and the first thing to do is to analyze its contents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Check Protocol Hierarchy&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Examine the protocol hierarchy within the pcap file. Look for any anomalies or unusual combinations of protocols.
+&lt;img src="https://qiaonpc.github.io/post/temporal-traffic-traces/protocol.png"
+width="1380"
+height="759"
+srcset="https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/temporal-traffic-traces/protocol_hu859b09cd508ac3295c500a32ffb56cd3_152738_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Protocol Hierarchy"
+class="gallery-image"
+data-flex-grow="181"
+data-flex-basis="436px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Focus on HTTP Traffic&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In this challenge, it&amp;rsquo;s essential to focus on HTTP traffic. You can identify and extract HTTP packets, which may contain relevant data.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Export HTTP Packets as Files&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Using a tool like Wireshark&amp;rsquo;s export functionality, extract HTTP packets as files for closer inspection.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify Base64 Encoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During your analysis, you may come across a base64 encoded message within the extracted files.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decode the Message&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Decode the base64-encoded message to unveil the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you decode the message, you will discover the flag hidden within the &amp;ldquo;Temporal Traffic Traces.&amp;rdquo; The flag follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and investigating the pcap file&amp;rsquo;s network traffic, you will successfully reveal the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Temporal Traffic Traces&amp;rdquo; challenge, your task is to analyze network traffic within a pcap file, extract the relevant data, and decode the hidden flag. Best of luck!&lt;/p></description></item><item><title>The Early Quantum Supercomputer I</title><link>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/</guid><description>&lt;h1 id="the-early-quantum-supercomputer-i---ctf-challenge-writeup">The Early Quantum Supercomputer I - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: The Early Quantum Supercomputer I&lt;br>
+Points: 100&lt;br>
+Category: Network Forensics, Operational Technology&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of &amp;ldquo;The Early Quantum Supercomputer I&amp;rdquo; challenge is to analyze a provided pcap file and identify an uncommon protocol to uncover the hidden flag. Your task is to investigate the network traffic and pinpoint the unique protocol.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete &amp;ldquo;The Early Quantum Supercomputer I&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the PCAP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by opening the provided pcap file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine Network Traffic&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Scrutinize the network traffic captured within the pcap file.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify Uncommon Protocols&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Pay close attention to the protocols being used. Look for any uncommon or unusual protocols that may stand out.
+&lt;img src="https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol.png"
+width="1396"
+height="795"
+srcset="https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/the-early-quantum-supercomputer-i/protocol_hubbbebcd40ea30e26874c88fb20df5685_89884_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Protocols"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Identification&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The flag is hidden within the uncommon protocol you identify during your analysis.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you identify the unique protocol, you will uncover the hidden flag. The flag is the uncommon protocol.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and investigating the network traffic within the pcap file, you will successfully reveal the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In &amp;ldquo;The Early Quantum Supercomputer I&amp;rdquo; challenge, your task is to analyze network traffic within a pcap file and identify the uncommon protocol that hides the flag. Best of luck!&lt;/p></description></item><item><title>The Enigmatic Manuscript</title><link>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</guid><description>&lt;h1 id="the-enigmatic-manuscript---ctf-challenge-writeup">The Enigmatic Manuscript - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: The Enigmatic Manuscript&lt;br>
+Points: 50&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of The Enigmatic Manuscript challenge is to uncover a hidden flag concealed within an image. Your task is to utilize cryptographic techniques to decipher the flag hidden within the image.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete The Enigmatic Manuscript challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Image Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by examining the provided image. In this challenge, images often hide clues or messages within their metadata or content.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exiftool Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use the &lt;code>exiftool&lt;/code> utility to inspect the image&amp;rsquo;s metadata and content for any hidden information.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Base64 Encoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon using &lt;code>exiftool&lt;/code> on the image, you may discover a base64 encoded message within the image&amp;rsquo;s metadata or content.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Message Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Decode the base64 encoded message to reveal the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>After following these steps and decoding the base64 message, you will successfully uncover the flag concealed within the image.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In The Enigmatic Manuscript challenge, your cryptography skills come into play as you decode the base64 message hidden within the image to unveil the flag. Best of luck!&lt;/p></description></item><item><title>The Quantum Nexus Prototype</title><link>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</guid><description>&lt;h1 id="the-quantum-nexus-prototype---ctf-challenge-writeup">The Quantum Nexus Prototype - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: The Quantum Nexus Prototype&lt;br>
+Points: 50&lt;br>
+Category: OSINT, Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of &amp;ldquo;The Quantum Nexus Prototype&amp;rdquo; challenge is to use your OSINT (Open-Source Intelligence) and cryptography skills to uncover hidden information within a provided YouTube link. At first glance, this challenge may seem confusing, but with careful examination of the link and some cryptography, you can successfully extract the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete &amp;ldquo;The Quantum Nexus Prototype&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Opening the YouTube Link&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Click the provided YouTube link. However, keep in mind that vulnerabilities cannot be hidden within a real rickroll video.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>URL Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As the video starts to load, take a close look at the link in the URL bar of your web browser. You will notice that the link is shrinking as the video loads.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Character Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The link shrinking indicates that some characters within the URL are not part of the actual YouTube link and are omitted. Carefully extract these omitted parts.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Base64 Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The extracted part, which has been omitted from the YouTube link, appears to be encoded using Base64. Decode this part to reveal the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By closely examining the link and decoding the extracted information, you will successfully unveil the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>&amp;ldquo;The Quantum Nexus Prototype&amp;rdquo; challenge combines OSINT and cryptography skills to uncover the hidden flag within the provided YouTube link. It&amp;rsquo;s a test of your ability to identify unusual elements in URLs and apply cryptographic techniques to decode hidden information. Good luck!&lt;/p></description></item><item><title>Unearth the Enigmatic Codebreaker's Challenge</title><link>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/unearth-the-enigmatic-codebreakers-challenge/</guid><description>&lt;h1 id="unearth-the-enigmatic-codebreakers-challenge---ctf-challenge-writeup">Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge&lt;br>
+Points: 150&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge&amp;rdquo; is to leverage memory forensics skills to crack Jerry&amp;rsquo;s hashed NTLM password. Your task is to find the hashdump, extract Jerry&amp;rsquo;s hashed password, and use a tool like hashcat to crack it and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge,&amp;rdquo; follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Prerequisite - Complete m3m0irs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is the third installment in the memory forensics series. While it is recommended to complete the previous challenges as a prerequisite, it&amp;rsquo;s not necessary to have completed it to proceed, especially since the CTF has ended.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Jerry&amp;rsquo;s Password Hash&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Jerry&amp;rsquo;s password is hashed, and you need to crack it. Hashcat, which didn&amp;rsquo;t work for Dexter&amp;rsquo;s password in the previous challenge, is effective for Jerry&amp;rsquo;s.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Locating the Hashdump&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To find the hashes to be cracked, you first need to locate the hashdump within the memory dump. You can achieve this using the following command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; hashdump&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Cracking Jerry&amp;rsquo;s Hashed Password&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After extracting Jerry&amp;rsquo;s hashed NTLM password from the hashdump, use a tool like &amp;ldquo;hashcat&amp;rdquo; to crack it. The objective is to reveal the plaintext of Jerry&amp;rsquo;s password.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Once you have successfully cracked Jerry&amp;rsquo;s hashed password, you will discover the flag. It will adhere to the specified format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and employing memory forensics techniques, you will uncover Jerry&amp;rsquo;s password and unveil the hidden flag in the &amp;ldquo;Unearth the Enigmatic Codebreaker&amp;rsquo;s Challenge.&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In this memory forensics challenge, you must use your skills to crack Jerry&amp;rsquo;s hashed NTLM password and reveal the hidden flag. Best of luck!&lt;/p></description></item><item><title>Unearth the Long Lost Cipher</title><link>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/</guid><description>&lt;h1 id="unearth-the-long-lost-cipher---ctf-challenge-writeup">Unearth the Long Lost Cipher - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Unearth the Long Lost Cipher&lt;br>
+Points: 150&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Unearth the Long Lost Cipher&amp;rdquo; challenge is to conduct memory forensics to find Dexter&amp;rsquo;s password on a computer. Your task is to identify the password and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Unearth the Long Lost Cipher&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Prerequisite - Complete m3m0irs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge is the second in the memory forensics series and assumes you have completed the &amp;ldquo;m3m0irs&amp;rdquo; challenge. However, since the previous challenge has ended, it&amp;rsquo;s not necessary to have completed it to proceed.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Search&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are tasked with finding Dexter&amp;rsquo;s password on the computer. Passwords can be located in various ways during memory forensics, such as examining hash dumps or LSA dumps.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Hash Cracking Attempt&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>An initial approach might involve attempting to crack the password hashes, but it didn&amp;rsquo;t yield results in this case.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>File Scan and Grep&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Another approach is to scan the memory for files and grep for references to &amp;ldquo;Dexter.&amp;rdquo; You can perform file scans using the command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; filescan &amp;gt; filescan.txt&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Locate SECRET.txt File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>During the file scan, you may discover a file named &amp;ldquo;SECRET.txt.&amp;rdquo; Extract this file from the memory dump using the command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; dumpfiles -Q &amp;lt;memory-location&amp;gt; -D &amp;lt;directory-where-you-wish-to-place-the-file&amp;gt;&lt;/code>.
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan.png"
+width="1709"
+height="327"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/filescan_hu4c72d5b5336bf99e71c685fc85914215_142573_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="SECRETS.txt"
+class="gallery-image"
+data-flex-grow="522"
+data-flex-basis="1254px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Examine Dexter&amp;rsquo;s Files&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Investigate the contents of Dexter&amp;rsquo;s files to gather information. You may find hints that lead to the password.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Clues&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Dexter constructed his password using his favorite animal and a mysterious &amp;ldquo;MMYY.&amp;rdquo; Your task is to determine the animal and decode the password using the provided clues.
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret.png"
+width="1246"
+height="213"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/secret_hu0be1dea07636c274986ca5b9dbcd147d_50967_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Password Construction"
+class="gallery-image"
+data-flex-grow="584"
+data-flex-basis="1403px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Format&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The flag will be in the format specified, with the animal represented by 7 letters, followed by &amp;ldquo;MM&amp;rdquo; and &amp;ldquo;YY.&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Multiple Panther Instances&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After examining Dexter&amp;rsquo;s files, you may discover two instances of the word &amp;ldquo;panther.&amp;rdquo; Assume this is his favorite animal and forms the first part of the flag (7 letters).
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint.png"
+width="1704"
+height="551"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/panther%20hint_hu1d1eaf963bfce08fe261c379ad770b55_284213_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="2 Instances of Panther"
+class="gallery-image"
+data-flex-grow="309"
+data-flex-basis="742px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Changing Hint&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>SECRET.txt may contain information about password changes. This hints that passwords are updated regularly.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Password Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>To narrow down the possibilities, investigate when the &amp;ldquo;notepad&amp;rdquo; application was used. You may find only two dates in the memory dump, so try both as potential password combinations.
+&lt;img src="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad.png"
+width="1715"
+height="128"
+srcset="https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unearth-the-long-lost-cipher/usage%20of%20notepad_hu4aef2cceaf23dfa00194fa62086b5e6c_65668_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Usage of Notepad"
+class="gallery-image"
+data-flex-grow="1339"
+data-flex-basis="3215px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>After following these steps and conducting memory forensics analysis, you will successfully locate Dexter&amp;rsquo;s password and reveal the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Unearth the Long Lost Cipher&amp;rdquo; challenge, memory forensics skills are crucial as you explore the computer&amp;rsquo;s memory to discover Dexter&amp;rsquo;s password and unveil the flag. Best of luck!&lt;/p></description></item><item><title>Unlock the Time Traveller's Dilemma</title><link>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/</guid><description>&lt;h1 id="unlock-the-time-travellers-dilemma---ctf-challenge-writeup">Unlock the Time Traveller&amp;rsquo;s Dilemma - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Unlock the Time Traveller&amp;rsquo;s Dilemma&lt;br>
+Points: 200&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Unlock the Time Traveller&amp;rsquo;s Dilemma&amp;rdquo; challenge was to perform advanced memory forensics to find the hidden flag. This challenge was the fourth in the memory forensics series, and while it was recommended to solve the previous three challenges, it wasn&amp;rsquo;t necessary as the CTF had ended.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Unlock the Time Traveller&amp;rsquo;s Dilemma&amp;rdquo; challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I explored various aspects of the computer&amp;rsquo;s memory, including examining the MFT (Master File Table) using &lt;code>mftparser&lt;/code> and reviewing the state of the computer using &lt;code>screenshot&lt;/code>. Unfortunately, none of these methods provided the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Clipboard Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>With my previous methods proving unsuccessful, I turned my attention to &lt;code>clipboard&lt;/code> content. I used the command: &lt;code>volatility -f &amp;lt;memory file&amp;gt; --profile=&amp;lt;architecture&amp;gt; clipboard&lt;/code> to examine the clipboard contents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Although the clipboard content didn&amp;rsquo;t immediately resemble the flag, but I tried it anyways and solved the challenge.
+&lt;img src="https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard.png"
+width="1409"
+height="330"
+srcset="https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/unlock-the-time-travellers-dilemma/clipboard_hued0250f4d36f200914d4877dc116f29b_83057_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Clipboard"
+class="gallery-image"
+data-flex-grow="426"
+data-flex-basis="1024px"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>After conducting a comprehensive memory forensics analysis, I successfully found the flag and completed the challenge.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Unlock the Time Traveller&amp;rsquo;s Dilemma&amp;rdquo; challenge, my advanced memory forensics skills were put to the test as I explored various aspects of the computer&amp;rsquo;s memory to unveil the hidden flag. It was a rewarding challenge that required careful analysis. Good luck!&lt;/p></description></item><item><title>Witness the Quantum Entanglement</title><link>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/witness-the-quantum-entanglement/</guid><description>&lt;h1 id="witness-the-quantum-entanglement---ctf-challenge-writeup">Witness the Quantum Entanglement - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Witness the Quantum Entanglement&lt;br>
+Points: 100&lt;br>
+Category: Memory Forensics&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Witness the Quantum Entanglement&amp;rdquo; challenge is to utilize your memory forensics skills to determine an essential piece of information. Building upon the previous challenges in the series, you are given a hint regarding Dexter&amp;rsquo;s wife, allowing you to focus on finding her birthdate. With this knowledge, you can proceed to solve the challenge.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Witness the Quantum Entanglement&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Previous Challenge Hint&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In the previous challenge, a hint was provided about Dexter&amp;rsquo;s wife. This hint, along with the knowledge that she is celebrating her 42nd birthday, forms the foundation for this challenge.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Dexter&amp;rsquo;s Wife&amp;rsquo;s Birthdate&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Dexter&amp;rsquo;s wife&amp;rsquo;s age is established as 42. Now, the objective is to determine when she was born.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Key Years&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The previous challenges also provided two years: 2023 and 2018. With these years in mind, attempt to calculate Dexter&amp;rsquo;s wife&amp;rsquo;s birthdate using both possibilities.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Test both years to find the correct combination of information that results in her birthdate. One of these combinations will lead you to the correct birthdate, allowing you to obtain the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By carefully analyzing the provided hints and experimenting with the available information, you will successfully determine Dexter&amp;rsquo;s wife&amp;rsquo;s birthdate and retrieve the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Witness the Quantum Entanglement&amp;rdquo; challenge, your memory forensics skills and problem-solving abilities are put to the test as you work to unravel the mystery of Dexter&amp;rsquo;s wife&amp;rsquo;s birthdate. Good luck!&lt;/p></description></item></channel></rss>

@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>iHack Prelim 2024 on</title><link>https://qiaonpc.github.io/categories/ihack-prelim-2024/</link><description>Recent content in iHack Prelim 2024 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 28 Jul 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/ihack-prelim-2024/index.xml" rel="self" type="application/rss+xml"/><item><title>Brute Force Frenzy</title><link>https://qiaonpc.github.io/post/brute-force-frenzy/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/brute-force-frenzy/</guid><description>&lt;h1 id="brute-force-frenzy-ctf-challenge-writeup">Brute Force Frenzy CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Brute Force Frenzy&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Reverse Engineering&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Reverse engineer a binary to find the correct key for verification.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/challenge.png"
+width="655"
+height="920"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/challenge_hu4c8cf4da84bcd8b3945b46a645934140_80492_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/challenge_hu4c8cf4da84bcd8b3945b46a645934140_80492_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="71"
+data-flex-basis="170px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Brute Force Frenzy&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Analyze the Binary&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use Ghidra to analyze the provided file. Identify the key verification process and how the key is checked against a predefined array.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/ghidra%20encryption.png"
+width="889"
+height="603"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/ghidra%20encryption_hucf363704a1fac76e8bfa759896fd4db1_62838_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/ghidra%20encryption_hucf363704a1fac76e8bfa759896fd4db1_62838_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Encryption"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="353px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/predefined%20bytes.png"
+width="818"
+height="610"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/predefined%20bytes_huee56daf63a4efb1e9096a267317f4ab1_48412_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/predefined%20bytes_huee56daf63a4efb1e9096a267317f4ab1_48412_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Predefined Bytes"
+class="gallery-image"
+data-flex-grow="134"
+data-flex-basis="321px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Understand the Obfuscation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Discover that the byte array used for verification is obfuscated. Only every 4th byte in the array is relevant for the key.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extract and Recreate&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extract the useful bytes from the obfuscated array.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Recreate the key verification logic in Python using these extracted bytes.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">find_license_key&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">predefined_values&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target_sum&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">license_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">found&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">False&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">c&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">32&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">127&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="c1"># Printable ASCII characters&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">iVar1&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">((&lt;/span>&lt;span class="n">c&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">13&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">97&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">iVar1&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">predefined_values&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">]:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">license_key&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">chr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">c&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">found&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">True&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="ow">not&lt;/span> &lt;span class="n">found&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">None&lt;/span> &lt;span class="c1"># If no valid character is found&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="nb">len&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">8&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">computed_sum&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">sum&lt;/span>&lt;span class="p">(((&lt;/span>&lt;span class="nb">ord&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">13&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">%&lt;/span> &lt;span class="mi">97&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Example usage:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">predefined_values&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="mi">91&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">62&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">66&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">19&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">59&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">51&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">72&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">41&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">target_sum&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">200&lt;/span> &lt;span class="c1"># Replace with the actual target sum value&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">license_key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">find_license_key&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">predefined_values&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">target_sum&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;The license key is: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">license_key&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Run the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Execute the Python script to test the key verification process. Obtain the flag from the script output.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/brute-force-frenzy/flag.png"
+width="743"
+height="120"
+srcset="https://qiaonpc.github.io/post/brute-force-frenzy/flag_huc2154d638344e9be9d6397696213414d_28330_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/brute-force-frenzy/flag_huc2154d638344e9be9d6397696213414d_28330_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="619"
+data-flex-basis="1486px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{NI220G24}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Character Journey</title><link>https://qiaonpc.github.io/post/character-journey/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/character-journey/</guid><description>&lt;h1 id="character-journey-ctf-challenge-writeup">Character Journey CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Character Journey&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Find and retrieve the flag from a web application by exploiting vulnerabilities.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/character-journey/challenge.png"
+width="664"
+height="816"
+srcset="https://qiaonpc.github.io/post/character-journey/challenge_hud5ada5ac3389c42e0cc2a050d3fc9f1f_74388_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/character-journey/challenge_hud5ada5ac3389c42e0cc2a050d3fc9f1f_74388_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="81"
+data-flex-basis="195px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Character Journey&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Exploration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Visit the web page and register for an account.&lt;/li>
+&lt;li>Upon registration, we observed that the application doesn&amp;rsquo;t have notable functionality
+&lt;ul>
+&lt;li>Feedback form does not actually send a POST request&lt;/li>
+&lt;li>YouTube link is quite useless&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Investigating User Account Features&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>We then focused on the functionality of viewing your own account.&lt;/li>
+&lt;li>While exploring this feature, investigate the URL parameters and other user-specific data.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Vulnerability&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Discover an Insecure Direct Object Reference (IDOR) vulnerability by manipulating user IDs in the URL (e.g., changing ID from 1 to 10).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Find that some URLs return base64 encoded text chunks.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/character-journey/found%20IDOR.png"
+width="1158"
+height="679"
+srcset="https://qiaonpc.github.io/post/character-journey/found%20IDOR_hub3b0f40217b87d2ca6a458403113f4e9_33619_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/character-journey/found%20IDOR_hub3b0f40217b87d2ca6a458403113f4e9_33619_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found IDOR"
+class="gallery-image"
+data-flex-grow="170"
+data-flex-basis="409px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/character-journey/base64%20chunks.png"
+width="960"
+height="639"
+srcset="https://qiaonpc.github.io/post/character-journey/base64%20chunks_hu16cd5ac440bfaaf75fed7abd59495da9_30056_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/character-journey/base64%20chunks_hu16cd5ac440bfaaf75fed7abd59495da9_30056_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Base64 Chunks"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="360px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Brute Force Exploration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Develop a script to automate the process of iHack Prelim 2024 user IDs from 1 to 100.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Run the script to extract all base64 encoded text chunks.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">requests&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">bs4&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">BeautifulSoup&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Function to fetch profile information for a given userId&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">fetch_profile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">url&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;http://character-journey.ihack24.capturextheflag.io/profile.php?userId=&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">headers&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;User-Agent&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/115.0&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Accept&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Accept-Language&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;en-US,en;q=0.5&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Accept-Encoding&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;gzip, deflate, br&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Connection&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;close&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Referer&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;http://character-journey.ihack24.capturextheflag.io/home.php&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Cookie&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;PHPSESSID=be6885c0ca68d30c985be4b2fee16ebd&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;Upgrade-Insecure-Requests&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">response&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">requests&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">url&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">headers&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">headers&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status_code&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">200&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">text&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Failed to fetch profile for userId: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2"> with status code: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">response&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">status_code&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Function to parse HTML and extract username and email&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">parse_profile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">html_content&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">soup&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">BeautifulSoup&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">html_content&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;html.parser&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Find &amp;lt;p&amp;gt; tags that contain the Name and Email&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name_tag&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">soup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;p&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">text&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">lambda&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">startswith&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Name:&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email_tag&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">soup&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">find&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;p&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">text&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="k">lambda&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">x&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">startswith&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Email:&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">name_tag&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">email_tag&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1"># Extract the text after &amp;#34;Name: &amp;#34; and &amp;#34;Email: &amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">name_tag&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get_text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">strip&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;: &amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">email&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">email_tag&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">get_text&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">strip&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">split&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;: &amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)[&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">email&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Could not find profile information in HTML content.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="kc">None&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">None&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># Main function to fetch profiles for userId 0-61 and save to a file&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">main&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;profiles.txt&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;w&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">user_id&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Fetching profile for userId: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">html_content&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">fetch_profile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">html_content&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">email&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">parse_profile&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">html_content&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">name&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="n">email&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;userId: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, Name: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, Email: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">email&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;userId: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, Profile information not found&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">else&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">write&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;userId: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">user_id&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, Failed to fetch profile&lt;/span>&lt;span class="se">\n&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">main&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Review the extracted data from the brute force script.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Rather than decoding the base64 text, find the flag directly in the data without further processing.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/character-journey/brute%20force.png"
+width="1321"
+height="595"
+srcset="https://qiaonpc.github.io/post/character-journey/brute%20force_huc0740853aaeb6e0eca77cd66f778ec41_181481_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/character-journey/brute%20force_huc0740853aaeb6e0eca77cd66f778ec41_181481_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Brute Force"
+class="gallery-image"
+data-flex-grow="222"
+data-flex-basis="532px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/character-journey/flag.png"
+width="1454"
+height="131"
+srcset="https://qiaonpc.github.io/post/character-journey/flag_hub09a354196561355ceef2942c13b7f2a_51433_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/character-journey/flag_hub09a354196561355ceef2942c13b7f2a_51433_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="1109"
+data-flex-basis="2663px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{655b7b7ae4c62d726a568eff8914573e}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Just A Normal EXE</title><link>https://qiaonpc.github.io/post/just-a-normal-exe/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/just-a-normal-exe/</guid><description>&lt;h1 id="just-a-normal-exe-ctf-challenge-writeup">Just A Normal EXE CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Just A Normal EXE&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Meoware&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a malware file to find the flag.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/just-a-normal-exe/challenge.png"
+width="654"
+height="920"
+srcset="https://qiaonpc.github.io/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="71"
+data-flex-basis="170px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Just A Normal EXE&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used VirusTotal to scan the provided malware file. This helps to get a preliminary analysis and detect any immediate issues.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Review VirusTotal Results&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Access the detailed report from VirusTotal, available &lt;a class="link" href="https://www.virustotal.com/gui/file/01eeac6d706e078645f78e100bf6c2d808a443c4d85b3257b63fa087eef228cc/relations" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify Key Findings&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In the VirusTotal output, we found &lt;code>s3cr3t5.txt&lt;/code> file mentioned in the relations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Access the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Visit the URL associated with &lt;code>s3cr3t5.txt&lt;/code> to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/just-a-normal-exe/flag.png"
+width="871"
+height="275"
+srcset="https://qiaonpc.github.io/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="316"
+data-flex-basis="760px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong> : &lt;strong>ihack24{obFusCat!on_Alw4ys_w0rK}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Lock?</title><link>https://qiaonpc.github.io/post/lock/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/lock/</guid><description>&lt;h1 id="lock-ctf-challenge-writeup">Lock? CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Lock?&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: DFIR (Digital Forensics and Incident Response)&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Recover the flag from a BitLocker-encrypted disk image by analyzing logs and decrypting the image.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/challenge.png"
+width="653"
+height="948"
+srcset="https://qiaonpc.github.io/post/lock/challenge_hu120854b6ac4413d85b0f0cf2e5c86454_116125_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/challenge_hu120854b6ac4413d85b0f0cf2e5c86454_116125_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="68"
+data-flex-basis="165px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Lock?&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>We are provided with multiple files, including various event logs.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing Event Logs&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use Hayabusa to analyze the &lt;code>.evtx&lt;/code> files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Although Hayabusa didn’t provide extensive results, it revealed a password useful for decrypting the BitLocker image.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/hayabusa%20output.png"
+width="1233"
+height="488"
+srcset="https://qiaonpc.github.io/post/lock/hayabusa%20output_huc2abd5c305811c56c5999d3a553bb96e_29756_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/hayabusa%20output_huc2abd5c305811c56c5999d3a553bb96e_29756_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Bitlocker Output"
+class="gallery-image"
+data-flex-grow="252"
+data-flex-basis="606px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Handling the Disk Image&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The &lt;code>.img&lt;/code> file is identified as a DOS file based on the &lt;code>file&lt;/code> command output.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Attempt to mount the image using Autopsy, but encounter an error indicating that it is a BitLocker-encrypted volume.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/file%20output.png"
+width="1317"
+height="187"
+srcset="https://qiaonpc.github.io/post/lock/file%20output_huf0d32ca2c86369b329adf1ad9fe9d748_49628_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/file%20output_huf0d32ca2c86369b329adf1ad9fe9d748_49628_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="File Output"
+class="gallery-image"
+data-flex-grow="704"
+data-flex-basis="1690px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/autopsy.png"
+width="1365"
+height="708"
+srcset="https://qiaonpc.github.io/post/lock/autopsy_hucded28c6ec367bdf12ac5bff531db922_83457_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/autopsy_hucded28c6ec367bdf12ac5bff531db922_83457_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Autopsy"
+class="gallery-image"
+data-flex-grow="192"
+data-flex-basis="462px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Mounting the Disk Image&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Research shows that double-clicking the &lt;code>.img&lt;/code> file on Linux can automatically mount the disk.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Enter the password obtained from the logs to unlock and mount the encrypted disk image.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/mount.png"
+width="1367"
+height="748"
+srcset="https://qiaonpc.github.io/post/lock/mount_hufdebe59e3807e09518bb92b68edbb941_513724_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/mount_hufdebe59e3807e09518bb92b68edbb941_513724_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Mount"
+class="gallery-image"
+data-flex-grow="182"
+data-flex-basis="438px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Once the disk is mounted, navigate through the filesystem to locate the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Retrieve the flag from the accessible filesystem.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/lock/flag.png"
+width="1023"
+height="417"
+srcset="https://qiaonpc.github.io/post/lock/flag_hu908995cec0deb171addd5820ef1c0817_44029_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/lock/flag_hu908995cec0deb171addd5820ef1c0817_44029_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="245"
+data-flex-basis="588px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &amp;ldquo;ihack24{6f6450f1695e405557486a2be402dc27}&amp;rdquo;&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Memory</title><link>https://qiaonpc.github.io/post/memory/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/memory/</guid><description>&lt;h1 id="memory-ctf-challenge-writeup">Memory CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Memory&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: DFIR (Digital Forensics and Incident Response)&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify the user that was created based on a memory dump from a Windows system.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/challenge.png"
+width="680"
+height="899"
+srcset="https://qiaonpc.github.io/post/memory/challenge_hu8d943007e1db52133e46709e65b3b886_140588_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/challenge_hu8d943007e1db52133e46709e65b3b886_140588_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="75"
+data-flex-basis="181px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Memory&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Setup&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>We are tasked with finding the user created on a Windows system based on a memory dump.&lt;/li>
+&lt;li>Given the filename suggests a Windows environment, use &lt;code>memprocfs&lt;/code> to streamline the analysis of the memory dump, avoiding manual extraction with tools like Volatility.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing Powershell Commands&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Navigate to &lt;code>/sys/proc/proc-v.txt&lt;/code> within &lt;code>memprocfs&lt;/code> to locate and review PowerShell commands executed during the memory capture.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search for commands that involve executing base64 encoded strings.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/powershell.png"
+width="1654"
+height="857"
+srcset="https://qiaonpc.github.io/post/memory/powershell_hue65ed31818b4dd708707f0361788db9c_127081_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/powershell_hue65ed31818b4dd708707f0361788db9c_127081_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell"
+class="gallery-image"
+data-flex-grow="192"
+data-flex-basis="463px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding Base64 Commands&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Identify and extract the base64 encoded strings from the PowerShell commands.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decode the base64 strings to reveal the underlying PowerShell commands.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/decoded%20base64.png"
+width="961"
+height="655"
+srcset="https://qiaonpc.github.io/post/memory/decoded%20base64_hu1bdccd6f67bbc62de5df5f17f71ece72_78051_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/decoded%20base64_hu1bdccd6f67bbc62de5df5f17f71ece72_78051_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decoded Base64"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="352px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Executing and Reversing PowerShell Commands&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Run the decoded PowerShell commands to reveal their functionality.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Analyze the output to determine which user was created.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/powrshell%20executed.png"
+width="1905"
+height="786"
+srcset="https://qiaonpc.github.io/post/memory/powrshell%20executed_hue222b5147006b13eb2d294ecc62a763b_89320_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/powrshell%20executed_hue222b5147006b13eb2d294ecc62a763b_89320_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Powershell Executed"
+class="gallery-image"
+data-flex-grow="242"
+data-flex-basis="581px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>With the user information identified from the PowerShell commands, make the flag&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/memory/flalg.png"
+width="446"
+height="620"
+srcset="https://qiaonpc.github.io/post/memory/flalg_huc76f719ed256e5c2a64a1faeb5f83f53_11865_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/memory/flalg_huc76f719ed256e5c2a64a1faeb5f83f53_11865_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="71"
+data-flex-basis="172px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{sysadmin_SYSAdmin}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>Mystery File</title><link>https://qiaonpc.github.io/post/mystery-file/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/mystery-file/</guid><description>&lt;h1 id="mystery-file-ctf-challenge-writeup">Mystery File CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Mystery File&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: DFIR (Digital Forensics and Incident Response)&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Deobfuscate a script within a ZIP file to uncover a domain and retrieve the flag from the associated webpage.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/challenge.png"
+width="658"
+height="949"
+srcset="https://qiaonpc.github.io/post/mystery-file/challenge_hu0d2feb64800025e2a7752003c4e43b04_107338_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/challenge_hu0d2feb64800025e2a7752003c4e43b04_107338_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="69"
+data-flex-basis="166px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Mystery File&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>We are given a file named &lt;code>program.bin&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Use the &lt;code>file&lt;/code> command to identify the nature of the file, which reveals it is a ZIP archive.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/found%20zip%20file.png"
+width="1124"
+height="119"
+srcset="https://qiaonpc.github.io/post/mystery-file/found%20zip%20file_hu0c975e5c8d5da052906b6db9206065cf_26423_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/found%20zip%20file_hu0c975e5c8d5da052906b6db9206065cf_26423_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Zip File"
+class="gallery-image"
+data-flex-grow="944"
+data-flex-basis="2266px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting the ZIP File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Unzip &lt;code>program.bin&lt;/code> to obtain its contents, which include a large, obfuscated Bash script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/obfsucataed%201.png"
+width="1532"
+height="755"
+srcset="https://qiaonpc.github.io/post/mystery-file/obfsucataed%201_huc85426c768a5dd35125b4f561d3ca1d8_299139_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/obfsucataed%201_huc85426c768a5dd35125b4f561d3ca1d8_299139_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Obfuscated"
+class="gallery-image"
+data-flex-grow="202"
+data-flex-basis="486px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Running the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>To handle the obfuscation, use an online Bash interpreter such as &lt;a class="link" href="https://tio.run/#bash" target="_blank" rel="noopener"
+>TIO.run&lt;/a> to execute the script.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The initial execution of the script shows no useful output.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/nothing%20to%20see%20here.png"
+width="800"
+height="200"
+srcset="https://qiaonpc.github.io/post/mystery-file/nothing%20to%20see%20here_hue8d2dd89dd546cb49f8d59182eb2339e_11969_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/nothing%20to%20see%20here_hue8d2dd89dd546cb49f8d59182eb2339e_11969_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Nothing to see"
+class="gallery-image"
+data-flex-grow="400"
+data-flex-basis="960px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Deobfuscating the Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Modify the script to replace &lt;code>eval&lt;/code> with &lt;code>echo&lt;/code>. This allows you to see the script&amp;rsquo;s output, revealing a new, similarly obfuscated Bash script.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Repeat the process of replacing &lt;code>eval&lt;/code> with &lt;code>echo&lt;/code> to progressively reveal less obfuscated versions of the script.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/less%20obfuscated.png"
+width="1565"
+height="556"
+srcset="https://qiaonpc.github.io/post/mystery-file/less%20obfuscated_hud96892a3ef132c5bc0f45259f4868424_97552_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/less%20obfuscated_hud96892a3ef132c5bc0f45259f4868424_97552_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Less Obfuscated"
+class="gallery-image"
+data-flex-grow="281"
+data-flex-basis="675px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Uncovering the Domain and Flag Location&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After several iterations, the script becomes sufficiently deobfuscated to understand its content.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The script contains two base64 encoded strings. Decode the first string to reveal a domain name.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decode the second string to find the URL where the flag can be obtained.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/beef.png"
+width="1900"
+height="751"
+srcset="https://qiaonpc.github.io/post/mystery-file/beef_hu9dc06f89b3f9b884981a5a9876a7b6fa_131978_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/beef_hu9dc06f89b3f9b884981a5a9876a7b6fa_131978_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Beef"
+class="gallery-image"
+data-flex-grow="252"
+data-flex-basis="607px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/flag%20link.png"
+width="980"
+height="792"
+srcset="https://qiaonpc.github.io/post/mystery-file/flag%20link_hu5413b8efa87feb0ad89dd91e45ddf6cc_59774_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/flag%20link_hu5413b8efa87feb0ad89dd91e45ddf6cc_59774_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Link"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="296px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Retrieving the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Visit the webpage indicated by the decoded domain to locate and extract the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/mystery-file/flag.png"
+width="1436"
+height="412"
+srcset="https://qiaonpc.github.io/post/mystery-file/flag_hu0eaebece33cc29eb0fe6df467c3b5562_22785_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/mystery-file/flag_hu0eaebece33cc29eb0fe6df467c3b5562_22785_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="348"
+data-flex-basis="836px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{0bfusc4t3d_thr34t3}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>SSH Compromised</title><link>https://qiaonpc.github.io/post/ssh-compromised/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/ssh-compromised/</guid><description>&lt;h1 id="ssh-compromised-ctf-challenge-writeup">SSH Compromised CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: SSH Compromised&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Incident Handling&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a large log file to identify a compromised SSH login.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;SSH Compromised&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Start by examining the large log file provided for clues regarding SSH logins.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Filtering the Log File&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Reduce the amount of noise in the log file by removing lines containing common failure and error messages:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;fail&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;error&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;invalid&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;unknown&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;closed&amp;rdquo; and &amp;ldquo;disconnect&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;ignoring&amp;rdquo;&lt;/li>
+&lt;li>&lt;strong>Remove lines with&lt;/strong>: &amp;ldquo;reset&amp;rdquo; and &amp;ldquo;unable&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/removing%20fail.png"
+width="1655"
+height="492"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/removing%20fail_hu086a0563318a2698c8c85c5872b0efec_443907_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/removing%20fail_hu086a0563318a2698c8c85c5872b0efec_443907_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Fail Removed"
+class="gallery-image"
+data-flex-grow="336"
+data-flex-basis="807px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/removing%20error.png"
+width="1653"
+height="465"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/removing%20error_hu107b2f7b35640c4cad1e86e5ea675a10_420869_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/removing%20error_hu107b2f7b35640c4cad1e86e5ea675a10_420869_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Error Removed"
+class="gallery-image"
+data-flex-grow="355"
+data-flex-basis="853px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/removed%20almost%20everything.png"
+width="1575"
+height="720"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/removed%20almost%20everything_hu277baf15dff4a3b28f3dedd5dd9ebafb_675357_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/removed%20almost%20everything_hu277baf15dff4a3b28f3dedd5dd9ebafb_675357_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Removed Almost Everything"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="525px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying Successful Logins&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After filtering, focus on the remaining lines to identify successful logins.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Search for entries related to the user &lt;code>sysadmin&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/foud%20stuff.png"
+width="1385"
+height="262"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/foud%20stuff_huda2b7c3376e573deae58f166edb2372f_231376_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/foud%20stuff_huda2b7c3376e573deae58f166edb2372f_231376_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Stuff"
+class="gallery-image"
+data-flex-grow="528"
+data-flex-basis="1268px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting Relevant Information&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>From the filtered results, find entries showing successful logins for the user &lt;code>sysadmin&lt;/code>.&lt;/li>
+&lt;li>Identify the IP address associated with these logins. In this case, the IP address is &lt;code>149.102.244.68&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Finding the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Use the extracted IP address and user information to locate the flag related to the SSH compromise.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/ssh-compromised/flag.png"
+width="1643"
+height="331"
+srcset="https://qiaonpc.github.io/post/ssh-compromised/flag_hudb47794599e6a68ebc99d45af972e165_324345_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/ssh-compromised/flag_hudb47794599e6a68ebc99d45af972e165_324345_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="496"
+data-flex-basis="1191px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong>: &lt;strong>ihack24{149.102.244.68_sysadmin}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

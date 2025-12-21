@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>NETSA CTF 2025 on</title><link>https://qiaonpc.github.io/categories/netsa-ctf-2025/</link><description>Recent content in NETSA CTF 2025 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 26 May 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/netsa-ctf-2025/index.xml" rel="self" type="application/rss+xml"/><item><title>Blink Logic</title><link>https://qiaonpc.github.io/post/blink-logic/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/blink-logic/</guid><description>&lt;h1 id="blink-logic-ctf-challenge-writeup">Blink Logic CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Blink Logic&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: IoT&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a firmware file and determine the correct keypad input to unlock an IoT system running on Wokwi simulation.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Blink Logic&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Challenge Setup&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The challenge provides a compiled firmware file in &lt;code>.hex&lt;/code> format and instructs the user to simulate an IoT project using &lt;a class="link" href="https://wokwi.com" target="_blank" rel="noopener"
+>Wokwi&lt;/a>, a popular online Arduino/IoT simulation platform.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The goal is to determine the correct key combination on a virtual keypad to &amp;ldquo;unlock&amp;rdquo; the system and retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/challenge.png"
+width="617"
+height="667"
+srcset="https://qiaonpc.github.io/post/blink-logic/challenge_hubae76b2a5397748abcfcbbd49265c803_121741_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/challenge_hubae76b2a5397748abcfcbbd49265c803_121741_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="92"
+data-flex-basis="222px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Converting the Firmware&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Started by converting the &lt;code>.hex&lt;/code> file into a binary format using the &lt;code>objcopy&lt;/code> tool:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">objcopy -I ihex BlinkLogic.ino.hex firmware.bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>This step makes it easier to inspect the raw data inside the firmware.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/converting%20firmware.png"
+width="855"
+height="105"
+srcset="https://qiaonpc.github.io/post/blink-logic/converting%20firmware_hu33f104636e2656748016ea8fdc37fc5e_47016_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/converting%20firmware_hu33f104636e2656748016ea8fdc37fc5e_47016_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Converting Firmware"
+class="gallery-image"
+data-flex-grow="814"
+data-flex-basis="1954px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Static Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Ran the &lt;code>strings&lt;/code> command on the &lt;code>.bin&lt;/code> file to extract human-readable content.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">strings firmware.bin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Among the output, several familiar keypad characters were visible (&lt;code>123A456B789C*0#D&lt;/code>), which appeared to represent a standard 4x4 keypad layout.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/analyse%20firmware.png"
+width="633"
+height="239"
+srcset="https://qiaonpc.github.io/post/blink-logic/analyse%20firmware_hu1519a7f7a13ab0674556f721369e28db_83156_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/analyse%20firmware_hu1519a7f7a13ab0674556f721369e28db_83156_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Analysing Firmware"
+class="gallery-image"
+data-flex-grow="264"
+data-flex-basis="635px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Noticed an unusual string near the end of the readable content: &lt;code>630B&lt;/code>.&lt;/li>
+&lt;li>This did not match the keypad layout directly but stood out from the rest of the data — suggesting it was the intended key sequence.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Testing the Key on Wokwi&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Loaded the given project on Wokwi and manually entered &lt;code>630B&lt;/code> on the virtual keypad.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The system responded with an &amp;ldquo;unlocked&amp;rdquo; message, confirming the key was correct.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/blink-logic/flag.png"
+width="565"
+height="658"
+srcset="https://qiaonpc.github.io/post/blink-logic/flag_hucd6dd23324fd7e6e06b827bdb2ab92ff_75903_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/blink-logic/flag_hucd6dd23324fd7e6e06b827bdb2ab92ff_75903_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="85"
+data-flex-basis="206px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{630B}&lt;/p></description></item><item><title>Kapas</title><link>https://qiaonpc.github.io/post/kapas/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/kapas/</guid><description>&lt;h1 id="kapas-ctf-challenge-writeup">Kapas CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Kapas&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Steganography&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a suspicious document file to uncover hidden malicious content and extract the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Kapas&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The file provided had no extension, making it unclear what type of file it was.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used the &lt;code>file&lt;/code> command on Linux to determine its format.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Identified as a &lt;code>.docx&lt;/code> (Microsoft Word) document.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/binwalk.png"
+width="1290"
+height="381"
+srcset="https://qiaonpc.github.io/post/kapas/binwalk_hud5d118e88d5f213c23e38148985f7d56_529552_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/binwalk_hud5d118e88d5f213c23e38148985f7d56_529552_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Binwalk"
+class="gallery-image"
+data-flex-grow="338"
+data-flex-basis="812px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Extracting Contents&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used &lt;code>binwalk&lt;/code> to extract the contents of the &lt;code>.docx&lt;/code> file.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This revealed various internal files and directories typical of Office documents, such as &lt;code>word/document.xml&lt;/code>, &lt;code>vbaProject.bin&lt;/code>, etc.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/binwalk2.png"
+width="1289"
+height="204"
+srcset="https://qiaonpc.github.io/post/kapas/binwalk2_hu83546e9951bedb9ad1fc683a46e734cc_114122_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/binwalk2_hu83546e9951bedb9ad1fc683a46e734cc_114122_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Extraction via Binwalk"
+class="gallery-image"
+data-flex-grow="631"
+data-flex-basis="1516px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reviewing Document Content&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Opened &lt;code>document.xml&lt;/code> to check for embedded content.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Filtered for strings containing &amp;ldquo;meow&amp;rdquo; (a recurring term in the document), but none were meaningful or led to the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/remove%20meow.png"
+width="1301"
+height="623"
+srcset="https://qiaonpc.github.io/post/kapas/remove%20meow_hu30fbf726317fcc616f317e1630c8eab7_320702_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/remove%20meow_hu30fbf726317fcc616f317e1630c8eab7_320702_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Remove MEOWS"
+class="gallery-image"
+data-flex-grow="208"
+data-flex-basis="501px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing VBA Macros&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempted to use tools like &lt;code>olevba&lt;/code> to analyze potential VBA macros.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>However, tools failed to parse the macros properly — possibly due to corruption or obfuscation.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decided to inspect the &lt;code>vbaProject.bin&lt;/code> file manually using the &lt;code>strings&lt;/code> command.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/olevba%20failed.png"
+width="1295"
+height="405"
+srcset="https://qiaonpc.github.io/post/kapas/olevba%20failed_hu7800c2e6b63b3fc389b9de1388c99188_357960_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/olevba%20failed_hu7800c2e6b63b3fc389b9de1388c99188_357960_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="OLEVBA Failed"
+class="gallery-image"
+data-flex-grow="319"
+data-flex-basis="767px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/decided%20to%20strings.png"
+width="1307"
+height="457"
+srcset="https://qiaonpc.github.io/post/kapas/decided%20to%20strings_hub9ab66ae034dc5d83bfcc0ac7db592fa_215220_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/decided%20to%20strings_hub9ab66ae034dc5d83bfcc0ac7db592fa_215220_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decided to Strings"
+class="gallery-image"
+data-flex-grow="285"
+data-flex-basis="686px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Discovering Obfuscated Payload&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Within the strings output, noticed several cryptography-related keywords (e.g., AES), but none led to useful results.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found a suspicious, compact string that resembled Brainfuck code.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/found%20crypto.png"
+width="951"
+height="663"
+srcset="https://qiaonpc.github.io/post/kapas/found%20crypto_hue34b1956da00975c9e05bbba8a4b3b6b_378401_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/found%20crypto_hue34b1956da00975c9e05bbba8a4b3b6b_378401_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Crypto"
+class="gallery-image"
+data-flex-grow="143"
+data-flex-basis="344px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/found%20possible%20brainfuck.png"
+width="945"
+height="81"
+srcset="https://qiaonpc.github.io/post/kapas/found%20possible%20brainfuck_hubeb118737051749d6f7addc059f9f71b_49105_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/found%20possible%20brainfuck_hubeb118737051749d6f7addc059f9f71b_49105_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found Brainfuck"
+class="gallery-image"
+data-flex-grow="1166"
+data-flex-basis="2800px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Brainfuck Payload&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Confirmed the string was valid Brainfuck code.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used an online Brainfuck interpreter to decode the payload.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The decoded output revealed the flag in plaintext.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/confirmed%20brainfuck.png"
+width="943"
+height="454"
+srcset="https://qiaonpc.github.io/post/kapas/confirmed%20brainfuck_hu8d142071c3f4917b9d09276f9e664b79_205981_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/confirmed%20brainfuck_hu8d142071c3f4917b9d09276f9e664b79_205981_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Confirmed Brainfuck"
+class="gallery-image"
+data-flex-grow="207"
+data-flex-basis="498px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/kapas/flag.png"
+width="882"
+height="502"
+srcset="https://qiaonpc.github.io/post/kapas/flag_hu8a0bc605eac0ff693e2e83ba3fbd5f67_181546_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/kapas/flag_hu8a0bc605eac0ff693e2e83ba3fbd5f67_181546_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{m4l1c10us_d0cx}&lt;/p></description></item><item><title>Phantom Protocol I</title><link>https://qiaonpc.github.io/post/phantom-protocol-i/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/phantom-protocol-i/</guid><description>&lt;h1 id="phantom-protocol-i-ctf-challenge-writeup">Phantom Protocol I CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Phantom Protocol I&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify the WebSocket endpoint that the attacker connected to by analyzing network traffic.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Phantom Protocol I&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This is the first challenge in the &amp;ldquo;Phantom Protocol&amp;rdquo; series.&lt;/li>
+&lt;li>The challenge requires identifying the WebSocket endpoint used by an attacker to initiate communication.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Network Traffic&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Loaded the provided &lt;code>.pcap&lt;/code> file into Wireshark for analysis.&lt;/li>
+&lt;li>Filtered the traffic using the WebSocket protocol (&lt;code>websocket&lt;/code>) to isolate relevant packets.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying IP Addresses&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Observed multiple WebSocket handshake packets and ongoing connections.&lt;/li>
+&lt;li>By examining the IP headers and context of the WebSocket traffic, determined that the victim’s IP address was &lt;code>192.168.244.132&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Determining the Attacker&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Based on the direction and initiation of the WebSocket connection, identified &lt;code>192.168.244.129&lt;/code> as the attacker&amp;rsquo;s IP address.&lt;/li>
+&lt;li>The connection was established on port &lt;code>39518&lt;/code>, with the endpoint being &lt;code>/ws&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Constructing the Endpoint&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Combined the IP, port, and path to form the WebSocket URL:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ws://192.168.244.129:39518/ws
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/phantom-protocol-i/explanation.png"
+width="1048"
+height="561"
+srcset="https://qiaonpc.github.io/post/phantom-protocol-i/explanation_hu96eab3e4c6ce4d7fe18aaf2a3ee8b6ff_389385_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/phantom-protocol-i/explanation_hu96eab3e4c6ce4d7fe18aaf2a3ee8b6ff_389385_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Explanation"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="448px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{ws://192.168.244.129:39518/ws}&lt;/p></description></item><item><title>Phantom Protocol II</title><link>https://qiaonpc.github.io/post/phantom-protocol-ii/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/phantom-protocol-ii/</guid><description>&lt;h1 id="phantom-protocol-ii-ctf-challenge-writeup">Phantom Protocol II CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Phantom Protocol II&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Extract the credentials used by the attacker to successfully authenticate on the server via WebSocket.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Phantom Protocol II&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This is the second challenge in the &amp;ldquo;Phantom Protocol&amp;rdquo; series.&lt;/li>
+&lt;li>The goal is to identify the credentials used by the attacker to log into the server via a WebSocket connection.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>PCAP Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Trace and focus on those that involve WebSocket handshakes and data exchanges.&lt;/li>
+&lt;li>Observed multiple attempts where the attacker sends base64-encoded credentials to the server.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying the Successful Login&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Carefully reviewed each encoded login attempt within the WebSocket data.&lt;/li>
+&lt;li>Noticed that most of them received a failure response from the server.&lt;/li>
+&lt;li>Eventually found one request that did not trigger a rejection or error, indicating a successful authentication.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Credentials&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extracted the base64 string from the successful authentication attempt.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoded it to reveal the plaintext credentials:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">admin:P@ssw0rd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/phantom-protocol-ii/explanation.png"
+width="773"
+height="222"
+srcset="https://qiaonpc.github.io/post/phantom-protocol-ii/explanation_hue3af4421d89fe153b2eddacce5c5dec7_68832_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/phantom-protocol-ii/explanation_hue3af4421d89fe153b2eddacce5c5dec7_68832_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Explanation"
+class="gallery-image"
+data-flex-grow="348"
+data-flex-basis="835px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{admin:P@ssw0rd}&lt;/p></description></item><item><title>Phantom Protocol III</title><link>https://qiaonpc.github.io/post/phantom-protocol-iii/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/phantom-protocol-iii/</guid><description>&lt;h1 id="phantom-protocol-iii-ctf-challenge-writeup">Phantom Protocol III CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Phantom Protocol III&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify and extract a base64-encoded command hidden in WebSocket traffic that reveals the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Phantom Protocol III&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Context&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This is the third challenge in the &amp;ldquo;Phantom Protocol&amp;rdquo; series.&lt;/li>
+&lt;li>The goal is to locate and decode a suspicious command transmitted via WebSocket that contains the flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Spotting Suspicious Activity&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Among several routine interactions, noticed a particular base64 string being sent in one of the WebSocket messages.&lt;/li>
+&lt;li>This payload stood out due to its formatting and context, appearing as a command being executed remotely.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Payload&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Copied the base64 string and decoded it using a base64 decoder.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The decoded result revealed a readable plaintext string that included the flag:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">netsa{w3b_s0ck3t_f0rens1c_p4ck37}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/post/phantom-protocol-iii/explanation.png"
+width="778"
+height="616"
+srcset="https://qiaonpc.github.io/post/phantom-protocol-iii/explanation_hub1c0f73e88c24e9931bb302c2c1916e6_152132_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/phantom-protocol-iii/explanation_hub1c0f73e88c24e9931bb302c2c1916e6_152132_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Explanation"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="303px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/phantom-protocol-iii/Flag.png"
+width="793"
+height="399"
+srcset="https://qiaonpc.github.io/post/phantom-protocol-iii/Flag_hu6f8a205cb6972ae37d500b76476f524d_36815_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/phantom-protocol-iii/Flag_hu6f8a205cb6972ae37d500b76476f524d_36815_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="198"
+data-flex-basis="476px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{w3b_s0ck3t_f0rens1c_p4ck37}&lt;/p></description></item><item><title>XorisEzy</title><link>https://qiaonpc.github.io/post/xorisezy/</link><pubDate>Mon, 26 May 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/xorisezy/</guid><description>&lt;h1 id="xorisezy-ctf-challenge-writeup">XorisEzy CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: XorisEzy&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Web&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify and exploit a SQL injection vulnerability in a user search feature, reverse the password obfuscation method, and retrieve the flag by logging in as the administrator.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;XorisEzy&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Exploring the Application&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After registering and logging into the web application, noticed a search functionality to look up user accounts.&lt;/li>
+&lt;li>Suspected this search feature might be vulnerable to either IDOR or SQL injection based on its behavior and error responses.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Testing for SQL Injection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Inputting a single quote (&lt;code>'&lt;/code>) into the search box triggered an SQL error message.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This confirmed that the backend was not sanitizing user input, indicating a SQL injection vulnerability.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/xorisezy/sql%20error.png"
+width="983"
+height="308"
+srcset="https://qiaonpc.github.io/post/xorisezy/sql%20error_hu59464c0a6a5d785bdf72fdc741a037dd_125623_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/xorisezy/sql%20error_hu59464c0a6a5d785bdf72fdc741a037dd_125623_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="SQL Error"
+class="gallery-image"
+data-flex-grow="319"
+data-flex-basis="765px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploiting the Vulnerability&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Crafted several payloads to enumerate the database, focusing on dumping data from the &lt;code>information_schema.tables&lt;/code> and related metadata.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Eventually retrieved usernames and their associated &amp;lsquo;hashed&amp;rsquo; passwords.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/xorisezy/dump%20information%20schema.png"
+width="977"
+height="514"
+srcset="https://qiaonpc.github.io/post/xorisezy/dump%20information%20schema_hu3d1bd2a094fea081cc5e20a018c6097a_311874_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/xorisezy/dump%20information%20schema_hu3d1bd2a094fea081cc5e20a018c6097a_311874_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Dump Information Schema"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="456px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Investigating the Password Hashing&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Noticed that passwords were obfuscated using a simple method — likely XOR.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Registered a test account with a known password and retrieved the obfuscated version to reverse-engineer the XOR key.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered that the key used for regular accounts was &lt;code>KeyForX&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/xorisezy/find%20xor%20key.png"
+width="955"
+height="447"
+srcset="https://qiaonpc.github.io/post/xorisezy/find%20xor%20key_hu0db00a1d7b1b730c30fa263eb86d9d40_137820_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/xorisezy/find%20xor%20key_hu0db00a1d7b1b730c30fa263eb86d9d40_137820_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Fnd XOR Key"
+class="gallery-image"
+data-flex-grow="213"
+data-flex-basis="512px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Bypassing XOR Obfuscation for Admin&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Tried to decode the administrator&amp;rsquo;s password using the same XOR key but failed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After extensive trial and error, hypothesized the key might be a variation of &lt;code>KeyForX&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Incrementally tested longer variants until &lt;code>KeyForXor&lt;/code> correctly decoded the admin password.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/xorisezy/xor%20key%20fail.png"
+width="953"
+height="464"
+srcset="https://qiaonpc.github.io/post/xorisezy/xor%20key%20fail_huac79d6032435fe5a5b4b62dd4c2c863a_144744_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/xorisezy/xor%20key%20fail_huac79d6032435fe5a5b4b62dd4c2c863a_144744_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="XOR Key Failed"
+class="gallery-image"
+data-flex-grow="205"
+data-flex-basis="492px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/xorisezy/guess%20xor%20key.png"
+width="944"
+height="462"
+srcset="https://qiaonpc.github.io/post/xorisezy/guess%20xor%20key_hu0a24c456adef5555c59b76011dad4cc3_135890_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/xorisezy/guess%20xor%20key_hu0a24c456adef5555c59b76011dad4cc3_135890_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Guess Key"
+class="gallery-image"
+data-flex-grow="204"
+data-flex-basis="490px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Logging in as Admin&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used the recovered admin credentials to log in.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Upon successful login, the application revealed the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/xorisezy/flag.png"
+width="818"
+height="187"
+srcset="https://qiaonpc.github.io/post/xorisezy/flag_hua97eab31d2a4e3caab7699cc44e3dbfe_52520_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/xorisezy/flag_hua97eab31d2a4e3caab7699cc44e3dbfe_52520_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="437"
+data-flex-basis="1049px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>netsa{X0rI$@wes0mE}&lt;/p></description></item></channel></rss>

@@ -1,0 +1,412 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Analyze the finals artifacts to reverse engineer a .NET malware chain, decrypt C2-delivered DLL payloads, and recover the flag."><title>finals</title>
+<link rel=canonical href=https://qiaonpc.github.io/post/finals/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="finals"><meta property='og:description' content="Analyze the finals artifacts to reverse engineer a .NET malware chain, decrypt C2-delivered DLL payloads, and recover the flag."><meta property='og:url' content='https://qiaonpc.github.io/post/finals/'><meta property='og:site_name' content><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Reverse Engineering'><meta property='article:published_time' content='2025-12-21T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-21T00:00:00+00:00'><meta name=twitter:title content="finals"><meta name=twitter:description content="Analyze the finals artifacts to reverse engineer a .NET malware chain, decrypt C2-delivered DLL payloads, and recover the flag."><link rel="shortcut icon" href=/avatar.jpeg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu3941651df2f1975cfd87dfe8c4afb297_324250_300x0_resize_q75_box.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🐱</span></figure><div class=site-meta><h1 class=site-name><a href=/></a></h1><h2 class=site-description>加油努力，大便要用力，大不出来没关系，至少放个屁</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#challenge-information>Challenge Information</a></li><li><a href=#solution>Solution</a><ol><li><a href=#1-finals-format-overview>1. <strong>Finals Format Overview</strong></a></li><li><a href=#2-scope-of-this-writeup>2. <strong>Scope of This Writeup</strong></a></li><li><a href=#3-malware-chain-summary>3. <strong>Malware Chain Summary</strong></a></li><li><a href=#4-explorerexe-section-net-reactor-protection>4. <strong>Explorer.exe Section: .NET Reactor Protection</strong></a></li><li><a href=#5-c2-address-and-crypto-basics>5. <strong>C2 Address and Crypto Basics</strong></a></li><li><a href=#6-port-443-behavior>6. <strong>Port 443 Behavior</strong></a></li><li><a href=#7-c2-endpoints>7. <strong>C2 Endpoints</strong></a></li><li><a href=#8-port-7219-connection>8. <strong>Port 7219 Connection</strong></a></li><li><a href=#9-hardcoded-aes-key-and-iv-names>9. <strong>Hardcoded AES Key and IV Names</strong></a></li><li><a href=#10-dll-transfer-protocol>10. <strong>DLL Transfer Protocol</strong></a></li><li><a href=#11-payload-decryption-and-loading>11. <strong>Payload Decryption and Loading</strong></a></li><li><a href=#12-payloads-on-the-7219-session>12. <strong>Payloads on the 7219 Session</strong></a></li><li><a href=#13-extracting-dlls-from-the-pcap>13. <strong>Extracting DLLs from the PCAP</strong></a></li><li><a href=#14-payload-responsibilities>14. <strong>Payload Responsibilities</strong></a></li><li><a href=#15-reigeldll-section-initial-look>15. <strong>Reigel.dll Section: Initial Look</strong></a></li><li><a href=#16-ransomware-file-walk-and-filters>16. <strong>Ransomware File Walk and Filters</strong></a></li><li><a href=#17-hybrid-rsa--aes-scheme>17. <strong>Hybrid RSA + AES Scheme</strong></a></li><li><a href=#18-ransom-note-drop>18. <strong>Ransom Note Drop</strong></a></li><li><a href=#19-vulnerable-c2-section-endpoint-check>19. <strong>Vulnerable C2 Section: Endpoint Check</strong></a></li><li><a href=#20-endpoint-brute-force-findings>20. <strong>Endpoint Brute Force Findings</strong></a></li><li><a href=#21-sql-injection-on-victim>21. <strong>SQL Injection on /victim</strong></a></li><li><a href=#22-dumping-the-database>22. <strong>Dumping the Database</strong></a></li><li><a href=#23-victims-table-agent-id>23. <strong>Victims Table Agent ID</strong></a></li><li><a href=#24-agents-table-keys>24. <strong>Agents Table Keys</strong></a></li><li><a href=#25-decryption-script-for-anon-files>25. <strong>Decryption Script for .anon Files</strong></a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/nexsec-2025/ style=background-color:#0177b8;color:#fff>NEXSEC 2025
+</a><a href=/categories/ctf-writeup/ style=background-color:#2a9d8f;color:#fff>CTF Writeup</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/finals/>finals</a></h2><h3 class=article-subtitle>Analyze the finals artifacts to reverse engineer a .NET malware chain, decrypt C2-delivered DLL payloads, and recover the flag.</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Dec 21, 2025</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>8 minute read</time></div></footer></div></header><section class=article-content><h1 id=finals>finals</h1><h2 id=challenge-information>Challenge Information</h2><ul><li><strong>Name</strong>: finals</li><li><strong>Points</strong>: 10</li><li><strong>Category</strong>: Reverse Engineering</li><li><strong>Objective</strong>: Analyze the finals artifacts to reverse engineer a .NET malware chain, decrypt C2-delivered DLL payloads, and recover the flag.</li></ul><h2 id=solution>Solution</h2><h3 id=1-finals-format-overview>1. <strong>Finals Format Overview</strong></h3><ul><li>The finals format is new, and there are no flags provided at the start.</li><li>You are given a set of artifacts to analyze for IOCs and related details.</li><li>No questions are provided initially, just the team and the artifact set.</li><li>One hour before the CTF ends, the questions are released.</li><li>It feels like blackbox forensics where you really have to do threat intelligence work.</li></ul><h3 id=2-scope-of-this-writeup>2. <strong>Scope of This Writeup</strong></h3><ul><li>This writeup focuses only on the reverse engineering part because that was the most interesting section.</li></ul><h3 id=3-malware-chain-summary>3. <strong>Malware Chain Summary</strong></h3><ul><li>The chain starts with a malicious DOCX file delivered by email.</li><li>Opening the DOCX fetches a macro file from GitHub and runs it.</li><li>The macro constructs <code>explorer.exe</code> and places it at <code>C:\Users\Public\explorer.exe</code>.</li></ul><h3 id=4-explorerexe-section-net-reactor-protection>4. <strong>Explorer.exe Section: .NET Reactor Protection</strong></h3><ul><li><code>Explorer.exe</code> is a .NET binary intentionally protected by Eziriz .NET Reactor to make reversing harder.</li><li>The main functionality lives in <code>NetworkDiagnostics.dll</code>.</li></ul><h3 id=5-c2-address-and-crypto-basics>5. <strong>C2 Address and Crypto Basics</strong></h3><ul><li><p>The C2 server IP address and port 443 were identified.</p></li><li><p>The program uses AES in CBC mode with a hardcoded key and IV, which lets us decrypt parts of its behavior.</p><p><img src=/post/finals/5.1.png width=493 height=219 srcset="/post/finals/5.1_hu95ae3a508a3bbe262702a250b5c90ead_15919_480x0_resize_box_3.png 480w, /post/finals/5.1_hu95ae3a508a3bbe262702a250b5c90ead_15919_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 5" class=gallery-image data-flex-grow=225 data-flex-basis=540px></p></li></ul><h3 id=6-port-443-behavior>6. <strong>Port 443 Behavior</strong></h3><ul><li>Port 443 is used for beaconing, tasking (get commands), and reporting results.</li><li>This is encrypted C2 messaging disguised as HTTPS, and the TLS layer means HTTP paths/body are not readable from the PCAP.</li></ul><h3 id=7-c2-endpoints>7. <strong>C2 Endpoints</strong></h3><ul><li>The C2 server exposes several endpoints.<ul><li><code>/victim</code>: Register the user’s unique ID.</li><li><code>/command</code>: Fetch attacker tasking.</li><li><code>/result</code>: Send execution output back.</li><li><code>/heart</code>: Send heartbeat.</li><li><code>/file</code>: Upload files.</li></ul></li></ul><h3 id=8-port-7219-connection>8. <strong>Port 7219 Connection</strong></h3><ul><li>Alongside the port 443 traffic, there is a separate connection to port 7219.</li><li>This TCP connection is used to send encrypted DLL payloads.</li></ul><h3 id=9-hardcoded-aes-key-and-iv-names>9. <strong>Hardcoded AES Key and IV Names</strong></h3><ul><li><p>The AES key and IV used to decrypt payloads are hardcoded in the binary as Base64 strings.</p><ul><li><code>ballandchain</code> holds the AES key (Base64).</li><li><code>anchovies</code> holds the AES IV (Base64).</li></ul><p><img src=/post/finals/9.1.png width=1343 height=161 srcset="/post/finals/9.1_hu7aee983dfa48f0fdae2abb6aaf7421fc_20299_480x0_resize_box_3.png 480w, /post/finals/9.1_hu7aee983dfa48f0fdae2abb6aaf7421fc_20299_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 9" class=gallery-image data-flex-grow=834 data-flex-basis=2001px></p><p><img src=/post/finals/9.2.png width=1541 height=450 srcset="/post/finals/9.2_hu58bf506e6a647d4af4ec9e198fbdf75a_102414_480x0_resize_box_3.png 480w, /post/finals/9.2_hu58bf506e6a647d4af4ec9e198fbdf75a_102414_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 9" class=gallery-image data-flex-grow=342 data-flex-basis=821px></p></li></ul><h3 id=10-dll-transfer-protocol>10. <strong>DLL Transfer Protocol</strong></h3><ul><li>The DLLs are transferred using a simple request/response structure.</li><li>The client sends:<ul><li>4 bytes: Request payload length.</li><li>N bytes: How many bytes the client wants to receive.</li></ul></li><li>The server sends:<ul><li>4 bytes: Requested payload length.</li><li>N bytes: Encrypted payload bytes.</li></ul></li></ul><h3 id=11-payload-decryption-and-loading>11. <strong>Payload Decryption and Loading</strong></h3><ul><li>The payload bytes are AES-CBC with PKCS7 padding; after reading N bytes, the client decrypts with the hardcoded AES key/IV and loads the result as a .NET DLL.</li></ul><h3 id=12-payloads-on-the-7219-session>12. <strong>Payloads on the 7219 Session</strong></h3><ul><li>The 7219 session is used to send two files.<ul><li><code>Ertrag.dll</code>.</li><li><code>Riegel.dll</code>.</li></ul></li></ul><h3 id=13-extracting-dlls-from-the-pcap>13. <strong>Extracting DLLs from the PCAP</strong></h3><ul><li>After dumping the payloads from the PCAP, two DLLs were extracted:<ul><li>one for exfiltration and one for encrypting files on disk.</li></ul></li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=ch>#!/usr/bin/env python3</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>struct</span><span class=o>,</span> <span class=nn>ipaddress</span><span class=o>,</span> <span class=nn>pathlib</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>cryptography.hazmat.primitives.ciphers</span> <span class=kn>import</span> <span class=n>Cipher</span><span class=p>,</span> <span class=n>algorithms</span><span class=p>,</span> <span class=n>modes</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>cryptography.hazmat.primitives</span> <span class=kn>import</span> <span class=n>padding</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>base64</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>PCAP_IN</span> <span class=o>=</span> <span class=s2>&#34;FS-pcap.pcap&#34;</span>  <span class=c1># use editcap -F pcap FS-pcap.pcapng FS-pcap.pcap</span>
+</span></span><span class=line><span class=cl><span class=n>FLOWS</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=s2>&#34;209.97.175.18&#34;</span><span class=p>,</span> <span class=mi>7219</span><span class=p>,</span> <span class=s2>&#34;10.10.111.114&#34;</span><span class=p>,</span> <span class=mi>55311</span><span class=p>,</span> <span class=s2>&#34;artifacts/Ertrag.dll&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl>  <span class=p>(</span><span class=s2>&#34;209.97.175.18&#34;</span><span class=p>,</span> <span class=mi>7219</span><span class=p>,</span> <span class=s2>&#34;10.10.111.114&#34;</span><span class=p>,</span> <span class=mi>55339</span><span class=p>,</span> <span class=s2>&#34;artifacts/Riegel.dll&#34;</span><span class=p>),</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>KEY</span> <span class=o>=</span> <span class=n>base64</span><span class=o>.</span><span class=n>b64decode</span><span class=p>(</span><span class=s2>&#34;wWrx+62b7++4exaVvcwZRy3QNnd+KBGuEZcW46Ho6E4=&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>IV</span> <span class=o>=</span> <span class=n>base64</span><span class=o>.</span><span class=n>b64decode</span><span class=p>(</span><span class=s2>&#34;ERQOOQ4Cz2cyehEUrqfhLA==&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>read_pcap</span><span class=p>(</span><span class=n>path</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>  <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>path</span><span class=p>,</span> <span class=s2>&#34;rb&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>      <span class=n>gh</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=n>read</span><span class=p>(</span><span class=mi>24</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>gh</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>24</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>raise</span> <span class=ne>SystemExit</span><span class=p>(</span><span class=s2>&#34;Bad pcap header&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=n>endian</span> <span class=o>=</span> <span class=s2>&#34;&lt;&#34;</span> <span class=k>if</span> <span class=n>gh</span><span class=p>[:</span><span class=mi>4</span><span class=p>]</span> <span class=o>==</span> <span class=sa>b</span><span class=s2>&#34;</span><span class=se>\xd4\xc3\xb2\xa1</span><span class=s2>&#34;</span> <span class=k>else</span> <span class=s2>&#34;&gt;&#34;</span>
+</span></span><span class=line><span class=cl>      <span class=k>while</span> <span class=kc>True</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=n>hdr</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=n>read</span><span class=p>(</span><span class=mi>16</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>hdr</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>16</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>              <span class=k>break</span>
+</span></span><span class=line><span class=cl>          <span class=n>ts_sec</span><span class=p>,</span> <span class=n>ts_usec</span><span class=p>,</span> <span class=n>incl_len</span><span class=p>,</span> <span class=n>orig_len</span> <span class=o>=</span> <span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=n>endian</span> <span class=o>+</span> <span class=s2>&#34;IIII&#34;</span><span class=p>,</span> <span class=n>hdr</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=n>data</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=n>read</span><span class=p>(</span><span class=n>incl_len</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=k>yield</span> <span class=n>data</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>assemble_flow</span><span class=p>(</span><span class=n>src</span><span class=p>,</span> <span class=n>sport</span><span class=p>,</span> <span class=n>dst</span><span class=p>,</span> <span class=n>dport</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>  <span class=n>segs</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=n>pkt</span> <span class=ow>in</span> <span class=n>read_pcap</span><span class=p>(</span><span class=n>PCAP_IN</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>pkt</span><span class=p>)</span> <span class=o>&lt;</span> <span class=mi>34</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>continue</span>
+</span></span><span class=line><span class=cl>      <span class=n>eth_type</span> <span class=o>=</span> <span class=nb>int</span><span class=o>.</span><span class=n>from_bytes</span><span class=p>(</span><span class=n>pkt</span><span class=p>[</span><span class=mi>12</span><span class=p>:</span><span class=mi>14</span><span class=p>],</span> <span class=s2>&#34;big&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=n>ip_off</span> <span class=o>=</span> <span class=mi>14</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=n>eth_type</span> <span class=o>==</span> <span class=mh>0x8100</span><span class=p>:</span>  <span class=c1># VLAN</span>
+</span></span><span class=line><span class=cl>          <span class=n>eth_type</span> <span class=o>=</span> <span class=nb>int</span><span class=o>.</span><span class=n>from_bytes</span><span class=p>(</span><span class=n>pkt</span><span class=p>[</span><span class=mi>16</span><span class=p>:</span><span class=mi>18</span><span class=p>],</span> <span class=s2>&#34;big&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>          <span class=n>ip_off</span> <span class=o>=</span> <span class=mi>18</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=n>eth_type</span> <span class=o>!=</span> <span class=mh>0x0800</span> <span class=ow>or</span> <span class=n>pkt</span><span class=p>[</span><span class=n>ip_off</span> <span class=o>+</span> <span class=mi>9</span><span class=p>]</span> <span class=o>!=</span> <span class=mi>6</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>continue</span>
+</span></span><span class=line><span class=cl>      <span class=n>ihl</span> <span class=o>=</span> <span class=p>(</span><span class=n>pkt</span><span class=p>[</span><span class=n>ip_off</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0x0F</span><span class=p>)</span> <span class=o>*</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>      <span class=n>tcp_off</span> <span class=o>=</span> <span class=n>ip_off</span> <span class=o>+</span> <span class=n>ihl</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>pkt</span><span class=p>)</span> <span class=o>&lt;</span> <span class=n>tcp_off</span> <span class=o>+</span> <span class=mi>20</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>continue</span>
+</span></span><span class=line><span class=cl>      <span class=n>sport2</span><span class=p>,</span> <span class=n>dport2</span><span class=p>,</span> <span class=n>seq</span> <span class=o>=</span> <span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s2>&#34;!HHI&#34;</span><span class=p>,</span> <span class=n>pkt</span><span class=p>[</span><span class=n>tcp_off</span><span class=p>:</span><span class=n>tcp_off</span> <span class=o>+</span> <span class=mi>8</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>      <span class=n>off</span> <span class=o>=</span> <span class=p>(</span><span class=n>pkt</span><span class=p>[</span><span class=n>tcp_off</span> <span class=o>+</span> <span class=mi>12</span><span class=p>]</span> <span class=o>&gt;&gt;</span> <span class=mi>4</span><span class=p>)</span> <span class=o>*</span> <span class=mi>4</span>
+</span></span><span class=line><span class=cl>      <span class=n>payload</span> <span class=o>=</span> <span class=n>pkt</span><span class=p>[</span><span class=n>tcp_off</span> <span class=o>+</span> <span class=n>off</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=ow>not</span> <span class=n>payload</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=k>continue</span>
+</span></span><span class=line><span class=cl>      <span class=n>sip</span> <span class=o>=</span> <span class=nb>str</span><span class=p>(</span><span class=n>ipaddress</span><span class=o>.</span><span class=n>IPv4Address</span><span class=p>(</span><span class=n>pkt</span><span class=p>[</span><span class=n>ip_off</span> <span class=o>+</span> <span class=mi>12</span><span class=p>:</span><span class=n>ip_off</span> <span class=o>+</span> <span class=mi>16</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>      <span class=n>dip</span> <span class=o>=</span> <span class=nb>str</span><span class=p>(</span><span class=n>ipaddress</span><span class=o>.</span><span class=n>IPv4Address</span><span class=p>(</span><span class=n>pkt</span><span class=p>[</span><span class=n>ip_off</span> <span class=o>+</span> <span class=mi>16</span><span class=p>:</span><span class=n>ip_off</span> <span class=o>+</span> <span class=mi>20</span><span class=p>]))</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span><span class=n>sip</span><span class=p>,</span> <span class=n>sport2</span><span class=p>,</span> <span class=n>dip</span><span class=p>,</span> <span class=n>dport2</span><span class=p>)</span> <span class=o>==</span> <span class=p>(</span><span class=n>src</span><span class=p>,</span> <span class=n>sport</span><span class=p>,</span> <span class=n>dst</span><span class=p>,</span> <span class=n>dport</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>          <span class=n>segs</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>seq</span><span class=p>,</span> <span class=n>payload</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=ow>not</span> <span class=n>segs</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>      <span class=k>raise</span> <span class=ne>SystemExit</span><span class=p>(</span><span class=s2>&#34;No segments found&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>base</span> <span class=o>=</span> <span class=nb>min</span><span class=p>(</span><span class=n>s</span> <span class=k>for</span> <span class=n>s</span><span class=p>,</span> <span class=n>_</span> <span class=ow>in</span> <span class=n>segs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>end</span> <span class=o>=</span> <span class=nb>max</span><span class=p>(</span><span class=n>s</span> <span class=o>+</span> <span class=nb>len</span><span class=p>(</span><span class=n>p</span><span class=p>)</span> <span class=k>for</span> <span class=n>s</span><span class=p>,</span> <span class=n>p</span> <span class=ow>in</span> <span class=n>segs</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>buf</span> <span class=o>=</span> <span class=nb>bytearray</span><span class=p>(</span><span class=n>end</span> <span class=o>-</span> <span class=n>base</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=n>seq</span><span class=p>,</span> <span class=n>p</span> <span class=ow>in</span> <span class=n>segs</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>      <span class=n>off</span> <span class=o>=</span> <span class=n>seq</span> <span class=o>-</span> <span class=n>base</span>
+</span></span><span class=line><span class=cl>      <span class=n>buf</span><span class=p>[</span><span class=n>off</span><span class=p>:</span><span class=n>off</span> <span class=o>+</span> <span class=nb>len</span><span class=p>(</span><span class=n>p</span><span class=p>)]</span> <span class=o>=</span> <span class=n>p</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nb>bytes</span><span class=p>(</span><span class=n>buf</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>decrypt_module</span><span class=p>(</span><span class=n>buf</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>  <span class=n>length</span> <span class=o>=</span> <span class=nb>int</span><span class=o>.</span><span class=n>from_bytes</span><span class=p>(</span><span class=n>buf</span><span class=p>[:</span><span class=mi>4</span><span class=p>],</span> <span class=s2>&#34;little&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>ct</span> <span class=o>=</span> <span class=n>buf</span><span class=p>[</span><span class=mi>4</span><span class=p>:</span><span class=mi>4</span> <span class=o>+</span> <span class=n>length</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>  <span class=n>cipher</span> <span class=o>=</span> <span class=n>Cipher</span><span class=p>(</span><span class=n>algorithms</span><span class=o>.</span><span class=n>AES</span><span class=p>(</span><span class=n>KEY</span><span class=p>),</span> <span class=n>modes</span><span class=o>.</span><span class=n>CBC</span><span class=p>(</span><span class=n>IV</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>  <span class=n>decryptor</span> <span class=o>=</span> <span class=n>cipher</span><span class=o>.</span><span class=n>decryptor</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=n>pt</span> <span class=o>=</span> <span class=n>decryptor</span><span class=o>.</span><span class=n>update</span><span class=p>(</span><span class=n>ct</span><span class=p>)</span> <span class=o>+</span> <span class=n>decryptor</span><span class=o>.</span><span class=n>finalize</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=n>unpad</span> <span class=o>=</span> <span class=n>padding</span><span class=o>.</span><span class=n>PKCS7</span><span class=p>(</span><span class=mi>128</span><span class=p>)</span><span class=o>.</span><span class=n>unpadder</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>unpad</span><span class=o>.</span><span class=n>update</span><span class=p>(</span><span class=n>pt</span><span class=p>)</span> <span class=o>+</span> <span class=n>unpad</span><span class=o>.</span><span class=n>finalize</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>  <span class=n>pathlib</span><span class=o>.</span><span class=n>Path</span><span class=p>(</span><span class=s2>&#34;artifacts&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>mkdir</span><span class=p>(</span><span class=n>exist_ok</span><span class=o>=</span><span class=kc>True</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=n>flow</span> <span class=ow>in</span> <span class=n>FLOWS</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>      <span class=n>src</span><span class=p>,</span> <span class=n>sport</span><span class=p>,</span> <span class=n>dst</span><span class=p>,</span> <span class=n>dport</span><span class=p>,</span> <span class=n>out_path</span> <span class=o>=</span> <span class=n>flow</span>
+</span></span><span class=line><span class=cl>      <span class=n>buf</span> <span class=o>=</span> <span class=n>assemble_flow</span><span class=p>(</span><span class=n>src</span><span class=p>,</span> <span class=n>sport</span><span class=p>,</span> <span class=n>dst</span><span class=p>,</span> <span class=n>dport</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=n>dll</span> <span class=o>=</span> <span class=n>decrypt_module</span><span class=p>(</span><span class=n>buf</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=n>pathlib</span><span class=o>.</span><span class=n>Path</span><span class=p>(</span><span class=n>out_path</span><span class=p>)</span><span class=o>.</span><span class=n>write_bytes</span><span class=p>(</span><span class=n>dll</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Wrote </span><span class=si>{</span><span class=n>out_path</span><span class=si>}</span><span class=s2> (</span><span class=si>{</span><span class=nb>len</span><span class=p>(</span><span class=n>dll</span><span class=p>)</span><span class=si>}</span><span class=s2> bytes)&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=14-payload-responsibilities>14. <strong>Payload Responsibilities</strong></h3><ul><li>Going through the payloads, <code>Reigel.dll</code> handles the ransomware on the FileServer.</li><li><code>Ertrag.dll</code> is responsible for exfiltrating files.</li></ul><h3 id=15-reigeldll-section-initial-look>15. <strong>Reigel.dll Section: Initial Look</strong></h3><ul><li>Next step was looking into <code>reigel.dll</code> itself.</li></ul><h3 id=16-ransomware-file-walk-and-filters>16. <strong>Ransomware File Walk and Filters</strong></h3><ul><li><p>The encryption routine recursively walks a directory and encrypts every file except certain extensions.</p><ul><li><code>.anon</code> files are already encrypted and skipped.</li><li><code>.dll</code>, <code>.exe</code>, <code>.ini</code>, <code>.elf</code> are explicitly ignored.</li></ul><p><img src=/post/finals/16.1.png width=1232 height=423 srcset="/post/finals/16.1_hu56de1299650f9070494f5991c76c91ca_58824_480x0_resize_box_3.png 480w, /post/finals/16.1_hu56de1299650f9070494f5991c76c91ca_58824_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 16" class=gallery-image data-flex-grow=291 data-flex-basis=699px></p></li></ul><h3 id=17-hybrid-rsa--aes-scheme>17. <strong>Hybrid RSA + AES Scheme</strong></h3><ul><li><p>The encryption uses hybrid RSA + AES; for each unencrypted file it follows a fixed sequence.</p></li><li><p>Generate a fresh AES-256 key.</p></li><li><p>Encrypt file bytes using AES-CBC with PKCS7 padding and an all-zero IV (16 bytes).</p></li><li><p>Encrypt the AES key using the provided RSA public key with PKCS#1 v1.5 padding.</p></li><li><p>Create output bytes = RSA_ENC_AES_KEY + AES_CIPHERTEXT.</p></li><li><p>The encrypted AES key sits at the file header and the encrypted file content follows it.</p></li><li><p>The file is written with the <code>.anon</code> extension.</p><p><img src=/post/finals/17.1.png width=1056 height=343 srcset="/post/finals/17.1_hu131988e091e5639bb3f4a87b4a3315f4_37595_480x0_resize_box_3.png 480w, /post/finals/17.1_hu131988e091e5639bb3f4a87b4a3315f4_37595_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 17" class=gallery-image data-flex-grow=307 data-flex-basis=738px></p></li></ul><h3 id=18-ransom-note-drop>18. <strong>Ransom Note Drop</strong></h3><ul><li><p>After the encryption process, a ransom note is dropped.</p><p><img src=/post/finals/18.1.png width=1237 height=252 srcset="/post/finals/18.1_hu6f434ca31e27d63dd239169b04dfa97e_19301_480x0_resize_box_3.png 480w, /post/finals/18.1_hu6f434ca31e27d63dd239169b04dfa97e_19301_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 18" class=gallery-image data-flex-grow=490 data-flex-basis=1178px></p></li></ul><h3 id=19-vulnerable-c2-section-endpoint-check>19. <strong>Vulnerable C2 Section: Endpoint Check</strong></h3><ul><li>Reviewing the C2 endpoints on <code>209.97.175.18</code>, only <code>/victim</code> is valid and the other endpoints do not exist.</li></ul><h3 id=20-endpoint-brute-force-findings>20. <strong>Endpoint Brute Force Findings</strong></h3><ul><li><p>Using <code>feroxbuster</code> to brute-force endpoints revealed more routes.</p><ul><li><code>/agent</code> requires login.</li><li><code>/console</code> requires a PIN for the Werkzeug console.</li><li><code>/generate</code> can generate a Flask token.</li><li><code>/keys</code> requires login.</li></ul><p><img src=/post/finals/20.1.png width=1437 height=324 srcset="/post/finals/20.1_hudf9af92a2dd243a248a423865ec7593f_187049_480x0_resize_box_3.png 480w, /post/finals/20.1_hudf9af92a2dd243a248a423865ec7593f_187049_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 20" class=gallery-image data-flex-grow=443 data-flex-basis=1064px></p></li></ul><h3 id=21-sql-injection-on-victim>21. <strong>SQL Injection on /victim</strong></h3><ul><li><p>The <code>/victim</code> endpoint appears vulnerable to SQL injection in the <code>uniqueID</code> parameter.</p><p><img src=/post/finals/21.1.png width=1457 height=718 srcset="/post/finals/21.1_hu90ea96ac0f7137e00a449f6e46726a62_133386_480x0_resize_box_3.png 480w, /post/finals/21.1_hu90ea96ac0f7137e00a449f6e46726a62_133386_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 21" class=gallery-image data-flex-grow=202 data-flex-basis=487px></p></li></ul><h3 id=22-dumping-the-database>22. <strong>Dumping the Database</strong></h3><ul><li><p>Using SQLMap, the database was dumped.</p><p><img src=/post/finals/22.1.png width=1435 height=849 srcset="/post/finals/22.1_hu56d455d664d667b5a27e5d401ee28bc1_380073_480x0_resize_box_3.png 480w, /post/finals/22.1_hu56d455d664d667b5a27e5d401ee28bc1_380073_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 22" class=gallery-image data-flex-grow=169 data-flex-basis=405px></p></li></ul><h3 id=23-victims-table-agent-id>23. <strong>Victims Table Agent ID</strong></h3><ul><li>In the <code>victims</code> table, the <code>unique_agentId</code> column for <code>itdadmin</code> has the value <code>c18dabd3-bd18-453e-ba11-ba51ef1d5120</code>.</li></ul><h3 id=24-agents-table-keys>24. <strong>Agents Table Keys</strong></h3><ul><li>In the <code>agents</code> table, the <code>agent_uniqueId</code> is present along with Base64-encoded blobs.</li><li>One blob is the public key and another is the private key.</li><li>After identifying the private key, it can be used to decrypt files and recover what was lost.</li></ul><h3 id=25-decryption-script-for-anon-files>25. <strong>Decryption Script for .anon Files</strong></h3><ul><li>A decryption script was crafted for all <code>.anon</code> files.</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>os</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>hashlib</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>Crypto.PublicKey</span> <span class=kn>import</span> <span class=n>RSA</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>Crypto.Cipher</span> <span class=kn>import</span> <span class=n>PKCS1_v1_5</span><span class=p>,</span> <span class=n>AES</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=c1># RSA PRIVATE KEY (PKCS#8)</span>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=n>PRIVATE_KEY_PEM</span> <span class=o>=</span> <span class=sa>b</span><span class=s2>&#34;&#34;&#34;-----BEGIN PRIVATE KEY-----
+</span></span></span><span class=line><span class=cl><span class=s2>MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDkO46CUMQh5w19
+</span></span></span><span class=line><span class=cl><span class=s2>RevmIeIuR52joaq5h/YQS6q3dwiUbpNZtPc7aUyt5krDYDTqNA7Gcb21mTebMAdk
+</span></span></span><span class=line><span class=cl><span class=s2>2HxadEPhUe1wEDPoWKWrkR59nqjPzewVuIVzLof5IZteeSM03ULRZuGTsm45fF4y
+</span></span></span><span class=line><span class=cl><span class=s2>HxiHPUmuIucmeg5GcUBbgvz1alHzehWeZESILQ2T+fVEfmP/oDQ/c2upwY32CwST
+</span></span></span><span class=line><span class=cl><span class=s2>7XaJsroYwNJ+Vsk83x94tZKHiYo85ZlOOUT0f3ECYoFBnraOrmeJLQ42TJFbUjrG
+</span></span></span><span class=line><span class=cl><span class=s2>In76YWH30vXy2AYFw61yFEBTMjCbBLB62dkkXJF/4uMcJWJUygH/cTfUCnuhfmvn
+</span></span></span><span class=line><span class=cl><span class=s2>hXCfbBRfAgMBAAECggEAAyQms/h0mprZfq3lr0csG8L0knn5JZCPfG3uLZQ/0/sp
+</span></span></span><span class=line><span class=cl><span class=s2>oARzmqe6XHJc+Q9r6wVIZsbN+5/eOg6RK3wnSf9rp8A+6lnuvPXrYc8fgk8at7F3
+</span></span></span><span class=line><span class=cl><span class=s2>3FyryYgMawthXg2AxIt/De7CkAvWpIfnq/ztk37ucq0cTVVEuQd6AUhuPtp1wkoX
+</span></span></span><span class=line><span class=cl><span class=s2>Nl07SdFRo3HP2vWTWlWMa/rKVk7BuDWQIVGeg8b2vfEVHZ6GZ1Tnj5KH2QvpKnba
+</span></span></span><span class=line><span class=cl><span class=s2>sXarCxZXTuCxVOXMattrKKfQbsOAKeSFKcd1wlKdQe+T+k+CfbNfC8DpVv5xTqBA
+</span></span></span><span class=line><span class=cl><span class=s2>98jjiMf51dd0sXnZO+3sCCTuq8QuqDhdWeajzpK7AQKBgQDsyk1OGHVt42nszE6k
+</span></span></span><span class=line><span class=cl><span class=s2>ErHqeOI5Ruj8waMoAepgGq7y2RUp67ETEfkkWxLHeKC/YuL0QnxdWr5F83TH3L8z
+</span></span></span><span class=line><span class=cl><span class=s2>s30Y8m+OJifKiwDyL55wdeL2n+eMERY91YO+JYJDBnpaNGRXBsJlLlm/9igQQdHO
+</span></span></span><span class=line><span class=cl><span class=s2>Tt9pQADZ124pzODfw7eYUSEOHwKBgQD2v4dzlZNzMrSPWI+XFPn+akR6KcXT6R1n
+</span></span></span><span class=line><span class=cl><span class=s2>9Nmys9h9xIuSPHhLfok0T4+ojY8MBbZBDZ8+hFwErm6EJz+idRDynLU+nzRoMTAP
+</span></span></span><span class=line><span class=cl><span class=s2>vYFZgYy6p7fItQ9Rx0caHprC3GO+QdruKTSYYf/OLxxNw3e0cN6wAHFFYWf6TTrm
+</span></span></span><span class=line><span class=cl><span class=s2>4oeKw6OxwQKBgQDaSLgw+Q0vywf32nPYfr9ythNd18eqUdtVY0arZ43Fo2cGKRco
+</span></span></span><span class=line><span class=cl><span class=s2>zFXPNQG/zqzpIYC0yaGZ8bAcDg2mvRGp2JnG6J77/KKL7c5mdI1rgNFEpy4uCgZl
+</span></span></span><span class=line><span class=cl><span class=s2>5DG5lRxbK1qZU1j4fOuxmKP1+Tb/nZ2KwVzkyrK+HwGYGR1oSiUyjf+Z4wKBgFQE
+</span></span></span><span class=line><span class=cl><span class=s2>NS/TD2jbLAXfJs1PtCu/rV9XV+fm6T9bbMDfYei5ArkhY+h4xmkMaiL/SGTUkREn
+</span></span></span><span class=line><span class=cl><span class=s2>fUCBOv/REQpofs9nQwUI/OG8vdB4ZyAE68U5SlzH/NkXZYb37qrjHtkYx9GhhNUx
+</span></span></span><span class=line><span class=cl><span class=s2>LJpyS/K9scp8swa6o+iTzf3Mw+XDZDn3iiViphtBAoGAcgCNpMWSmHMUsToDkJOJ
+</span></span></span><span class=line><span class=cl><span class=s2>wzJq2bWnJ5fJoX360D9vRQyU58D4176X92+ljyeoYcGUMMgI7zz6Aff9T1/3dvaY
+</span></span></span><span class=line><span class=cl><span class=s2>lezJa0jmLZ7cUWERmuyPopLChbJitt+caUqwbHMKiR0c2yLe5XaQK0qToEQCtI+S
+</span></span></span><span class=line><span class=cl><span class=s2>JS3owTjTHA3h8bbSF7cKHg4=
+</span></span></span><span class=line><span class=cl><span class=s2>-----END PRIVATE KEY-----&#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=c1># ROOT DIRECTORY</span>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=n>ROOT_DIR</span> <span class=o>=</span> <span class=sa>r</span><span class=s2>&#34;C:\Users\Jeremy Phang Kah Chu\Downloads\Documents&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=c1># CRYPTO SETUP</span>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=n>rsa_key</span> <span class=o>=</span> <span class=n>RSA</span><span class=o>.</span><span class=n>import_key</span><span class=p>(</span><span class=n>PRIVATE_KEY_PEM</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>rsa_cipher</span> <span class=o>=</span> <span class=n>PKCS1_v1_5</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=n>rsa_key</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>recovered</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>failed</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=c1># WALK + DECRYPT</span>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>root</span><span class=p>,</span> <span class=n>_</span><span class=p>,</span> <span class=n>files</span> <span class=ow>in</span> <span class=n>os</span><span class=o>.</span><span class=n>walk</span><span class=p>(</span><span class=n>ROOT_DIR</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>name</span> <span class=ow>in</span> <span class=n>files</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=ow>not</span> <span class=n>name</span><span class=o>.</span><span class=n>endswith</span><span class=p>(</span><span class=s2>&#34;.anon&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=k>continue</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>anon_path</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>root</span><span class=p>,</span> <span class=n>name</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>out_path</span> <span class=o>=</span> <span class=n>anon_path</span><span class=p>[:</span><span class=o>-</span><span class=mi>5</span><span class=p>]</span>  <span class=c1># Remove .anon extension</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>anon_path</span><span class=p>,</span> <span class=s2>&#34;rb&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>data</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=n>read</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1># The file structure is:</span>
+</span></span><span class=line><span class=cl>            <span class=c1># [256 bytes RSA-encrypted AES key] + [remaining bytes: AES-encrypted file]</span>
+</span></span><span class=line><span class=cl>            <span class=n>rsa_blob</span> <span class=o>=</span> <span class=n>data</span><span class=p>[:</span><span class=mi>256</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>aes_blob</span> <span class=o>=</span> <span class=n>data</span><span class=p>[</span><span class=mi>256</span><span class=p>:]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1># RSA decrypt the AES key (returns raw 32-byte AES key)</span>
+</span></span><span class=line><span class=cl>            <span class=n>aes_key</span> <span class=o>=</span> <span class=n>rsa_cipher</span><span class=o>.</span><span class=n>decrypt</span><span class=p>(</span><span class=n>rsa_blob</span><span class=p>,</span> <span class=kc>None</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=ow>not</span> <span class=n>aes_key</span> <span class=ow>or</span> <span class=nb>len</span><span class=p>(</span><span class=n>aes_key</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>32</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;RSA decryption failed or invalid key length: </span><span class=si>{</span><span class=nb>len</span><span class=p>(</span><span class=n>aes_key</span><span class=p>)</span> <span class=k>if</span> <span class=n>aes_key</span> <span class=k>else</span> <span class=mi>0</span><span class=si>}</span><span class=s2> bytes&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1># AES decryption with zero IV and CBC mode</span>
+</span></span><span class=line><span class=cl>            <span class=n>iv</span> <span class=o>=</span> <span class=nb>bytes</span><span class=p>(</span><span class=mi>16</span><span class=p>)</span>  <span class=c1># Zero IV (16 bytes for AES)</span>
+</span></span><span class=line><span class=cl>            <span class=n>cipher</span> <span class=o>=</span> <span class=n>AES</span><span class=o>.</span><span class=n>new</span><span class=p>(</span><span class=n>aes_key</span><span class=p>,</span> <span class=n>AES</span><span class=o>.</span><span class=n>MODE_CBC</span><span class=p>,</span> <span class=n>iv</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>plaintext</span> <span class=o>=</span> <span class=n>cipher</span><span class=o>.</span><span class=n>decrypt</span><span class=p>(</span><span class=n>aes_blob</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1># Remove PKCS7 padding</span>
+</span></span><span class=line><span class=cl>            <span class=n>padding_length</span> <span class=o>=</span> <span class=n>plaintext</span><span class=p>[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>padding_length</span> <span class=o>&gt;</span> <span class=mi>16</span> <span class=ow>or</span> <span class=n>padding_length</span> <span class=o>&lt;</span> <span class=mi>1</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>raise</span> <span class=ne>ValueError</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Invalid padding length: </span><span class=si>{</span><span class=n>padding_length</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>plaintext</span> <span class=o>=</span> <span class=n>plaintext</span><span class=p>[:</span><span class=o>-</span><span class=n>padding_length</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1># Calculate SHA256 hash of decrypted content</span>
+</span></span><span class=line><span class=cl>            <span class=n>sha256_hash</span> <span class=o>=</span> <span class=n>hashlib</span><span class=o>.</span><span class=n>sha256</span><span class=p>(</span><span class=n>plaintext</span><span class=p>)</span><span class=o>.</span><span class=n>hexdigest</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=c1># Write decrypted file</span>
+</span></span><span class=line><span class=cl>            <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>out_path</span><span class=p>,</span> <span class=s2>&#34;wb&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>f</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>plaintext</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;[+] Decrypted: </span><span class=si>{</span><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=n>out_path</span><span class=p>)</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;    SHA256: </span><span class=si>{</span><span class=n>sha256_hash</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;    Path: </span><span class=si>{</span><span class=n>out_path</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=n>recovered</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>except</span> <span class=ne>Exception</span> <span class=k>as</span> <span class=n>e</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;[!] Failed: </span><span class=si>{</span><span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=n>anon_path</span><span class=p>)</span><span class=si>}</span><span class=s2> (</span><span class=si>{</span><span class=n>e</span><span class=si>}</span><span class=s2>)&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;    Path: </span><span class=si>{</span><span class=n>anon_path</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>            <span class=n>failed</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=c1># SUMMARY</span>
+</span></span><span class=line><span class=cl><span class=c1># ============================================================</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>=== SUMMARY ===&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Recovered : </span><span class=si>{</span><span class=n>recovered</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Failed    : </span><span class=si>{</span><span class=n>failed</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/post/finals/25.1.png width=1474 height=380 srcset="/post/finals/25.1_hu7ae7818eec1e3a12f2e98bd6bfdb217f_57368_480x0_resize_box_3.png 480w, /post/finals/25.1_hu7ae7818eec1e3a12f2e98bd6bfdb217f_57368_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 25" class=gallery-image data-flex-grow=387 data-flex-basis=930px></p></section><footer class=article-footer><section class=article-tags><a href=/tags/reverse-engineering/>Reverse Engineering</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>Last updated on Dec 21, 2025 00:00 UTC</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/post/quack-bot/><div class=article-details><h2 class=article-title>quack-bot</h2></div></a></article><article><a href=/post/sprivect/><div class=article-details><h2 class=article-title>Sprivect</h2></div></a></article><article><a href=/post/x/><div class=article-details><h2 class=article-title>X</h2></div></a></article><article><a href=/post/iamspeed/><div class=article-details><h2 class=article-title>iamspeed</h2></div></a></article><article><a href=/post/packman/><div class=article-details><h2 class=article-title>Packman</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2023 -
+2025</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.30.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

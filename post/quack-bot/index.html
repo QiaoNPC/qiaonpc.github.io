@@ -1,0 +1,692 @@
+<!doctype html><html lang=en-us dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Analyze a Kramer-encrypted PYC binary and its staged shellcode to extract the final payload and recover the flag."><title>quack-bot</title>
+<link rel=canonical href=https://qiaonpc.github.io/post/quack-bot/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="quack-bot"><meta property='og:description' content="Analyze a Kramer-encrypted PYC binary and its staged shellcode to extract the final payload and recover the flag."><meta property='og:url' content='https://qiaonpc.github.io/post/quack-bot/'><meta property='og:site_name' content><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Reverse Engineering'><meta property='article:published_time' content='2025-12-21T00:00:00+00:00'><meta property='article:modified_time' content='2025-12-21T00:00:00+00:00'><meta name=twitter:title content="quack-bot"><meta name=twitter:description content="Analyze a Kramer-encrypted PYC binary and its staged shellcode to extract the final payload and recover the flag."><link rel="shortcut icon" href=/avatar.jpeg></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label="Toggle Menu">
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu3941651df2f1975cfd87dfe8c4afb297_324250_300x0_resize_q75_box.jpeg width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🐱</span></figure><div class=site-meta><h1 class=site-name><a href=/></a></h1><h2 class=site-description>加油努力，大便要用力，大不出来没关系，至少放个屁</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>Dark Mode</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">Table of contents</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#challenge-information>Challenge Information</a></li><li><a href=#solution>Solution</a></li><li><a href=#flag>Flag</a></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/nexsec-2025/ style=background-color:#0177b8;color:#fff>NEXSEC 2025
+</a><a href=/categories/ctf-writeup/ style=background-color:#2a9d8f;color:#fff>CTF Writeup</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/post/quack-bot/>quack-bot</a></h2><h3 class=article-subtitle>Analyze a Kramer-encrypted PYC binary and its staged shellcode to extract the final payload and recover the flag.</h3></div><footer class=article-time><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Dec 21, 2025</time></div><div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>12 minute read</time></div></footer></div></header><section class=article-content><h1 id=quack-bot>quack-bot</h1><h2 id=challenge-information>Challenge Information</h2><ul><li><strong>Name</strong>: quack-bot</li><li><strong>Points</strong>: 10</li><li><strong>Category</strong>: Reverse Engineering</li><li><strong>Objective</strong>: Analyze a Kramer-encrypted PYC binary and its staged shellcode to extract the final payload and recover the flag.</li></ul><h2 id=solution>Solution</h2><ol><li><p><strong>Spotting the PYC artifact</strong></p><ul><li>The <code>QuackBot.quack</code> file stands out as a PYC-compiled binary.</li><li>This sets the stage for Python bytecode-focused reversing.</li></ul><p><img src=/post/quack-bot/1.1.png width=1600 height=103 srcset="/post/quack-bot/1.1_hu379b9be34d233e90d00e19d06d958703_88814_480x0_resize_box_3.png 480w, /post/quack-bot/1.1_hu379b9be34d233e90d00e19d06d958703_88814_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 1" class=gallery-image data-flex-grow=1553 data-flex-basis=3728px></p></li><li><p><strong>Decompiling with an online tool</strong></p><ul><li>Used the online viewer to reverse the bytecode at <a class=link href="https://pylingual.io/view_chimera?identifier=35d0286b3a3d4c7cb833ef6de56995ac9f8d04dafd9187347e4bd7c10c54e19a" target=_blank rel=noopener>https://pylingual.io/view_chimera?identifier=35d0286b3a3d4c7cb833ef6de56995ac9f8d04dafd9187347e4bd7c10c54e19a</a>.</li><li>The output confirmed the code was readable but still protected.</li></ul><p><img src=/post/quack-bot/2.1.png width=1600 height=592 srcset="/post/quack-bot/2.1_hua845644823360106665639da311820cc_398097_480x0_resize_box_3.png 480w, /post/quack-bot/2.1_hua845644823360106665639da311820cc_398097_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 2" class=gallery-image data-flex-grow=270 data-flex-basis=648px></p></li><li><p><strong>Recognizing Kramer encryption</strong></p><ul><li>The decompiled output shows Kramer-style protection.</li><li>Switched to the Kramer decryptor at <a class=link href=https://github.com/jcarndt/kramer_decryptor/blob/main/kramer_decryptor.py target=_blank rel=noopener>https://github.com/jcarndt/kramer_decryptor/blob/main/kramer_decryptor.py</a>.</li></ul></li><li><p><strong>Hitting a decryptor issue</strong></p><ul><li>The script failed to extract the needed <code>ceb6</code> blob.</li><li>The PYC data still clearly contained the <code>ceb6</code> pattern, so the extraction logic looked too strict.</li></ul><p><img src=/post/quack-bot/4.1.png width=1088 height=350 srcset="/post/quack-bot/4.1_hu89f482e5ba5802f02bc1c2d8532d18e5_95317_480x0_resize_box_3.png 480w, /post/quack-bot/4.1_hu89f482e5ba5802f02bc1c2d8532d18e5_95317_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 4" class=gallery-image data-flex-grow=310 data-flex-basis=746px></p></li><li><p><strong>Confirming the regex mismatch</strong></p><ul><li>The decryptor’s pattern matching did not capture the full encrypted content.</li><li>This mismatch blocked further progress until the regex was adjusted.</li></ul><p><img src=/post/quack-bot/5.1.png width=1600 height=823 srcset="/post/quack-bot/5.1_hub1452c190e14f9a567d83227d4176373_2245315_480x0_resize_box_3.png 480w, /post/quack-bot/5.1_hub1452c190e14f9a567d83227d4176373_2245315_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 5" class=gallery-image data-flex-grow=194 data-flex-basis=466px></p></li><li><p><strong>Relaxing the regex and updating the script</strong></p><ul><li>The regex was loosened to capture the <code>ceb6 ... )</code> blob reliably.</li><li>With this change, the decryptor could extract and process the encrypted data.</li></ul></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>argparse</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>binascii</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>re</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>parse_arguments</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>parser</span> <span class=o>=</span> <span class=n>argparse</span><span class=o>.</span><span class=n>ArgumentParser</span><span class=p>(</span><span class=n>description</span><span class=o>=</span><span class=s2>&#34;Decrypt a .pyc file that has been encrypted with Kramer encryption.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>parser</span><span class=o>.</span><span class=n>add_argument</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;-f&#39;</span><span class=p>,</span> <span class=s1>&#39;--file&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>required</span><span class=o>=</span><span class=kc>True</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>help</span><span class=o>=</span><span class=s1>&#39;Path to the input file&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>parser</span><span class=o>.</span><span class=n>add_argument</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>        <span class=s1>&#39;-k&#39;</span><span class=p>,</span> <span class=s1>&#39;--key&#39;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>required</span><span class=o>=</span><span class=kc>False</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>default</span><span class=o>=</span><span class=kc>None</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=nb>type</span><span class=o>=</span><span class=nb>int</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>        <span class=n>help</span><span class=o>=</span><span class=s1>&#39;Key value to use for decrypting file (if known)&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>parser</span><span class=o>.</span><span class=n>parse_args</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Kyrie</span><span class=p>():</span> <span class=c1>#&lt;- Class taken directly from Kramer encryptor</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_dkyrie</span><span class=p>(</span><span class=n>text</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>r</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>a</span> <span class=ow>in</span> <span class=n>text</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=n>a</span> <span class=ow>in</span> <span class=n>strings</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>i</span> <span class=o>=</span> <span class=n>strings</span><span class=o>.</span><span class=n>index</span><span class=p>(</span><span class=n>a</span><span class=p>)</span><span class=o>+</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>i</span> <span class=o>&gt;=</span> <span class=nb>len</span><span class=p>(</span><span class=n>strings</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>                    <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>                <span class=n>a</span> <span class=o>=</span> <span class=n>strings</span><span class=p>[</span><span class=n>i</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>            <span class=n>r</span> <span class=o>+=</span> <span class=n>a</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>r</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_encrypt</span><span class=p>(</span><span class=n>text</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>key</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=kc>None</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>type</span><span class=p>(</span><span class=n>key</span><span class=p>)</span> <span class=o>==</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>key</span> <span class=o>=</span> <span class=nb>sum</span><span class=p>(</span><span class=nb>ord</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>key</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>t</span> <span class=o>=</span> <span class=p>[</span><span class=nb>chr</span><span class=p>(</span><span class=nb>ord</span><span class=p>(</span><span class=n>t</span><span class=p>)</span><span class=o>+</span><span class=n>key</span><span class=p>)</span><span class=k>if</span> <span class=n>t</span> <span class=o>!=</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span> <span class=k>else</span> <span class=s2>&#34;ζ&#34;</span> <span class=k>for</span> <span class=n>t</span> <span class=ow>in</span> <span class=n>text</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s2>&#34;&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>t</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>_decrypt</span><span class=p>(</span><span class=n>text</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>key</span><span class=p>:</span> <span class=nb>str</span> <span class=o>=</span> <span class=kc>None</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=nb>type</span><span class=p>(</span><span class=n>key</span><span class=p>)</span> <span class=o>==</span> <span class=nb>str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>key</span> <span class=o>=</span> <span class=nb>sum</span><span class=p>(</span><span class=nb>ord</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>key</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=s2>&#34;&#34;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=nb>chr</span><span class=p>(</span><span class=nb>ord</span><span class=p>(</span><span class=n>t</span><span class=p>)</span><span class=o>-</span><span class=n>key</span><span class=p>)</span> <span class=k>if</span> <span class=n>t</span> <span class=o>!=</span> <span class=s2>&#34;ζ&#34;</span> <span class=k>else</span> <span class=s2>&#34;</span><span class=se>\n</span><span class=s2>&#34;</span> <span class=k>for</span> <span class=n>t</span> <span class=ow>in</span> <span class=n>text</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>class</span> <span class=nc>Key</span><span class=p>:</span> <span class=c1>#&lt;- Class taken directly from Kramer encryptor</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>encrypt</span><span class=p>(</span><span class=n>e</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>key</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>e1</span> <span class=o>=</span> <span class=n>Kyrie</span><span class=o>.</span><span class=n>_ekyrie</span><span class=p>(</span><span class=n>e</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Kyrie</span><span class=o>.</span><span class=n>_encrypt</span><span class=p>(</span><span class=n>e1</span><span class=p>,</span> <span class=n>key</span><span class=o>=</span><span class=n>key</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>def</span> <span class=nf>decrypt</span><span class=p>(</span><span class=n>e</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>key</span><span class=p>:</span> <span class=nb>str</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>text</span> <span class=o>=</span> <span class=n>Kyrie</span><span class=o>.</span><span class=n>_decrypt</span><span class=p>(</span><span class=n>e</span><span class=p>,</span> <span class=n>key</span><span class=o>=</span><span class=n>key</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span> <span class=n>Kyrie</span><span class=o>.</span><span class=n>_dkyrie</span><span class=p>(</span><span class=n>text</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=n>python_indicators</span> <span class=o>=</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=s1>&#39;keywords&#39;</span><span class=p>:</span> <span class=p>{</span><span class=s1>&#39;import&#39;</span><span class=p>}</span> <span class=c1>#&lt;- Add more words as you see fit like &#39;def&#39;, &#39;str&#39;, &#39;int&#39;, &#39;set&#39;, &#39;list&#39;, &#39;dict&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=c1>#&#39;keywords&#39;: {&#39;import&#39;, &#39;def&#39;, &#39;str&#39;, &#39;int&#39;} &lt;- Example</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>strings</span> <span class=o>=</span> <span class=s2>&#34;abcdefghijklmnopqrstuvwxyz0123456789&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+</span></span><span class=line><span class=cl>    <span class=n>args</span> <span class=o>=</span> <span class=n>parse_arguments</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=n>file_path</span> <span class=o>=</span> <span class=n>args</span><span class=o>.</span><span class=n>file</span>
+</span></span><span class=line><span class=cl>    <span class=n>key</span> <span class=o>=</span> <span class=n>args</span><span class=o>.</span><span class=n>key</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=s1>&#39;</span><span class=se>\\</span><span class=s1>&#39;</span> <span class=ow>in</span> <span class=n>file_path</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>file</span> <span class=o>=</span> <span class=n>file_path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;</span><span class=se>\\</span><span class=s1>&#39;</span><span class=p>)[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=k>elif</span> <span class=s1>&#39;/&#39;</span> <span class=ow>in</span> <span class=n>file_path</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>file</span> <span class=o>=</span> <span class=n>file_path</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)[</span><span class=o>-</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>file</span> <span class=o>=</span> <span class=n>file_path</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>#Open file</span>
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>file_path</span><span class=p>,</span> <span class=s1>&#39;rb&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>content</span> <span class=o>=</span> <span class=n>f</span><span class=o>.</span><span class=n>read</span><span class=p>()</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s1>&#39;latin-1&#39;</span><span class=p>,</span> <span class=n>errors</span><span class=o>=</span><span class=s1>&#39;ignore&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>#Grab necessary encrypted strings from .pyc file</span>
+</span></span><span class=line><span class=cl>    <span class=n>pattern</span> <span class=o>=</span> <span class=sa>r</span><span class=s1>&#39;ceb6.*ceb6\)&#39;</span>
+</span></span><span class=line><span class=cl>    <span class=k>match</span> <span class=o>=</span> <span class=n>re</span><span class=o>.</span><span class=n>search</span><span class=p>(</span><span class=sa>r</span><span class=s1>&#39;ceb6.*?\)&#39;</span><span class=p>,</span> <span class=n>content</span><span class=p>,</span> <span class=n>flags</span><span class=o>=</span><span class=n>re</span><span class=o>.</span><span class=n>DOTALL</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=ow>not</span> <span class=k>match</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>raise</span> <span class=ne>SystemExit</span><span class=p>(</span><span class=s2>&#34;No match for encrypted blob (looked for &#39;ceb6 ... )&#39;). Try searching for the actual delimiter.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>result</span> <span class=o>=</span> <span class=k>match</span><span class=o>.</span><span class=n>group</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=k>match</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span> <span class=o>=</span> <span class=k>match</span><span class=o>.</span><span class=n>group</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>#If key argument is provided</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>key</span> <span class=ow>is</span> <span class=ow>not</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;Using key: </span><span class=si>{</span><span class=n>key</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>content_split</span> <span class=o>=</span> <span class=n>result</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=n>_content_</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=n>key</span> <span class=o>=</span> <span class=n>key</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>#Decrypt content</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>item</span> <span class=ow>in</span> <span class=n>content_split</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>unhexed</span> <span class=o>=</span> <span class=n>binascii</span><span class=o>.</span><span class=n>unhexlify</span><span class=p>(</span><span class=n>item</span><span class=p>)</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span> <span class=c1>#&lt;- Unhexlify first</span>
+</span></span><span class=line><span class=cl>                <span class=n>_content_</span> <span class=o>+=</span> <span class=n>Key</span><span class=o>.</span><span class=n>decrypt</span><span class=p>(</span><span class=n>unhexed</span><span class=p>,</span> <span class=n>key</span><span class=o>=</span><span class=n>key</span><span class=p>)</span> <span class=c1>#&lt;- Send to decryptor</span>
+</span></span><span class=line><span class=cl>            <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>pass</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>#Create file name</span>
+</span></span><span class=line><span class=cl>        <span class=n>file</span> <span class=o>=</span> <span class=n>file</span> <span class=o>+</span> <span class=s2>&#34;_decrypted_&#34;</span> <span class=o>+</span> <span class=nb>str</span><span class=p>(</span><span class=n>key</span><span class=p>)</span> <span class=o>+</span> <span class=s2>&#34;.py.txt&#34;</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;DECRYPTED CONTENT: &#34;</span> <span class=o>+</span> <span class=n>file</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1>#Output _content_ to file</span>
+</span></span><span class=line><span class=cl>        <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>file</span><span class=p>,</span> <span class=s1>&#39;w&#39;</span><span class=p>,</span> <span class=n>encoding</span><span class=o>=</span><span class=s1>&#39;utf-8&#39;</span><span class=p>)</span> <span class=k>as</span> <span class=n>f</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>f</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>_content_</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1>#If no key is provided</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;**BRUTE FORCING KEY**&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        
+</span></span><span class=line><span class=cl>        <span class=c1>#Grab only beginning content, adjust as you see fit.</span>
+</span></span><span class=line><span class=cl>        <span class=n>first_600</span> <span class=o>=</span> <span class=n>result</span><span class=p>[:</span><span class=mi>600</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>content_split</span> <span class=o>=</span> <span class=n>first_600</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>#Begin brute forcing</span>
+</span></span><span class=line><span class=cl>        <span class=n>i</span> <span class=o>=</span> <span class=mi>3</span>
+</span></span><span class=line><span class=cl>        <span class=k>while</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>1000001</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=n>_content_</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>item</span> <span class=ow>in</span> <span class=n>content_split</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=k>try</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=n>unhexed</span> <span class=o>=</span> <span class=n>binascii</span><span class=o>.</span><span class=n>unhexlify</span><span class=p>(</span><span class=n>item</span><span class=p>)</span><span class=o>.</span><span class=n>decode</span><span class=p>()</span> <span class=c1>#&lt;- Unhexlify first</span>
+</span></span><span class=line><span class=cl>                    <span class=n>_content_</span> <span class=o>+=</span> <span class=n>Key</span><span class=o>.</span><span class=n>decrypt</span><span class=p>(</span><span class=n>unhexed</span><span class=p>,</span> <span class=n>key</span><span class=o>=</span><span class=n>i</span><span class=p>)</span> <span class=c1>#&lt;- Send to decryptor</span>
+</span></span><span class=line><span class=cl>                <span class=k>except</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=k>pass</span>
+</span></span><span class=line><span class=cl>            <span class=k>for</span> <span class=n>keyword</span> <span class=ow>in</span> <span class=n>python_indicators</span><span class=p>[</span><span class=s1>&#39;keywords&#39;</span><span class=p>]:</span> <span class=c1>#&lt;- Check if likely a decrypted python script</span>
+</span></span><span class=line><span class=cl>                <span class=k>if</span> <span class=n>keyword</span> <span class=ow>in</span> <span class=n>_content_</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;KEY: &#34;</span> <span class=o>+</span> <span class=nb>str</span><span class=p>(</span><span class=n>i</span><span class=p>)</span> <span class=o>+</span> <span class=s2>&#34;</span><span class=se>\r\n</span><span class=s2>OUTPUT:</span><span class=se>\r\n</span><span class=s2>&#34;</span> <span class=o>+</span><span class=n>_content_</span><span class=p>)</span> <span class=c1>#&lt;- If so, print key used as well as output to verify</span>
+</span></span><span class=line><span class=cl>            <span class=n>i</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>main</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/post/quack-bot/6.1.png width=828 height=481 srcset="/post/quack-bot/6.1_huad5869666c947083bec41244abbceb10_122620_480x0_resize_box_3.png 480w, /post/quack-bot/6.1_huad5869666c947083bec41244abbceb10_122620_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 6" class=gallery-image data-flex-grow=172 data-flex-basis=413px></p><ol start=7><li><p><strong>Seeing shellcode execution</strong></p><ul><li>The decrypted output shows the next stage runs shellcode.</li><li>That pushed the analysis toward shellcode behavior instead of Python logic.</li></ul><p><img src=/post/quack-bot/7.1.png width=1299 height=410 srcset="/post/quack-bot/7.1_hu11c3cbecb64816dbb57a67c8f0181b78_107303_480x0_resize_box_3.png 480w, /post/quack-bot/7.1_hu11c3cbecb64816dbb57a67c8f0181b78_107303_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 7" class=gallery-image data-flex-grow=316 data-flex-basis=760px></p></li><li><p><strong>Converting shellcode to an EXE</strong></p><ul><li>Emulation with scdbg did not work.</li><li>The shellcode was converted to an executable with <a class=link href=https://github.com/accidentalrebel/shcode2exe target=_blank rel=noopener>https://github.com/accidentalrebel/shcode2exe</a>.</li></ul><p><img src=/post/quack-bot/8.1.png width=1213 height=203 srcset="/post/quack-bot/8.1_hu9f29a1778c2e19b0dc7bd1f1365fac1e_31398_480x0_resize_box_3.png 480w, /post/quack-bot/8.1_hu9f29a1778c2e19b0dc7bd1f1365fac1e_31398_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 8" class=gallery-image data-flex-grow=597 data-flex-basis=1434px></p><p><img src=/post/quack-bot/8.2.png width=610 height=80 srcset="/post/quack-bot/8.2_hu40d6d61c852be234e04ad33e83ab727e_7990_480x0_resize_box_3.png 480w, /post/quack-bot/8.2_hu40d6d61c852be234e04ad33e83ab727e_7990_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 8" class=gallery-image data-flex-grow=762 data-flex-basis=1830px></p></li><li><p><strong>Recreating the API hash logic</strong></p><ul><li>The loader avoids plaintext API strings and skips direct <code>GetProcAddress</code> usage.</li><li>It computes a 64-bit hash from module and export names and compares XORed pairs against constants.</li><li>A script was written to reproduce the hashing routine and map constants back to real API names.</li></ul></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>  1
+</span><span class=lnt>  2
+</span><span class=lnt>  3
+</span><span class=lnt>  4
+</span><span class=lnt>  5
+</span><span class=lnt>  6
+</span><span class=lnt>  7
+</span><span class=lnt>  8
+</span><span class=lnt>  9
+</span><span class=lnt> 10
+</span><span class=lnt> 11
+</span><span class=lnt> 12
+</span><span class=lnt> 13
+</span><span class=lnt> 14
+</span><span class=lnt> 15
+</span><span class=lnt> 16
+</span><span class=lnt> 17
+</span><span class=lnt> 18
+</span><span class=lnt> 19
+</span><span class=lnt> 20
+</span><span class=lnt> 21
+</span><span class=lnt> 22
+</span><span class=lnt> 23
+</span><span class=lnt> 24
+</span><span class=lnt> 25
+</span><span class=lnt> 26
+</span><span class=lnt> 27
+</span><span class=lnt> 28
+</span><span class=lnt> 29
+</span><span class=lnt> 30
+</span><span class=lnt> 31
+</span><span class=lnt> 32
+</span><span class=lnt> 33
+</span><span class=lnt> 34
+</span><span class=lnt> 35
+</span><span class=lnt> 36
+</span><span class=lnt> 37
+</span><span class=lnt> 38
+</span><span class=lnt> 39
+</span><span class=lnt> 40
+</span><span class=lnt> 41
+</span><span class=lnt> 42
+</span><span class=lnt> 43
+</span><span class=lnt> 44
+</span><span class=lnt> 45
+</span><span class=lnt> 46
+</span><span class=lnt> 47
+</span><span class=lnt> 48
+</span><span class=lnt> 49
+</span><span class=lnt> 50
+</span><span class=lnt> 51
+</span><span class=lnt> 52
+</span><span class=lnt> 53
+</span><span class=lnt> 54
+</span><span class=lnt> 55
+</span><span class=lnt> 56
+</span><span class=lnt> 57
+</span><span class=lnt> 58
+</span><span class=lnt> 59
+</span><span class=lnt> 60
+</span><span class=lnt> 61
+</span><span class=lnt> 62
+</span><span class=lnt> 63
+</span><span class=lnt> 64
+</span><span class=lnt> 65
+</span><span class=lnt> 66
+</span><span class=lnt> 67
+</span><span class=lnt> 68
+</span><span class=lnt> 69
+</span><span class=lnt> 70
+</span><span class=lnt> 71
+</span><span class=lnt> 72
+</span><span class=lnt> 73
+</span><span class=lnt> 74
+</span><span class=lnt> 75
+</span><span class=lnt> 76
+</span><span class=lnt> 77
+</span><span class=lnt> 78
+</span><span class=lnt> 79
+</span><span class=lnt> 80
+</span><span class=lnt> 81
+</span><span class=lnt> 82
+</span><span class=lnt> 83
+</span><span class=lnt> 84
+</span><span class=lnt> 85
+</span><span class=lnt> 86
+</span><span class=lnt> 87
+</span><span class=lnt> 88
+</span><span class=lnt> 89
+</span><span class=lnt> 90
+</span><span class=lnt> 91
+</span><span class=lnt> 92
+</span><span class=lnt> 93
+</span><span class=lnt> 94
+</span><span class=lnt> 95
+</span><span class=lnt> 96
+</span><span class=lnt> 97
+</span><span class=lnt> 98
+</span><span class=lnt> 99
+</span><span class=lnt>100
+</span><span class=lnt>101
+</span><span class=lnt>102
+</span><span class=lnt>103
+</span><span class=lnt>104
+</span><span class=lnt>105
+</span><span class=lnt>106
+</span><span class=lnt>107
+</span><span class=lnt>108
+</span><span class=lnt>109
+</span><span class=lnt>110
+</span><span class=lnt>111
+</span><span class=lnt>112
+</span><span class=lnt>113
+</span><span class=lnt>114
+</span><span class=lnt>115
+</span><span class=lnt>116
+</span><span class=lnt>117
+</span><span class=lnt>118
+</span><span class=lnt>119
+</span><span class=lnt>120
+</span><span class=lnt>121
+</span><span class=lnt>122
+</span><span class=lnt>123
+</span><span class=lnt>124
+</span><span class=lnt>125
+</span><span class=lnt>126
+</span><span class=lnt>127
+</span><span class=lnt>128
+</span><span class=lnt>129
+</span><span class=lnt>130
+</span><span class=lnt>131
+</span><span class=lnt>132
+</span><span class=lnt>133
+</span><span class=lnt>134
+</span><span class=lnt>135
+</span><span class=lnt>136
+</span><span class=lnt>137
+</span><span class=lnt>138
+</span><span class=lnt>139
+</span><span class=lnt>140
+</span><span class=lnt>141
+</span><span class=lnt>142
+</span><span class=lnt>143
+</span><span class=lnt>144
+</span><span class=lnt>145
+</span><span class=lnt>146
+</span><span class=lnt>147
+</span><span class=lnt>148
+</span><span class=lnt>149
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>typing</span> <span class=kn>import</span> <span class=n>Tuple</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>struct</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>MASK32</span> <span class=o>=</span> <span class=mh>0xFFFFFFFF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>rol32</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>r</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>((</span><span class=n>x</span> <span class=o>&lt;&lt;</span> <span class=n>r</span><span class=p>)</span> <span class=o>&amp;</span> <span class=n>MASK32</span><span class=p>)</span> <span class=o>|</span> <span class=p>((</span><span class=n>x</span> <span class=o>&amp;</span> <span class=n>MASK32</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=p>(</span><span class=mi>32</span> <span class=o>-</span> <span class=n>r</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>ror32</span><span class=p>(</span><span class=n>x</span><span class=p>,</span> <span class=n>r</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=p>((</span><span class=n>x</span> <span class=o>&amp;</span> <span class=n>MASK32</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=n>r</span><span class=p>)</span> <span class=o>|</span> <span class=p>((</span><span class=n>x</span> <span class=o>&lt;&lt;</span> <span class=p>(</span><span class=mi>32</span> <span class=o>-</span> <span class=n>r</span><span class=p>))</span> <span class=o>&amp;</span> <span class=n>MASK32</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>sub_40C246</span><span class=p>(</span><span class=n>block_words</span><span class=p>:</span> <span class=n>Tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span><span class=nb>int</span><span class=p>,</span><span class=nb>int</span><span class=p>,</span><span class=nb>int</span><span class=p>],</span> <span class=n>a2</span><span class=p>:</span> <span class=nb>int</span><span class=p>,</span> <span class=n>a3</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span><span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    Implements the core compression loop from the decompiled sub_40C246.
+</span></span></span><span class=line><span class=cl><span class=s2>    Inputs:
+</span></span></span><span class=line><span class=cl><span class=s2>      - block_words: tuple of four 32-bit words [w0, w1, w2, w3] (little-endian from 16 bytes)
+</span></span></span><span class=line><span class=cl><span class=s2>      - a2, a3: 32-bit state values (input)
+</span></span></span><span class=line><span class=cl><span class=s2>    Returns:
+</span></span></span><span class=line><span class=cl><span class=s2>      - (result, a3_final) as 32-bit unsigned ints
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># initialize as in decomp</span>
+</span></span><span class=line><span class=cl>    <span class=n>v6</span> <span class=o>=</span> <span class=n>block_words</span><span class=p>[</span><span class=mi>3</span><span class=p>]</span>  <span class=c1># a1[3]</span>
+</span></span><span class=line><span class=cl>    <span class=n>v7</span> <span class=o>=</span> <span class=n>block_words</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span>  <span class=c1># a1[2]</span>
+</span></span><span class=line><span class=cl>    <span class=n>v8</span> <span class=o>=</span> <span class=n>block_words</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>  <span class=c1># *a1</span>
+</span></span><span class=line><span class=cl>    <span class=n>v10</span> <span class=o>=</span> <span class=n>block_words</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=c1># a1[1]</span>
+</span></span><span class=line><span class=cl>    <span class=n>result</span> <span class=o>=</span> <span class=n>a2</span>
+</span></span><span class=line><span class=cl>    <span class=c1># loop 0..0x1A (27 iterations)</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>v5</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mh>0x1B</span><span class=p>):</span>  <span class=c1># 27 rounds</span>
+</span></span><span class=line><span class=cl>        <span class=n>v9</span> <span class=o>=</span> <span class=n>v6</span>
+</span></span><span class=line><span class=cl>        <span class=c1># result = v8 ^ (a3 + ROR(result,8))</span>
+</span></span><span class=line><span class=cl>        <span class=n>result</span> <span class=o>=</span> <span class=p>(</span><span class=n>v8</span> <span class=o>^</span> <span class=p>((</span><span class=n>a3</span> <span class=o>+</span> <span class=n>ror32</span><span class=p>(</span><span class=n>result</span><span class=p>,</span> <span class=mi>8</span><span class=p>))</span> <span class=o>&amp;</span> <span class=n>MASK32</span><span class=p>))</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>        <span class=c1># v6 = v5 ^ (v8 + ROR(v10,8))</span>
+</span></span><span class=line><span class=cl>        <span class=n>v6</span> <span class=o>=</span> <span class=p>(</span><span class=n>v5</span> <span class=o>^</span> <span class=p>((</span><span class=n>v8</span> <span class=o>+</span> <span class=n>ror32</span><span class=p>(</span><span class=n>v10</span><span class=p>,</span> <span class=mi>8</span><span class=p>))</span> <span class=o>&amp;</span> <span class=n>MASK32</span><span class=p>))</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>        <span class=c1># a3 = result ^ ROL(a3,3)</span>
+</span></span><span class=line><span class=cl>        <span class=n>a3</span> <span class=o>=</span> <span class=p>(</span><span class=n>result</span> <span class=o>^</span> <span class=n>rol32</span><span class=p>(</span><span class=n>a3</span><span class=p>,</span> <span class=mi>3</span><span class=p>))</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>        <span class=c1># v10 = v7</span>
+</span></span><span class=line><span class=cl>        <span class=n>v10</span> <span class=o>=</span> <span class=n>v7</span>
+</span></span><span class=line><span class=cl>        <span class=c1># v8 = v6 ^ ROL(v8,3)</span>
+</span></span><span class=line><span class=cl>        <span class=n>v8</span> <span class=o>=</span> <span class=p>(</span><span class=n>v6</span> <span class=o>^</span> <span class=n>rol32</span><span class=p>(</span><span class=n>v8</span><span class=p>,</span> <span class=mi>3</span><span class=p>))</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>        <span class=c1># v7 = v9</span>
+</span></span><span class=line><span class=cl>        <span class=n>v7</span> <span class=o>=</span> <span class=n>v9</span>
+</span></span><span class=line><span class=cl>    <span class=c1># return result and the final a3 value (these are the two 32-bit outputs we will use)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>result</span> <span class=o>&amp;</span> <span class=n>MASK32</span><span class=p>,</span> <span class=n>a3</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>pad_and_hash</span><span class=p>(</span><span class=n>name_bytes</span><span class=p>:</span> <span class=nb>bytes</span><span class=p>,</span> <span class=n>seed_a2</span><span class=p>:</span> <span class=nb>int</span><span class=p>,</span> <span class=n>seed_a3</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span><span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;&#34;&#34;
+</span></span></span><span class=line><span class=cl><span class=s2>    Implements sub_40C17F-like streaming + padding. Returns two 32-bit words (a2_final, a3_final).
+</span></span></span><span class=line><span class=cl><span class=s2>    We follow the decompiled logic: buffering up to 16 bytes, applying 0x80 padding, writing bit-length
+</span></span></span><span class=line><span class=cl><span class=s2>    into the last dword (8*length), and calling the compression. The mapping used here returns
+</span></span></span><span class=line><span class=cl><span class=s2>    (a2_final, a3_final) where each compression returns (ret, new_a3) and we XOR both into state.
+</span></span></span><span class=line><span class=cl><span class=s2>    &#34;&#34;&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Buffer processing similar to the decompiled loop.</span>
+</span></span><span class=line><span class=cl>    <span class=n>a2</span> <span class=o>=</span> <span class=n>seed_a2</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>    <span class=n>a3</span> <span class=o>=</span> <span class=n>seed_a3</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>    <span class=n>total_bytes</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>buf</span> <span class=o>=</span> <span class=nb>bytearray</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=n>done_flag</span> <span class=o>=</span> <span class=kc>False</span>
+</span></span><span class=line><span class=cl>    <span class=c1># append bytes into buffer until we hit NUL or reach 64 bytes (the decomp checks for v4==64)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># but here we simply consume the whole input</span>
+</span></span><span class=line><span class=cl>    <span class=c1># The decomp reads bytes up to first NUL; so we should stop at first NUL if present.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># The code lowercased the module name earlier; caller ensures input is lowercased.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># We&#39;ll use the provided bytes as-is and stop at the first 0 if present.</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span><span class=p>,</span> <span class=n>b</span> <span class=ow>in</span> <span class=nb>enumerate</span><span class=p>(</span><span class=n>name_bytes</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>b</span> <span class=o>==</span> <span class=mi>0</span> <span class=ow>or</span> <span class=n>i</span> <span class=o>==</span> <span class=mi>64</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=k>break</span>
+</span></span><span class=line><span class=cl>        <span class=n>buf</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=n>b</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>total_bytes</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># Now perform padding and compress as in the decompiled function.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Process in 16-byte blocks</span>
+</span></span><span class=line><span class=cl>    <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>    <span class=n>blocks</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span> <span class=o>=</span> <span class=nb>bytes</span><span class=p>(</span><span class=n>buf</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># The decompiled code had a fairly specific padding: append 0x80 then zero out remaining, possibly compress twice.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># We&#39;ll follow the standard &#34;append 0x80, then zeros, then length in bits in last dword&#34;, with at most two compressions.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Build a single padded buffer</span>
+</span></span><span class=line><span class=cl>    <span class=n>pad</span> <span class=o>=</span> <span class=nb>bytearray</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>pad</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=mh>0x80</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># pad with zeros until length % 16 == 12 (so we can put 4-byte length at end) OR pad full block if needed</span>
+</span></span><span class=line><span class=cl>    <span class=k>while</span> <span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>pad</span><span class=p>)</span> <span class=o>%</span> <span class=mi>16</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>12</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>pad</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=mh>0x00</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># append 4-byte little-endian bit length</span>
+</span></span><span class=line><span class=cl>    <span class=n>bitlen</span> <span class=o>=</span> <span class=p>(</span><span class=n>total_bytes</span> <span class=o>*</span> <span class=mi>8</span><span class=p>)</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>    <span class=n>pad</span> <span class=o>+=</span> <span class=n>struct</span><span class=o>.</span><span class=n>pack</span><span class=p>(</span><span class=s1>&#39;&lt;I&#39;</span><span class=p>,</span> <span class=n>bitlen</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=c1># Now split into 16-byte blocks</span>
+</span></span><span class=line><span class=cl>    <span class=n>blocks</span> <span class=o>=</span> <span class=p>[</span><span class=n>pad</span><span class=p>[</span><span class=n>j</span><span class=p>:</span><span class=n>j</span><span class=o>+</span><span class=mi>16</span><span class=p>]</span> <span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>pad</span><span class=p>),</span> <span class=mi>16</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>    <span class=c1># For each block, call compression</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>block</span> <span class=ow>in</span> <span class=n>blocks</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=c1># interpret as 4 little-endian uint32 words</span>
+</span></span><span class=line><span class=cl>        <span class=n>w</span> <span class=o>=</span> <span class=n>struct</span><span class=o>.</span><span class=n>unpack</span><span class=p>(</span><span class=s1>&#39;&lt;4I&#39;</span><span class=p>,</span> <span class=n>block</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=n>ret</span><span class=p>,</span> <span class=n>out_a3</span> <span class=o>=</span> <span class=n>sub_40C246</span><span class=p>(</span><span class=n>w</span><span class=p>,</span> <span class=n>a2</span><span class=p>,</span> <span class=n>a3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=c1># XOR into states as a reasonable mapping of the decompiled register interactions</span>
+</span></span><span class=line><span class=cl>        <span class=n>a2</span> <span class=o>=</span> <span class=p>(</span><span class=n>a2</span> <span class=o>^</span> <span class=n>ret</span><span class=p>)</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>        <span class=n>a3</span> <span class=o>=</span> <span class=p>(</span><span class=n>a3</span> <span class=o>^</span> <span class=n>out_a3</span><span class=p>)</span> <span class=o>&amp;</span> <span class=n>MASK32</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>a2</span><span class=p>,</span> <span class=n>a3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>hash_name</span><span class=p>(</span><span class=n>name</span><span class=p>:</span> <span class=nb>str</span><span class=p>,</span> <span class=n>seed_a2</span><span class=p>:</span> <span class=nb>int</span><span class=p>,</span> <span class=n>seed_a3</span><span class=p>:</span> <span class=nb>int</span><span class=p>)</span> <span class=o>-&gt;</span> <span class=n>Tuple</span><span class=p>[</span><span class=nb>int</span><span class=p>,</span><span class=nb>int</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>    <span class=c1># The caller lowercases module names first. For exports, the name is used as-is.</span>
+</span></span><span class=line><span class=cl>    <span class=c1># We&#39;ll lowercase module names where requested by caller externally.</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span> <span class=o>=</span> <span class=n>name</span><span class=o>.</span><span class=n>encode</span><span class=p>(</span><span class=s1>&#39;ascii&#39;</span><span class=p>,</span> <span class=n>errors</span><span class=o>=</span><span class=s1>&#39;ignore&#39;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>pad_and_hash</span><span class=p>(</span><span class=n>b</span><span class=p>,</span> <span class=n>seed_a2</span><span class=p>,</span> <span class=n>seed_a3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># constants from your dump (these are compared as XOR results in peb_walk)</span>
+</span></span><span class=line><span class=cl><span class=n>TARGET_A3</span> <span class=o>=</span> <span class=mh>0xB0A9C6C0</span>
+</span></span><span class=line><span class=cl><span class=n>TARGET_A4</span> <span class=o>=</span> <span class=mh>0x6197C707</span>
+</span></span><span class=line><span class=cl><span class=n>SEED_A5</span> <span class=o>=</span> <span class=mh>0xE1F5C30F</span>
+</span></span><span class=line><span class=cl><span class=n>SEED_A6</span> <span class=o>=</span> <span class=mh>0x5FBF2E07</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># test names</span>
+</span></span><span class=line><span class=cl><span class=n>module</span> <span class=o>=</span> <span class=s2>&#34;kernel32.dll&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>export</span> <span class=o>=</span> <span class=s2>&#34;CreateThread&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># note: module names in the decomp are lowercased before hashing</span>
+</span></span><span class=line><span class=cl><span class=n>mod_hash</span> <span class=o>=</span> <span class=n>hash_name</span><span class=p>(</span><span class=n>module</span><span class=o>.</span><span class=n>lower</span><span class=p>(),</span> <span class=n>SEED_A5</span><span class=p>,</span> <span class=n>SEED_A6</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>exp_hash</span> <span class=o>=</span> <span class=n>hash_name</span><span class=p>(</span><span class=n>export</span><span class=p>,</span> <span class=n>SEED_A5</span><span class=p>,</span> <span class=n>SEED_A6</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Module:&#34;</span><span class=p>,</span> <span class=n>module</span><span class=p>,</span> <span class=s2>&#34;-&gt; hash pair (hex):&#34;</span><span class=p>,</span> <span class=nb>tuple</span><span class=p>(</span><span class=nb>hex</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=n>mod_hash</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Export:&#34;</span><span class=p>,</span> <span class=n>export</span><span class=p>,</span> <span class=s2>&#34;-&gt; hash pair (hex):&#34;</span><span class=p>,</span> <span class=nb>tuple</span><span class=p>(</span><span class=nb>hex</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=n>exp_hash</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># compute XORs and compare with targets</span>
+</span></span><span class=line><span class=cl><span class=n>xor1</span> <span class=o>=</span> <span class=n>mod_hash</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>^</span> <span class=n>exp_hash</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>xor2</span> <span class=o>=</span> <span class=n>mod_hash</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>^</span> <span class=n>exp_hash</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>Computed XORs:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;mod_hash[0] ^ exp_hash[0] =&#34;</span><span class=p>,</span> <span class=nb>hex</span><span class=p>(</span><span class=n>xor1</span><span class=p>),</span> <span class=s2>&#34; expected:&#34;</span><span class=p>,</span> <span class=nb>hex</span><span class=p>(</span><span class=n>TARGET_A3</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;mod_hash[1] ^ exp_hash[1] =&#34;</span><span class=p>,</span> <span class=nb>hex</span><span class=p>(</span><span class=n>xor2</span><span class=p>),</span> <span class=s2>&#34; expected:&#34;</span><span class=p>,</span> <span class=nb>hex</span><span class=p>(</span><span class=n>TARGET_A4</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>Match A3?&#34;</span><span class=p>,</span> <span class=n>xor1</span> <span class=o>==</span> <span class=n>TARGET_A3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Match A4?&#34;</span><span class=p>,</span> <span class=n>xor2</span> <span class=o>==</span> <span class=n>TARGET_A4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># If it didn&#39;t match, try a small search over plausible case variants for module and export</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=n>xor1</span> <span class=o>!=</span> <span class=n>TARGET_A3</span> <span class=ow>or</span> <span class=n>xor2</span> <span class=o>!=</span> <span class=n>TARGET_A4</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;</span><span class=se>\n</span><span class=s2>Trying variations of case (module) and common export forms...&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>candidates_mod</span> <span class=o>=</span> <span class=p>[</span><span class=n>module</span><span class=p>,</span> <span class=n>module</span><span class=o>.</span><span class=n>lower</span><span class=p>(),</span> <span class=n>module</span><span class=o>.</span><span class=n>upper</span><span class=p>(),</span> <span class=n>module</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;.dll&#34;</span><span class=p>,</span><span class=s2>&#34;&#34;</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>    <span class=n>candidates_exp</span> <span class=o>=</span> <span class=p>[</span><span class=n>export</span><span class=p>,</span> <span class=n>export</span><span class=o>.</span><span class=n>lower</span><span class=p>(),</span> <span class=n>export</span><span class=o>.</span><span class=n>upper</span><span class=p>(),</span> <span class=n>export</span><span class=o>.</span><span class=n>replace</span><span class=p>(</span><span class=s2>&#34;Create&#34;</span><span class=p>,</span><span class=s2>&#34;create&#34;</span><span class=p>)]</span>
+</span></span><span class=line><span class=cl>    <span class=n>found</span> <span class=o>=</span> <span class=p>[]</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>cm</span> <span class=ow>in</span> <span class=nb>set</span><span class=p>(</span><span class=n>candidates_mod</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>mh</span> <span class=o>=</span> <span class=n>hash_name</span><span class=p>(</span><span class=n>cm</span><span class=o>.</span><span class=n>lower</span><span class=p>(),</span> <span class=n>SEED_A5</span><span class=p>,</span> <span class=n>SEED_A6</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>ce</span> <span class=ow>in</span> <span class=nb>set</span><span class=p>(</span><span class=n>candidates_exp</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>eh</span> <span class=o>=</span> <span class=n>hash_name</span><span class=p>(</span><span class=n>ce</span><span class=p>,</span> <span class=n>SEED_A5</span><span class=p>,</span> <span class=n>SEED_A6</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=k>if</span> <span class=p>(</span><span class=n>mh</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>^</span> <span class=n>eh</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span> <span class=o>==</span> <span class=n>TARGET_A3</span> <span class=ow>and</span> <span class=p>(</span><span class=n>mh</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>^</span> <span class=n>eh</span><span class=p>[</span><span class=mi>1</span><span class=p>])</span> <span class=o>==</span> <span class=n>TARGET_A4</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>                <span class=n>found</span><span class=o>.</span><span class=n>append</span><span class=p>((</span><span class=n>cm</span><span class=p>,</span> <span class=n>ce</span><span class=p>,</span> <span class=n>mh</span><span class=p>,</span> <span class=n>eh</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>found</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Found match(s):&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>cm</span><span class=p>,</span> <span class=n>ce</span><span class=p>,</span> <span class=n>mh</span><span class=p>,</span> <span class=n>eh</span> <span class=ow>in</span> <span class=n>found</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;  Module:&#34;</span><span class=p>,</span> <span class=n>cm</span><span class=p>,</span> <span class=s2>&#34;Export:&#34;</span><span class=p>,</span> <span class=n>ce</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;   mod hash:&#34;</span><span class=p>,</span> <span class=nb>tuple</span><span class=p>(</span><span class=nb>hex</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=n>mh</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>            <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;   exp hash:&#34;</span><span class=p>,</span> <span class=nb>tuple</span><span class=p>(</span><span class=nb>hex</span><span class=p>(</span><span class=n>x</span><span class=p>)</span> <span class=k>for</span> <span class=n>x</span> <span class=ow>in</span> <span class=n>eh</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;No match found with simple variations. The original decomp used register outputs from the compression in a slightly different way.&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;If you want, I can try to exactly emulate the register-based outputs (using multiple values returned by the compression) to replicate the original match exactly.&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/post/quack-bot/9.1.png width=1020 height=192 srcset="/post/quack-bot/9.1_hu8a17e719ac5176a1d168e1c109e04d4a_20484_480x0_resize_box_3.png 480w, /post/quack-bot/9.1_hu8a17e719ac5176a1d168e1c109e04d4a_20484_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 9" class=gallery-image data-flex-grow=531 data-flex-basis=1275px></p><ol start=10><li><strong>Assuming likely API targets</strong></li></ol><ul><li>Dynamic API resolution suggests common calls like <code>VirtualAlloc()</code>.</li><li>This points to a staged payload being copied into memory.</li></ul><p><img src=/post/quack-bot/10.1.png width=664 height=566 srcset="/post/quack-bot/10.1_hubbe169473117e8ef16c5b7d609d70e20_45733_480x0_resize_box_3.png 480w, /post/quack-bot/10.1_hubbe169473117e8ef16c5b7d609d70e20_45733_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 10" class=gallery-image data-flex-grow=117 data-flex-basis=281px></p><ol start=11><li><strong>Finding the next routine</strong></li></ol><ul><li>Debugging shows a call into <code>sub_40ab95()</code>.</li><li>That call anchors the next stage of analysis.</li></ul><p><img src=/post/quack-bot/11.1.png width=1160 height=443 srcset="/post/quack-bot/11.1_hu29a32d41472805a2483ddebbaa905f5d_53030_480x0_resize_box_3.png 480w, /post/quack-bot/11.1_hu29a32d41472805a2483ddebbaa905f5d_53030_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 11" class=gallery-image data-flex-grow=261 data-flex-basis=628px></p><ol start=12><li><strong>Tracing payload copy and decrypt</strong></li></ol><ul><li><code>sub_40C5B1()</code> copies a large blob into memory at <code>v6</code> (0x1a0000).</li><li><code>sub_40C2A9()</code> then decrypts that payload.</li></ul><p><img src=/post/quack-bot/12.1.png width=1340 height=498 srcset="/post/quack-bot/12.1_huc6cedd3c32d87097a0db9b61941178e3_81948_480x0_resize_box_3.png 480w, /post/quack-bot/12.1_huc6cedd3c32d87097a0db9b61941178e3_81948_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 12" class=gallery-image data-flex-grow=269 data-flex-basis=645px></p><ol start=13><li><strong>Preparing a memory dump</strong></li></ol><ul><li>A breakpoint at <code>sub_40C2A9()</code> reveals argument 1 as the key, argument 2 as the IV, and argument 3 as the destination buffer.</li><li>The target region to dump is <code>0x001B023C</code> with a length of <code>0x5184</code> bytes.</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>ida_bytes</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>idc</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>memdump</span><span class=p>(</span><span class=n>ea</span><span class=p>,</span> <span class=n>size</span><span class=p>,</span> <span class=n>file</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>data</span> <span class=o>=</span> <span class=n>ida_bytes</span><span class=o>.</span><span class=n>get_bytes</span><span class=p>(</span><span class=n>ea</span><span class=p>,</span> <span class=n>size</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>data</span> <span class=ow>is</span> <span class=kc>None</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Failed to read memory at 0x</span><span class=si>{:X}</span><span class=s2>&#34;</span><span class=o>.</span><span class=n>format</span><span class=p>(</span><span class=n>ea</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=k>return</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>with</span> <span class=nb>open</span><span class=p>(</span><span class=n>file</span><span class=p>,</span> <span class=s2>&#34;wb&#34;</span><span class=p>)</span> <span class=k>as</span> <span class=n>fp</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=n>fp</span><span class=o>.</span><span class=n>write</span><span class=p>(</span><span class=n>data</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;Memdump Success!&#34;</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><ol start=14><li><strong>Dumping after decryption</strong></li></ol><ul><li>The IDA script was used right after <code>sub_40C2A9()</code> completed.</li><li>This produced the decrypted blob for the next step.</li></ul><p><img src=/post/quack-bot/14.1.png width=692 height=158 srcset="/post/quack-bot/14.1_hucfd4c0c2d38875a92ea21432f5cea692_12718_480x0_resize_box_3.png 480w, /post/quack-bot/14.1_hucfd4c0c2d38875a92ea21432f5cea692_12718_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 14" class=gallery-image data-flex-grow=437 data-flex-basis=1051px>
+<img src=/post/quack-bot/14.2.png width=1045 height=690 srcset="/post/quack-bot/14.2_hu25a40bd9f41f352e8d54a6195fcc8d86_95389_480x0_resize_box_3.png 480w, /post/quack-bot/14.2_hu25a40bd9f41f352e8d54a6195fcc8d86_95389_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 14" class=gallery-image data-flex-grow=151 data-flex-basis=363px></p><ol start=15><li><strong>Reading the dumped strings</strong></li></ol><ul><li>The dumped data contains readable strings now.</li><li>That confirms the decryption worked as expected.</li></ul><p><img src=/post/quack-bot/15.1.png width=1043 height=312 srcset="/post/quack-bot/15.1_hu1c3936ab44a757a8e0032c83d932e1b0_56463_480x0_resize_box_3.png 480w, /post/quack-bot/15.1_hu1c3936ab44a757a8e0032c83d932e1b0_56463_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 15" class=gallery-image data-flex-grow=334 data-flex-basis=802px></p><ol start=16><li><strong>Handling a non-EXE stage</strong></li></ol><ul><li>The extracted <code>idkwhatstage.bin</code> is not a valid EXE.</li><li>Binwalk failed to extract it automatically.</li></ul><p><img src=/post/quack-bot/16.1.png width=1090 height=627 srcset="/post/quack-bot/16.1_hud75708a441248fa869b4aac168ae070f_365349_480x0_resize_box_3.png 480w, /post/quack-bot/16.1_hud75708a441248fa869b4aac168ae070f_365349_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 16" class=gallery-image data-flex-grow=173 data-flex-basis=417px></p><ol start=17><li><strong>Force-extracting the next binary</strong></li></ol><ul><li>Manual extraction was done with <code>dd if=idkwhatstage.bin of=stage2.exe bs=1 skip=4172 status=progress</code>.</li><li>The resulting <code>stage2.exe</code> is the next payload to inspect.</li></ul><p><img src=/post/quack-bot/17.1.png width=827 height=171 srcset="/post/quack-bot/17.1_hu37ba391156e38ab96966747e5ddfdcf8_96033_480x0_resize_box_3.png 480w, /post/quack-bot/17.1_hu37ba391156e38ab96966747e5ddfdcf8_96033_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 17" class=gallery-image data-flex-grow=483 data-flex-basis=1160px></p><ol start=18><li><strong>Identifying bind shell behavior</strong></li></ol><ul><li>The new binary opens a TCP listener and launches <code>cmd.exe</code>.</li><li>That behavior matches a bind shell stage.</li></ul><p><img src=/post/quack-bot/18.1.png width=827 height=171 srcset="/post/quack-bot/18.1_hu37ba391156e38ab96966747e5ddfdcf8_96033_480x0_resize_box_3.png 480w, /post/quack-bot/18.1_hu37ba391156e38ab96966747e5ddfdcf8_96033_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 18" class=gallery-image data-flex-grow=483 data-flex-basis=1160px></p><ol start=19><li><strong>Spotting odd IP addresses</strong></li></ol><ul><li><code>off_140003000</code> contains a list of invalid-looking IPs.</li><li>The format hints at octal-encoded bytes rather than real dotted decimals.</li></ul><p><img src=/post/quack-bot/19.1.png width=787 height=605 srcset="/post/quack-bot/19.1_hue37773ec6d59649f98b3bc968cbb707d_44152_480x0_resize_box_3.png 480w, /post/quack-bot/19.1_hue37773ec6d59649f98b3bc968cbb707d_44152_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 19" class=gallery-image data-flex-grow=130 data-flex-basis=312px>
+<img src=/post/quack-bot/19.2.png width=885 height=530 srcset="/post/quack-bot/19.2_hu214dfadf078c70e0330e14f7c46ef4f3_65498_480x0_resize_box_3.png 480w, /post/quack-bot/19.2_hu214dfadf078c70e0330e14f7c46ef4f3_65498_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 19" class=gallery-image data-flex-grow=166 data-flex-basis=400px></p><ol start=20><li><strong>Decoding octal to ASCII</strong></li></ol><ul><li>Converting the octal bytes to ASCII reveals the final string.</li><li>The decoding script used is below.</li></ul><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=ch>#!/usr/bin/env python3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Hard-coded dotted “IPs” (each dot-part is an OCTAL byte)</span>
+</span></span><span class=line><span class=cl><span class=n>OCTAL_DOTTED</span> <span class=o>=</span> <span class=p>[</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;156.145.170.163&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;145.143.62.65&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;173.65.61.63&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;141.146.143.61&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;62.67.62.142&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;64.60.66.66&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;70.71.71.65&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;144.141.63.146&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;66.71.146.141&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;145.145.145.65&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;142.63.67.144&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;144.65.70.142&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;145.143.143.143&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;71.146.142.146&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;64.61.143.143&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;63.142.64.64&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;141.65.70.66&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;66.71.144.145&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl>    <span class=s2>&#34;66.175&#34;</span><span class=p>,</span>
+</span></span><span class=line><span class=cl><span class=p>]</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>def</span> <span class=nf>decode_octal_dotted</span><span class=p>(</span><span class=n>lines</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>    <span class=n>out</span> <span class=o>=</span> <span class=nb>bytearray</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>line</span> <span class=ow>in</span> <span class=n>lines</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=k>for</span> <span class=n>part</span> <span class=ow>in</span> <span class=n>line</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s2>&#34;.&#34;</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>            <span class=n>out</span><span class=o>.</span><span class=n>append</span><span class=p>(</span><span class=nb>int</span><span class=p>(</span><span class=n>part</span><span class=p>,</span> <span class=mi>8</span><span class=p>)</span> <span class=o>&amp;</span> <span class=mh>0xFF</span><span class=p>)</span>  <span class=c1># base-8 -&gt; byte</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>out</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&#34;__main__&#34;</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>b</span> <span class=o>=</span> <span class=n>decode_octal_dotted</span><span class=p>(</span><span class=n>OCTAL_DOTTED</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nb>print</span><span class=p>(</span><span class=n>b</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s2>&#34;utf-8&#34;</span><span class=p>,</span> <span class=n>errors</span><span class=o>=</span><span class=s2>&#34;replace&#34;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/post/quack-bot/20.1.png width=873 height=102 srcset="/post/quack-bot/20.1_hu572fde8173244febebe170d92915c601_46838_480x0_resize_box_3.png 480w, /post/quack-bot/20.1_hu572fde8173244febebe170d92915c601_46838_1024x0_resize_box_3.png 1024w" loading=lazy alt="Step 20" class=gallery-image data-flex-grow=855 data-flex-basis=2054px></p><h2 id=flag>Flag</h2><p>The flag for this challenge is: <code>nexsec25{513afc1272b40668995da3f69faeee5b37dd58beccc9fbf41cc3b44a58669de6}</code></p></section><footer class=article-footer><section class=article-tags><a href=/tags/reverse-engineering/>Reverse Engineering</a></section><section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>Last updated on Dec 21, 2025 00:00 UTC</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>Related content</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/post/finals/><div class=article-details><h2 class=article-title>finals</h2></div></a></article><article><a href=/post/sprivect/><div class=article-details><h2 class=article-title>Sprivect</h2></div></a></article><article><a href=/post/x/><div class=article-details><h2 class=article-title>X</h2></div></a></article><article><a href=/post/iamspeed/><div class=article-details><h2 class=article-title>iamspeed</h2></div></a></article><article><a href=/post/packman/><div class=article-details><h2 class=article-title>Packman</h2></div></a></article></div></div></aside><footer class=site-footer><section class=copyright>&copy;
+2023 -
+2025</section><section class=powerby>Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a><br>Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.30.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

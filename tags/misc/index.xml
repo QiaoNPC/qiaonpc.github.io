@@ -1,0 +1,1449 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Misc on</title><link>https://qiaonpc.github.io/tags/misc/</link><description>Recent content in Misc on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 25 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/misc/index.xml" rel="self" type="application/rss+xml"/><item><title>0 - Zero</title><link>https://qiaonpc.github.io/post/0-zero/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/0-zero/</guid><description>&lt;h1 id="zero---ctf-challenge-writeup">Zero - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Zero&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Locate and extract the flag by investigating a provided file or image (&lt;code>zero:welcome&lt;/code>). The goal is to navigate the user profile and identify credentials or indicators of compromise from accessible paths.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-navigating-to-the-desktop">1. &lt;strong>Navigating to the Desktop&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>given &lt;code>zero:welcome&lt;/code>, proceed to Desktop folder to find the password for User One.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/0-zero/zero.png"
+width="1006"
+height="631"
+srcset="https://qiaonpc.github.io/post/0-zero/zero_hu78c3e0ecd1b6859217fc6b8e2328eea5_244112_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/0-zero/zero_hu78c3e0ecd1b6859217fc6b8e2328eea5_244112_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="159"
+data-flex-basis="382px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>sherpactf25&lt;/code>&lt;/p></description></item><item><title>1 - One</title><link>https://qiaonpc.github.io/post/1-one/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/1-one/</guid><description>&lt;h1 id="one---ctf-challenge-writeup">One - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: One&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify and decode a simple obfuscated message left by a previous user.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>From &lt;strong>User Zero&lt;/strong>, we find a file with a ciphered message.&lt;/li>
+&lt;li>The message appears to be &lt;strong>reversed text&lt;/strong>.&lt;/li>
+&lt;li>Wrote a quick Python script to reverse it:&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;one.txt&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;r&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">read&lt;/span>&lt;span class="p">()[::&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://qiaonpc.github.io/one.png"
+loading="lazy"
+alt="Challenge One"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/one_flag.png"
+loading="lazy"
+alt="Flag"
+>&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>SHERPACTF25{I_Kn3w_it_44}&lt;/code>&lt;/p></description></item><item><title>10 - Ten</title><link>https://qiaonpc.github.io/post/10-ten/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/10-ten/</guid><description>&lt;h1 id="ten---ctf-challenge-writeup">Ten - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Ten&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit a vulnerable login form in OWASP Juice Shop using classic SQL Injection techniques to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Nine&lt;/strong>, we’re given another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/10-ten/ten.png"
+width="986"
+height="396"
+srcset="https://qiaonpc.github.io/post/10-ten/ten_hue4a90d231a01611e0e31d6bb4fd5d981_74776_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/10-ten/ten_hue4a90d231a01611e0e31d6bb4fd5d981_74776_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 10"
+class="gallery-image"
+data-flex-grow="248"
+data-flex-basis="597px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one is a &lt;strong>classic&lt;/strong> — good old &lt;strong>SQL Injection&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The login form is completely unprotected, no WAF, no input sanitization.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A simple payload like &lt;code>' OR 1=1 --&lt;/code> bypasses authentication.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After logging in using that injection, the &lt;strong>flag is revealed&lt;/strong> on the resulting page or via the admin panel.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/10-ten/flag.png"
+width="1572"
+height="471"
+srcset="https://qiaonpc.github.io/post/10-ten/flag_hu9d08e04c1943d82f595fbcad390a6bd0_84857_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/10-ten/flag_hu9d08e04c1943d82f595fbcad390a6bd0_84857_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="333"
+data-flex-basis="801px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>`690fa3247a99d651e0b26f947baf&lt;/p></description></item><item><title>11 - Eleven</title><link>https://qiaonpc.github.io/post/11-eleven/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/11-eleven/</guid><description>&lt;h1 id="eleven---ctf-challenge-writeup">Eleven - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Eleven&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Access and manipulate a custom Rubik’s Cube web challenge under restricted user sessions to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Ten&lt;/strong>, we’re given a &lt;strong>custom web challenge&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/11-eleven/eleven.png"
+width="1705"
+height="888"
+srcset="https://qiaonpc.github.io/post/11-eleven/eleven_huba2cab93668c2f94cee5d417fb590143_326084_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/11-eleven/eleven_huba2cab93668c2f94cee5d417fb590143_326084_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 11"
+class="gallery-image"
+data-flex-grow="192"
+data-flex-basis="460px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At first, I couldn’t open the &lt;code>Rubiks.html&lt;/code> file due to &lt;strong>permission issues&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After &lt;strong>45 minutes of debugging&lt;/strong>, I realized I had been &lt;code>su&lt;/code>-ing through multiple users — causing nested shells under &lt;strong>User Zero’s terminal&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Because of that, although I was technically &lt;strong>User Ten&lt;/strong>, the permission context was messed up.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To fix this, I &lt;strong>logged out completely&lt;/strong> and logged in directly as &lt;strong>User Ten&lt;/strong>. That allowed me to open &lt;strong>Firefox&lt;/strong> and view the HTML page.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/11-eleven/login%20as%20eleven.png"
+width="1718"
+height="972"
+srcset="https://qiaonpc.github.io/post/11-eleven/login%20as%20eleven_hu15c415cc434848ccd98373b7c47e5a17_1139859_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/11-eleven/login%20as%20eleven_hu15c415cc434848ccd98373b7c47e5a17_1139859_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 11"
+class="gallery-image"
+data-flex-grow="176"
+data-flex-basis="424px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The challenge was a &lt;strong>Rubik’s Cube simulation&lt;/strong>. As someone who can solve a cube physically, I considered solving it directly.&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>But the page didn’t allow turning multiple layers, and I couldn’t mentally map 1-layer operations.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So instead, I chose the &lt;strong>easier way&lt;/strong>: modifying the &lt;strong>source code&lt;/strong> to force the check function to always &lt;strong>return true&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/11-eleven/src%20code%20modification.png"
+width="1682"
+height="877"
+srcset="https://qiaonpc.github.io/post/11-eleven/src%20code%20modification_huf568bb0cf1df00a7d1b3ed4ab444304b_767710_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/11-eleven/src%20code%20modification_huf568bb0cf1df00a7d1b3ed4ab444304b_767710_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Src Code Modification"
+class="gallery-image"
+data-flex-grow="191"
+data-flex-basis="460px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>This trick worked — and the flag was revealed.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/11-eleven/flag.png"
+width="1628"
+height="853"
+srcset="https://qiaonpc.github.io/post/11-eleven/flag_hu418f6f31acc56a1a2ee7df2011ab525d_194274_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/11-eleven/flag_hu418f6f31acc56a1a2ee7df2011ab525d_194274_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="458px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>RUBIKSCUBEMASTA&lt;/code>&lt;/p></description></item><item><title>12 - Twelve</title><link>https://qiaonpc.github.io/post/12-twelve/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/12-twelve/</guid><description>&lt;h1 id="twelve---ctf-challenge-writeup">Twelve - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Twelve&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit session manipulation in OWASP Juice Shop to gain access to another user&amp;rsquo;s basket and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Eleven&lt;/strong>, we’re handed yet another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/12-twelve/twelve.png"
+width="1162"
+height="370"
+srcset="https://qiaonpc.github.io/post/12-twelve/twelve_hu1813fb55fc949620183a659b8e1d5c74_90951_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/12-twelve/twelve_hu1813fb55fc949620183a659b8e1d5c74_90951_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 12"
+class="gallery-image"
+data-flex-grow="314"
+data-flex-basis="753px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one revolves around accessing &lt;strong>another user&amp;rsquo;s basket&lt;/strong> — a classic session-based vulnerability.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The key here is that the &lt;strong>basket ID is stored in &lt;code>sessionStorage&lt;/code>&lt;/strong>, which is accessible via the browser&amp;rsquo;s developer tools.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>By manually modifying the &lt;code>bid&lt;/code> value in &lt;code>sessionStorage&lt;/code>, we can point our session to a different user’s basket.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After trying a few IDs, one of them &lt;strong>revealed the flag&lt;/strong> tied to that other user&amp;rsquo;s data.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/12-twelve/flag.png"
+width="1617"
+height="682"
+srcset="https://qiaonpc.github.io/post/12-twelve/flag_hu7f7957eea63cf44d11b80b9e62222891_96107_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/12-twelve/flag_hu7f7957eea63cf44d11b80b9e62222891_96107_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="237"
+data-flex-basis="569px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>e6982b34b6734ceadd28e5019b251f929a80b815&lt;/code>&lt;/p></description></item><item><title>13 - Thirteen</title><link>https://qiaonpc.github.io/post/13-thirteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/13-thirteen/</guid><description>&lt;h1 id="thirteen---ctf-challenge-writeup">Thirteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Thirteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit a vulnerable custom web application that evaluates function names passed via URL parameters without proper validation.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Twelve&lt;/strong>, we’re given a &lt;strong>custom web app&lt;/strong>, different from the usual OWASP Juice Shop challenges.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/13-thirteen/thirteen.png"
+width="815"
+height="245"
+srcset="https://qiaonpc.github.io/post/13-thirteen/thirteen_hu6fcbe268459ead80f53092b73e863019_40971_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/13-thirteen/thirteen_hu6fcbe268459ead80f53092b73e863019_40971_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 13"
+class="gallery-image"
+data-flex-grow="332"
+data-flex-basis="798px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/13-thirteen/challenge.png"
+width="1398"
+height="860"
+srcset="https://qiaonpc.github.io/post/13-thirteen/challenge_hub964f1f3efa7a7177f82d3d775981446_125242_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/13-thirteen/challenge_hub964f1f3efa7a7177f82d3d775981446_125242_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 13 2"
+class="gallery-image"
+data-flex-grow="162"
+data-flex-basis="390px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The challenge revolves around passing an &lt;strong>operator&lt;/strong> to the application through a query string.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The vulnerability lies in the fact that the &lt;strong>operator is executed as a function&lt;/strong>, without any restrictions or sanitization.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>That means arbitrary functions (like &lt;code>system&lt;/code>) can be invoked directly.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>A crafted URL like below exploits this: &lt;code>http://localhost:8081?operator=system&amp;amp;num1=cat&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The application executes &lt;code>system('cat flag.txt')&lt;/code>, leaking the flag directly in the response.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/13-thirteen/flag.png"
+width="1049"
+height="773"
+srcset="https://qiaonpc.github.io/post/13-thirteen/flag_hub05417e70a4a452f6491c2f1c6d40e87_81078_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/13-thirteen/flag_hub05417e70a4a452f6491c2f1c6d40e87_81078_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="325px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{ARRRRRR\_CIIIIII\_EIEIEIE}&lt;/code>&lt;/p></description></item><item><title>14 - Fourteen</title><link>https://qiaonpc.github.io/post/14-fourteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/14-fourteen/</guid><description>&lt;h1 id="fourteen---ctf-challenge-writeup">Fourteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Fourteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit OWASP Juice Shop by registering a user with empty input values to trigger a vulnerable behavior and obtain the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Thirteen&lt;/strong>, we’re given &lt;strong>another OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/14-fourteen/fourteen.png"
+width="1247"
+height="274"
+srcset="https://qiaonpc.github.io/post/14-fourteen/fourteen_hu86ce927744fd558816994f14e0b95d45_63928_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/14-fourteen/fourteen_hu86ce927744fd558816994f14e0b95d45_63928_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 14"
+class="gallery-image"
+data-flex-grow="455"
+data-flex-basis="1092px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The goal here is to &lt;strong>register a user with empty fields&lt;/strong> — which the frontend normally doesn’t allow.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Using &lt;strong>Firefox’s built-in repeater&lt;/strong> or dev tools, we can intercept the registration request and &lt;strong>manually edit the payload&lt;/strong> to submit empty values (e.g., empty email and password).&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/14-fourteen/original%20request.png"
+width="1309"
+height="499"
+srcset="https://qiaonpc.github.io/post/14-fourteen/original%20request_hu890c2f35599f47045a868425c0ed9056_73615_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/14-fourteen/original%20request_hu890c2f35599f47045a868425c0ed9056_73615_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Original Request"
+class="gallery-image"
+data-flex-grow="262"
+data-flex-basis="629px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/14-fourteen/empty%20request.png"
+width="593"
+height="777"
+srcset="https://qiaonpc.github.io/post/14-fourteen/empty%20request_hu5a62efe30da35d21f447d5fc37c4c07a_77839_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/14-fourteen/empty%20request_hu5a62efe30da35d21f447d5fc37c4c07a_77839_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sending Empty Request"
+class="gallery-image"
+data-flex-grow="76"
+data-flex-basis="183px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The backend fails to validate it properly, resulting in successful registration and exposure of the &lt;strong>flag&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/14-fourteen/flag.png"
+width="1293"
+height="279"
+srcset="https://qiaonpc.github.io/post/14-fourteen/flag_huf7c4455e7a9f3c09c27734ad130e1e27_46449_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/14-fourteen/flag_huf7c4455e7a9f3c09c27734ad130e1e27_46449_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="463"
+data-flex-basis="1112px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>e58f8a9612c60985360e904b027535262c52f9dc&lt;/code>&lt;/p></description></item><item><title>15 - Fifteen</title><link>https://qiaonpc.github.io/post/15-fifteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/15-fifteen/</guid><description>&lt;h1 id="fifteen---ctf-challenge-writeup">Fifteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Fifteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Interact with a restricted terminal environment and extract the contents of the &lt;code>flag.txt&lt;/code> file using limited command-line capabilities.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Fourteen&lt;/strong>, we’re dropped into a &lt;strong>restricted terminal&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/15-fifteen/fifteen.png"
+width="1030"
+height="813"
+srcset="https://qiaonpc.github.io/post/15-fifteen/fifteen_hu29882b363993ad231d798d3097ee77ca_143842_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/15-fifteen/fifteen_hu29882b363993ad231d798d3097ee77ca_143842_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 15"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="304px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I’ve faced similar setups before, but didn’t take notes — so it took me around &lt;strong>an hour of trial and error&lt;/strong> to rediscover the solution.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>In restricted shells where typical tools or flags are disabled, breaking down output is key.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The command that worked: &lt;code>grep -o . flag.txt&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This prints the flag &lt;strong>character by character&lt;/strong>, bypassing common output restrictions and filters.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/15-fifteen/flag.png"
+width="1049"
+height="833"
+srcset="https://qiaonpc.github.io/post/15-fifteen/flag_huf2241c4744427a15ce6582229c652775_119338_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/15-fifteen/flag_huf2241c4744427a15ce6582229c652775_119338_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="125"
+data-flex-basis="302px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{EZPZ}&lt;/code>&lt;/p></description></item><item><title>16 - Sixteen</title><link>https://qiaonpc.github.io/post/16-sixteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/16-sixteen/</guid><description>&lt;h1 id="sixteen---ctf-challenge-writeup">Sixteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Sixteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Log in as admin via SQL Injection and delete all 5-star feedback entries to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Fifteen&lt;/strong>, the challenge is to remove all &lt;strong>five-star feedbacks&lt;/strong> from the system.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/16-sixteen/sixteen.png"
+width="1176"
+height="428"
+srcset="https://qiaonpc.github.io/post/16-sixteen/sixteen_hubfe6842d6b7e56d1c14d831962e522b0_80549_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/16-sixteen/sixteen_hubfe6842d6b7e56d1c14d831962e522b0_80549_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 16"
+class="gallery-image"
+data-flex-grow="274"
+data-flex-basis="659px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>To do that, we first need &lt;strong>admin access&lt;/strong>, which can be achieved using &lt;strong>SQL Injection&lt;/strong> on the login form.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After gaining access, navigate to the &lt;strong>feedback section&lt;/strong> of the OWASP Juice Shop dashboard.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Manually identify and &lt;strong>delete all entries with a 5-star rating&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once all high-rated feedbacks are cleared, the challenge marks as complete and the &lt;strong>flag is revealed&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/16-sixteen/flag.png"
+width="1485"
+height="767"
+srcset="https://qiaonpc.github.io/post/16-sixteen/flag_huf2e8221b349333f7bacf0b88a94b155e_115353_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/16-sixteen/flag_huf2e8221b349333f7bacf0b88a94b155e_115353_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="193"
+data-flex-basis="464px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>78231b75c0b2180b7e964dcbb1ab3c3f58639f2e&lt;/code>&lt;/p></description></item><item><title>17 - Seventeen</title><link>https://qiaonpc.github.io/post/17-seventeen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/17-seventeen/</guid><description>&lt;h1 id="seventeen---ctf-challenge-writeup">Seventeen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Seventeen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Unzip a series of recursively compressed ZIP files, collect password fragments from each layer, and use the final combined password to extract the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Sixteen&lt;/strong>, we&amp;rsquo;re presented with a challenge that involves unzipping &lt;strong>layered ZIP files&lt;/strong> — a total of &lt;strong>10 layers deep&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Each ZIP file is named with a &lt;strong>3-character password&lt;/strong>: either all lowercase, all uppercase, or all numbers.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Without access to GPT, scripting this was difficult, so I ended up doing most of the layers &lt;strong>manually&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>At each level, the ZIP would extract into another ZIP, and inside each, a &lt;strong>snippet of the final password&lt;/strong> was hidden.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After collecting all the snippets across the 10 layers, I &lt;strong>combined them into a single string&lt;/strong>, which served as the password to unlock the &lt;strong>final ZIP file&lt;/strong> containing the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/17-seventeen/flag.png"
+width="1558"
+height="517"
+srcset="https://qiaonpc.github.io/post/17-seventeen/flag_hu95a2f35634177e28b9144fa0e06fe227_162225_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/17-seventeen/flag_hu95a2f35634177e28b9144fa0e06fe227_162225_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="301"
+data-flex-basis="723px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{Cr4ck_z1p5_3zpz}&lt;/code>&lt;/p></description></item><item><title>18 - Eighteen</title><link>https://qiaonpc.github.io/post/18-eighteen/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/18-eighteen/</guid><description>&lt;h1 id="eighteen---ctf-challenge-writeup">Eighteen - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Eighteen&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Log in as a specific user (Jim) in OWASP Juice Shop using SQL Injection to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Seventeen&lt;/strong>, we’re given another &lt;strong>OWASP Juice Shop&lt;/strong> challenge. This time, the task is to &lt;strong>log in as Jim&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/18-eighteen/eighteen.png"
+width="1153"
+height="409"
+srcset="https://qiaonpc.github.io/post/18-eighteen/eighteen_hu022f3e19197bd96250288a46a2f4a90e_82391_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/18-eighteen/eighteen_hu022f3e19197bd96250288a46a2f4a90e_82391_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge 18"
+class="gallery-image"
+data-flex-grow="281"
+data-flex-basis="676px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Actually, we had already done something similar earlier when logging in as admin to delete five-star ratings.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The first step is to &lt;strong>find Jim&amp;rsquo;s email&lt;/strong>, which is typically:&lt;code>jim@juice-sh.op&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/18-eighteen/jim%20email.png"
+width="1282"
+height="765"
+srcset="https://qiaonpc.github.io/post/18-eighteen/jim%20email_hu27729c98c40906903738a885885ed2ea_234827_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/18-eighteen/jim%20email_hu27729c98c40906903738a885885ed2ea_234827_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Jim&amp;rsquo;s Email"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="402px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Then, use a &lt;strong>basic SQL injection&lt;/strong> payload to bypass the password check: &lt;code>jim@juice-sh.op'--&lt;/code>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This logs us in as Jim, and once authenticated, the &lt;strong>flag becomes accessible&lt;/strong> — either via the profile page or shown directly.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/18-eighteen/flag.png"
+width="1551"
+height="391"
+srcset="https://qiaonpc.github.io/post/18-eighteen/flag_hu56e707cd0bad9eb2cf18662771bd08d6_59867_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/18-eighteen/flag_hu56e707cd0bad9eb2cf18662771bd08d6_59867_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="396"
+data-flex-basis="952px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>de0806c1e34a5783b4b1672fa4eed440a9912378&lt;/code>&lt;/p></description></item><item><title>2 - Two</title><link>https://qiaonpc.github.io/post/2-two/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/2-two/</guid><description>&lt;h1 id="two---ctf-challenge-writeup">Two - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Two&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Access the Juice Shop instance running on port &lt;code>42000&lt;/code> and locate the scoreboard to find the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User One&lt;/strong>, we’re told to check a web app on port &lt;strong>42000&lt;/strong> — turns out it’s &lt;strong>OWASP Juice Shop&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-two/two.png"
+width="894"
+height="570"
+srcset="https://qiaonpc.github.io/post/2-two/two_hu661478713b2e4bc3ed1fbc2522e27d7b_208394_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-two/two_hu661478713b2e4bc3ed1fbc2522e27d7b_208394_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="156"
+data-flex-basis="376px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I’ve done this before, so it was familiar, but doing it again without internet or GPT made it more fun.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Checked the source code, looked around, found &lt;code>/score-board&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-two/two_link.png"
+width="994"
+height="783"
+srcset="https://qiaonpc.github.io/post/2-two/two_link_hu721cd81540f0c305d98e622239c5bb1b_137583_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-two/two_link_hu721cd81540f0c305d98e622239c5bb1b_137583_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Found score-board endpoint"
+class="gallery-image"
+data-flex-grow="126"
+data-flex-basis="304px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Once you browse to the endpoint, the flag will automatically appear on the top of the screen.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/2-two/flag.png"
+width="1657"
+height="269"
+srcset="https://qiaonpc.github.io/post/2-two/flag_hu7aa02ea0244f65a30b3b3ad4478af422_37258_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/2-two/flag_hu7aa02ea0244f65a30b3b3ad4478af422_37258_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="615"
+data-flex-basis="1478px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>2614339936e8282e2f820f023d4d998a1f95e02a&lt;/code>&lt;/p></description></item><item><title>3 - Three</title><link>https://qiaonpc.github.io/post/3-three/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/3-three/</guid><description>&lt;h1 id="three---ctf-challenge-writeup">Three - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Three&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Decode the hidden flag from a seemingly normal message given by User Two.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Two&lt;/strong>, we’re given a regular-looking message, but the flag is &lt;strong>encoded&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-three/three.png"
+width="1224"
+height="838"
+srcset="https://qiaonpc.github.io/post/3-three/three_hud62a83453be8bbcfa8cf2cbdf25dcadc_193124_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/3-three/three_hud62a83453be8bbcfa8cf2cbdf25dcadc_193124_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="146"
+data-flex-basis="350px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Just by eyeballing it, the pattern looked like &lt;strong>ROT13&lt;/strong> — common and easy to test manually.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoded it by counting through the letters manually, and got the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/3-three/flag.jpg"
+width="1080"
+height="538"
+srcset="https://qiaonpc.github.io/post/3-three/flag_hu392cd00ea5ebec8dca5d90441bc2ef31_27380_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/3-three/flag_hu392cd00ea5ebec8dca5d90441bc2ef31_27380_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="481px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{Gh0st_in_Th3_W1r3s}&lt;/code>&lt;/p></description></item><item><title>4 - Four</title><link>https://qiaonpc.github.io/post/4-four/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/4-four/</guid><description>&lt;h1 id="four---ctf-challenge-writeup">Four - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Four&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Access and explore an exposed FTP server tied to an OWASP Juice Shop challenge to retrieve confidential internal files, including the flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Three&lt;/strong>, we’re given another &lt;strong>OWASP Juice Shop&lt;/strong>-related challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/4-four/four.png"
+width="1052"
+height="565"
+srcset="https://qiaonpc.github.io/post/4-four/four_hu7fae35b89c4bb18e4554e54544c6cef8_91437_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/4-four/four_hu7fae35b89c4bb18e4554e54544c6cef8_91437_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge Four"
+class="gallery-image"
+data-flex-grow="186"
+data-flex-basis="446px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This time, the focus is on an &lt;strong>open FTP server&lt;/strong> that contains internal files.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Browsing through the FTP, one of the files available is &lt;code>acquisitions.md&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Opening that file reveals the &lt;strong>flag directly&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/4-four/flag.png"
+width="1639"
+height="418"
+srcset="https://qiaonpc.github.io/post/4-four/flag_hueaec141ff6de3f82f41e5d4feb779300_66176_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/4-four/flag_hueaec141ff6de3f82f41e5d4feb779300_66176_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="392"
+data-flex-basis="941px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>8d2072c6b0a455608ca1a293dc0c9579883fc6a5&lt;/code>&lt;/p></description></item><item><title>5 - Five</title><link>https://qiaonpc.github.io/post/5-five/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/5-five/</guid><description>&lt;h1 id="five---ctf-challenge-writeup">Five - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Five&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Investigate uploaded files to identify a malicious web shell used by an attacker.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Four&lt;/strong>, we’re tasked with finding &lt;strong>malicious files&lt;/strong> uploaded by an attacker.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/5-five/five.png"
+width="1671"
+height="605"
+srcset="https://qiaonpc.github.io/post/5-five/five_huf20920689421df35b74a02fe14bcb409_150498_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/5-five/five_huf20920689421df35b74a02fe14bcb409_150498_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="276"
+data-flex-basis="662px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>By grepping for keywords like &lt;code>&amp;quot;upload&amp;quot;&lt;/code> in the logs or source files, we can trace file upload activity.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This leads us to a file named &lt;strong>&lt;code>nusa_shell.php&lt;/code>&lt;/strong> — clearly malicious and matches the context of a typical web shell.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>That filename itself is the &lt;strong>flag&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/5-five/grep.png"
+width="1663"
+height="538"
+srcset="https://qiaonpc.github.io/post/5-five/grep_hu4f0e09602ea967e8d1a99d32400b609a_249676_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/5-five/grep_hu4f0e09602ea967e8d1a99d32400b609a_249676_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="309"
+data-flex-basis="741px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{nusa_shell.php}&lt;/code>&lt;/p></description></item><item><title>6 - Six</title><link>https://qiaonpc.github.io/post/6-six/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/6-six/</guid><description>&lt;h1 id="six---ctf-challenge-writeup">Six - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Six&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Interact with a newly added OWASP Juice Shop AI-based feature and identify how to retrieve a hidden flag through it.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Five&lt;/strong>, we&amp;rsquo;re given another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/6-six/six.png"
+width="989"
+height="598"
+srcset="https://qiaonpc.github.io/post/6-six/six_hu07b6e3fd454666752b9cd2a5d6fb6c19_109727_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/6-six/six_hu07b6e3fd454666752b9cd2a5d6fb6c19_109727_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge Six"
+class="gallery-image"
+data-flex-grow="165"
+data-flex-basis="396px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one felt different — it’s a &lt;strong>newer challenge&lt;/strong>, likely introduced after &lt;strong>AI pentesting features&lt;/strong> were added to the platform.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Spent quite a bit of time stuck, expecting a typical &lt;code>flag&lt;/code> to be revealed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Turns out, this challenge doesn&amp;rsquo;t deal with flags directly — instead, it uses a &lt;strong>coupon bot&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After repeatedly interacting with the bot and specifically &lt;strong>asking for a coupon&lt;/strong> multiple times, the &lt;strong>flag was finally returned&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/6-six/image.png"
+width="988"
+height="845"
+srcset="https://qiaonpc.github.io/post/6-six/image_hubc5ab71b2c4d1136f39dcbeb56264fe2_96392_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/6-six/image_hubc5ab71b2c4d1136f39dcbeb56264fe2_96392_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Asking for Coupon"
+class="gallery-image"
+data-flex-grow="116"
+data-flex-basis="280px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/6-six/flag.png"
+width="1638"
+height="358"
+srcset="https://qiaonpc.github.io/post/6-six/flag_hu17888f7dd016063b1e32a635dd6cbf24_50077_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/6-six/flag_hu17888f7dd016063b1e32a635dd6cbf24_50077_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="457"
+data-flex-basis="1098px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>9dd704b4c48bd310dd3187971a344c179213562d&lt;/code>&lt;/p></description></item><item><title>7 - Seven</title><link>https://qiaonpc.github.io/post/7-seven/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/7-seven/</guid><description>&lt;h1 id="seven---ctf-challenge-writeup">Seven - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Seven&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Identify the real IP address of the attacker from the data provided by User Six.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Six&lt;/strong>, the task was to determine the &lt;strong>real IP address&lt;/strong> of the attacker.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/7-seven/seven.png"
+width="1662"
+height="427"
+srcset="https://qiaonpc.github.io/post/7-seven/seven_hu9f89f2e05f19c607c683499cb9265a04_111541_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/7-seven/seven_hu9f89f2e05f19c607c683499cb9265a04_111541_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge seven"
+class="gallery-image"
+data-flex-grow="389"
+data-flex-basis="934px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I went with a &lt;strong>brute-force approach&lt;/strong>, submitting all possible IPs found in the provided logs/data.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Eventually, one of them returned a &lt;strong>positive result&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/7-seven/brute%20forcing.png"
+width="744"
+height="840"
+srcset="https://qiaonpc.github.io/post/7-seven/brute%20forcing_hu0c978561f56ac215ef59ca70c0017a4f_100377_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/7-seven/brute%20forcing_hu0c978561f56ac215ef59ca70c0017a4f_100377_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Brute Force"
+class="gallery-image"
+data-flex-grow="88"
+data-flex-basis="212px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>One important note: the flag format had a quirk — the platform &lt;strong>expected the flag without the &amp;lsquo;5&amp;rsquo;&lt;/strong> in &lt;code>SHERPACTF25&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>So instead of &lt;code>SHERPACTF25{...}&lt;/code>, the correct format was &lt;strong>&lt;code>SHERPACTF2{...}&lt;/code>&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF2{103.17.24.77}&lt;/code>&lt;/p></description></item><item><title>8 - Eight</title><link>https://qiaonpc.github.io/post/8-eight/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/8-eight/</guid><description>&lt;h1 id="eight---ctf-challenge-writeup">Eight - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Eight&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Explore the OWASP Juice Shop instance and retrieve the flag by reading the Privacy Policy page.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Seven&lt;/strong>, we’re given yet another &lt;strong>OWASP Juice Shop&lt;/strong> challenge.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/8-eight/eight.png"
+width="1028"
+height="578"
+srcset="https://qiaonpc.github.io/post/8-eight/eight_hue95704bfd4bf7cc33e6bea3d3d99e249_114401_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/8-eight/eight_hue95704bfd4bf7cc33e6bea3d3d99e249_114401_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Eight"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This one is straightforward — all that’s needed is to &lt;strong>read the Privacy Policy&lt;/strong> page.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Upon opening the page, the &lt;strong>flag is displayed&lt;/strong>, either at the bottom or embedded in the text.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/8-eight/flag.png"
+width="1659"
+height="375"
+srcset="https://qiaonpc.github.io/post/8-eight/flag_hu1c06383176e830671aa42fb7a6dae491_62539_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/8-eight/flag_hu1c06383176e830671aa42fb7a6dae491_62539_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="442"
+data-flex-basis="1061px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>13083493dec15380f7319596e5e2bc67437ce5c4&lt;/code>&lt;/p></description></item><item><title>9 - Nine</title><link>https://qiaonpc.github.io/post/9-nine/</link><pubDate>Tue, 25 Nov 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/9-nine/</guid><description>&lt;h1 id="nine---ctf-challenge-writeup">Nine - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Nine&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze forensic artifacts to determine the real name of the threat actor based on their Telegram activity and archived file data.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>From &lt;strong>User Eight&lt;/strong>, we&amp;rsquo;re given a &lt;strong>forensic artifact&lt;/strong> similar to a previous challenge, but this time the goal is to find the &lt;strong>real name of the attacker&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/9-nine/nine.png"
+width="1684"
+height="685"
+srcset="https://qiaonpc.github.io/post/9-nine/nine_hucacb0529e6eebc8c936d937d2f3b3942_150446_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/9-nine/nine_hucacb0529e6eebc8c936d937d2f3b3942_150446_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge Nine"
+class="gallery-image"
+data-flex-grow="245"
+data-flex-basis="590px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Opening &lt;code>telegram_profile.txt&lt;/code>, we can view the user&amp;rsquo;s &lt;strong>old usernames&lt;/strong>, one of which resembles a &lt;strong>last name&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/9-nine/part%201.png"
+width="830"
+height="694"
+srcset="https://qiaonpc.github.io/post/9-nine/part%201_hu0d732c8d2ba7f6e90a2bfa256cfc1db5_138532_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/9-nine/part%201_hu0d732c8d2ba7f6e90a2bfa256cfc1db5_138532_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Last Name"
+class="gallery-image"
+data-flex-grow="119"
+data-flex-basis="287px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Separately, in &lt;code>nu5a-archiv3.txt&lt;/code>, another potential name appears — likely the &lt;strong>first name&lt;/strong>. Both names start with &lt;strong>R&lt;/strong>, which supports this link.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/9-nine/part%202.png"
+width="759"
+height="790"
+srcset="https://qiaonpc.github.io/post/9-nine/part%202_hu18583ea33a4f4f0da290623368dcb95e_155940_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/9-nine/part%202_hu18583ea33a4f4f0da290623368dcb95e_155940_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="First Name"
+class="gallery-image"
+data-flex-grow="96"
+data-flex-basis="230px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Combining the two gives us the full name: &lt;strong>&lt;code>RADITYA_PRATAMA&lt;/code>&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>&lt;code>SHERPACTF25{RADITYA_PRATAMA}&lt;/code>&lt;/p></description></item><item><title>attack CNN?</title><link>https://qiaonpc.github.io/post/attack-cnn/</link><pubDate>Mon, 07 Jul 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/attack-cnn/</guid><description>&lt;h1 id="attack-cnn---ctf-challenge-writeup">attack CNN? - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: attack CNN?&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Perform an adversarial attack against two provided YOLO (You Only Look Once) models. Craft an image such that the two models produce &lt;strong>significantly different predictions&lt;/strong>, demonstrating an understanding of adversarial machine learning techniques.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-understanding-the-goal">1. &lt;strong>Understanding the Goal&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Given two object detection models:&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>yolo_v8.pt&lt;/code>&lt;/li>
+&lt;li>&lt;code>yolo_v10.pt&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The objective is to &lt;strong>generate a single adversarial image&lt;/strong> that causes the models to output different results under the following conditions:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">different_prediction&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class_name&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class_name&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">confidence_gap&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nb">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mf">0.4&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>Both conditions must be satisfied to consider the attack successful.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-choosing-the-attack-method">2. &lt;strong>Choosing the Attack Method&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>This is a classic use case for &lt;strong>adversarial machine learning&lt;/strong> techniques, targeting deep neural networks.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Two common attacks were considered:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>FGSM (Fast Gradient Sign Method)&lt;/strong> – faster, simpler&lt;/li>
+&lt;li>&lt;strong>PGD (Projected Gradient Descent)&lt;/strong> – more effective but slower&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>For this challenge, &lt;strong>PGD was used&lt;/strong> for better perturbation control and higher attack success rate.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-executing-the-attack">3. &lt;strong>Executing the Attack&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Loaded both YOLO models using an appropriate framework (e.g., PyTorch + Ultralytics YOLOv8).&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Started from a base image and applied the &lt;strong>PGD adversarial attack&lt;/strong>, modifying the image iteratively to:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Change the prediction &lt;strong>class name&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Create a &lt;strong>≥ 0.4 confidence gap&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;span class="lnt">36
+&lt;/span>&lt;span class="lnt">37
+&lt;/span>&lt;span class="lnt">38
+&lt;/span>&lt;span class="lnt">39
+&lt;/span>&lt;span class="lnt">40
+&lt;/span>&lt;span class="lnt">41
+&lt;/span>&lt;span class="lnt">42
+&lt;/span>&lt;span class="lnt">43
+&lt;/span>&lt;span class="lnt">44
+&lt;/span>&lt;span class="lnt">45
+&lt;/span>&lt;span class="lnt">46
+&lt;/span>&lt;span class="lnt">47
+&lt;/span>&lt;span class="lnt">48
+&lt;/span>&lt;span class="lnt">49
+&lt;/span>&lt;span class="lnt">50
+&lt;/span>&lt;span class="lnt">51
+&lt;/span>&lt;span class="lnt">52
+&lt;/span>&lt;span class="lnt">53
+&lt;/span>&lt;span class="lnt">54
+&lt;/span>&lt;span class="lnt">55
+&lt;/span>&lt;span class="lnt">56
+&lt;/span>&lt;span class="lnt">57
+&lt;/span>&lt;span class="lnt">58
+&lt;/span>&lt;span class="lnt">59
+&lt;/span>&lt;span class="lnt">60
+&lt;/span>&lt;span class="lnt">61
+&lt;/span>&lt;span class="lnt">62
+&lt;/span>&lt;span class="lnt">63
+&lt;/span>&lt;span class="lnt">64
+&lt;/span>&lt;span class="lnt">65
+&lt;/span>&lt;span class="lnt">66
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">torch&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">cv2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">os&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">ultralytics&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">YOLO&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">device&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;cuda&amp;#34;&lt;/span> &lt;span class="k">if&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cuda&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">is_available&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="s2">&amp;#34;cpu&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model_v8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YOLO&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;yolo_v8.pt&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">model_v10&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">YOLO&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;yolo_v10.pt&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">load_image&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">640&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imread&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">resize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">size&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">size&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_BGR2RGB&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">img&lt;/span> &lt;span class="o">/&lt;/span> &lt;span class="mf">255.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">tensor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dtype&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">float32&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">unsqueeze&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">to&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">device&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nd">@torch.no_grad&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">image_tensor&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">results&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">model&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">predict&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_tensor&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">verbose&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">False&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">boxes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">results&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">boxes&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">boxes&lt;/span> &lt;span class="ow">is&lt;/span> &lt;span class="kc">None&lt;/span> &lt;span class="ow">or&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cls&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;None&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">0.0&lt;/span>&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">confs&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">conf&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">classes&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">boxes&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cls&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">top&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">confs&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">argmax&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">{&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">int&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">classes&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">top&lt;/span>&lt;span class="p">])),&lt;/span> &lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">float&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">confs&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">top&lt;/span>&lt;span class="p">])}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">add_random_start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">noise&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">empty_like&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">uniform_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">noise&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">pgd_with_dummy_grad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ori&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">iters&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">requires_grad_&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dummy_loss&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">mean&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dummy_loss&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">backward&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">grad&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">grad&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">image&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">alpha&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">grad&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sign&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">delta&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">ori&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">min&lt;/span>&lt;span class="o">=-&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nb">max&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">image&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">torch&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clamp&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ori&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">delta&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">detach&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">image&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">run_pgd_ctf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.03&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.005&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">40&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">max_restarts&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">20&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">out_dir&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;pgd_ctf_out&amp;#34;&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">os&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">makedirs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">out_dir&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">exist_ok&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="kc">True&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">base&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">load_image&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">image_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">max_restarts&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">start&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">add_random_start&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">base&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">clone&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">adv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">pgd_with_dummy_grad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">start&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result_v10&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model_v10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">result_v8&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">get_top_prediction&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">model_v8&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;[&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">] v10: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">result_v10&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">, v8: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;class&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="ow">and&lt;/span> &lt;span class="nb">abs&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">result_v8&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">-&lt;/span> &lt;span class="n">result_v10&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s2">&amp;#34;confidence&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;gt;=&lt;/span> &lt;span class="mf">0.4&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">adv&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">squeeze&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">permute&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cpu&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">numpy&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">255&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">astype&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">uint8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">img&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">cvtColor&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">img&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">COLOR_RGB2BGR&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cv2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">imwrite&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">out_dir&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">/pgd_success_&lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">img&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;✅ CTF condition met.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;❌ CTF condition not met after max_restarts.&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="vm">__name__&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="s2">&amp;#34;__main__&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">run_pgd_ctf&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;car.png&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">epsilon&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.03&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">alpha&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mf">0.005&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iters&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">40&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The attack was successful when the altered image caused the two models to disagree both in classification and confidence, satisfying the provided formula.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/attack-cnn/flag.png"
+width="1148"
+height="763"
+srcset="https://qiaonpc.github.io/post/attack-cnn/flag_hue859d4d380f19cb6a0eeb5f76259ffae_891640_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/attack-cnn/flag_hue859d4d380f19cb6a0eeb5f76259ffae_891640_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="361px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>NHNC{you_kn0w_h0w_t0_d0_adv3rs3ria1_attack}&lt;/code>&lt;/p>
+&lt;hr>
+&lt;h2 id="summary">Summary
+&lt;/h2>&lt;p>The &amp;ldquo;attack CNN?&amp;rdquo; challenge introduces players to the field of &lt;strong>adversarial AI&lt;/strong>, focusing on image-based attacks against neural networks. By crafting subtle perturbations, players learn how seemingly minor changes can cause significant shifts in deep learning model outputs — an essential skill in both AI security and red-teaming contexts.&lt;/p>
+&lt;hr></description></item><item><title>Just A Normal EXE</title><link>https://qiaonpc.github.io/post/just-a-normal-exe/</link><pubDate>Sun, 28 Jul 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/just-a-normal-exe/</guid><description>&lt;h1 id="just-a-normal-exe-ctf-challenge-writeup">Just A Normal EXE CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Just A Normal EXE&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 500&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Meoware&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a malware file to find the flag.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/just-a-normal-exe/challenge.png"
+width="654"
+height="920"
+srcset="https://qiaonpc.github.io/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/just-a-normal-exe/challenge_hu0efdc000f1987cb3a50dde45e188fffe_82113_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Challenge"
+class="gallery-image"
+data-flex-grow="71"
+data-flex-basis="170px"
+>&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;Just A Normal EXE&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used VirusTotal to scan the provided malware file. This helps to get a preliminary analysis and detect any immediate issues.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Review VirusTotal Results&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Access the detailed report from VirusTotal, available &lt;a class="link" href="https://www.virustotal.com/gui/file/01eeac6d706e078645f78e100bf6c2d808a443c4d85b3257b63fa087eef228cc/relations" target="_blank" rel="noopener"
+>here&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identify Key Findings&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>In the VirusTotal output, we found &lt;code>s3cr3t5.txt&lt;/code> file mentioned in the relations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Access the Flag&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Visit the URL associated with &lt;code>s3cr3t5.txt&lt;/code> to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/just-a-normal-exe/flag.png"
+width="871"
+height="275"
+srcset="https://qiaonpc.github.io/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/just-a-normal-exe/flag_hu3440649576c45ee60aa6617fd9c817e4_25393_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="316"
+data-flex-basis="760px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag&lt;/strong> : &lt;strong>ihack24{obFusCat!on_Alw4ys_w0rK}&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol></description></item><item><title>ButterCup</title><link>https://qiaonpc.github.io/post/buttercup/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/buttercup/</guid><description>&lt;h1 id="buttercup-ctf-challenge-writeup">ButterCup CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: ButterCup&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 490&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Misc&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves extracting three parts of the flag from a video, with two parts embedded in the video itself and one part hidden in the audio spectrum.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a detailed solution for the ButterCup CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Without hints, we definitely cannot solve this challenge.&lt;/li>
+&lt;li>We were told that there were three parts to the flag, with two parts embedded in the video and one part hidden in the audio spectrum.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Video Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Went through the video multiple times, including adjusting playback speed and brightness to catch any hidden elements.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered the words &lt;code>3XP3RT_&lt;/code> at around 14 seconds and &lt;code>1N_&lt;/code> at around 2:52 in the video.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/part%201.png"
+width="912"
+height="684"
+srcset="https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%201_hub431cfd944627e2ef5e441bda231df95_266331_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Part 1"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/part%202.png"
+width="1287"
+height="776"
+srcset="https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/buttercup/part%202_hufd87c6a477897d892f628531ef0882a8_417044_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Part 2"
+class="gallery-image"
+data-flex-grow="165"
+data-flex-basis="398px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Audio Spectrum Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Used audacity on the audio of the video to reveal hidden patterns.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Configured the spectrogram to enhance visibility of subtle details.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found a hint for the last part of the flag in the spectrogram.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Not the clearest picture of the last part, but we were able to deducde its &lt;code>4UD1O&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/configuration.jpg"
+width="528"
+height="388"
+srcset="https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/configuration_hu8f1f483e703576a18ac9d0dd90fdb63a_39450_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="Configuration"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="326px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/buttercup/last%20part.jpg"
+width="338"
+height="344"
+srcset="https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/buttercup/last%20part_hu5dc99631b381617f725944851c108dea_59094_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="Last Part"
+class="gallery-image"
+data-flex-grow="98"
+data-flex-basis="235px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Reconstruction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Combined the three parts of the flag obtained from the video and audio spectrum to reconstruct the complete flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Conclusion&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The ButterCup CTF challenge required a thorough analysis of both the video and audio spectrum to extract all parts of the flag. It demonstrated the importance of attention to detail and the use of specialized tools for multimedia analysis in CTF challenges.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>I Hope You Have The Software</title><link>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/i-hope-you-have-the-software/</guid><description>&lt;h1 id="i-hope-you-have-the-software-ctf-challenge-writeup">I Hope You Have The Software CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: I Hope You Have The Software&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 230&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Network&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of this challenge is to find the flag hidden in the HTML files served by the servers in the packet capture.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;I Hope You Have The Software&amp;rdquo; CTF challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Analyzed the packet capture and identified 12 servers.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Noticed two servers stacked on top of each other, suggesting a hidden layer.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked.png"
+width="585"
+height="609"
+srcset="https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/stacked_hub568cec8611f1348c13b776bcfc236c4_38127_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Stacked"
+class="gallery-image"
+data-flex-grow="96"
+data-flex-basis="230px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>HTML File Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Inspected the HTML files served by the servers.&lt;/li>
+&lt;li>Found the flag hidden within one of the HTML files.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Extracted the flag from the HTML file.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag.png"
+width="595"
+height="321"
+srcset="https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/i-hope-you-have-the-software/flag_hu9015d6a736d499f390c99650f0eb6eef_46035_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="185"
+data-flex-basis="444px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>STOP SPAMMING</title><link>https://qiaonpc.github.io/post/stop-spamming/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/stop-spamming/</guid><description>&lt;h1 id="stop-spamming---ctf-challenge-writeup">STOP SPAMMING - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: STOP SPAMMING&lt;br>
+Points: 100&lt;br>
+Category: Miscellaneous&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the STOP SPAMMING challenge is to decode a provided spam message using a spam decoder tool. Your task is to utilize the tool to uncover the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the STOP SPAMMING challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Spam Message Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by examining the provided spam message. The challenge hints at using a spam decoder tool.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Spam Decoder Tool&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>This challenge simplifies the task by directing you to a specific spam decoder tool. You can use the following online tool to decode the spam message:
+&lt;a class="link" href="https://spammimic.com/decode.cgi" target="_blank" rel="noopener"
+>Spam Decoder Tool&lt;/a>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>By utilizing the provided tool, you will decode the spam message and reveal the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>The STOP SPAMMING challenge, in this case, involves the straightforward use of a spam decoder tool to uncover the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the STOP SPAMMING challenge, you utilize a spam decoder tool to decode the spam message and reveal the flag. It&amp;rsquo;s a quick and straightforward solution to the challenge. Best of luck!&lt;/p></description></item></channel></rss>

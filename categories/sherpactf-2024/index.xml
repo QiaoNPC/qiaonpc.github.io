@@ -1,0 +1,649 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SherpaCTF 2024 on</title><link>https://qiaonpc.github.io/categories/sherpactf-2024/</link><description>Recent content in SherpaCTF 2024 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 24 Nov 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/sherpactf-2024/index.xml" rel="self" type="application/rss+xml"/><item><title>DeepFake</title><link>https://qiaonpc.github.io/post/deepfake/</link><pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/deepfake/</guid><description>&lt;h1 id="deepfake">Deepfake
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Deepfake&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: AI&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze the provided &lt;code>.h5&lt;/code> file to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Investigation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge provided a corrupted &lt;strong>HDF5 (.h5)&lt;/strong> file&lt;/li>
+&lt;li>Attempts to load the file using deep learning frameworks like TensorFlow or PyTorch failed, as the file structure appeared corrupted&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Static Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used &lt;strong>h5py&lt;/strong>, a library for inspecting and manipulating HDF5 files, to analyze the file:
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">h5py&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">with&lt;/span> &lt;span class="n">h5py&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">File&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;file.h5&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s2">&amp;#34;r&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">h5file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">h5file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">keys&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">layer&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">h5file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">keys&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">layer&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">h5file&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="n">layer&lt;/span>&lt;span class="p">][:])&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>Extracted the number of layers and their corresponding data.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Interpreting the Data&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The data extracted from the layers did not directly reveal the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Through iterative debugging and suggestions (thanks, ChatGPT!), realized that &lt;strong>rounding the values&lt;/strong> in the data to the nearest integers, we found that it appeared to be ASCII values.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/deepfake/ASCII%20Values.png"
+width="960"
+height="437"
+srcset="https://qiaonpc.github.io/post/deepfake/ASCII%20Values_hu37a9bc46100a41bf22a435a5781decd7_55727_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/deepfake/ASCII%20Values_hu37a9bc46100a41bf22a435a5781decd7_55727_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="ASCII Values"
+class="gallery-image"
+data-flex-grow="219"
+data-flex-basis="527px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Recovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>After decoding these decimal representations of ASCII, the flag was clearly encoded in the data.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/deepfake/flag.png"
+width="1265"
+height="389"
+srcset="https://qiaonpc.github.io/post/deepfake/flag_hu6bc6e8f727a21161b13f2f9dbe1aadaa_33916_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/deepfake/flag_hu6bc6e8f727a21161b13f2f9dbe1aadaa_33916_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="325"
+data-flex-basis="780px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Flag&lt;/strong>: &lt;code>SHCTF24{Hidd3n_in_Th3_Lay3rs}&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>iamspeed</title><link>https://qiaonpc.github.io/post/iamspeed/</link><pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/iamspeed/</guid><description>&lt;h1 id="iamspeed">iamspeed
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: iamspeed&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Reverse&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze the Python-compiled executable to retrieve and decode the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Upon inspecting the executable, it was identified as a &lt;strong>Python-compiled executable&lt;/strong> based on the presence of Python-related artifacts.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iamspeed/initial%20enumeration.png"
+width="855"
+height="690"
+srcset="https://qiaonpc.github.io/post/iamspeed/initial%20enumeration_huc0d5a53e4aa5b98a9703f4259a670f88_108784_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iamspeed/initial%20enumeration_huc0d5a53e4aa5b98a9703f4259a670f88_108784_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Initial Enumeration"
+class="gallery-image"
+data-flex-grow="123"
+data-flex-basis="297px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decompiling the Executable&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>Tools Used&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>PyInstaller Extractor&lt;/strong> (&lt;code>pyinstxtractor&lt;/code>) to extract the &lt;code>.pyc&lt;/code> file.&lt;/li>
+&lt;li>&lt;strong>PyCDC&lt;/strong> to decompile the &lt;code>.pyc&lt;/code> file into readable Python source code.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iamspeed/pyinstractor.png"
+width="1435"
+height="489"
+srcset="https://qiaonpc.github.io/post/iamspeed/pyinstractor_hu9059aaf99e8be1932731b7fe7618fe04_144870_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iamspeed/pyinstractor_hu9059aaf99e8be1932731b7fe7618fe04_144870_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Pyinstractor"
+class="gallery-image"
+data-flex-grow="293"
+data-flex-basis="704px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iamspeed/pycdc.png"
+width="1020"
+height="754"
+srcset="https://qiaonpc.github.io/post/iamspeed/pycdc_hu1b36e75049872b653b691ddb3ee25462_143340_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iamspeed/pycdc_hu1b36e75049872b653b691ddb3ee25462_143340_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="PYCDC"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="324px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Analyzing the Decompiled Script&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>My teammate, &lt;strong>Nem4ros&lt;/strong> then ran the script and found hints of &lt;strong>hidden HTTPS link&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>He then modified the script to print the extracted link directly.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iamspeed/found%20hints%20of%20http.png"
+width="783"
+height="562"
+srcset="https://qiaonpc.github.io/post/iamspeed/found%20hints%20of%20http_huf5956c9adb1503e4f2eea3cf633b5b30_347109_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iamspeed/found%20hints%20of%20http_huf5956c9adb1503e4f2eea3cf633b5b30_347109_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Hints of HTTP"
+class="gallery-image"
+data-flex-grow="139"
+data-flex-basis="334px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iamspeed/http%20link.png"
+width="796"
+height="588"
+srcset="https://qiaonpc.github.io/post/iamspeed/http%20link_hu4d730e4cf6a1683bc2818f4456304d92_434436_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iamspeed/http%20link_hu4d730e4cf6a1683bc2818f4456304d92_434436_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="HTTP Link"
+class="gallery-image"
+data-flex-grow="135"
+data-flex-basis="324px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Accessing the Link&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>The link pointed to a Google document containing &lt;strong>encoded text&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iamspeed/get%20another%20code.png"
+width="913"
+height="116"
+srcset="https://qiaonpc.github.io/post/iamspeed/get%20another%20code_hu74e7807d8f81adaabbc56f08db10fcda_49253_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iamspeed/get%20another%20code_hu74e7807d8f81adaabbc56f08db10fcda_49253_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Get Another Code"
+class="gallery-image"
+data-flex-grow="787"
+data-flex-basis="1888px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decoding the Text&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Attempts to decode the text with standard methods like &lt;strong>hex decoding&lt;/strong> failed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The text was successfully decoded using the &lt;strong>original script&lt;/strong> to process the encoded data.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/iamspeed/flag.png"
+width="824"
+height="580"
+srcset="https://qiaonpc.github.io/post/iamspeed/flag_hu0d9e706628c4bc5b9ccdbe12764d8690_458522_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/iamspeed/flag_hu0d9e706628c4bc5b9ccdbe12764d8690_458522_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="142"
+data-flex-basis="340px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Flag&lt;/strong>: &lt;code>SHCTF24{XXXXXXXXXX}&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>Into The Matrix</title><link>https://qiaonpc.github.io/post/into-the-matrix/</link><pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/into-the-matrix/</guid><description>&lt;h1 id="into-the-matrix">Into The Matrix
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Into The Matrix&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: AI&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Decode the contents of an NPY file to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Given an &lt;strong>NPY file&lt;/strong> in CTF, a common format for storing NumPy arrays, the first step is to &lt;strong>visualize&lt;/strong> its contents.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Visualization&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Loaded the NPY file into Python using NumPy:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">import&lt;/span> &lt;span class="nn">numpy&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">np&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">import&lt;/span> &lt;span class="nn">matplotlib.pyplot&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="nn">plt&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">from&lt;/span> &lt;span class="nn">sklearn.manifold&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">MDS&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kn">from&lt;/span> &lt;span class="nn">tqdm&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">tqdm&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">file_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;matrix.npy&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">data&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">np&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">load&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">file_path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;Data shape:&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">data&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">shape&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mds&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">MDS&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">n_components&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dissimilarity&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;precomputed&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">n_init&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">4&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">random_state&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">42&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">for&lt;/span> &lt;span class="n">_&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">tqdm&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">desc&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;Performing MDS&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">total&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">2&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">pos&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">mds&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">fit_transform&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">data&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">figure&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">figsize&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">scatter&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">pos&lt;/span>&lt;span class="p">[:,&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">pos&lt;/span>&lt;span class="p">[:,&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">],&lt;/span> &lt;span class="n">c&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;blue&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">label&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;Signal Origins&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">xlabel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MDS Component 1&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">ylabel&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MDS Component 2&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">title&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;MDS Visualization of Distance Matrix&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">legend&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plt&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">show&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>I wasn&amp;rsquo;t able to figure out what the graph meant, but my teammate &lt;strong>Nem4ros&lt;/strong> suggested that it appeared to be &lt;strong>SHCTF24{intro_to_ml}&lt;/strong>, but submitting this flag failed.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/into-the-matrix/hints%20of%20flag.png"
+width="1137"
+height="941"
+srcset="https://qiaonpc.github.io/post/into-the-matrix/hints%20of%20flag_hu27b5b00a7c4f930aa437a1f733327c1c_54790_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/into-the-matrix/hints%20of%20flag_hu27b5b00a7c4f930aa437a1f733327c1c_54790_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Hints of Flag"
+class="gallery-image"
+data-flex-grow="120"
+data-flex-basis="289px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Brute Forcing Variations&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Since whe know what the the flag approximately look like, we brute forced the flag, including:
+&lt;ul>
+&lt;li>&lt;code>SHCTF24{intr0_to_ml}&lt;/code>&lt;/li>
+&lt;li>&lt;code>SHCTF24{1ntro_to_ml}&lt;/code>&lt;/li>
+&lt;li>&lt;code>SHCTF24{intro_to_ml}&lt;/code>&lt;/li>
+&lt;li>&amp;hellip;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Eventually, one of these variations worked as the valid flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Flag&lt;/strong>: &lt;code>SHCTF24{XXXXXXXXXX}&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>Oren</title><link>https://qiaonpc.github.io/post/oren/</link><pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/oren/</guid><description>&lt;h1 id="oren">Oren
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Oren&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Boot2Root&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Exploit the target machine and retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Connection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Me and Han Kai connected the local challenge machine to NAT and used &lt;strong>netdiscover&lt;/strong> to identify its IP address.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/netdiscover.png"
+width="723"
+height="253"
+srcset="https://qiaonpc.github.io/post/oren/netdiscover_hu342f3545c2327a46936c9b2fe83f4da7_39281_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/netdiscover_hu342f3545c2327a46936c9b2fe83f4da7_39281_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Netdiscover"
+class="gallery-image"
+data-flex-grow="285"
+data-flex-basis="685px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Scanned the machine using &lt;strong>nmap&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Found that we are attacking a &lt;strong>Windows machine&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/nmap.png"
+width="1138"
+height="785"
+srcset="https://qiaonpc.github.io/post/oren/nmap_hu1d2d844d46132811c5264a273ea0e05f_232908_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/nmap_hu1d2d844d46132811c5264a273ea0e05f_232908_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="nmap"
+class="gallery-image"
+data-flex-grow="144"
+data-flex-basis="347px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Explored the web application on port &lt;code>8080&lt;/code>:&lt;/p>
+&lt;ul>
+&lt;li>Discovered &lt;code>admin.php&lt;/code>, &lt;code>phpinfo.php&lt;/code>, and &lt;code>index.php&lt;/code> using &lt;strong>feroxbuster&lt;/strong>.&lt;/li>
+&lt;li>Attempted &lt;strong>SQL injection&lt;/strong> on &lt;code>admin.php&lt;/code> using &lt;strong>sqlmap&lt;/strong>, but it failed.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/web-enum.png"
+width="1382"
+height="842"
+srcset="https://qiaonpc.github.io/post/oren/web-enum_huc93567fb2428118661ef6b1bcaa49fcd_257087_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/web-enum_huc93567fb2428118661ef6b1bcaa49fcd_257087_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Feroxbuster"
+class="gallery-image"
+data-flex-grow="164"
+data-flex-basis="393px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/index_php.png"
+width="1918"
+height="1198"
+srcset="https://qiaonpc.github.io/post/oren/index_php_hu5f383b641683aa61cb5bca325353ce9e_61050_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/index_php_hu5f383b641683aa61cb5bca325353ce9e_61050_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="index page"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/admin_php.png"
+width="1918"
+height="1192"
+srcset="https://qiaonpc.github.io/post/oren/admin_php_hu1346169967d87384a57800822243c696_46875_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/admin_php_hu1346169967d87384a57800822243c696_46875_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="admin page"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="386px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/phpinfo_php.png"
+width="1918"
+height="1198"
+srcset="https://qiaonpc.github.io/post/oren/phpinfo_php_hu37b08bd3bc1d09b3f427eb251861f792_190328_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/phpinfo_php_hu37b08bd3bc1d09b3f427eb251861f792_190328_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="phpinfo"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Kerberos Enumeration&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Han Kai then re-scanned using &lt;strong>nmap&lt;/strong> for potential users.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found usernames but failed to crack them via password spraying or brute-forcing the login page.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/kerberoastable.png"
+width="1007"
+height="292"
+srcset="https://qiaonpc.github.io/post/oren/kerberoastable_huc5cddddda95c1e195963f189f2a60f52_70665_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/kerberoastable_huc5cddddda95c1e195963f189f2a60f52_70665_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Users"
+class="gallery-image"
+data-flex-grow="344"
+data-flex-basis="827px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exploit Development&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Found PHP version &lt;code>8.1.25&lt;/code> from &lt;code>phpinfo.php&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Searched for related exploits but none of the existing POCs worked.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The challenge hint suggested focusing on the title &lt;strong>Oren&lt;/strong>, which led to discovering an exploit for &lt;strong>PHP 8.1.25 &amp;ldquo;orange&amp;rdquo;&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/php%20orange.png"
+width="1031"
+height="465"
+srcset="https://qiaonpc.github.io/post/oren/php%20orange_hu7df5621db061faf8f8485bb59f5c6f17_68745_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/php%20orange_hu7df5621db061faf8f8485bb59f5c6f17_68745_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Orange"
+class="gallery-image"
+data-flex-grow="221"
+data-flex-basis="532px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/php%20orange%20poc.png"
+width="1418"
+height="896"
+srcset="https://qiaonpc.github.io/post/oren/php%20orange%20poc_hu6360d5908c5139e64f09fca53365cedf_131055_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/php%20orange%20poc_hu6360d5908c5139e64f09fca53365cedf_131055_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="POC Orange"
+class="gallery-image"
+data-flex-grow="158"
+data-flex-basis="379px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Gaining Access&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Used the &lt;strong>PHP 8.1.25 orange exploit&lt;/strong> to gain access as the &lt;code>webadmin&lt;/code> user.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Privilege Escalation&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Enumerated the box and discovered files related to the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Found a &lt;strong>PowerShell script&lt;/strong> that, when executed, revealed the password for &lt;code>user.zip&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unzipped the archive to retrieve the flag.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/files%20related%20to%20flag.png"
+width="1011"
+height="492"
+srcset="https://qiaonpc.github.io/post/oren/files%20related%20to%20flag_hubd13c78667cc85a2fc795e317a3e1116_135155_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/files%20related%20to%20flag_hubd13c78667cc85a2fc795e317a3e1116_135155_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Files related to flag"
+class="gallery-image"
+data-flex-grow="205"
+data-flex-basis="493px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/ps1%20script.png"
+width="1654"
+height="556"
+srcset="https://qiaonpc.github.io/post/oren/ps1%20script_hud88992e6e3ae58ab1e2bd52e8c41a727_186729_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/ps1%20script_hud88992e6e3ae58ab1e2bd52e8c41a727_186729_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="PS1 Script"
+class="gallery-image"
+data-flex-grow="297"
+data-flex-basis="713px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/running%20ps1%20script.png"
+width="1343"
+height="171"
+srcset="https://qiaonpc.github.io/post/oren/running%20ps1%20script_hu8b347dc16a324b8dc35a25f542800e04_39417_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/running%20ps1%20script_hu8b347dc16a324b8dc35a25f542800e04_39417_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Running PS1 script"
+class="gallery-image"
+data-flex-grow="785"
+data-flex-basis="1884px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/oren/flag.png"
+width="714"
+height="195"
+srcset="https://qiaonpc.github.io/post/oren/flag_hu7aeb3327cacc4317f9343847ae0cbe46_11829_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/oren/flag_hu7aeb3327cacc4317f9343847ae0cbe46_11829_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="366"
+data-flex-basis="878px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Flag&lt;/strong>: &lt;code>SHCTF24{XXXXXXXXXX}&lt;/code>&lt;/li>
+&lt;/ul></description></item><item><title>X</title><link>https://qiaonpc.github.io/post/x/</link><pubDate>Sun, 24 Nov 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/x/</guid><description>&lt;h1 id="x">X
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: X&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 100&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Reverse&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze and reverse engineer the application to retrieve the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use tools such as Ghidra, IDA Pro, or Radare2 to analyze the code.&lt;/li>
+&lt;li>Upon analysing the application, it performs &lt;strong>XOR operations&lt;/strong> on a specific variable.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/x/xor%20operation.png"
+width="534"
+height="531"
+srcset="https://qiaonpc.github.io/post/x/xor%20operation_hu1bb163d90fe60860629545ff5b919bf5_38549_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/x/xor%20operation_hu1bb163d90fe60860629545ff5b919bf5_38549_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="XOR Operation"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="241px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/x/encoded%20flag.png"
+width="606"
+height="72"
+srcset="https://qiaonpc.github.io/post/x/encoded%20flag_hu2d16e0b4909d85855f9702a68783b55a_8338_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/x/encoded%20flag_hu2d16e0b4909d85855f9702a68783b55a_8338_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Encoded Flag"
+class="gallery-image"
+data-flex-grow="841"
+data-flex-basis="2020px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Reversing the XOR&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Since XOR is a reversible operation (&lt;code>XOR&lt;/code> is its own inverse):&lt;/li>
+&lt;li>Apply the same XOR key to the modified value to retrieve the original data (flag).&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">xor_values&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x6B&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">56&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x75&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">61&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x65&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">38&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x68&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">60&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x74&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">50&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x69&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">91&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x6F&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">91&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">(&lt;/span>&lt;span class="mh">0x77&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">12&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">aBcb4ce08a36317&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;bcb4ce08a3/6317b67`d8`d58e6e1e`b&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">decoded_first_part&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">xor_val&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">expected&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">xor_values&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">decoded_first_part&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">chr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">expected&lt;/span> &lt;span class="o">^&lt;/span> &lt;span class="n">xor_val&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">decoded_second_part&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">char&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">aBcb4ce08a36317&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">decoded_second_part&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">chr&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">ord&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">char&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">full_string&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">decoded_first_part&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">decoded_second_part&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Full String: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">full_string&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="s2">&amp;#34;}&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Flag&lt;/strong>: &lt;code>SHCTF24{cdc5df19b407428c78ae9ae69f7f2fac}&lt;/code>&lt;/li>
+&lt;/ul></description></item></channel></rss>

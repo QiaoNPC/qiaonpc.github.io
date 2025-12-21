@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cryptography on</title><link>https://qiaonpc.github.io/tags/cryptography/</link><description>Recent content in Cryptography on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 09 Mar 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/tags/cryptography/index.xml" rel="self" type="application/rss+xml"/><item><title>Round and Round</title><link>https://qiaonpc.github.io/post/round-and-round/</link><pubDate>Sat, 09 Mar 2024 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/round-and-round/</guid><description>&lt;h1 id="round-and-round-ctf-challenge-writeup">Round and Round CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Round and Round&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 50&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Cryptography&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The challenge involves decrypting a given ciphertext to obtain the flag.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>Here&amp;rsquo;s a detailed solution for the Round and Round CTF challenge:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Assessment&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Examined the given ciphertext but was unsure of the encryption method used.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Observations and Strategy&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>It took me long to notice that the ciphertext seemed to resemble ASCII values or character mappings.&lt;/li>
+&lt;li>Attempted to place the flag format, &lt;code>RWSC{&lt;/code>, under the ciphertext to see if any patterns emerged.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Decryption Process&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>For example, 21 corresponds to &amp;lsquo;R&amp;rsquo;, 26 corresponds to &amp;lsquo;W&amp;rsquo;, and so on.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Used this pattern to decode each number in the ciphertext to its corresponding character.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>But there is a gimmick, I eventually found out that if numbers were less than 30 were being wrapped around.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>This is a very stupid gimmick to be honest, since the flag cannot be constructed without knowing this.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/round-and-round/workings.png"
+width="1467"
+height="2164"
+srcset="https://qiaonpc.github.io/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/round-and-round/workings_hu8a28ac0814e970ea7ea7fdab252debe4_496580_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Workings"
+class="gallery-image"
+data-flex-grow="67"
+data-flex-basis="162px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Decrypted the entire ciphertext using the wrapping pattern to reveal the flag.&lt;/li>
+&lt;li>The flag is also in upper-case.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="conclusion">Conclusion
+&lt;/h2>&lt;p>The Round and Round CTF challenge required understanding a specific wrapping pattern to decrypt the given ciphertext. By recognizing the pattern and applying it to the ciphertext, the flag was successfully decrypted. This challenge demonstrated the importance of pattern recognition and creative thinking in cryptography challenges.&lt;/p></description></item><item><title>May The Force Be With You</title><link>https://qiaonpc.github.io/post/may-the-force-be-with-you/</link><pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/may-the-force-be-with-you/</guid><description>&lt;h1 id="may-the-force-be-with-you---ctf-challenge-writeup">May The Force Be With You - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: May The Force Be With You&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;May The Force Be With You&amp;rdquo; CTF challenge is to decipher a hidden flag encoded within a given script using reverse engineering techniques.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To solve the &amp;ldquo;May The Force Be With You&amp;rdquo; challenge and obtain the flag, I followed the below steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Understanding the Challenge Objective&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The challenge required decoding a hidden flag from a provided script using reverse engineering methods.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Initial Approach&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Due to personal constraints and limited expertise in mathematics, I opted to use HackerGPT, a tool specialized in reversing scripts, to decode the hidden flag.&lt;/li>
+&lt;li>Though using automated tools can be considered disrespectful to the challenge creator, it was necessary due to my limitations and time constraints during the competition.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Script Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Utilizing the script below, I executed it to unveil the hidden flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Unfortunately, due to my lack of proficiency in deciphering the script manually, I had to rely on HackerGPT to assist me in understanding the logic and unveiling the flag.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Cipher&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">AES&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Util.Padding&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">unpad&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">from&lt;/span> &lt;span class="nn">Crypto.Protocol.KDF&lt;/span> &lt;span class="kn">import&lt;/span> &lt;span class="n">PBKDF2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">textwrap&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">decrypt_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">encrypted_file_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">with&lt;/span> &lt;span class="nb">open&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">encrypted_file_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;rb&amp;#39;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="k">as&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ciphertext_iv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">file&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">read&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">iv&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ciphertext_iv&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">AES&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">block_size&lt;/span>&lt;span class="p">:]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">ciphertext&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">ciphertext_iv&lt;/span>&lt;span class="p">[:&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">AES&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">block_size&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">passwd&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">textwrap&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">dedent&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">password&lt;/span>&lt;span class="p">)[:&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">salt&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="sa">b&lt;/span>&lt;span class="s1">&amp;#39;salt123&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">PBKDF2&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">passwd&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">encode&lt;/span>&lt;span class="p">(),&lt;/span> &lt;span class="n">salt&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dkLen&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">16&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">cipher&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">AES&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">new&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">key&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">AES&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">MODE_CBC&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">iv&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">plaintext&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">unpad&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">cipher&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">decrypt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">ciphertext&lt;/span>&lt;span class="p">),&lt;/span> &lt;span class="n">AES&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">block_size&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">plaintext&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;ni5h2h?Yrq8Do?n+|6a;pKbZkv%}O~tV&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">encrypted_file_path&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;./flag.txt.enc&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">plaintext&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">decrypt_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">encrypted_file_path&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">password&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">plaintext&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">decode&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon executing the script, the decoded flag was revealed as &lt;code>ABOH23{A3S_Rul35_tH3_F0rc3}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>The resolution of this challenge involved leveraging reverse engineering tools like HackerGPT to decode the hidden flag from the provided script. While I regret not being able to decode it manually due to personal limitations, I acknowledge the importance of understanding the underlying concepts for future challenges.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>ABOH23{A3S_Rul35_tH3_F0rc3}&lt;/code>.&lt;/p>
+&lt;p>This writeup serves as a demonstration of utilizing reverse engineering tools to decode the hidden flag in the &amp;ldquo;May The Force Be With You&amp;rdquo; CTF challenge. If you have any further inquiries or need additional clarification, please feel free to ask.&lt;/p></description></item><item><title>Small Sage</title><link>https://qiaonpc.github.io/post/small-sage/</link><pubDate>Sat, 02 Dec 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/small-sage/</guid><description>&lt;h1 id="small-sage---ctf-challenge-writeup">Small Sage - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Small Sage&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: The objective of the &amp;ldquo;Small Sage&amp;rdquo; CTF challenge is to decipher a flag that has been encrypted using RSA encryption techniques, focusing on elements like &lt;code>n&lt;/code>, &lt;code>p&lt;/code>, &lt;code>q&lt;/code>, &lt;code>C&lt;/code>, &lt;code>N&lt;/code>, and &lt;code>e&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully solve the &amp;ldquo;Small Sage&amp;rdquo; challenge and retrieve the flag, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Initial Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Upon inspecting the provided &amp;ldquo;Small Sage&amp;rdquo; script, it was evident that it resembled RSA encryption, as it contained elements like &lt;code>n&lt;/code>, &lt;code>p&lt;/code>, and &lt;code>q&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Additionally, the &lt;code>out.txt&lt;/code> file contained variables &lt;code>C&lt;/code>, &lt;code>N&lt;/code>, and &lt;code>e&lt;/code>, further indicating an RSA encryption problem.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/small-sage/nce.png"
+width="1311"
+height="328"
+srcset="https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/nce_hu9d0504293500d1a468b47f426a1e08d7_229909_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="NCE"
+class="gallery-image"
+data-flex-grow="399"
+data-flex-basis="959px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/small-sage/npq.png"
+width="863"
+height="438"
+srcset="https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/npq_hu8c6949fe70ed8a9f3dee81b31d8dbd8e_136125_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="NPQ"
+class="gallery-image"
+data-flex-grow="197"
+data-flex-basis="472px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Identifying RSA Encryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Recognizing the RSA encryption components (&lt;code>n&lt;/code>, &lt;code>p&lt;/code>, &lt;code>q&lt;/code>, &lt;code>C&lt;/code>, &lt;code>N&lt;/code>, &lt;code>e&lt;/code>), it was clear that this challenge was centered around RSA encryption and decryption.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Approach&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Noticing the hint with the term &amp;ldquo;small&amp;rdquo; in the challenge name, I hypothesized that it might involve a small &lt;code>e&lt;/code> problem in RSA encryption.&lt;/li>
+&lt;li>I proceeded to use my typucal script tailored for solving RSA problems with small &lt;code>e&lt;/code> values.&lt;/li>
+&lt;li>You can find the script in solve.py&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Retrieval&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>Executing the script designed to handle RSA problems with small &lt;code>e&lt;/code> values successfully decrypted the encrypted data.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The deciphered message revealed the flag: &lt;code>ABOH23{rocky0ubrr!}&lt;/code>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/small-sage/flag.png"
+width="760"
+height="136"
+srcset="https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/small-sage/flag_hu6c76f6ca70f5b7cba887c2eae295a926_19940_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="558"
+data-flex-basis="1341px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">gmpy2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">N&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">28161864534081810305839467239167774824180698442991360538137338315924601027539535041400325106523598882827263670671140966855944057889837783992080270143420119844958855679728614805589197733901663249220100214524859116110365815705699485099116276988534253521580223115836247118089590595980346272692504104976860138248959015932618979651746563030552421216691329694961700647328850519321776696007920491542096366696034760558758393690945535590284240994579352805664119144134863786797266463118165575746650538843159490903440899114347091988968775074879305009340592457617508211781199057573663246634610497629416920053419998682083393087987&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">e&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">3&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">C&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">762355112596222421309825166446067448121886093544068458795156044255325081286699861240486430215279901835675723822721970949307265398924333599178805487220325668055743991293697494477706560130827449405781098938392283482757063955895656607033694619449376928780098570577226994800731087835230561205556094959240210387000&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">t&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="nb">range&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">is_true_root&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">gmpy2&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">iroot&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">t&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">N&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">C&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">e&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">is_true_root&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Found, Iteration = &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="n">t&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="sa">f&lt;/span>&lt;span class="s2">&amp;#34;Flag: &lt;/span>&lt;span class="si">{&lt;/span>&lt;span class="nb">bytearray&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">fromhex&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">format&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">m&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;x&amp;#39;&lt;/span>&lt;span class="p">))&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">decode&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="si">}&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">break&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>The resolution of the &amp;ldquo;Small Sage&amp;rdquo; challenge involved recognizing RSA encryption elements and leveraging a specialized script to handle the small &lt;code>e&lt;/code> problem, resulting in the decryption of the encrypted data to obtain the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>ABOH23{rocky0ubrr!}&lt;/code>.&lt;/p>
+&lt;p>This writeup demonstrates the process of identifying and decrypting an RSA-encrypted flag in the &amp;ldquo;Small Sage&amp;rdquo; CTF challenge. Should you require further clarification or have additional questions, please feel free to ask.&lt;/p></description></item><item><title>Cryptic Raven</title><link>https://qiaonpc.github.io/post/cryptic-raven/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/cryptic-raven/</guid><description>&lt;h1 id="cryptic-raven---ctf-challenge-writeup">Cryptic Raven - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Cryptic Raven&lt;br>
+Points: 100&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the Cryptic Raven challenge is to decrypt a given message, which is encoded using an undisclosed encryption technique. Your task is to decipher the message and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the Cryptic Raven challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Message Deciphering&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by examining the provided message. The challenge does not disclose the specific encryption technique used.
+&lt;img src="https://qiaonpc.github.io/Challenge.png"
+loading="lazy"
+alt="Encrypted Text"
+>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Caesar Cipher Brute Force&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Given the lack of information about the encryption method, you can try a brute force approach, specifically the Caesar cipher brute force.&lt;/li>
+&lt;li>The Caesar cipher is a simple and widely used substitution cipher where each letter in the plaintext is shifted a certain number of places down or up the alphabet.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Brute Force Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Implement a brute force decryption approach by trying all possible shifts within the Caesar cipher.&lt;/li>
+&lt;li>Continue shifting the letters and evaluating the results until you find a meaningful message.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After trying various shift values, you will eventually discover the flag concealed within the decrypted message.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By successfully using the Caesar cipher brute force method, you&amp;rsquo;ll unveil the hidden flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the Cryptic Raven challenge, your cryptography skills are tested as you employ a brute force approach to decipher the message and reveal the flag. Best of luck!&lt;/p></description></item><item><title>Harmonic Secrets</title><link>https://qiaonpc.github.io/post/harmonic-secrets/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/harmonic-secrets/</guid><description>&lt;h1 id="harmonic-secrets---ctf-challenge-writeup">Harmonic Secrets - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Harmonic Secrets&lt;br>
+Points: 100&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>My objective in the Harmonic Secrets challenge was to decrypt a given ciphertext using the provided key, which I suspected to be a Vigenère cipher. My task was to apply the key and reveal the hidden flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the Harmonic Secrets challenge, I followed these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Key Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I began by examining the provided key. Based on the challenge information, I suspected that it was a Vigenère cipher key.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Vigenère Cipher Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>I applied the Vigenère decryption process using the provided key to decipher the given ciphertext.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>After successfully decrypting the ciphertext with the Vigenère key, I revealed the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>By following these steps and applying the Vigenère cipher decryption, I uncovered the flag.&lt;/p>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the Harmonic Secrets challenge, my cryptography skills came into play as I decrypted the Vigenère-encrypted message using the provided key to unveil the flag. It was a satisfying experience. Best of luck!&lt;/p></description></item><item><title>Marx's Melodic Memoir</title><link>https://qiaonpc.github.io/post/marxs-melodic-memoir/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/marxs-melodic-memoir/</guid><description>&lt;h1 id="marxs-melodic-memoir---ctf-challenge-writeup">Marx&amp;rsquo;s Melodic Memoir - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: Marx&amp;rsquo;s Melodic Memoir&lt;br>
+Points: 100&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of the &amp;ldquo;Marx&amp;rsquo;s Melodic Memoir&amp;rdquo; challenge is to decode a given music sheet to reveal the hidden flag. Your task is to find a music sheet decoder, manually input every element from the picture, and decipher the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete the &amp;ldquo;Marx&amp;rsquo;s Melodic Memoir&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Music Sheet Provided&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>You are provided with a music sheet that contains encoded information.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Find a Music Sheet Decoder&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Your first step is to search for music sheet decoders or tools designed to interpret encoded musical notations.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Manual Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Using the music sheet decoder you find, manually input every element and symbol from the provided picture.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Flag Discovery&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As you decode the music sheet, you will uncover the hidden flag, which follows the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By following these steps and decoding the music sheet, you will successfully reveal the flag hidden within Marx&amp;rsquo;s Melodic Memoir.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In the &amp;ldquo;Marx&amp;rsquo;s Melodic Memoir&amp;rdquo; challenge, your task is to decode the provided music sheet and unveil the hidden flag. Best of luck!&lt;/p></description></item><item><title>The Enigmatic Manuscript</title><link>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/the-enigmatic-manuscript/</guid><description>&lt;h1 id="the-enigmatic-manuscript---ctf-challenge-writeup">The Enigmatic Manuscript - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: The Enigmatic Manuscript&lt;br>
+Points: 50&lt;br>
+Category: Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of The Enigmatic Manuscript challenge is to uncover a hidden flag concealed within an image. Your task is to utilize cryptographic techniques to decipher the flag hidden within the image.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete The Enigmatic Manuscript challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Image Analysis&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Begin by examining the provided image. In this challenge, images often hide clues or messages within their metadata or content.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Exiftool Inspection&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Use the &lt;code>exiftool&lt;/code> utility to inspect the image&amp;rsquo;s metadata and content for any hidden information.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Base64 Encoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Upon using &lt;code>exiftool&lt;/code> on the image, you may discover a base64 encoded message within the image&amp;rsquo;s metadata or content.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Message Decryption&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Decode the base64 encoded message to reveal the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>After following these steps and decoding the base64 message, you will successfully uncover the flag concealed within the image.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>In The Enigmatic Manuscript challenge, your cryptography skills come into play as you decode the base64 message hidden within the image to unveil the flag. Best of luck!&lt;/p></description></item><item><title>The Quantum Nexus Prototype</title><link>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</link><pubDate>Tue, 10 Oct 2023 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/the-quantum-nexus-prototype/</guid><description>&lt;h1 id="the-quantum-nexus-prototype---ctf-challenge-writeup">The Quantum Nexus Prototype - CTF Challenge Writeup
+&lt;/h1>&lt;p>Challenge: The Quantum Nexus Prototype&lt;br>
+Points: 50&lt;br>
+Category: OSINT, Cryptography&lt;/p>
+&lt;h2 id="objective">Objective
+&lt;/h2>&lt;p>The objective of &amp;ldquo;The Quantum Nexus Prototype&amp;rdquo; challenge is to use your OSINT (Open-Source Intelligence) and cryptography skills to uncover hidden information within a provided YouTube link. At first glance, this challenge may seem confusing, but with careful examination of the link and some cryptography, you can successfully extract the flag.&lt;/p>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;p>To successfully complete &amp;ldquo;The Quantum Nexus Prototype&amp;rdquo; challenge, follow these steps:&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Opening the YouTube Link&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>Click the provided YouTube link. However, keep in mind that vulnerabilities cannot be hidden within a real rickroll video.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>URL Examination&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>As the video starts to load, take a close look at the link in the URL bar of your web browser. You will notice that the link is shrinking as the video loads.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Character Extraction&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The link shrinking indicates that some characters within the URL are not part of the actual YouTube link and are omitted. Carefully extract these omitted parts.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Base64 Decoding&lt;/strong>:&lt;/p>
+&lt;ul>
+&lt;li>The extracted part, which has been omitted from the YouTube link, appears to be encoded using Base64. Decode this part to reveal the hidden flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>By closely examining the link and decoding the extracted information, you will successfully unveil the flag.&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is in the format: &lt;code>petgrad2023{XXXXXXXXXX}&lt;/code>.&lt;/p>
+&lt;p>&amp;ldquo;The Quantum Nexus Prototype&amp;rdquo; challenge combines OSINT and cryptography skills to uncover the hidden flag within the provided YouTube link. It&amp;rsquo;s a test of your ability to identify unusual elements in URLs and apply cryptographic techniques to decode hidden information. Good luck!&lt;/p></description></item></channel></rss>
