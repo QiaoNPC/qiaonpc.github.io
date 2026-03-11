@@ -18,6 +18,8 @@ Around **45 selected students** from different countries join every year. The ca
 
 This year, I was very lucky to represent **Malaysia** together with **[Ruhan](https://www.linkedin.com/in/ruhan-aidan-amaradasa-104113155/), [Han Ming](https://www.linkedin.com/in/hmleong0510/), and [Shree](https://www.linkedin.com/in/0x251e/)**. During the week, we met many talented participants from different countries and learned from experienced security researchers and industry practitioners.
 
+One funny and memorable part outside the classes was seeing **Han Ming aura farming on the piano** with some improvised music. It became one of those random GCC moments that made the whole week feel even more special.
+
 ---
 
 ## What is Global Cybersecurity Camp?
@@ -162,7 +164,7 @@ Another important part of GCC is the **group assignment**, where participants ar
 
 Each group needs to work together to solve a cybersecurity problem and present the results at the end of the camp.
 
-Our **Group 8** consisted of **Hidenori, [Rohit](https://www.linkedin.com/in/rohitprasanth/), [Amelia](https://www.linkedin.com/in/rohitprasanth/), [Vo](https://www.linkedin.com/in/threalwinky/), and me**. We worked on a project related to **Android security**, focusing on **APK intent exploitation**.
+Our **Group 8** consisted of **Hidenori, [Rohit](https://www.linkedin.com/in/rohitprasanth/), [Amelia](https://www.linkedin.com/in/amelia-chua-xxx/), [Vo](https://www.linkedin.com/in/threalwinky/), and me**. We worked on a project related to **Android security**, focusing on **APK intent exploitation**.
 
 The objective of our project was to:
 
@@ -186,12 +188,15 @@ It was a very satisfying moment for the whole team.
 
 Besides the technical learning, GCC also gives opportunities for participants to experience the culture of the host country.
 
-During the week, we had some time to explore **Ho Chi Minh City** and experience Vietnamese culture.
+During the week, we had some time to explore **Ho Chi Minh City** and experience Vietnamese culture. A lot of my favorite memories actually came from these small moments outside class, where everyone was just eating, talking, joking around, and learning about each other’s backgrounds.
 
 Some memorable moments included:
 
 - Trying **Vietnamese pho**
+- Eating **banh mi**
+- Trying **jellyfish**
 - Drinking **Vietnamese coffee**
+- Drinking **Vietnamese tea**
 - Exploring the city with other participants
 - Having many conversations about cybersecurity research and career paths
 
@@ -226,3 +231,16 @@ I am very grateful to be part of this experience and hope to apply what I learne
 If you have the chance to attend GCC in the future, I would definitely recommend it.
 
 It is truly a very memorable experience.
+
+At the end of this post, I also want to include some of my favorite images from the camp. I think photos can capture the feeling better than words sometimes, especially the moments with teammates, new friends, classes, food, and all the small memories in between.
+
+![Group 8](<group 8.jpg>)
+
+
+![Malaysia](malaysia.jpeg)
+
+
+![Sherpasec](<malaysia 2.JPEG>)
+
+
+![hehe](hehe.png)
