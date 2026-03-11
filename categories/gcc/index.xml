@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>GCC on</title><link>https://qiaonpc.github.io/categories/gcc/</link><description>Recent content in GCC on</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://qiaonpc.github.io/categories/gcc/index.xml" rel="self" type="application/rss+xml"/><item><title>Global Cybersecurity Camp (GCC) 2026 – Vietnam</title><link>https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/</link><pubDate>Wed, 11 Mar 2026 00:00:00 +0000</pubDate><guid>https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/</guid><description>&lt;h1 id="global-cybersecurity-camp-gcc-2026--vietnam-">Global Cybersecurity Camp (GCC) 2026 – Vietnam 🇻🇳
+&lt;/h1>&lt;h2 id="introduction">Introduction
+&lt;/h2>&lt;p>From &lt;strong>March 2 to March 6, 2026&lt;/strong>, I had the chance to attend &lt;strong>Global Cybersecurity Camp (GCC) 2026&lt;/strong> in &lt;strong>Ho Chi Minh City, Vietnam&lt;/strong>.&lt;/p>
+&lt;p>Global Cybersecurity Camp is a &lt;strong>week-long international cybersecurity training camp&lt;/strong> that brings together cybersecurity students from many countries. The main goal of the camp is to help grow the next generation of cybersecurity professionals and also build stronger collaboration between countries in the cybersecurity community.&lt;/p>
+&lt;p>Around &lt;strong>45 selected students&lt;/strong> from different countries join every year. The camp includes &lt;strong>technical lectures, hands-on workshops, and group projects&lt;/strong>, together with cultural exchange activities.&lt;/p>
+&lt;p>This year, I was very lucky to represent &lt;strong>Malaysia&lt;/strong> together with &lt;strong>&lt;a class="link" href="https://www.linkedin.com/in/ruhan-aidan-amaradasa-104113155/" target="_blank" rel="noopener"
+>Ruhan&lt;/a>, &lt;a class="link" href="https://www.linkedin.com/in/hmleong0510/" target="_blank" rel="noopener"
+>Han Ming&lt;/a>, and &lt;a class="link" href="https://www.linkedin.com/in/0x251e/" target="_blank" rel="noopener"
+>Shree&lt;/a>&lt;/strong>. During the week, we met many talented participants from different countries and learned from experienced security researchers and industry practitioners.&lt;/p>
+&lt;p>One funny and memorable part outside the classes was seeing &lt;strong>Han Ming aura farming on the piano&lt;/strong> with some improvised music. It became one of those random GCC moments that made the whole week feel even more special.&lt;/p>
+&lt;hr>
+&lt;h2 id="what-is-global-cybersecurity-camp">What is Global Cybersecurity Camp?
+&lt;/h2>&lt;p>Global Cybersecurity Camp (GCC) is an international initiative that focuses on &lt;strong>developing cybersecurity talent and strengthening the global security community&lt;/strong>.&lt;/p>
+&lt;p>The camp is organized by cybersecurity communities and educational partners from multiple countries, with support from industry sponsors who believe in growing cybersecurity talent.&lt;/p>
+&lt;p>This year we had participants from the following countries:&lt;/p>
+&lt;ul>
+&lt;li>Japan&lt;/li>
+&lt;li>Singapore&lt;/li>
+&lt;li>Malaysia&lt;/li>
+&lt;li>Taiwan&lt;/li>
+&lt;li>Thailand&lt;/li>
+&lt;li>Vietnam&lt;/li>
+&lt;li>India&lt;/li>
+&lt;li>Indonesia&lt;/li>
+&lt;li>Romania&lt;/li>
+&lt;/ul>
+&lt;p>The program combines different activities including:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Technical cybersecurity workshops&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Expert-led lectures&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Team-based security projects&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>International collaboration&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Cultural exchange&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>Because of this, GCC is not only about technical learning, but also about building long-term friendships and connections with people in the cybersecurity community.&lt;/p>
+&lt;hr>
+&lt;h2 id="technical-sessions">Technical Sessions
+&lt;/h2>&lt;p>One of the main parts of GCC is the &lt;strong>technical sessions&lt;/strong> delivered by experienced security researchers.&lt;/p>
+&lt;p>During GCC 2026, we joined several sessions covering different areas of cybersecurity such as:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>IoT / ICS Security&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>AV / EDR Kernel Protection&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Binary Hardening with CET&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Hypervisor Security&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Agentic AI for Offensive Security&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Entra ID Attack Chains&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>Most of the sessions had both &lt;strong>theoretical explanation and practical exercises&lt;/strong>, so it was not only listening to lectures, but also understanding how the concepts work in real attack and defense scenarios.&lt;/p>
+&lt;h3 id="introduction-to-iotics-security--firmware-analysis-skills">Introduction to IoT/ICS Security &amp;amp; Firmware Analysis Skills
+&lt;/h3>&lt;p>The first class by &lt;strong>&lt;a class="link" href="https://www.linkedin.com/in/marscheng93/" target="_blank" rel="noopener"
+>Mars Cheng&lt;/a>&lt;/strong> focused on &lt;strong>IoT/ICS security&lt;/strong>, threat trends, attack surface, and firmware analysis. The workshop started from the basics of what IoT and ICS environments are, then slowly moved into how these systems are used in real office, industrial, and operational technology environments.&lt;/p>
+&lt;p>What I liked about this class is that it did not treat IoT as only smart home devices. It also connected the topic to &lt;strong>ICS/SCADA/CPS security&lt;/strong> and real operational impact. This made the class feel much more practical and realistic.&lt;/p>
+&lt;p>One part I found especially useful was the &lt;strong>firmware analysis&lt;/strong> section. The workshop introduced a full toolchain for analyzing firmware images, including tools like &lt;strong>Binwalk, Ghidra, QEMU, Firmadyne, FACT, Firmwalker, Pwntools, Radare2, Burp Suite, and GDB&lt;/strong>. There was also an &lt;strong>IoT-MQTT protocol simulation&lt;/strong>, which helped us understand how communication between devices and brokers works in a more realistic IoT setup.&lt;/p>
+&lt;p>Overall, this class gave a very strong introduction to embedded devices, firmware structure, and network attack surface. It was a very good foundation for people who want to understand IoT security more deeply.&lt;/p>
+&lt;h3 id="super-hats-kernel-trick-social-engineering-the-avedr-kernel-protection">Super Hat’s Kernel Trick: Social Engineering the AV/EDR Kernel Protection
+&lt;/h3>&lt;p>This session by &lt;strong>&lt;a class="link" href="https://www.linkedin.com/in/aaaddress1/" target="_blank" rel="noopener"
+>Shenghao Ma&lt;/a>&lt;/strong> was honestly one of the most memorable classes for me during the whole camp.&lt;/p>
+&lt;p>The topic was not just about bypassing AV/EDR in a simple way. It was more about &lt;strong>understanding the protection layers deeply enough to disable them, abuse them, or work around them in a smarter way&lt;/strong>. The workshop looked at AV/EDR protection from different layers, including &lt;strong>malware file landing scan, Windows privilege tokens, PP(L) for process access integrity, kernel-based self anti-tamper, and sandbox-related behavior&lt;/strong>.&lt;/p>
+&lt;p>What made this class very interesting was the mindset behind it. Instead of only thinking, “find one exploit and break everything,” the session showed how an attacker can look at the problem step by step:&lt;/p>
+&lt;ol>
+&lt;li>&lt;strong>Can the malware even land on disk without being stopped by file scan?&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Can a trusted or privileged token be abused to interfere with AV/EDR?&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>How does Protected Process Light (PPL) affect process access?&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>How do kernel self anti-tamper protections stop attempts to disable security products?&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>If direct bypass is too hard, can the environment itself be socially engineered at the privilege and protection layer?&lt;/strong>&lt;/li>
+&lt;/ol>
+&lt;p>This class was very hands-on and offensive in mindset. It was not only theory. The workshop included demos and labs on &lt;strong>file landing malware scan&lt;/strong>, &lt;strong>local privilege escalation&lt;/strong>, &lt;strong>Windows privilege token abuse using WinDbg&lt;/strong>, and &lt;strong>anti-tamper exploitation&lt;/strong>.&lt;/p>
+&lt;p>One very cool part was the section on &lt;strong>building your own vulnerable driver to exploit&lt;/strong>, then using &lt;strong>BYOD + DKOM&lt;/strong> techniques for &lt;strong>LPE&lt;/strong>, &lt;strong>stripping PP(L)&lt;/strong>, &lt;strong>LSASS dumping&lt;/strong>, and studying AV/EDR anti-tampering and sandbox behavior.&lt;/p>
+&lt;p>For me, the biggest takeaway from this class was the thinking process. It showed that advanced operators do not always need a fancy 0-day to break protections. Sometimes the real power comes from understanding &lt;strong>Windows privilege management&lt;/strong>, how &lt;strong>security products trust certain operations&lt;/strong>, and how &lt;strong>kernel protection logic can be manipulated indirectly&lt;/strong>.&lt;/p>
+&lt;p>This session really changed the way I think about endpoint security. It felt less like “exploit one bug and win,” and more like &lt;strong>abusing assumptions between multiple protection layers&lt;/strong>. That idea made the whole class feel much deeper and more realistic.&lt;/p>
+&lt;h3 id="practical-binary-hardening-with-control-flow-enforcement-technology-cet">Practical Binary Hardening with Control-flow Enforcement Technology (CET)
+&lt;/h3>&lt;p>The class by &lt;strong>Michael and Kento Oki&lt;/strong> focused on &lt;strong>Control-flow Enforcement Technology (CET)&lt;/strong> and how modern binaries can be hardened against control-flow hijacking attacks.&lt;/p>
+&lt;p>The session explained how modern exploitation often relies on techniques like &lt;strong>ROP, JOP, and COP&lt;/strong>, and why software mitigations alone are sometimes still not enough. From there, the workshop introduced &lt;strong>Intel CET&lt;/strong>, especially the two important parts:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Shadow Stack&lt;/strong> for protecting the backward edge&lt;/li>
+&lt;li>&lt;strong>Indirect Branch Tracking (IBT)&lt;/strong> for protecting the forward edge&lt;/li>
+&lt;/ul>
+&lt;p>I liked this class because it connected exploitation knowledge with actual hardware-backed mitigations. Instead of only saying “CET makes exploitation harder,” the session explained how &lt;strong>return addresses are protected&lt;/strong>, how &lt;strong>ENDBR32/ENDBR64&lt;/strong> is used for indirect branch validation, and how violations can trigger &lt;strong>Control Protection faults (#CP)&lt;/strong>.&lt;/p>
+&lt;p>The class also touched on &lt;strong>Linux / Windows implementation&lt;/strong>, real-world adoption, and some practical limitations and assumptions behind CET. It was a very useful session for understanding where binary hardening is going in modern systems.&lt;/p>
+&lt;h3 id="hypervisors-for-hackers">Hypervisors for Hackers
+&lt;/h3>&lt;p>The class by &lt;strong>&lt;a class="link" href="https://www.linkedin.com/in/satoshitanda/" target="_blank" rel="noopener"
+>Satoshi Tanda&lt;/a>&lt;/strong> was about &lt;strong>hypervisors from a security researcher perspective&lt;/strong>.&lt;/p>
+&lt;p>The session started with virtualization history, moving from &lt;strong>full emulation&lt;/strong>, to &lt;strong>trap-and-emulate&lt;/strong>, to &lt;strong>para-virtualization&lt;/strong>, before going into &lt;strong>hardware-assisted virtualization&lt;/strong> like &lt;strong>Intel VT-x&lt;/strong>. After that, the workshop explained how a hypervisor works internally, including concepts like &lt;strong>VMX root / non-root operation&lt;/strong>, &lt;strong>VMCS&lt;/strong>, &lt;strong>VM-entry&lt;/strong>, and &lt;strong>VM-exit&lt;/strong>.&lt;/p>
+&lt;p>What I enjoyed most was that the session did not present hypervisors as only infrastructure technology. Instead, it showed hypervisors as a &lt;strong>security boundary&lt;/strong> and even a &lt;strong>security enhancement tool&lt;/strong>.&lt;/p>
+&lt;p>One demo used a vulnerable driver similar to &lt;strong>capcom.sys&lt;/strong>, where the exploit tried to clear &lt;strong>CR4.SMEP&lt;/strong> and execute attacker-controlled code in kernel mode. Then the workshop showed how a hypervisor can detect and prevent this by monitoring sensitive state changes, especially around &lt;strong>CR4.SMEP&lt;/strong>, with minimal overhead.&lt;/p>
+&lt;p>This made the class feel very practical. It connected CPU architecture, virtualization internals, and exploit prevention in a way that was much easier to understand and appreciate from an offensive security learner perspective.&lt;/p>
+&lt;h3 id="agentic-ai-for-offensive-security">Agentic AI for Offensive Security
+&lt;/h3>&lt;p>The &lt;strong>Agentic AI&lt;/strong> workshop by &lt;strong>&lt;a class="link" href="https://www.linkedin.com/in/kar-wei-loh/" target="_blank" rel="noopener"
+>Kar Wei Loh&lt;/a>&lt;/strong> explored how AI can be used in a more autonomous way for offensive security tasks.&lt;/p>
+&lt;p>Instead of using AI only for searching or summarizing, the session explained &lt;strong>agentic AI&lt;/strong> as something that can break a goal into smaller steps, reason about what to do next, use tools, and keep memory of past actions. The workshop then moved into a more practical setup using &lt;strong>Opencode&lt;/strong>, where participants learned how to create an agent environment, define &lt;strong>workflows&lt;/strong>, and write &lt;strong>skills and tools&lt;/strong> for the agent.&lt;/p>
+&lt;p>One thing I found interesting was that the workshop showed both the strengths and also the weaknesses of agentic workflows. For example, the AI agent could make progress on pentest-style tasks, but it could also make bad decisions, miss small operational steps, or go in the wrong direction if the workflow was not designed carefully.&lt;/p>
+&lt;p>That made the class feel realistic instead of overhyped. I also liked that the workshop was very builder-oriented. It was not only “use this AI tool,” but more like “understand how the agent thinks, write better skills, improve workflows, and build your own agent for your own use case.”&lt;/p>
+&lt;h3 id="entra-id-attack-chains-born-in-the-cloud-breached-on-the-on-prem">Entra ID Attack Chains: Born in the Cloud, Breached on the On-Prem
+&lt;/h3>&lt;p>The session by &lt;strong>Jimmy Su and John Jiang&lt;/strong> focused on &lt;strong>identity attack paths in Entra ID and hybrid environments&lt;/strong>.&lt;/p>
+&lt;p>This class was especially interesting because it showed how a compromise path can start from a &lt;strong>low-privilege Entra-joined machine&lt;/strong> and move toward a &lt;strong>higher-privilege Azure target&lt;/strong>. The workshop was beginner-friendly but still very practical, with &lt;strong>five hands-on labs&lt;/strong> and a CTF-style setup.&lt;/p>
+&lt;p>The session covered topics such as:&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>Azure / Resource / Entra ID fundamentals&lt;/strong>&lt;/li>
+&lt;li>Understanding &lt;strong>AT, RT, and PRT&lt;/strong>&lt;/li>
+&lt;li>Abusing an &lt;strong>Entra-joined machine&lt;/strong> to obtain &lt;strong>PRT&lt;/strong>&lt;/li>
+&lt;li>Using stolen token material for &lt;strong>vertical privilege escalation in Azure&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Azure recon&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>On-premises lateral movement&lt;/strong> through &lt;strong>Entra Pass-the-Cert&lt;/strong>&lt;/li>
+&lt;li>&lt;strong>Azure persistence&lt;/strong>&lt;/li>
+&lt;/ul>
+&lt;p>What I liked about this class was how clearly it explained the relationship between cloud identity, device identity, and hybrid access. The discussion around &lt;strong>PRT&lt;/strong>, &lt;strong>PRT cookie&lt;/strong>, and &lt;strong>Pass-the-Cert&lt;/strong> made it easier to understand how identity abuse can move across endpoint, browser, cloud, and even on-prem environments.&lt;/p>
+&lt;p>It also showed that identity is not only a cloud problem or only an AD problem anymore, but really both together. That was one of the most valuable points from this session for me.&lt;/p>
+&lt;p>Overall, the technical sessions at GCC 2026 covered a very wide range of topics, from embedded systems and firmware, to Windows internals, kernel protection, identity attack paths, virtualization, and AI-assisted offensive workflows. That wide range was one of the things that made the camp so valuable for me.&lt;/p>
+&lt;hr>
+&lt;h2 id="group-project">Group Project
+&lt;/h2>&lt;p>Another important part of GCC is the &lt;strong>group assignment&lt;/strong>, where participants are placed into teams with members from different countries.&lt;/p>
+&lt;p>Each group needs to work together to solve a cybersecurity problem and present the results at the end of the camp.&lt;/p>
+&lt;p>Our &lt;strong>Group 8&lt;/strong> consisted of &lt;strong>Hidenori, &lt;a class="link" href="https://www.linkedin.com/in/rohitprasanth/" target="_blank" rel="noopener"
+>Rohit&lt;/a>, &lt;a class="link" href="https://www.linkedin.com/in/amelia-chua-xxx/" target="_blank" rel="noopener"
+>Amelia&lt;/a>, &lt;a class="link" href="https://www.linkedin.com/in/threalwinky/" target="_blank" rel="noopener"
+>Vo&lt;/a>, and me&lt;/strong>. We worked on a project related to &lt;strong>Android security&lt;/strong>, focusing on &lt;strong>APK intent exploitation&lt;/strong>.&lt;/p>
+&lt;p>The objective of our project was to:&lt;/p>
+&lt;ul>
+&lt;li>Identify insecure &lt;strong>Android intent exposures&lt;/strong>&lt;/li>
+&lt;li>Analyze how applications communicate using &lt;strong>Android intents&lt;/strong>&lt;/li>
+&lt;li>Build a &lt;strong>mobile application scanner&lt;/strong> that can detect vulnerable apps&lt;/li>
+&lt;/ul>
+&lt;p>The project required both &lt;strong>security research and software development&lt;/strong>. We spent many late nights discussing ideas, debugging the application, and improving the detection logic.&lt;/p>
+&lt;p>Many days we were working until &lt;strong>2–3 AM&lt;/strong>, trying to finish the implementation before the final presentation.&lt;/p>
+&lt;p>I was very thankful to have such a strong team. Everyone contributed different ideas and strengths, and I think that was one big reason why our project worked out well in the end.&lt;/p>
+&lt;p>In the end, our effort paid off and &lt;strong>Group 8 received 1st place&lt;/strong> for the group assignment.&lt;/p>
+&lt;p>It was a very satisfying moment for the whole team.&lt;/p>
+&lt;hr>
+&lt;h2 id="cultural-exchange">Cultural Exchange
+&lt;/h2>&lt;p>Besides the technical learning, GCC also gives opportunities for participants to experience the culture of the host country.&lt;/p>
+&lt;p>During the week, we had some time to explore &lt;strong>Ho Chi Minh City&lt;/strong> and experience Vietnamese culture. A lot of my favorite memories actually came from these small moments outside class, where everyone was just eating, talking, joking around, and learning about each other’s backgrounds.&lt;/p>
+&lt;p>Some memorable moments included:&lt;/p>
+&lt;ul>
+&lt;li>Trying &lt;strong>Vietnamese pho&lt;/strong>&lt;/li>
+&lt;li>Eating &lt;strong>banh mi&lt;/strong>&lt;/li>
+&lt;li>Trying &lt;strong>jellyfish&lt;/strong>&lt;/li>
+&lt;li>Drinking &lt;strong>Vietnamese coffee&lt;/strong>&lt;/li>
+&lt;li>Drinking &lt;strong>Vietnamese tea&lt;/strong>&lt;/li>
+&lt;li>Exploring the city with other participants&lt;/li>
+&lt;li>Having many conversations about cybersecurity research and career paths&lt;/li>
+&lt;/ul>
+&lt;p>Meeting people from different countries and learning about their local cybersecurity communities was one of the most valuable parts of the camp for me.&lt;/p>
+&lt;hr>
+&lt;h2 id="acknowledgements">Acknowledgements
+&lt;/h2>&lt;p>I would like to give a big thank you to &lt;strong>&lt;a class="link" href="https://www.linkedin.com/company/sherpasec/" target="_blank" rel="noopener"
+>SherpaSec&lt;/a>&lt;/strong> for sponsoring the Malaysian participants and making this opportunity possible.&lt;/p>
+&lt;p>Special thanks also to &lt;strong>&lt;a class="link" href="https://www.linkedin.com/in/chang-shiau-huei/" target="_blank" rel="noopener"
+>Shiau Huei&lt;/a>&lt;/strong> and &lt;strong>&lt;a class="link" href="https://www.linkedin.com/in/ryanyap555/" target="_blank" rel="noopener"
+>Ryan&lt;/a>&lt;/strong> for managing the logistics and coordinating everything during the event.&lt;/p>
+&lt;p>Their help made the whole experience much smoother for all participants.&lt;/p>
+&lt;hr>
+&lt;h2 id="final-thoughts">Final Thoughts
+&lt;/h2>&lt;p>Attending &lt;strong>Global Cybersecurity Camp 2026&lt;/strong> was a very meaningful experience for me.&lt;/p>
+&lt;p>Besides learning many technical topics, the camp also allowed me to:&lt;/p>
+&lt;ul>
+&lt;li>collaborate with talented cybersecurity students from many countries&lt;/li>
+&lt;li>learn from experienced researchers and professionals&lt;/li>
+&lt;li>build new friendships in the cybersecurity community&lt;/li>
+&lt;/ul>
+&lt;p>GCC is not just a training program. It is also a place where the international cybersecurity community connects and grows together.&lt;/p>
+&lt;p>I am very grateful to be part of this experience and hope to apply what I learned in my future cybersecurity work.&lt;/p>
+&lt;p>If you have the chance to attend GCC in the future, I would definitely recommend it.&lt;/p>
+&lt;p>It is truly a very memorable experience.&lt;/p>
+&lt;p>At the end of this post, I also want to include some of my favorite images from the camp. I think photos can capture the feeling better than words sometimes, especially the moments with teammates, new friends, classes, food, and all the small memories in between.&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/group%208.jpg"
+width="4032"
+height="3024"
+srcset="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/group%208_hu8a1449cca59ddc3f0ea255ac09f9d34d_2824670_480x0_resize_q75_box.jpg 480w, https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/group%208_hu8a1449cca59ddc3f0ea255ac09f9d34d_2824670_1024x0_resize_q75_box.jpg 1024w"
+loading="lazy"
+alt="Group 8"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/malaysia.jpeg"
+width="5472"
+height="3648"
+srcset="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/malaysia_hueed03529a7dd048374bfdd8d95d6c029_3656029_480x0_resize_q75_box.jpeg 480w, https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/malaysia_hueed03529a7dd048374bfdd8d95d6c029_3656029_1024x0_resize_q75_box.jpeg 1024w"
+loading="lazy"
+alt="Malaysia"
+class="gallery-image"
+data-flex-grow="150"
+data-flex-basis="360px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/malaysia%202.JPEG"
+width="2048"
+height="1536"
+srcset="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/malaysia%202_hu251cb7c9ee5c88bfc39663ebbe4f6f3a_1192578_480x0_resize_q75_box.JPEG 480w, https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/malaysia%202_hu251cb7c9ee5c88bfc39663ebbe4f6f3a_1192578_1024x0_resize_q75_box.JPEG 1024w"
+loading="lazy"
+alt="Sherpasec"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;img src="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/hehe.png"
+width="1080"
+height="1920"
+srcset="https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/hehe_hu9bf9e4e417022dc47c9767ea7160714f_3608859_480x0_resize_box_3.png 480w, https://qiaonpc.github.io/post/global-cybersecurity-camp-gcc-2026-vietnam/hehe_hu9bf9e4e417022dc47c9767ea7160714f_3608859_1024x0_resize_box_3.png 1024w"
+loading="lazy"
+alt="hehe"
+class="gallery-image"
+data-flex-grow="56"
+data-flex-basis="135px"
+>&lt;/p></description></item></channel></rss>
