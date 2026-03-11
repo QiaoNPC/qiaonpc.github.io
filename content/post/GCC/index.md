@@ -1,3 +1,11 @@
+---
+title: Global Cybersecurity Camp (GCC) 2026 – Vietnam
+description: A short reflection on my experience at Global Cybersecurity Camp 2026 in Vietnam, covering the technical workshops, group project, and the people I met throughout the week.
+date: 2026-03-11 00:00:00+0000
+categories:
+   - GCC
+weight: 1     
+---
 # Global Cybersecurity Camp (GCC) 2026 – Vietnam 🇻🇳
 
 ## Introduction
